@@ -1,0 +1,356 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>RYŌ Unboxed — Dirección creativa</title>
+  <style>
+    :root {
+      --black: #000;
+      --ink: #101625;
+      --blue: #3e4d92;
+      --blue-light: #6674bc;
+      --ivory: #f8efdd;
+      --muted: #aaa89f;
+      --gold: #c5a464;
+      --line: rgb(197 164 100 / 35%);
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ivory);
+      background: var(--black);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-weight: 400;
+      letter-spacing: -.035em;
+    }
+    h1 { max-width: 900px; margin-bottom: 1.25rem; font-size: clamp(3.5rem, 9vw, 8rem); line-height: .88; }
+    h2 { margin-bottom: 2rem; font-size: clamp(2.2rem, 5vw, 4.6rem); line-height: .98; }
+    h3 { margin-bottom: .65rem; font-size: .78rem; font-weight: 650; letter-spacing: .16em; text-transform: uppercase; }
+    p { max-width: 68ch; }
+    .eyebrow, .status { font-size: .72rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; }
+    .eyebrow { color: var(--gold); }
+    .status { display: inline-flex; gap: .55rem; align-items: center; color: var(--muted); }
+    .status::before { width: .45rem; height: .45rem; background: var(--gold); border-radius: 50%; content: ""; }
+    .wrap { width: min(calc(100% - 2rem), var(--max)); margin-inline: auto; }
+    .masthead {
+      position: relative;
+      min-height: 100svh;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 18%, rgb(255 248 234 / 17%), transparent 24%),
+        radial-gradient(ellipse at 50% 73%, rgb(72 87 158 / 20%), transparent 37%),
+        #000;
+    }
+    .masthead::after {
+      position: absolute;
+      inset: 45% -15% -18%;
+      background: linear-gradient(170deg, #111 0%, #030303 48%, #000 100%);
+      border-top: 1px solid rgb(255 255 255 / 7%);
+      content: "";
+      transform: perspective(800px) rotateX(62deg);
+      transform-origin: top;
+    }
+    .masthead__nav, .masthead__copy, .box-stage { position: relative; z-index: 1; }
+    .masthead__nav { display: flex; justify-content: space-between; padding-block: 1.2rem; border-bottom: 1px solid var(--line); }
+    .masthead__copy { padding-top: clamp(4rem, 11vh, 9rem); }
+    .lede { color: #d6d0c2; font-size: clamp(1.05rem, 2vw, 1.35rem); }
+    .box-stage {
+      display: grid;
+      width: min(72vw, 700px);
+      aspect-ratio: 2 / .78;
+      margin: clamp(3rem, 7vh, 6rem) auto 0;
+      place-items: center;
+      background: linear-gradient(145deg, rgb(255 255 255 / 9%), transparent 28%), linear-gradient(160deg, var(--blue-light), var(--blue) 45%, #28346f);
+      border: 1px solid rgb(255 255 255 / 22%);
+      box-shadow: 0 50px 90px rgb(0 0 0 / 80%), 0 0 70px rgb(69 84 160 / 18%);
+      color: white;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(2.2rem, 6vw, 5.5rem);
+      letter-spacing: .07em;
+      transform: perspective(900px) rotateX(56deg) rotateZ(-3deg);
+    }
+    section { padding-block: clamp(5rem, 10vw, 10rem); }
+    .section-line { border-top: 1px solid var(--line); }
+    .intro-grid, .two-col { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(260px, .75fr); gap: clamp(2rem, 7vw, 7rem); align-items: start; }
+    .statement { font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.9rem, 4vw, 3.8rem); line-height: 1.08; }
+    .principles, .cards, .shots, .checkpoints { display: grid; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .principles { grid-template-columns: repeat(4, 1fr); }
+    .cards { grid-template-columns: repeat(3, 1fr); }
+    .shots { grid-template-columns: repeat(4, 1fr); }
+    .checkpoints { grid-template-columns: repeat(2, 1fr); }
+    .card { min-height: 210px; padding: 1.5rem; background: #070707; }
+    .card p, .muted { color: var(--muted); }
+    .number { display: block; margin-bottom: 4rem; color: var(--gold); font-family: Georgia, "Times New Roman", serif; font-size: 1.6rem; }
+    .storyboard { display: grid; gap: 3rem; }
+    .scene { display: grid; grid-template-columns: 80px minmax(260px, .85fr) minmax(0, 1.15fr); gap: clamp(1.5rem, 4vw, 4rem); padding-top: 2rem; border-top: 1px solid var(--line); }
+    .scene__id { color: var(--gold); font-family: Georgia, "Times New Roman", serif; font-size: 2.2rem; }
+    .scene__frame { min-height: 240px; background: radial-gradient(circle at 50% 10%, rgb(255 255 255 / 16%), transparent 28%), linear-gradient(145deg, #0d0d0d, #020202); border: 1px solid rgb(255 255 255 / 8%); }
+    .scene__frame.box { background: linear-gradient(155deg, transparent 35%, rgb(67 81 151 / 45%) 36% 65%, transparent 66%), radial-gradient(circle at 50% 5%, rgb(255 255 255 / 16%), transparent 28%), #030303; }
+    .scene__frame.ivory { background: linear-gradient(135deg, #f8efdd, #b8aa8e); }
+    .label { display: inline-block; margin-bottom: 1rem; padding: .32rem .58rem; border: 1px solid var(--gold); color: var(--gold); font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .quote { padding-left: 1.5rem; border-left: 1px solid var(--gold); color: #d8d2c4; font-family: Georgia, "Times New Roman", serif; font-size: clamp(1.35rem, 2.5vw, 2rem); }
+    .note { padding: 1.25rem; border: 1px solid var(--line); color: var(--muted); }
+    .swatches { display: flex; flex-wrap: wrap; gap: .75rem; }
+    .swatch { display: grid; width: 110px; aspect-ratio: 1; padding: .7rem; place-items: end start; border: 1px solid rgb(255 255 255 / 12%); color: white; font-size: .7rem; }
+    .wave-demo {
+      margin-top: 2rem;
+      background-color: var(--ink);
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .wave-demo img { display: block; width: 100%; height: auto; }
+    .wave-demo figcaption { padding: .75rem; color: var(--muted); font-size: .7rem; }
+    .approval { background: var(--ivory); color: var(--ink); }
+    .approval .eyebrow { color: #7c6331; }
+    .approval .card { background: #eee3ce; }
+    .approval .checkpoints { background: #b8a987; border-color: #b8a987; }
+    .approval .card p { color: #4e4c48; }
+    footer { padding-block: 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
+    @media (max-width: 820px) {
+      .intro-grid, .two-col, .scene { grid-template-columns: 1fr; }
+      .principles, .cards, .shots, .checkpoints { grid-template-columns: 1fr 1fr; }
+      .scene__id { font-size: 1.3rem; }
+      .box-stage { width: 92vw; }
+    }
+    @media (max-width: 520px) {
+      .principles, .cards, .shots, .checkpoints { grid-template-columns: 1fr; }
+      .masthead__nav .status { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  </style>
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap">
+      <nav class="masthead__nav" aria-label="Estado del entregable">
+        <a class="eyebrow" href="ryo-unboxed-visual-system-v1.html">Ver sistema visual V1 →</a>
+        <span class="status">Atmósfera aprobada · Keyframes en revisión</span>
+      </nav>
+      <div class="masthead__copy">
+        <p class="eyebrow">Concepto 01 · 26.08.2026</p>
+        <h1>RYŌ<br>Unboxed</h1>
+        <p class="lede">Una caja azul bajo una sola luz. El resto del mundo desaparece.</p>
+      </div>
+      <div class="box-stage" role="img" aria-label="Representación conceptual de la caja azul RYŌ sobre una mesa negra">RYŌ</div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap intro-grid">
+        <div><p class="eyebrow">North star</p><p class="statement">No estamos diseñando una página sobre sushi. Estamos filmando el momento en que una experiencia privada llega, se abre y se descubre.</p></div>
+        <div><p>La landing vive en una dark kitchen abstracta: fondo negro absoluto, mesa premium mate y una luz cenital que solo reconoce la caja, las manos y el producto.</p><p class="muted">El azul del empaque y el color natural del sushi son los únicos acentos vivos. El dorado pertenece a la interfaz editorial, nunca a una escenografía ostentosa.</p></div>
+      </div>
+    </section>
+
+    <section class="section-line">
+      <div class="wrap">
+        <p class="eyebrow">Dirección de arte</p>
+        <h2>Oscuridad controlada.<br>Producto inevitable.</h2>
+        <div class="principles">
+          <article class="card"><span class="number">01</span><h3>Espacio</h3><p>Negro puro como vacío escénico. Sin restaurante, cocina falsa ni fondo decorativo.</p></article>
+          <article class="card"><span class="number">02</span><h3>Superficie</h3><p>Mesa de piedra negra, mate y casi sin veta. Reflejo corto, nunca espejo.</p></article>
+          <article class="card"><span class="number">03</span><h3>Luz</h3><p>Spot cenital suave y estrecho. Caída rápida hacia negro; relleno mínimo para conservar volumen.</p></article>
+          <article class="card"><span class="number">04</span><h3>Cámara</h3><p>Cenital preciso para la caja; macro bajo para el roll. Movimiento lento, pesado y sin temblor.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-line">
+      <div class="wrap two-col">
+        <div><p class="eyebrow">Patrón de arcos concéntricos</p><h2>Una firma que aparece y desaparece.</h2><figure class="wave-demo"><img src="../../references/ryo-sushi/brand/ryo-overlapping-arcs-pattern-2026-08-26.png" alt="Patrón RYŌ de arcos concéntricos superpuestos en tonos navy"><figcaption>Referencia aportada por Victor · original archivado · uso público pendiente de permiso.</figcaption></figure></div>
+        <div>
+          <p>La referencia correcta no es un seigaiha de escamas repetidas. Es una composición irregular de arcos concéntricos superpuestos, con centros, radios y recortes diferentes.</p>
+          <h3>Usos propuestos</h3>
+          <p>Sombra proyectada sobre la mesa, máscara entre capítulos, textura interior de superficies navy y marco del menú estático.</p>
+          <h3>Regla</h3>
+          <p>La primera aproximación queda descartada. La versión web se reconstruirá desde esta fuente conservando superposición, separación de líneas y contraste tono sobre tono; no se sustituirá por un patrón japonés genérico.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-line">
+      <div class="wrap">
+        <p class="eyebrow">Evidencia visual · Story principal</p>
+        <h2>Recursos que sí pertenecen<br>al lenguaje de RYŌ.</h2>
+        <div class="cards">
+          <article class="card"><span class="number">01</span><h3>Portada navy</h3><p>Wordmark dorado centrado, textura de arcos muy tenue y una base marfil como transición.</p></article>
+          <article class="card"><span class="number">02</span><h3>Respiración marfil</h3><p>Páginas claras con marcos finos, fotografía protagonista y títulos de serif editorial.</p></article>
+          <article class="card"><span class="number">03</span><h3>Platos recortados</h3><p>Producto aislado que invade el marco y alterna izquierda/derecha sobre navy.</p></article>
+          <article class="card"><span class="number">04</span><h3>Palillos</h3><p>Rolls especiales sostenidos en diagonal; recurso ideal para hacerlos salir de la caja con profundidad.</p></article>
+          <article class="card"><span class="number">05</span><h3>Etiquetas</h3><p>Rectángulos navy/dorado, títulos verticales y líneas de marco para ordenar sin usar tarjetas genéricas.</p></article>
+          <article class="card"><span class="number">06</span><h3>Macro</h3><p>Acercamientos extremos para tempura y especiales; aportan textura, pero deben alternarse con espacio negativo.</p></article>
+        </div>
+        <p class="note">Fuente: screen recording de la Story principal, 73,025 s, 856 × 1396 px. La grabación es evidencia de composición; los masters finales seguirán prefiriendo las fotografías originales cuando existan.</p>
+      </div>
+    </section>
+
+    <section class="section-line">
+      <div class="wrap two-col">
+        <div><p class="eyebrow">Paleta de escena</p><h2>El menú entra en la oscuridad.</h2></div>
+        <div class="swatches" aria-label="Paleta propuesta">
+          <span class="swatch" style="background:#000">Void<br>#000000</span>
+          <span class="swatch" style="background:#101625">Ink<br>#101625</span>
+          <span class="swatch" style="background:#3e4d92">Box<br>provisional</span>
+          <span class="swatch" style="background:#c5a464;color:#101625">Gold<br>#C5A464</span>
+          <span class="swatch" style="background:#f8efdd;color:#101625">Ivory<br>#F8EFDD</span>
+        </div>
+      </div>
+      <div class="wrap"><p class="note">El negro puro se aprueba como ambiente audiovisual. El navy del menú sigue siendo la superficie editorial de navegación, menú y textos extensos. El azul real de la caja se muestreará cuando exista un master confiable.</p></div>
+    </section>
+
+    <section class="section-line">
+      <div class="wrap">
+        <p class="eyebrow">Decisión de producción</p>
+        <h2>Video para el gesto.<br>HTML para el control.</h2>
+        <div class="cards">
+          <article class="card"><span class="number">A</span><h3>3D completo</h3><p>Permite cámara libre, apertura exacta y profundidad real. Exige modelar caja, tapa, bandejas, materiales y cada plato; aumenta peso, tiempo y riesgo móvil.</p><p class="muted">No recomendado para v1.</p></article>
+          <article class="card"><span class="number">B</span><h3>Video completo</h3><p>Da la mejor continuidad cinematográfica, pero fija encuadre y ritmo. Es difícil adaptar cada salida de plato, texto y breakpoint sin volver a renderizar.</p><p class="muted">Útil para la apertura, no para toda la página.</p></article>
+          <article class="card"><span class="number">C</span><h3>Híbrido 2.5D</h3><p>Un clip corto resuelve luz y apertura. Caja, tapa, rolls y UI se separan en capas para animarlos con scroll, máscaras y transforms nativos.</p><p class="muted">Dirección recomendada.</p></article>
+        </div>
+        <p class="note"><strong>Recomendación:</strong> producir un master corto de caja cerrada → caja abierta y construir la salida de 3–4 platos como capas transparentes en HTML/CSS. La anatomía, textos, patrón de arcos y navegación permanecen en HTML. Solo se evalúa 3D después del vertical slice si falta una perspectiva imposible de resolver con estas capas.</p>
+      </div>
+    </section>
+
+    <section class="section-line">
+      <div class="wrap">
+        <p class="eyebrow">Arquitectura de contenido</p>
+        <h2>Deseo primero.<br>Explicación después.</h2>
+        <div class="cards">
+          <article class="card"><span class="number">01</span><h3>Identificar</h3><p>RYŌ, caja cerrada y una promesa breve. Menú y contacto siempre accesibles.</p></article>
+          <article class="card"><span class="number">02</span><h3>Revelar</h3><p>La caja se abre. El producto demuestra la propuesta antes de que la marca la explique.</p></article>
+          <article class="card"><span class="number">03</span><h3>Desplegar</h3><p>Tres o cuatro platos salen de la caja uno por uno y construyen variedad sin convertir la landing en catálogo.</p></article>
+          <article class="card"><span class="number">04</span><h3>Explicar</h3><p>Un roll protagonista se convierte en anatomía con ingredientes confirmados.</p></article>
+          <article class="card"><span class="number">05</span><h3>Experimentar</h3><p>La caja funciona como mesa y conecta producto, delivery, horarios y métodos.</p></article>
+          <article class="card"><span class="number">06</span><h3>Presentar</h3><p>“Sobre nosotros” ligero después de demostrar el producto y la experiencia.</p></article>
+          <article class="card"><span class="number">07</span><h3>Orientar</h3><p>Acceso a los modos “Explorar” y “Lista” del menú.</p></article>
+          <article class="card"><span class="number">08</span><h3>Convertir</h3><p>WhatsApp como acción principal e Instagram como continuidad visual, pendientes de aprobación.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-line">
+      <div class="wrap">
+        <p class="eyebrow">Storyboard scrolling · Landing</p>
+        <h2>Del silencio al primer bocado.</h2>
+        <div class="storyboard">
+          <article class="scene"><div class="scene__id">00</div><div class="scene__frame"></div><div><span class="label">Umbral</span><h3>Negro absoluto</h3><p>Solo aparece el wordmark. Una luz todavía invisible comienza a dibujar la mesa. El visitante puede saltar al menú desde el primer momento.</p></div></article>
+          <article class="scene"><div class="scene__id">01</div><div class="scene__frame box"></div><div><span class="label">Hero</span><h3>La caja sellada</h3><p>El spot cenital encuentra la caja azul. Un dolly-in muy lento revela textura, bordes y proporción. Nada compite con ella.</p></div></article>
+          <article class="scene"><div class="scene__id">02</div><div class="scene__frame box"></div><div><span class="label">Apertura</span><h3>La caja original se revela</h3><p>El clip corto muestra el gesto y termina en una vista limpia del interior real. La tapa conserva peso; la geometría, divisiones y escala no se inventan.</p></div></article>
+          <article class="scene"><div class="scene__id">03</div><div class="scene__frame box"></div><div><span class="label">Rolls</span><h3>Salen uno por uno</h3><p>Tres o cuatro platos destacados emergen como capas independientes. Cada salida cambia encuadre y ritmo; el resto del menú espera en la ruta de consulta.</p></div></article>
+          <article class="scene"><div class="scene__id">04</div><div class="scene__frame ivory"></div><div><span class="label">Anatomía</span><h3>Del corte al detalle</h3><p>Una pieza se convierte en macro. Casillas translúcidas identifican ingredientes confirmados; hover o foco revela una sola línea y punto. Nombre y descripción permanecen legibles, sin precio en esta escena.</p></div></article>
+          <article class="scene"><div class="scene__id">05</div><div class="scene__frame box"></div><div><span class="label">Experiencia</span><h3>La caja se vuelve mesa</h3><p>La composición completa explica cómo llega, cómo se comparte y qué información operativa necesita el cliente.</p></div></article>
+          <article class="scene"><div class="scene__id">06</div><div class="scene__frame"></div><div><span class="label">Sobre nosotros</span><h3>La cocina detrás de la caja</h3><p>Después de demostrar producto y experiencia, una pausa breve explica qué busca RYŌ y cómo entiende el sushi para disfrutar en casa.</p><p class="muted">Copy pendiente de fuente o entrevista. Máximo 45–65 palabras; no inventar historia, equipo ni antigüedad.</p></div></article>
+          <article class="scene"><div class="scene__id">07</div><div class="scene__frame box"></div><div><span class="label">Menú</span><h3>Explorar o consultar</h3><p>Las divisiones de la caja se alinean como categorías. Se presentan los modos “Explorar” y “Lista”, alimentados por una sola fuente.</p></div></article>
+          <article class="scene"><div class="scene__id">08</div><div class="scene__frame"></div><div><span class="label">Cierre</span><h3>La luz se apaga</h3><p>La tapa baja parcialmente y deja visible la acción principal. La escena termina casi donde comenzó, pero ahora sabemos qué había dentro.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-line">
+      <div class="wrap">
+        <p class="eyebrow">Sobre nosotros · contenido pendiente</p>
+        <div class="two-col">
+          <div><h2>Ligero, humano y verificable.</h2><p class="quote">La sección no debe frenar la película. Debe darle significado a lo que ya vimos.</p></div>
+          <div><h3>Información que necesitamos</h3><p>Origen de RYŌ, intención culinaria, significado de la experiencia en casa, forma real de preparación y aquello que el equipo considera diferente.</p><h3>Formato recomendado</h3><p>Un titular, 45–65 palabras y una prueba visual: manos trabajando, detalle del corte o empaque preparado. Sin biografía corporativa extensa.</p><h3>Posición</h3><p>Después de producto, anatomía y experiencia; antes del menú. Primero demostramos, después damos significado y finalmente convertimos.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-line">
+      <div class="wrap">
+        <p class="eyebrow">Plan de imágenes · producción Codex</p>
+        <h2>Crear un lenguaje,<br>no una colección de renders.</h2>
+        <div class="cards">
+          <article class="card"><span class="number">K01</span><h3>Hero master</h3><p>Caja cerrada, cenital 30°, mesa negra, un spot, composición horizontal y vertical.</p></article>
+          <article class="card"><span class="number">K02</span><h3>Open master</h3><p>Caja abierta completa con divisiones reales, sushi y accesorios verificados.</p></article>
+          <article class="card"><span class="number">K03</span><h3>Roll lift</h3><p>Palillos levantando la pieza protagonista contra negro absoluto.</p></article>
+          <article class="card"><span class="number">K04</span><h3>Anatomy</h3><p>Macro transversal limpio, iluminación lateral y espacio negativo para callouts.</p></article>
+          <article class="card"><span class="number">K05</span><h3>Craft</h3><p>Manos, cuchillo o montaje real; sin rostro inventado ni chef ficticio identificable.</p></article>
+          <article class="card"><span class="number">K06</span><h3>Collection</h3><p>Tres familias visuales: fresco, crujiente y especial, consistentes en lente y luz.</p></article>
+          <article class="card"><span class="number">K07</span><h3>Experience</h3><p>Caja usada como mesa premium para compartir, con utilería mínima.</p></article>
+          <article class="card"><span class="number">K08</span><h3>Closing</h3><p>Caja parcialmente cerrada y CTA en el único espacio iluminado.</p></article>
+          <article class="card"><span class="number">K09</span><h3>Menu covers</h3><p>Una imagen por categoría solo cuando el contenido real justifique producirla.</p></article>
+        </div>
+        <p class="note">Las imágenes del menú sí pueden alimentar la composición cuando el recorte tenga resolución suficiente y exista permiso: se aislarán, limpiarán y adaptarán, sin inventar lados ocultos ni ingredientes. Para masters finales se prefieren fotografías originales. Toda imagen generada quedará identificada como creación conceptual, no como fotografía documental del negocio.</p>
+      </div>
+    </section>
+
+    <section class="section-line">
+      <div class="wrap">
+        <p class="eyebrow">Qué podemos hacer · Qué no</p>
+        <div class="checkpoints">
+          <article class="card"><h3>Podemos</h3><p>Extraer rolls limpios del PDF, crear transparencias, corregir color, componerlos sobre la mesa, producir fondos, sombras, el patrón de arcos y transiciones; animar platos como capas independientes.</p></article>
+          <article class="card"><h3>Necesitamos fuente</h3><p>Para mostrar la caja original con precisión necesitamos fotos o video claros de tapa, exterior, interior y divisiones; para anatomía necesitamos ingredientes confirmados.</p></article>
+          <article class="card"><h3>No debemos</h3><p>Inventar el interior de la caja, reconstruir un logo borroso, presentar un roll generado como plato real o atribuir ingredientes que la fuente no confirma.</p></article>
+          <article class="card"><h3>No conviene</h3><p>Hacer salir todo el catálogo desde el hero, sincronizar un video largo frame a frame o cargar un modelo 3D pesado antes de validar la escena crítica.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-line">
+      <div class="wrap two-col">
+        <div><p class="eyebrow">Gramática para generación visual</p><h2>Una receta constante.</h2><p class="quote">Black studio void, premium matte stone table, controlled overhead spotlight, deep falloff, restrained highlights, editorial Japanese fine-dining photography, authentic food texture, cinematic but plausible.</p></div>
+        <div><h3>Siempre</h3><p>Negro limpio, un solo foco, sombras densas, textura real del alimento, encuadre editorial, espacio para interfaz y continuidad entre planos.</p><h3>Nunca</h3><p>Neón, vapor teatral, flores de cerezo, restaurante genérico, exceso de vajilla, manos deformes, comida plástica, logo reconstruido o ingredientes no confirmados.</p><h3>Variaciones controladas</h3><p>Ángulo de cámara, apertura de la caja, distancia focal, proporción desktop/móvil y posición del producto. La atmósfera no cambia entre assets.</p></div>
+      </div>
+    </section>
+
+    <section class="section-line">
+      <div class="wrap">
+        <p class="eyebrow">Plan de video · producción Codex</p>
+        <h2>Un master narrativo.<br>Clips solo cuando aporten.</h2>
+        <div class="shots">
+          <article class="card"><span class="number">V01</span><h3>Encuentro</h3><p>La luz revela la caja cerrada. 3–4 segundos.</p></article>
+          <article class="card"><span class="number">V02</span><h3>Apertura</h3><p>Una mano abre la caja con peso real. Plano principal, 6–10 segundos.</p></article>
+          <article class="card"><span class="number">V03</span><h3>Interior</h3><p>Cenital estable para enlazar divisiones y categorías.</p></article>
+          <article class="card"><span class="number">V04</span><h3>Elevación</h3><p>Palillos toman un roll y lo llevan hacia cámara.</p></article>
+          <article class="card"><span class="number">V05</span><h3>Corte</h3><p>Match cut hacia el macro de anatomía.</p></article>
+          <article class="card"><span class="number">V06</span><h3>Detalle</h3><p>Salsa o acabado en clip breve; nunca loop decorativo constante.</p></article>
+          <article class="card"><span class="number">V07</span><h3>Servicio</h3><p>La caja funciona como mesa de experiencia en casa.</p></article>
+          <article class="card"><span class="number">V08</span><h3>Cierre</h3><p>La tapa baja y el spot se reduce alrededor del CTA.</p></article>
+        </div>
+        <p class="note">Pipeline híbrido: aprobar keyframes → producir un clip corto de apertura → separar caja y platos en capas → probar scroll nativo → aprobar ritmo → exportar MP4/WebM y posters. Los platos salen mediante HTML/CSS; no se hornean dentro de un video largo.</p>
+      </div>
+    </section>
+
+    <section class="section-line">
+      <div class="wrap">
+        <p class="eyebrow">Orden de producción</p>
+        <h2>Decidir con imágenes,<br>producir después.</h2>
+        <div class="checkpoints">
+          <article class="card"><span class="number">A</span><h3>Reference lock</h3><p>Reunir caja, logo, platos, highlights, permisos y respuestas de “Sobre nosotros”.</p></article>
+          <article class="card"><span class="number">B</span><h3>Atmosphere board</h3><p>Generaré 4–6 contactos de luz, mesa y encuadre sin cerrar todavía el producto final.</p></article>
+          <article class="card"><span class="number">C</span><h3>Hero approval</h3><p>Elegimos una composición maestra y calibramos negro, azul, reflejo y escala.</p></article>
+          <article class="card"><span class="number">D</span><h3>Keyframes</h3><p>Produzco los frames K01–K08 manteniendo continuidad visual.</p></article>
+          <article class="card"><span class="number">E</span><h3>Motion proof</h3><p>Clip de apertura más una salida de plato en capas antes de producir el resto.</p></article>
+          <article class="card"><span class="number">F</span><h3>Vertical slice</h3><p>Caja cerrada, apertura, un roll y anatomía en HTML responsive.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="approval">
+      <div class="wrap">
+        <p class="eyebrow">Próxima aprobación</p>
+        <h2>Qué estamos decidiendo ahora.</h2>
+        <div class="checkpoints">
+          <article class="card"><h3>Atmósfera</h3><p>Aprobada: negro absoluto, mesa de piedra mate y luz cenital única. El patrón correcto de arcos concéntricos está identificado; su reconstrucción web espera aprobación.</p></article>
+          <article class="card"><h3>Narrativa</h3><p>Caja cerrada → apertura → rolls → anatomía → experiencia → Sobre nosotros → menú → cierre.</p></article>
+          <article class="card"><h3>Producción</h3><p>Recomendación: video corto para abrir y capas HTML/CSS para platos, interfaz y scroll.</p></article>
+          <article class="card"><h3>Contenido</h3><p>La historia del negocio, ingredientes, precios, horarios y pagos esperan fuentes verificadas.</p></article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">RYŌ Unboxed · Entregable de diseño HTML · Propuesta privada de portfolio · Material de terceros pendiente de autorización.</div></footer>
+</body>
+</html>

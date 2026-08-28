@@ -1,0 +1,32 @@
+# Dependencies and builds
+node_modules/
+.next/
+out/
+dist/
+coverage/
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+
+# Hosting metadata
+.vercel/
+
+# Operating system and editors
+.DS_Store
+*.swp
+*.swo
+
+# Local test artifacts
+playwright-report/
+test-results/
+tmp/
+graphify-out/
+
+# External source media stays local until publication rights are confirmed
+references/ryo-sushi/**/*.jpg
+references/ryo-sushi/**/*.jpeg
+references/ryo-sushi/**/*.png
+references/ryo-sushi/**/*.pdf
+references/ryo-sushi/**/*.mov

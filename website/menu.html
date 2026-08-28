@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Menú interactivo de Ryo Sushi con modos Explorar y Lista.">
+  <meta name="color-scheme" content="dark">
+  <title>Menú — RYŌ Sushi</title>
+  <link rel="stylesheet" href="styles.css?v=20260828-3">
+  <script type="module" src="app.js"></script>
+</head>
+<body class="menu-page">
+  <div class="stinger" data-stinger aria-hidden="true">
+    <div class="stinger__door stinger__door--left"></div>
+    <div class="stinger__door stinger__door--right"></div>
+    <div class="stinger__light"></div>
+    <div class="stinger__seal"><img src="public/media/ryo-wordmark-gold.png" alt=""></div>
+  </div>
+
+  <nav class="site-nav" aria-label="Navegación del menú">
+    <a class="site-nav__logo" href="index.html" aria-label="Volver a RYŌ Sushi"><img src="public/media/ryo-wordmark-gold.png" alt="RYŌ"></a>
+    <div class="site-nav__links"><a href="index.html">Experiencia</a><a href="#catalogo">Platos</a><a class="button button--solid" href="https://wa.me/584220382261" target="_blank" rel="noopener">WhatsApp</a></div>
+  </nav>
+
+  <header class="menu-hero">
+    <div class="wrap menu-hero__content">
+      <div><p class="eyebrow">Menú RYŌ</p><h1>Elegir también es parte de la experiencia.</h1></div>
+      <button class="button" type="button" data-replay-stinger>Repetir stinger</button>
+    </div>
+  </header>
+
+  <main class="menu-main" id="catalogo">
+    <div class="wrap">
+      <div class="menu-heading">
+        <div><p class="eyebrow">Una fuente · Dos lecturas</p><h2>Explorar o consultar.</h2></div>
+        <div class="view-switch" role="group" aria-label="Cambiar presentación del menú"><button type="button" data-menu-view="explore" aria-pressed="true">Explorar</button><button type="button" data-menu-view="list" aria-pressed="false">Lista</button></div>
+      </div>
+      <div class="category-nav" data-menu-categories role="group" aria-label="Filtrar por categoría"></div>
+      <p class="prototype-note"><strong>Selección conceptual:</strong> esta etapa trabaja únicamente con sushi rolls y nigiris. Los valores provienen del PDF de referencia; moneda y vigencia se consolidarán después de la aprobación del cliente.</p>
+
+      <section class="menu-explorer" data-menu-explorer tabindex="0" aria-label="Explorar platos. Usa los botones o las flechas izquierda y derecha." aria-live="polite">
+        <figure class="dish-visual" data-dish-visual></figure>
+        <article class="dish-copy">
+          <div class="dish-index"><span data-dish-category></span><span data-dish-count></span></div>
+          <h2 data-dish-name></h2>
+          <p class="dish-description" data-dish-description></p>
+          <ul class="ingredient-chips" data-dish-ingredients aria-label="Ingredientes confirmados"></ul>
+          <div class="dish-meta"><div><span>Precio del PDF</span><strong data-dish-price></strong></div><div><span>Presentación</span><strong data-dish-pieces></strong></div></div>
+        </article>
+        <div class="explorer-controls"><button class="button" data-previous-dish type="button">← Anterior</button><div class="progress-dots" data-progress-dots aria-label="Seleccionar plato"></div><button class="button" data-next-dish type="button">Siguiente →</button></div>
+      </section>
+
+      <section class="menu-catalogue" data-menu-catalogue aria-label="Lista de platos" hidden></section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap site-footer__main">
+      <div><p class="eyebrow">Contacto</p><h2>¿Ya elegiste?</h2></div>
+      <div class="site-footer__contact"><p>Alta cocina japonesa para disfrutar en casa.</p><p><strong>Solo delivery y pick up.</strong></p><a class="button button--solid" href="https://wa.me/584220382261" target="_blank" rel="noopener">Escribir por WhatsApp</a><a href="https://www.instagram.com/ryomcbo/" target="_blank" rel="noopener">Instagram · @ryomcbo</a></div>
+    </div>
+    <div class="wrap site-footer__bottom"><span>RYŌ Sushi · Menú</span><span>Delivery y pick up</span></div>
+  </footer>
+</body>
+</html>

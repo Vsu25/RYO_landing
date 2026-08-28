@@ -1,0 +1,9 @@
+interface:
+  display_name: "Sushi Page Project Manager"
+  short_description: "Ordena decisiones, alcance y estado del proyecto"
+  brand_color: "#C63D2F"
+  default_prompt: "Usa $sushi-project-manager para evaluar esta acción, recomendar el enfoque mínimo y mantener organizado Sushi Page."
+
+policy:
+  allow_implicit_invocation: true
+

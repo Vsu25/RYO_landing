@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>RYŌ — Stinger, menú y footer V1</title>
+  <style>
+    :root {
+      --navy:#101a33;
+      --navy-deep:#080e1d;
+      --navy-soft:#182442;
+      --gold:#dfbe78;
+      --gold-line:rgb(223 190 120 / 38%);
+      --ivory:#f6efdf;
+      --sand:#e8dcc3;
+      --ink:#11182b;
+      --muted:#aaa99f;
+      --max:1320px;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ivory); background:var(--navy-deep); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.5; }
+    button,a { font:inherit; }
+    button { color:inherit; }
+    a { color:inherit; }
+    img { display:block; max-width:100%; }
+    h1,h2,h3,p { margin-top:0; }
+    h1,h2 { font-family:Georgia,"Times New Roman",serif; font-weight:400; letter-spacing:-.04em; }
+    h1 { max-width:12ch; margin-bottom:1.25rem; font-size:clamp(4rem,10vw,9rem); line-height:.82; }
+    h2 { margin-bottom:1.25rem; font-size:clamp(2.6rem,6vw,6rem); line-height:.92; }
+    .wrap { width:min(calc(100% - 2rem),var(--max)); margin-inline:auto; }
+    .eyebrow { color:var(--gold); font-size:.68rem; font-weight:800; letter-spacing:.17em; text-transform:uppercase; }
+    .muted { color:var(--muted); }
+    .button { display:inline-flex; min-height:2.8rem; padding:.7rem 1rem; align-items:center; justify-content:center; border:1px solid var(--gold-line); background:transparent; cursor:pointer; font-size:.72rem; font-weight:800; letter-spacing:.12em; text-decoration:none; text-transform:uppercase; }
+    .button:hover,.button:focus-visible { color:var(--ink); background:var(--gold); border-color:var(--gold); outline:0; }
+    .button--solid { color:var(--ink); background:var(--gold); border-color:var(--gold); }
+    .button--solid:hover,.button--solid:focus-visible { color:var(--ivory); background:var(--navy); }
+
+    .stinger { position:fixed; z-index:100; inset:0; overflow:hidden; pointer-events:none; }
+    .stinger__door { position:absolute; top:0; bottom:0; width:50.15%; background-color:var(--navy); background-image:linear-gradient(rgb(16 26 51 / 16%),rgb(8 14 29 / 44%)),url("../../references/ryo-sushi/brand/ryo-overlapping-arcs-pattern-2026-08-26.png"); background-size:200vw 100vh; background-repeat:no-repeat; box-shadow:inset 0 0 8rem rgb(0 0 0 / 28%); will-change:transform; }
+    .stinger__door--left { left:0; background-position:left center; border-right:1px solid var(--gold); animation:door-left 1s cubic-bezier(.76,0,.24,1) .82s forwards; }
+    .stinger__door--right { right:0; background-position:right center; border-left:1px solid var(--gold); animation:door-right 1s cubic-bezier(.76,0,.24,1) .82s forwards; }
+    .stinger__light { position:absolute; z-index:2; top:0; bottom:0; left:50%; width:2px; background:var(--gold); box-shadow:0 0 2rem rgb(223 190 120 / 74%); transform:translateX(-50%) scaleY(0); animation:light-seam .82s cubic-bezier(.2,.75,.2,1) forwards; }
+    .stinger__seal { position:absolute; z-index:3; top:50%; left:50%; width:min(17rem,56vw); padding:1rem; border:1px solid var(--gold); background:var(--navy); box-shadow:0 1.5rem 5rem rgb(0 0 0 / 48%); transform:translate(-50%,-50%); animation:seal-out .48s ease .62s forwards; }
+    .stinger__seal img { width:100%; aspect-ratio:4/3; object-fit:cover; }
+    @keyframes light-seam { 45% { transform:translateX(-50%) scaleY(1); } 100% { opacity:0; transform:translateX(-50%) scaleY(1); } }
+    @keyframes seal-out { to { opacity:0; transform:translate(-50%,-50%) scale(.9); } }
+    @keyframes door-left { to { transform:translateX(-101%); } }
+    @keyframes door-right { to { transform:translateX(101%); } }
+
+    .site-nav { position:sticky; z-index:20; top:0; display:flex; min-height:4.5rem; padding-inline:max(1rem,calc((100vw - var(--max))/2)); align-items:center; justify-content:space-between; gap:1rem; border-bottom:1px solid var(--gold-line); background:rgb(8 14 29 / 82%); backdrop-filter:blur(16px); }
+    .site-nav__mark { color:var(--gold); font:1.55rem Georgia,"Times New Roman",serif; text-decoration:none; }
+    .site-nav__links { display:flex; align-items:center; gap:1rem; }
+    .site-nav__links a:not(.button) { color:#d5d0c4; font-size:.72rem; letter-spacing:.1em; text-underline-offset:.35rem; text-transform:uppercase; }
+
+    .intro { position:relative; min-height:calc(100svh - 4.5rem); display:grid; overflow:hidden; align-items:end; isolation:isolate; }
+    .intro::before { position:absolute; z-index:-2; inset:0; background:url("../../references/ryo-sushi/brand/ryo-overlapping-arcs-pattern-2026-08-26.png") center/cover no-repeat; opacity:.4; content:""; }
+    .intro::after { position:absolute; z-index:-1; inset:0; background:radial-gradient(circle at 72% 42%,rgb(223 190 120 / 11%),transparent 28%),linear-gradient(90deg,var(--navy-deep) 5%,rgb(8 14 29 / 82%) 48%,rgb(8 14 29 / 42%)); content:""; }
+    .intro__content { display:grid; grid-template-columns:1.25fr .75fr; gap:clamp(2rem,7vw,8rem); padding-block:clamp(6rem,12vw,11rem) 5rem; align-items:end; }
+    .intro__lede { max-width:42rem; color:#d4cfc3; font-size:clamp(1rem,1.7vw,1.3rem); }
+    .motion-card { padding:1.4rem; border:1px solid var(--gold-line); background:rgb(8 14 29 / 64%); backdrop-filter:blur(12px); }
+    .motion-card ol { margin:1.5rem 0 0; padding:0; list-style:none; counter-reset:step; }
+    .motion-card li { display:grid; grid-template-columns:3.4rem 1fr; gap:1rem; padding:.8rem 0; border-top:1px solid var(--gold-line); counter-increment:step; }
+    .motion-card li::before { color:var(--gold); content:counter(step,decimal-leading-zero); font:1.25rem Georgia,serif; }
+    .motion-card strong { display:block; margin-bottom:.2rem; font-size:.74rem; letter-spacing:.11em; text-transform:uppercase; }
+    .motion-card span { color:var(--muted); font-size:.76rem; }
+
+    .menu-section { padding-block:clamp(5rem,9vw,9rem); border-top:1px solid var(--gold-line); }
+    .menu-heading { display:grid; grid-template-columns:1fr auto; gap:2rem; margin-bottom:2.5rem; align-items:end; }
+    .menu-heading h2 { margin-bottom:0; }
+    .view-switch { display:inline-flex; padding:.25rem; border:1px solid var(--gold-line); background:#0a1122; }
+    .view-switch button { min-width:7rem; padding:.62rem .8rem; border:0; color:var(--muted); background:transparent; cursor:pointer; font-size:.68rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    .view-switch button[aria-pressed="true"] { color:var(--ink); background:var(--gold); }
+    .category-nav { display:flex; gap:.55rem; margin-bottom:1rem; overflow-x:auto; scrollbar-width:thin; }
+    .category-nav button { flex:0 0 auto; padding:.65rem .9rem; border:1px solid var(--gold-line); color:var(--muted); background:transparent; cursor:pointer; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; }
+    .category-nav button:hover,.category-nav button:focus-visible,.category-nav button[aria-pressed="true"] { color:var(--ivory); border-color:var(--gold); outline:0; }
+    .category-nav button[aria-pressed="true"] { background:rgb(223 190 120 / 12%); }
+    .prototype-note { margin-bottom:2rem; padding:1rem 1.1rem; border-left:2px solid var(--gold); color:var(--muted); background:rgb(223 190 120 / 6%); font-size:.8rem; }
+
+    .explorer { display:grid; grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr); min-height:43rem; border:1px solid var(--gold-line); background:#090f1d; }
+    .dish-visual { position:relative; min-height:34rem; margin:0; overflow:hidden; background:var(--navy); }
+    .dish-visual::after { position:absolute; inset:0; background:linear-gradient(90deg,transparent 55%,#090f1d),linear-gradient(0deg,rgb(0 0 0 / 58%),transparent 45%); pointer-events:none; content:""; }
+    .dish-visual img { width:100%; height:100%; padding:clamp(1.5rem,4vw,4rem); object-fit:contain; background:radial-gradient(circle at 50% 46%,var(--navy-soft),#05070c 68%); }
+    .dish-placeholder { display:grid; width:100%; height:100%; padding:2rem; place-items:center; background:linear-gradient(rgb(16 26 51 / 26%),rgb(8 14 29 / 58%)),url("../../references/ryo-sushi/brand/ryo-overlapping-arcs-pattern-2026-08-26.png") center/cover no-repeat; color:var(--gold); font:clamp(3rem,8vw,7rem) Georgia,serif; text-align:center; }
+    .dish-placeholder small { display:block; margin-top:1rem; color:#bcb5a7; font:700 .65rem Inter,system-ui,sans-serif; letter-spacing:.14em; text-transform:uppercase; }
+    .dish-copy { display:flex; flex-direction:column; padding:clamp(2rem,5vw,4.5rem); justify-content:center; }
+    .dish-index { display:flex; margin-bottom:2.5rem; justify-content:space-between; color:var(--gold); font-size:.68rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    .dish-copy h3 { margin-bottom:1rem; font:clamp(2.6rem,5vw,5.5rem)/.9 Georgia,"Times New Roman",serif; letter-spacing:-.045em; }
+    .dish-description { color:#d2cdc0; font-size:clamp(.95rem,1.35vw,1.12rem); }
+    .ingredient-chips { display:flex; flex-wrap:wrap; gap:.45rem; margin:1rem 0 2rem; padding:0; list-style:none; }
+    .ingredient-chips li { padding:.35rem .55rem; border:1px solid var(--gold-line); color:var(--muted); font-size:.64rem; letter-spacing:.07em; text-transform:uppercase; }
+    .dish-meta { display:grid; grid-template-columns:1fr 1fr; gap:1px; margin-top:auto; border:1px solid var(--gold-line); background:var(--gold-line); }
+    .dish-meta div { padding:1rem; background:#0c1427; }
+    .dish-meta span { display:block; margin-bottom:.35rem; color:var(--gold); font-size:.6rem; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    .dish-meta strong { font:1.25rem Georgia,serif; }
+    .explorer-controls { grid-column:1/-1; display:grid; grid-template-columns:auto 1fr auto; gap:1rem; padding:1rem; align-items:center; border-top:1px solid var(--gold-line); }
+    .progress-dots { display:flex; gap:.45rem; justify-content:center; }
+    .progress-dots button { width:.6rem; height:.6rem; padding:0; border:1px solid var(--gold); border-radius:50%; background:transparent; cursor:pointer; }
+    .progress-dots button[aria-current="true"] { background:var(--gold); }
+
+    .catalogue[hidden],.explorer[hidden] { display:none; }
+    .catalogue { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; border:1px solid var(--gold-line); background:var(--gold-line); }
+    .catalogue article { display:grid; grid-template-columns:1fr auto; gap:1rem; min-height:14rem; padding:1.5rem; background:#0a1122; }
+    .catalogue h3 { margin-bottom:.6rem; font:2rem/1 Georgia,serif; }
+    .catalogue p { margin-bottom:1rem; color:var(--muted); font-size:.8rem; }
+    .catalogue small { color:var(--gold); font-size:.62rem; letter-spacing:.1em; text-transform:uppercase; }
+    .catalogue__price { text-align:right; }
+    .catalogue__price strong { display:block; color:var(--ivory); font:1.65rem Georgia,serif; }
+    .catalogue__price span { color:var(--muted); font-size:.62rem; }
+
+    .menu-pending { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:4rem; border:1px solid var(--gold-line); background:var(--gold-line); }
+    .menu-pending article { padding:1.3rem; background:#0a1122; }
+    .menu-pending span { color:var(--gold); font-size:.62rem; font-weight:800; letter-spacing:.11em; text-transform:uppercase; }
+    .menu-pending h3 { margin:.8rem 0 .5rem; font:.95rem Inter,system-ui,sans-serif; letter-spacing:.08em; text-transform:uppercase; }
+    .menu-pending p { margin:0; color:var(--muted); font-size:.76rem; }
+
+    .site-footer { color:var(--ink); background:var(--sand); border-top:.45rem solid var(--gold); }
+    .site-footer__main { display:grid; grid-template-columns:1.35fr .65fr; gap:clamp(3rem,9vw,10rem); padding-block:clamp(5rem,9vw,8rem); }
+    .site-footer .eyebrow { color:#755b2a; }
+    .site-footer h2 { max-width:11ch; }
+    .site-footer__contact { display:grid; align-content:end; gap:1rem; }
+    .site-footer__contact p { margin:0; color:#4f4d48; }
+    .site-footer__contact a:not(.button) { font-weight:800; text-underline-offset:.3rem; }
+    .site-footer__bottom { display:flex; padding-block:1.2rem; justify-content:space-between; gap:1rem; border-top:1px solid rgb(17 24 43 / 24%); color:#605d56; font-size:.68rem; letter-spacing:.08em; text-transform:uppercase; }
+
+    @media (max-width:900px) {
+      .intro__content,.explorer,.site-footer__main { grid-template-columns:1fr; }
+      .intro__content { align-items:end; }
+      .motion-card { max-width:42rem; }
+      .dish-visual { min-height:30rem; }
+      .dish-visual::after { background:linear-gradient(0deg,#090f1d,transparent 26%); }
+      .catalogue { grid-template-columns:1fr; }
+    }
+    @media (max-width:680px) {
+      .site-nav__links a:not(.button) { display:none; }
+      .menu-heading { grid-template-columns:1fr; }
+      .view-switch { width:100%; }
+      .view-switch button { flex:1; }
+      .dish-visual { min-height:22rem; }
+      .dish-copy { padding:1.5rem 1rem 2rem; }
+      .explorer-controls { grid-template-columns:1fr 1fr; }
+      .progress-dots { grid-column:1/-1; grid-row:1; flex-wrap:wrap; }
+      .menu-pending { grid-template-columns:1fr; }
+      .site-footer__bottom { display:grid; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      .stinger__door--left { animation:door-left .01ms linear forwards; }
+      .stinger__door--right { animation:door-right .01ms linear forwards; }
+      .stinger__light,.stinger__seal { animation:none; opacity:0; }
+    }
+  </style>
+</head>
+<body>
+  <div class="stinger" id="stinger" aria-hidden="true">
+    <div class="stinger__door stinger__door--left"></div>
+    <div class="stinger__door stinger__door--right"></div>
+    <div class="stinger__light"></div>
+    <div class="stinger__seal"><img src="../../brand/assets/ryo-wordmark-gold-transparent.png" alt=""></div>
+  </div>
+
+  <nav class="site-nav" aria-label="Navegación del prototipo">
+    <a class="site-nav__mark" href="ryo-unboxed-visual-system-v1.html">RYŌ</a>
+    <div class="site-nav__links"><a href="#menu">Menú</a><a href="#contacto">Contacto</a><a class="button button--solid" href="https://wa.me/584220382261" target="_blank" rel="noopener">WhatsApp</a></div>
+  </nav>
+
+  <header class="intro">
+    <div class="wrap intro__content">
+      <div>
+        <p class="eyebrow">Sistema 02 · Stinger + menú + cierre</p>
+        <h1>Abrir el menú.</h1>
+        <p class="intro__lede">Dos paneles inspirados en puertas japonesas separan el patrón RYŌ desde el centro. No es una cortina decorativa: introduce la consulta del menú y reaparece únicamente en transiciones mayores.</p>
+        <button class="button" id="replay-stinger" type="button">Repetir stinger</button>
+      </div>
+      <aside class="motion-card">
+        <p class="eyebrow">Coreografía propuesta · 1.82 s</p>
+        <ol>
+          <li><div><strong>Junta</strong><span>Una línea dorada revela el eje central.</span></div></li>
+          <li><div><strong>Sello</strong><span>El wordmark pierde escala y libera la apertura.</span></div></li>
+          <li><div><strong>Puertas</strong><span>Los paneles salen con el patrón continuo.</span></div></li>
+          <li><div><strong>Contenido</strong><span>El menú queda estable, sin loop ni bloqueo.</span></div></li>
+        </ol>
+      </aside>
+    </div>
+  </header>
+
+  <main id="menu" class="menu-section">
+    <div class="wrap">
+      <div class="menu-heading">
+        <div><p class="eyebrow">Menú interactivo · Vertical slice</p><h2>Explorar o consultar.</h2></div>
+        <div class="view-switch" role="group" aria-label="Cambiar presentación del menú">
+          <button type="button" data-view="explore" aria-pressed="true">Explorar</button>
+          <button type="button" data-view="list" aria-pressed="false">Lista</button>
+        </div>
+      </div>
+      <div class="category-nav" role="group" aria-label="Filtrar por categoría">
+        <button type="button" data-category="Rolls especiales" aria-pressed="true">Rolls especiales</button>
+        <button type="button" data-category="Nigiris" aria-pressed="false">Nigiris</button>
+      </div>
+      <p class="prototype-note"><strong>Alcance factual:</strong> este prototipo usa los diez platos ya verificados en SRC-002. Las demás categorías continúan pendientes de transcripción. Los números de precio provienen del PDF; la moneda y vigencia todavía deben confirmarse.</p>
+
+      <section class="explorer" id="explorer" aria-label="Vista para explorar platos" aria-live="polite">
+        <figure class="dish-visual" id="dish-visual"></figure>
+        <article class="dish-copy">
+          <div class="dish-index"><span id="dish-category"></span><span id="dish-count"></span></div>
+          <h3 id="dish-name"></h3>
+          <p class="dish-description" id="dish-description"></p>
+          <ul class="ingredient-chips" id="dish-ingredients" aria-label="Ingredientes confirmados"></ul>
+          <div class="dish-meta">
+            <div><span>Precio del PDF</span><strong id="dish-price"></strong></div>
+            <div><span>Presentación</span><strong id="dish-pieces"></strong></div>
+          </div>
+        </article>
+        <div class="explorer-controls">
+          <button class="button" id="previous-dish" type="button">← Anterior</button>
+          <div class="progress-dots" id="progress-dots" aria-label="Seleccionar plato"></div>
+          <button class="button" id="next-dish" type="button">Siguiente →</button>
+        </div>
+      </section>
+
+      <section class="catalogue" id="catalogue" aria-label="Vista de lista de platos" hidden></section>
+
+      <div class="menu-pending">
+        <article><span>Pendiente</span><h3>Catálogo completo</h3><p>Entradas, ensaladas, clásicos, tempura, pokes y bebidas deben transcribirse desde la fuente vigente.</p></article>
+        <article><span>Pendiente</span><h3>Moneda y precios</h3><p>Los valores existen en el PDF, pero no se publica símbolo monetario hasta confirmar moneda y vigencia.</p></article>
+        <article><span>Pendiente</span><h3>Fotografía faltante</h3><p>Cuando no existe una imagen original aprobada, el patrón ocupa el espacio sin inventar el plato.</p></article>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer" id="contacto">
+    <div class="wrap site-footer__main">
+      <div><p class="eyebrow">Contacto</p><h2>Del menú a tu mesa.</h2></div>
+      <div class="site-footer__contact">
+        <p>Alta cocina japonesa para disfrutar en casa.</p>
+        <p><strong>Solo delivery y pick up.</strong></p>
+        <a class="button button--solid" href="https://wa.me/584220382261" target="_blank" rel="noopener">Escribir por WhatsApp</a>
+        <a href="https://www.instagram.com/ryomcbo/" target="_blank" rel="noopener">Instagram · @ryomcbo</a>
+      </div>
+    </div>
+    <div class="wrap site-footer__bottom"><span>RYŌ Unboxed · Concepto privado de portfolio</span><span>Horarios y métodos de pago pendientes de verificación</span></div>
+  </footer>
+
+  <script>
+    const dishes=[
+      {category:"Rolls especiales",name:"Fuji",description:"Uramaki relleno de camarón, cangrejo, queso crema, con topping de aguacate y camarón crujiente, bañado en salsa de anguila y salsa fuji.",ingredients:["Camarón","Cangrejo","Queso crema","Aguacate","Camarón crujiente","Salsa de anguila","Salsa fuji"],price:13,pieces:null,image:null},
+      {category:"Rolls especiales",name:"Yuzu",description:"Uramaki relleno de tuna, mango, cebollín frito, con topping de pescado blanco y masago, bañado en salsa ponzu con un toque de limón.",ingredients:["Tuna","Mango","Cebollín frito","Pescado blanco","Masago","Salsa ponzu","Limón"],price:11,pieces:null,image:"../../references/ryo-sushi/rolls/Yuzu Roll.png"},
+      {category:"Rolls especiales",name:"Kamasutra",description:"Envuelto en papel de soya, relleno de tuna, salmón, pescado blanco, camarón y kani crujiente con queso crema y aguacate, coronado con gratinado de pesca blanca crujiente.",ingredients:["Papel de soya","Tuna","Salmón","Pescado blanco","Camarón","Kani crujiente","Queso crema","Aguacate","Gratinado de pesca blanca crujiente"],price:14,pieces:null,image:null},
+      {category:"Rolls especiales",name:"Rendi",description:"Envuelto en papel de soya, relleno de camarón, plátano, ensalada kani, wakame, aguacate y cebollín, con topping de salmón ahumado y mix de tuna blanca flameada, bañado en salsa de anguila y spicy mayo.",ingredients:["Papel de soya","Camarón","Plátano","Ensalada kani","Wakame","Aguacate","Cebollín","Salmón ahumado","Tuna blanca flameada","Salsa de anguila","Spicy mayo"],price:15,pieces:null,image:null},
+      {category:"Rolls especiales",name:"Sei Exclusive",description:"Uramaki relleno de camarón crujiente, aguacate y cilantro, con topping de tuna, slice de limón y masago, bañado en salsa de anguila.",ingredients:["Camarón crujiente","Aguacate","Cilantro","Tuna","Limón","Masago","Salsa de anguila"],price:11,pieces:"10 piezas",image:"../../references/ryo-sushi/rolls/Sei Exclusive roll.png"},
+      {category:"Rolls especiales",name:"Koga Explosion",description:"Uramaki relleno de cangrejo, tuna y cebollín, con topping de spicy tuna y cebolla frita, bañado en salsa de anguila.",ingredients:["Cangrejo","Tuna","Cebollín","Spicy tuna","Cebolla frita","Salsa de anguila"],price:11,pieces:"10 piezas",image:"../../references/ryo-sushi/rolls/Koga Explosion Roll.png"},
+      {category:"Rolls especiales",name:"Playboy",description:"Uramaki relleno de camarón, aguacate y pepino, con topping de tuna y masago, bañado en salsa de anguila y spicy mayo.",ingredients:["Camarón","Aguacate","Pepino","Tuna","Masago","Salsa de anguila","Spicy mayo"],price:10,pieces:"10 piezas",image:"../../references/ryo-sushi/rolls/Playboy Roll.png"},
+      {category:"Nigiris",name:"Nigiri Tuná",description:"Atún importado, decorado con cebolla crujiente y nuestra exclusiva salsa Ryo.",ingredients:["Arroz","Atún importado","Cebolla crujiente","Salsa Ryo"],price:5,pieces:"2 piezas",image:null},
+      {category:"Nigiris",name:"Nigiri Salmón",description:"Salmón flameado servido con spicy mayo.",ingredients:["Arroz","Salmón flameado","Spicy mayo"],price:5,pieces:"2 piezas",image:null},
+      {category:"Nigiris",name:"Pesca Blanca",description:"Pescado blanco, decorado con slice de limón y salsa ponzu.",ingredients:["Arroz","Pescado blanco","Limón","Salsa ponzu"],price:5,pieces:"2 piezas",image:null}
+    ];
+    const reducedMotion=matchMedia("(prefers-reduced-motion: reduce)");
+    const stinger=document.querySelector("#stinger");
+    const replay=document.querySelector("#replay-stinger");
+    const explorer=document.querySelector("#explorer");
+    const catalogue=document.querySelector("#catalogue");
+    const categoryButtons=[...document.querySelectorAll("[data-category]")];
+    const viewButtons=[...document.querySelectorAll("[data-view]")];
+    let category="Rolls especiales";
+    let current=0;
+    const filtered=()=>dishes.filter(dish=>dish.category===category);
+
+    function replayStinger(){
+      const animated=stinger.querySelectorAll(".stinger__door,.stinger__light,.stinger__seal");
+      animated.forEach(element=>element.style.animation="none");
+      stinger.offsetWidth;
+      animated.forEach(element=>element.style.removeProperty("animation"));
+    }
+
+    function renderExplore(){
+      const items=filtered();
+      const dish=items[current];
+      document.querySelector("#dish-visual").innerHTML=dish.image?`<img src="${dish.image}" alt="Referencia visual de ${dish.name}">`:`<div class="dish-placeholder">${dish.name}<small>Fotografía pendiente</small></div>`;
+      document.querySelector("#dish-category").textContent=dish.category;
+      document.querySelector("#dish-count").textContent=`${String(current+1).padStart(2,"0")} / ${String(items.length).padStart(2,"0")}`;
+      document.querySelector("#dish-name").textContent=dish.name;
+      document.querySelector("#dish-description").textContent=dish.description;
+      document.querySelector("#dish-ingredients").innerHTML=dish.ingredients.map(ingredient=>`<li>${ingredient}</li>`).join("");
+      document.querySelector("#dish-price").textContent=`${dish.price} · moneda pendiente`;
+      document.querySelector("#dish-pieces").textContent=dish.pieces||"Por confirmar";
+      document.querySelector("#progress-dots").innerHTML=items.map((item,index)=>`<button type="button" data-index="${index}" aria-label="Ver ${item.name}" aria-current="${index===current}"></button>`).join("");
+      document.querySelectorAll("[data-index]").forEach(button=>button.addEventListener("click",()=>{current=Number(button.dataset.index);renderExplore();}));
+      if(!reducedMotion.matches) explorer.animate([{opacity:.62,transform:"translateY(6px)"},{opacity:1,transform:"translateY(0)"}],{duration:280,easing:"cubic-bezier(.2,.75,.2,1)"});
+    }
+
+    function renderList(){
+      catalogue.innerHTML=filtered().map(dish=>`<article><div><small>${dish.category}</small><h3>${dish.name}</h3><p>${dish.description}</p><small>${dish.pieces||"Presentación por confirmar"}</small></div><div class="catalogue__price"><strong>${dish.price}</strong><span>Moneda pendiente</span></div></article>`).join("");
+    }
+
+    function setCategory(nextCategory){
+      category=nextCategory;
+      current=0;
+      categoryButtons.forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.category===category)));
+      renderExplore();
+      renderList();
+    }
+
+    function setView(view){
+      const exploring=view==="explore";
+      explorer.hidden=!exploring;
+      catalogue.hidden=exploring;
+      viewButtons.forEach(button=>button.setAttribute("aria-pressed",String(button.dataset.view===view)));
+    }
+
+    replay.addEventListener("click",replayStinger);
+    categoryButtons.forEach(button=>button.addEventListener("click",()=>setCategory(button.dataset.category)));
+    viewButtons.forEach(button=>button.addEventListener("click",()=>setView(button.dataset.view)));
+    document.querySelector("#previous-dish").addEventListener("click",()=>{current=(current-1+filtered().length)%filtered().length;renderExplore();});
+    document.querySelector("#next-dish").addEventListener("click",()=>{current=(current+1)%filtered().length;renderExplore();});
+    renderExplore();
+    renderList();
+  </script>
+</body>
+</html>

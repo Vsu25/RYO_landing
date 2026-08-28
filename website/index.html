@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Concepto de portfolio para Ryo Sushi: alta cocina japonesa para disfrutar en casa.">
+  <meta name="color-scheme" content="dark">
+  <title>RYŌ Sushi — Unboxed</title>
+  <link rel="stylesheet" href="styles.css?v=20260828-3">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <nav class="site-nav" aria-label="Navegación principal">
+    <a class="site-nav__logo" href="#inicio" aria-label="RYŌ Sushi · Inicio"><img src="public/media/ryo-wordmark-gold.png" alt="RYŌ"></a>
+    <div class="site-nav__links"><a href="#objeto">La caja</a><a href="#rolls">Rolls</a><a href="#anatomia">Anatomía</a><a href="#experiencia">Experiencia</a><a class="button button--solid" href="https://wa.me/584220382261" target="_blank" rel="noopener">WhatsApp</a></div>
+  </nav>
+
+  <header class="hero" id="inicio">
+    <div class="wrap hero__content">
+      <p class="eyebrow">RYŌ · Alta cocina japonesa</p>
+      <h1><span>La experiencia</span><span>empieza</span><em>en la caja.</em></h1>
+      <p class="hero__lede">Alta cocina japonesa para disfrutar en casa. Solo delivery y pick up.</p>
+      <div class="button-row"><a class="button button--solid" href="#objeto">Abrir la experiencia</a><a class="button" href="#rolls">Descubrir los rolls</a></div>
+    </div>
+    <a class="scroll-cue" href="#objeto"><span>Desliza para abrir</span><i aria-hidden="true"></i></a>
+    <div class="hero__index" aria-hidden="true"><span>01</span><i></i><span>05</span></div>
+  </header>
+
+  <main id="contenido">
+    <section class="section object-section" id="objeto" aria-labelledby="objeto-title">
+      <div class="wrap">
+        <div class="two-col" data-reveal>
+          <div><p class="eyebrow">01 · La caja</p><h2 id="objeto-title">Todo comienza al abrirla.</h2></div>
+          <div><p class="statement">Una caja azul. Una escena precisa. El producto en el centro.</p><p class="muted">El wordmark, los divisores y el patrón convierten el packaging en la primera capa de la experiencia RYŌ.</p></div>
+        </div>
+        <figure class="stage-image stage-image--object" data-reveal><div class="box-reveal"><img class="box-reveal__open" src="public/media/box-open.webp" width="1672" height="940" alt="Caja azul RYŌ abierta en una escena de estudio oscura"><img class="box-reveal__closed" src="public/media/box-closed.webp" width="1672" height="940" alt=""></div><figcaption><span class="eyebrow">La caja RYŌ</span><br>Identidad, presentación y producto en un mismo gesto.</figcaption></figure>
+      </div>
+    </section>
+
+    <section class="section roll-showcase" id="rolls" aria-labelledby="rolls-heading">
+      <div class="wrap">
+        <div class="section-heading" data-reveal>
+          <div><p class="eyebrow">02 · Protagonistas</p><h2 id="rolls-heading">Cuatro rolls.<br>Un mismo escenario.</h2></div>
+          <p class="section-intro">Sei Exclusive, Koga Explosion, Yuzu y Playboy comparten una pose editorial para que cada corte conserve el protagonismo.</p>
+        </div>
+        <div class="roll-grid" data-reveal>
+          <a class="roll-card" href="#anatomia" data-roll-jump="sei"><img src="public/media/roll-sei.webp" width="1672" height="940" alt="Sei Exclusive sostenido frente a la caja RYŌ"><span><small>01</small>Sei Exclusive</span></a>
+          <a class="roll-card" href="#anatomia" data-roll-jump="koga"><img src="public/media/roll-koga.webp" width="1672" height="940" alt="Koga Explosion sostenido frente a la caja RYŌ"><span><small>02</small>Koga Explosion</span></a>
+          <a class="roll-card" href="#anatomia" data-roll-jump="yuzu"><img src="public/media/roll-yuzu.webp" width="1672" height="940" alt="Yuzu sostenido frente a la caja RYŌ"><span><small>03</small>Yuzu</span></a>
+          <a class="roll-card" href="#anatomia" data-roll-jump="playboy"><img src="public/media/roll-playboy.webp" width="1672" height="940" alt="Playboy sostenido frente a la caja RYŌ"><span><small>04</small>Playboy</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section--navy anatomy-section" id="anatomia" aria-labelledby="anatomy-heading">
+      <div class="wrap">
+        <div class="section-heading" data-reveal>
+          <div><p class="eyebrow">03 · Anatomía</p><h2 id="anatomy-heading">El roll domina.<br>La interfaz explica.</h2></div>
+          <p class="section-intro">Selecciona un roll y explora cada ingrediente. La línea aparece solo al acercarte; en móvil, la lectura se transforma en una lista clara.</p>
+        </div>
+        <div class="anatomy-shell" data-anatomy data-reveal>
+          <div class="anatomy-tabs" data-anatomy-tabs role="group" aria-label="Seleccionar roll"></div>
+          <p class="sr-only" aria-live="polite" data-anatomy-status></p>
+          <div class="anatomy-stage">
+            <img data-anatomy-image width="1672" height="940" src="public/media/roll-sei.webp" alt="Sei Exclusive frente a la caja RYŌ">
+            <svg class="anatomy-connectors" data-anatomy-connectors viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
+            <h3 class="anatomy-name" data-anatomy-name>Sei Exclusive</h3>
+            <ul class="anatomy-ingredients" data-anatomy-ingredients></ul>
+            <div class="anatomy-summary"><span>Descripción general</span><p data-anatomy-description></p></div>
+          </div>
+        </div>
+        <p class="editorial-note">Ingredientes identificados a partir del menú RYŌ. El precio queda reservado para la futura experiencia del menú.</p>
+      </div>
+    </section>
+
+    <section class="section" id="experiencia" aria-labelledby="experience-heading">
+      <div class="wrap">
+        <div class="section-heading" data-reveal><div><p class="eyebrow">04 · En casa</p><h2 id="experience-heading">RYŌ llega a tu mesa.</h2></div><p class="section-intro">Alta cocina japonesa para disfrutar en casa. Una experiencia creada para delivery y pick up.</p></div>
+        <div class="experience" data-reveal>
+          <div class="experience__copy"><p class="eyebrow">La experiencia RYŌ</p><h2>Alta cocina japonesa.</h2><p class="statement">Para disfrutar en casa.</p><div class="button-row"><a class="button button--solid" href="https://wa.me/584220382261" target="_blank" rel="noopener">Escribir por WhatsApp</a></div></div>
+          <figure class="experience__visual"><img src="public/media/box-open.webp" width="1672" height="940" alt="Caja RYŌ abierta como soporte de la sección Experiencia"></figure>
+          <div class="experience__facts">
+            <article class="fact"><span>Modalidad</span><strong>Solo delivery y pick up</strong><p>Disfrútalo donde quieras.</p></article>
+            <a class="fact" href="https://wa.me/584220382261" target="_blank" rel="noopener"><span>WhatsApp</span><strong>+58 422-0382261</strong><p>Canal directo.</p></a>
+            <a class="fact" href="https://www.instagram.com/ryomcbo/" target="_blank" rel="noopener"><span>Instagram</span><strong>@ryomcbo</strong><p>Descubre más de RYŌ.</p></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section menu-teaser" aria-labelledby="menu-title" data-reveal>
+      <div class="wrap menu-teaser__content">
+        <div><p class="eyebrow">05 · Próxima escena</p><h2 id="menu-title">Rolls y nigiris,<br>listos para descubrirse.</h2><p class="muted">La experiencia del menú se completará cuando sus fotografías estén aprobadas.</p></div>
+        <span class="button button--solid button--disabled" aria-disabled="true">Menú en preparación</span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" id="contacto">
+    <div class="wrap site-footer__main">
+      <div><p class="eyebrow">Contacto</p><h2>¿Listo para disfrutar RYŌ?</h2></div>
+      <div class="site-footer__contact"><p>Alta cocina japonesa para disfrutar en casa.</p><p><strong>Solo delivery y pick up.</strong></p><a class="button button--solid" href="https://wa.me/584220382261" target="_blank" rel="noopener">Escribir por WhatsApp</a><a href="https://www.instagram.com/ryomcbo/" target="_blank" rel="noopener">Instagram · @ryomcbo</a></div>
+    </div>
+    <div class="wrap site-footer__bottom"><span>RYŌ Sushi · Delivery y pick up</span><span>Menú y contacto</span></div>
+  </footer>
+</body>
+</html>

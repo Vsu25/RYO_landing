@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>RYŌ — Guía fotográfica de caja y producto</title>
+  <style>
+    :root {
+      --black: #030303;
+      --navy: #101625;
+      --blue: #3f458f;
+      --ivory: #f8efdd;
+      --muted: #aaa79e;
+      --gold: #c5a464;
+      --line: rgb(197 164 100 / 32%);
+      --panel: #090a0d;
+      --max: 1180px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ivory);
+      background: var(--black);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.55;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2 { font-family: Georgia, "Times New Roman", serif; font-weight: 400; letter-spacing: -.035em; }
+    h1 { max-width: 900px; margin-bottom: 1.2rem; font-size: clamp(3.2rem, 8vw, 7.4rem); line-height: .9; }
+    h2 { margin-bottom: 1.8rem; font-size: clamp(2.15rem, 5vw, 4.6rem); line-height: .98; }
+    h3 { margin-bottom: .65rem; font-size: .75rem; letter-spacing: .15em; text-transform: uppercase; }
+    p { max-width: 72ch; }
+    button { padding: .65rem .9rem; border: 1px solid var(--gold); color: var(--ivory); background: transparent; cursor: pointer; font: inherit; }
+    input[type="checkbox"] { width: 1rem; height: 1rem; accent-color: var(--gold); }
+    .wrap { width: min(calc(100% - 2rem), var(--max)); margin-inline: auto; }
+    .eyebrow, .status, .code { color: var(--gold); font-size: .7rem; font-weight: 750; letter-spacing: .17em; text-transform: uppercase; }
+    .muted { color: var(--muted); }
+    .nav { display: flex; justify-content: space-between; gap: 1rem; padding-block: 1.1rem; border-bottom: 1px solid var(--line); }
+    .nav__actions { display: flex; gap: .8rem; align-items: center; }
+    .hero {
+      min-height: 86svh;
+      background: radial-gradient(circle at 68% 34%, rgb(77 86 164 / 22%), transparent 30%), linear-gradient(145deg, #060607, #000);
+    }
+    .hero__grid { display: grid; grid-template-columns: 1.08fr .92fr; gap: clamp(2rem, 7vw, 7rem); min-height: 75svh; align-items: center; }
+    .hero__visual { overflow: hidden; border: 1px solid var(--line); background: var(--navy); }
+    .hero__visual img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    .hero__visual figcaption { padding: .8rem 1rem; color: var(--muted); font-size: .72rem; }
+    section { padding-block: clamp(5rem, 9vw, 9rem); border-top: 1px solid var(--line); }
+    .two-col { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(280px, .95fr); gap: clamp(2rem, 7vw, 7rem); align-items: start; }
+    .grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .grid--four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card { padding: 1.35rem; background: var(--panel); }
+    .card p { color: var(--muted); }
+    .card p:last-child { margin-bottom: 0; }
+    .number { display: block; margin-bottom: 2.8rem; color: var(--gold); font: 1.5rem Georgia, serif; }
+    .alert { padding: 1.2rem; border: 1px solid var(--gold); background: rgb(197 164 100 / 8%); }
+    .source-order { display: grid; gap: .8rem; counter-reset: source; }
+    .source { display: grid; grid-template-columns: 48px 1fr; gap: 1rem; padding: 1rem 0; border-top: 1px solid var(--line); }
+    .source::before { counter-increment: source; content: counter(source, decimal-leading-zero); color: var(--gold); font: 1.35rem Georgia, serif; }
+    .source p { margin-bottom: 0; color: var(--muted); }
+    .reference-pair { display: grid; grid-template-columns: .62fr 1.38fr; gap: 1rem; }
+    figure { margin: 0; }
+    .reference { overflow: hidden; background: var(--panel); border: 1px solid var(--line); }
+    .reference img { width: 100%; height: 100%; max-height: 520px; object-fit: cover; }
+    .reference figcaption { padding: .75rem; color: var(--muted); font-size: .72rem; }
+    .table-wrap { overflow-x: auto; border: 1px solid var(--line); }
+    table { width: 100%; min-width: 860px; border-collapse: collapse; }
+    th, td { padding: .9rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+    th { color: var(--gold); font-size: .67rem; letter-spacing: .13em; text-transform: uppercase; }
+    td { color: var(--muted); font-size: .82rem; }
+    td strong { color: var(--ivory); }
+    tr:last-child td { border-bottom: 0; }
+    .check { display: grid; grid-template-columns: 22px 1fr; gap: .65rem; align-items: start; }
+    .menu-item { position: relative; }
+    .menu-item.recommended::after { position: absolute; top: 1rem; right: 1rem; padding: .25rem .45rem; border: 1px solid var(--gold); color: var(--gold); content: "PILOTO"; font-size: .58rem; font-weight: 750; letter-spacing: .12em; }
+    .menu-item .description { font-size: .8rem; }
+    .capture-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; }
+    .capture { padding: 1.2rem; background: var(--panel); border: 1px solid var(--line); }
+    .capture .code { display: block; margin-bottom: .7rem; }
+    .capture p { margin-bottom: 0; color: var(--muted); font-size: .84rem; }
+    .measurements { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+    .measurement { min-height: 110px; padding: 1rem; background: var(--panel); }
+    .measurement span { display: block; margin-top: 2rem; padding-bottom: .25rem; border-bottom: 1px solid var(--muted); color: var(--muted); }
+    .footer-note { padding: 1.2rem; border-left: 1px solid var(--gold); color: var(--muted); }
+    footer { padding-block: 2rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .75rem; }
+    @media (max-width: 900px) {
+      .hero__grid, .two-col, .reference-pair { grid-template-columns: 1fr; }
+      .grid, .grid--four { grid-template-columns: 1fr 1fr; }
+      .measurements { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 580px) {
+      .grid, .grid--four, .capture-list, .measurements { grid-template-columns: 1fr; }
+      .nav .status { display: none; }
+      .hero { min-height: auto; }
+    }
+    @media print {
+      :root { color-scheme: light; }
+      body { color: #111; background: #fff; font-size: 10pt; }
+      .hero { min-height: 0; color: #111; background: #fff; }
+      .hero__grid { min-height: 0; }
+      .nav__actions button { display: none; }
+      section { padding-block: 2rem; break-inside: avoid; }
+      .card, .capture, .measurement { color: #111; background: #fff; }
+      .card p, .capture p, .measurement span, .muted, td { color: #333; }
+      .reference img { max-height: 320px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="hero">
+    <div class="wrap">
+      <nav class="nav" aria-label="Navegación de la guía">
+        <a href="ryo-unboxed-visual-system-v1.html">← Sistema visual V1</a>
+        <div class="nav__actions"><span class="status">Preparada · Sesión pendiente</span><button type="button" onclick="window.print()">Imprimir guía</button></div>
+      </nav>
+      <div class="hero__grid">
+        <div>
+          <p class="eyebrow">RYŌ · Capture specification 01</p>
+          <h1>Fotografiar para no inventar.</h1>
+          <p>Guía de reunión y captura para fijar al 100% caja, wordmark, interiores, un roll especial y nigiris antes de producir los videos.</p>
+          <p class="muted">La sesión genera fuentes maestras. Los conceptos actuales solo definen composición, luz y movimiento.</p>
+        </div>
+        <figure class="hero__visual">
+          <img src="../../references/ryo-sushi/brand/ryo-wordmark-menu-reference-2026-08-27.png" alt="Referencia raster del wordmark RYŌ tomada de la portada del menú">
+          <figcaption>Referencia raster del menú · No sustituye el archivo oficial SVG/PDF/AI.</figcaption>
+        </figure>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="wrap two-col">
+        <div><p class="eyebrow">Corrección aceptada</p><h2>El logo es parte física de la caja.</h2></div>
+        <div>
+          <p class="alert"><strong>Invariante:</strong> el wordmark RYŌ aparece en el exterior y en el interior de la caja. Debe conservar forma, color, escala, orientación, material y distancia a los bordes.</p>
+          <p>No se generará como texto por IA. Para foto y video final se usará el objeto real; para composiciones se usará el archivo oficial de marca con tracking y perspectiva medidos.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap two-col">
+        <div><p class="eyebrow">Jerarquía de verdad</p><h2>Qué fuente manda.</h2></div>
+        <div class="source-order">
+          <article class="source"><div><h3>Caja y producto físicos</h3><p>Autoridad final para geometría, acabado, color, logo, piezas, toppings y comportamiento.</p></div></article>
+          <article class="source"><div><h3>Archivos oficiales</h3><p>Logo vectorial, artes del empaque, receta aprobada y fotografías originales.</p></div></article>
+          <article class="source"><div><h3>Menú PDF</h3><p>Autoridad actual para nombre, descripción, cantidad, precio y apariencia visible de rolls especiales y nigiris.</p></div></article>
+          <article class="source"><div><h3>Reel e Instagram</h3><p>Apoyo para contexto de uso y construcción; no reemplazan una captura limpia.</p></div></article>
+          <article class="source"><div><h3>Conceptos generados</h3><p>Solo dirección de luz, cámara, encuadre y movimiento. Nunca corrigen al producto real.</p></div></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="eyebrow">Referencia actual</p>
+        <h2>Composición aprobable.<br>Branding todavía pendiente.</h2>
+        <div class="reference-pair">
+          <figure class="reference"><img src="../../references/ryo-sushi/instagram/ryo-box-open-reel-frame-2026-08-26.jpg" alt="Fotograma público de la caja RYŌ abierta dentro de un automóvil"><figcaption>Fuente pública: forma general, tapa, bandeja y presencia del wordmark.</figcaption></figure>
+          <figure class="reference"><img src="media/ryo-unboxed-keyframes-v1/k02-box-open-master.png" alt="Concepto generado de la caja RYŌ abierta sin wordmark"><figcaption>Concepto: conserva la dirección, pero debe reemplazarse con caja y producto documentados.</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="eyebrow">Logo lock</p>
+        <h2>Seis datos que no pueden faltar.</h2>
+        <div class="grid">
+          <article class="card"><span class="number">01</span><h3>Archivo</h3><p class="check"><input type="checkbox"><span>Solicitar SVG, PDF o AI oficial del wordmark.</span></p></article>
+          <article class="card"><span class="number">02</span><h3>Exterior</h3><p class="check"><input type="checkbox"><span>Foto perpendicular de la tapa exterior completa.</span></p></article>
+          <article class="card"><span class="number">03</span><h3>Interior</h3><p class="check"><input type="checkbox"><span>Foto perpendicular del logo interior con tapa abierta.</span></p></article>
+          <article class="card"><span class="number">04</span><h3>Medidas</h3><p class="check"><input type="checkbox"><span>Ancho, alto y distancia exacta a cada borde.</span></p></article>
+          <article class="card"><span class="number">05</span><h3>Acabado</h3><p class="check"><input type="checkbox"><span>Confirmar impresión, foil, relieve, brillo y color real.</span></p></article>
+          <article class="card"><span class="number">06</span><h3>Orientación</h3><p class="check"><input type="checkbox"><span>Registrar giro y sentido de lectura exterior/interior.</span></p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="eyebrow">Shot list · Caja</p>
+        <h2>Doce capturas maestras.</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Hecho</th><th>Código</th><th>Captura</th><th>Debe mostrar</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td><input type="checkbox" aria-label="BOX-01 completada"></td><td><strong>BOX-01</strong></td><td>Cerrada, cenital perpendicular</td><td>Tapa completa, logo exterior y cuatro bordes</td><td>Arte y medidas</td></tr>
+              <tr><td><input type="checkbox" aria-label="BOX-02 completada"></td><td><strong>BOX-02</strong></td><td>Cerrada, 45° superior</td><td>Frente, lateral, espesor y sombra</td><td>Hero K00</td></tr>
+              <tr><td><input type="checkbox" aria-label="BOX-03 completada"></td><td><strong>BOX-03</strong></td><td>Cerrada, perfil lateral</td><td>Altura, unión tapa/base y pliegues</td><td>Modelo geométrico</td></tr>
+              <tr><td><input type="checkbox" aria-label="BOX-04 completada"></td><td><strong>BOX-04</strong></td><td>Abierta vacía, cenital</td><td>Logo interior, bandeja, divisiones y huecos</td><td>Plano de interior</td></tr>
+              <tr><td><input type="checkbox" aria-label="BOX-05 completada"></td><td><strong>BOX-05</strong></td><td>Abierta vacía, 45° superior</td><td>Ángulo real de tapa y profundidad de bandeja</td><td>Master K02</td></tr>
+              <tr><td><input type="checkbox" aria-label="BOX-06 completada"></td><td><strong>BOX-06</strong></td><td>Bisagra y pliegue, macro</td><td>Material, radio y límite de apertura</td><td>Animación</td></tr>
+              <tr><td><input type="checkbox" aria-label="BOX-07 completada"></td><td><strong>BOX-07</strong></td><td>Interior cargado, cenital</td><td>Orden real, cantidad y orientación de piezas</td><td>Continuidad</td></tr>
+              <tr><td><input type="checkbox" aria-label="BOX-08 completada"></td><td><strong>BOX-08</strong></td><td>Interior cargado, 45° superior</td><td>Rolls, salsas, separadores y logo interior</td><td>Hero abierto</td></tr>
+              <tr><td><input type="checkbox" aria-label="BOX-09 completada"></td><td><strong>BOX-09</strong></td><td>Salsas y recipientes, macro</td><td>Número, diámetro, tapa y ubicación exacta</td><td>Inventario de objetos</td></tr>
+              <tr><td><input type="checkbox" aria-label="BOX-10 completada"></td><td><strong>BOX-10</strong></td><td>Color con tarjeta gris</td><td>Caja, logo y mesa bajo luz neutra</td><td>Calibración</td></tr>
+              <tr><td><input type="checkbox" aria-label="BOX-11 completada"></td><td><strong>BOX-11</strong></td><td>Escala con regla</td><td>Largo, ancho, alto, bandeja y divisores</td><td>Modelo exacto</td></tr>
+              <tr><td><input type="checkbox" aria-label="BOX-12 completada"></td><td><strong>BOX-12</strong></td><td>360° lento</td><td>Todos los lados sin manos ocultando bordes</td><td>Reconstrucción</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="eyebrow">Producto · Rolls especiales</p>
+        <h2>El plato real manda.</h2>
+        <p class="footer-note"><strong>Secuencia seleccionada: Sei Exclusive → Koga Explosion → Yuzu → Playboy.</strong> Los cuatro cortes frontales aportados por Victor permiten conservar una sola pose anatómica y cambiar únicamente el producto durante el scroll.</p>
+        <div class="grid grid--four">
+          <article class="card menu-item recommended"><h3>Sei Exclusive</h3><p class="description">Uramaki relleno de camarón crujiente, aguacate y cilantro, con topping de tuna, slice de limón y masago, bañado en salsa de anguila.</p><p>10 pcs · 11 REF · página 10.</p></article>
+          <article class="card menu-item"><h3>Koga Explosion</h3><p class="description">Uramaki relleno de cangrejo, tuna y cebollín, con topping de spicy tuna y cebolla frita, bañado en salsa de anguila.</p><p>10 pcs · 11 REF · página 10.</p></article>
+          <article class="card menu-item"><h3>Yuzu</h3><p class="description">Uramaki relleno de tuna, mango, cebollín frito, con topping de pescado blanco y masago, bañado en salsa ponzu con un toque de limón.</p><p>10 pcs · 11 REF · página 11.</p></article>
+          <article class="card menu-item"><h3>Playboy</h3><p class="description">Uramaki relleno de camarón, aguacate y pepino, con topping de tuna y masago, bañado en salsa de anguila y spicy mayo.</p><p>10 pcs · 10 REF · página 12.</p></article>
+        </div>
+        <p class="muted">Resumen visual basado en el menú consultado el 26.08.2026. Antes de publicar, transcribir literalmente y confirmar vigencia.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="eyebrow">Shot list · Rolls de anatomía</p>
+        <h2>La misma vista para cada plato.</h2>
+        <div class="capture-list">
+          <article class="capture"><span class="code">ROLL-01</span><h3>Entrega completa</h3><p>Plato o caja con la cantidad real de piezas, orden y toppings tal como se vende.</p></article>
+          <article class="capture"><span class="code">ROLL-02</span><h3>Corte frontal</h3><p>Una pieza perpendicular a cámara; foco en toda la sección y fondo neutro.</p></article>
+          <article class="capture"><span class="code">ROLL-03</span><h3>Perfil</h3><p>Lado completo para altura, wrapper, topping, salsa y volumen real.</p></article>
+          <article class="capture"><span class="code">ROLL-04</span><h3>Cenital</h3><p>Corona y distribución de salsa sin perspectiva deformante.</p></article>
+          <article class="capture"><span class="code">ROLL-05</span><h3>Palillos · derecha</h3><p>Pieza sostenida en el endpoint previsto; mano fuera de cuadro si es posible.</p></article>
+          <article class="capture"><span class="code">ROLL-06</span><h3>Palillos · izquierda</h3><p>Vista espejo para responsive y composición alternativa.</p></article>
+          <article class="capture"><span class="code">ROLL-07</span><h3>Topping macro</h3><p>Textura real de pescado, aguacate, crujiente y salsas.</p></article>
+          <article class="capture"><span class="code">ROLL-08</span><h3>Componentes</h3><p>Ingredientes preparados y separados, solo si el equipo confirma que corresponden al plato.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap two-col">
+        <div>
+          <p class="eyebrow">Nigiris</p>
+          <h2>La misma regla:<br>usar los reales.</h2>
+          <p>La referencia vigente muestra tres tipos: tuna, salmón flameado y pesca blanca. La sesión debe reproducir exactamente arroz, corte, topping, salsa, cantidad y plato real.</p>
+        </div>
+        <div class="grid" style="grid-template-columns:1fr">
+          <article class="card"><h3>Nigiri tuná</h3><p>Atún importado, decorado con cebolla crujiente y nuestra exclusiva salsa Ryo. · 2 pcs · 5 REF · página 5.</p></article>
+          <article class="card"><h3>Nigiri salmón</h3><p>Salmón flameado servido con spicy mayo. · 2 pcs · 5 REF · página 5.</p></article>
+          <article class="card"><h3>Pesca blanca</h3><p>Pescado blanco, decorado con slice de limón y salsa ponzu. · 2 pcs · 5 REF · página 5.</p></article>
+        </div>
+      </div>
+      <div class="wrap"><p class="footer-note">Capturar: trío como aparece en el menú, cada tipo por separado, frente 45°, cenital, perfil y una pieza sostenida por palillos. El plato azul del concepto también debe confirmarse como objeto real disponible.</p></div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="eyebrow">Video test</p>
+        <h2>Dos clips.<br>Seis tomas de control.</h2>
+        <div class="grid">
+          <article class="card"><span class="number">V01</span><h3>Hold cerrado</h3><p>5 s inmóvil desde el ángulo hero. Logo exterior legible.</p></article>
+          <article class="card"><span class="number">V02</span><h3>Apertura</h3><p>Dos tomas completas a velocidad real; manos no cubren logo ni bisagra.</p></article>
+          <article class="card"><span class="number">V03</span><h3>Hold abierto</h3><p>5 s inmóvil con interior, logo, bandeja y producto completos.</p></article>
+          <article class="card"><span class="number">V04</span><h3>Lift Sei</h3><p>Tres repeticiones limpias; termina exactamente en la pose frontal de K12.</p></article>
+          <article class="card"><span class="number">V05</span><h3>Pose común</h3><p>Sei, Koga, Yuzu y Playboy ocupan el mismo centro, escala, giro y agarre para los cambios de imagen.</p></article>
+          <article class="card"><span class="number">V06</span><h3>Retorno + cierre</h3><p>Playboy regresa a la caja y la tapa cierra sin cambiar cámara; el logo exterior termina legible.</p></article>
+        </div>
+        <p class="footer-note">Grabar 4K, exposición y balance de blancos bloqueados. 24 fps para tomas reales; 60 fps como respaldo para apertura, lift y cierre. Sin texto, filtros, modo retrato ni zoom digital.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="eyebrow">Mediciones</p>
+        <h2>Completar durante la reunión.</h2>
+        <div class="measurements">
+          <div class="measurement"><h3>Caja · largo</h3><span>_____ cm</span></div>
+          <div class="measurement"><h3>Caja · ancho</h3><span>_____ cm</span></div>
+          <div class="measurement"><h3>Caja · alto</h3><span>_____ cm</span></div>
+          <div class="measurement"><h3>Tapa · ángulo máximo</h3><span>_____ °</span></div>
+          <div class="measurement"><h3>Logo exterior</h3><span>_____ × _____ cm</span></div>
+          <div class="measurement"><h3>Logo interior</h3><span>_____ × _____ cm</span></div>
+          <div class="measurement"><h3>Bandeja · profundidad</h3><span>_____ cm</span></div>
+          <div class="measurement"><h3>Separadores</h3><span>_____ cm</span></div>
+          <div class="measurement"><h3>Recipiente de salsa</h3><span>Ø _____ cm</span></div>
+          <div class="measurement"><h3>Pieza · diámetro</h3><span>_____ cm</span></div>
+          <div class="measurement"><h3>Pieza · alto</h3><span>_____ cm</span></div>
+          <div class="measurement"><h3>Palillos · largo</h3><span>_____ cm</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <p class="eyebrow">Inventario de objetos</p>
+        <h2>Nada entra al frame sin confirmar.</h2>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Hecho</th><th>Objeto</th><th>Confirmar</th><th>Estado actual</th></tr></thead>
+            <tbody>
+              <tr><td><input type="checkbox"></td><td><strong>Caja exterior</strong></td><td>Color, material, pliegues, logo y dimensiones</td><td>Referencia pública parcial</td></tr>
+              <tr><td><input type="checkbox"></td><td><strong>Tapa interior</strong></td><td>Logo, color, posición y acabado</td><td>Existencia confirmada por Victor; medidas pendientes</td></tr>
+              <tr><td><input type="checkbox"></td><td><strong>Bandeja y divisores</strong></td><td>Número, posición, profundidad y material</td><td>Doble línea conceptual; verificar físico</td></tr>
+              <tr><td><input type="checkbox"></td><td><strong>Salsas y recipientes</strong></td><td>Tipos, cantidad, tapas y ubicación</td><td>Visibles en reel; inventario pendiente</td></tr>
+              <tr><td><input type="checkbox"></td><td><strong>Rolls de anatomía</strong></td><td>Receta, piezas, presentación y foto oficial</td><td>Sei, Koga, Yuzu y Playboy seleccionados; recortes archivados</td></tr>
+              <tr><td><input type="checkbox"></td><td><strong>Nigiris</strong></td><td>Tres tipos, cantidad, toppings y plato</td><td>Menú confirmado; masters pendientes</td></tr>
+              <tr><td><input type="checkbox"></td><td><strong>Palillos</strong></td><td>Color, material, sección y longitud</td><td>Bambú natural en referencias y masters; objeto real pendiente</td></tr>
+              <tr><td><input type="checkbox"></td><td><strong>Mesa</strong></td><td>Acabado mate, textura y reflectancia</td><td>Prop de producción, no objeto RYŌ</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap two-col">
+        <div><p class="eyebrow">Entrega de la sesión</p><h2>Un paquete simple y verificable.</h2></div>
+        <div>
+          <h3>Captura mínima</h3>
+          <p>RAW o ProRAW + JPEG, resolución original, una tarjeta gris, regla y trípode. Guardar originales sin editar.</p>
+          <h3>Nombres</h3>
+          <p><code>BOX-01_closed-top_001.dng</code><br><code>ROLL-02_fuji-front_001.dng</code><br><code>VID-04_fuji-lift_take-01.mov</code></p>
+          <h3>Paquete</h3>
+          <p><code>01-box/</code>, <code>02-logo/</code>, <code>03-roll/</code>, <code>04-nigiri/</code>, <code>05-video/</code>, <code>06-brand-files/</code>.</p>
+          <p class="footer-note">No enviar por aplicaciones que compriman. Usar Drive, Dropbox, AirDrop o transferencia de originales.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer><div class="wrap">RYŌ · Guía fotográfica de caja y producto · Delivery HTML · 28.08.2026</div></footer>
+</body>
+</html>

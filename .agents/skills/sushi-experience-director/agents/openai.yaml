@@ -1,0 +1,9 @@
+interface:
+  display_name: "Sushi Experience Director"
+  short_description: "Dirige narrativa, producto, menú y experiencia visual"
+  brand_color: "#C63D2F"
+  default_prompt: "Usa $sushi-experience-director para desarrollar una parte coherente de la landing o del menú de Sushi Page."
+
+policy:
+  allow_implicit_invocation: true
+
