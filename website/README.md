@@ -1,6 +1,6 @@
 # Website
 
-Foundation local de Sushi Page. Victor autorizó iniciar el vertical slice el 28.08.2026; no está autorizado su despliegue público mientras continúen pendientes permisos, vigencia del menú y contenido operativo.
+Landing estática de RYŌ Sushi. Victor autorizó su publicación para revisión el 28.08.2026. El menú interactivo permanece congelado y fuera de la navegación pública hasta aprobar sus fotografías.
 
 ## Stack
 
@@ -11,7 +11,7 @@ Foundation local de Sushi Page. Victor autorizó iniciar el vertical slice el 28
 
 ## Rutas actuales
 
-- `index.html`: landing de cinco actos —caja cerrada, apertura, cuatro rolls, anatomía y Experiencia/contacto—.
+- `index.html`: landing de cuatro actos —caja/apertura, cuatro rolls, anatomía y Experiencia/contacto—.
 - `menu.html`: stinger, categorías verificadas y switch `Explorar / Lista`.
 - `menu-data.js`: fuente única de los diez platos verificados.
 - `app.js`: interacción compartida por ambas rutas.
@@ -25,9 +25,13 @@ python3 -m http.server 4173 --directory website
 
 Abrir `http://127.0.0.1:4173/`. No hay comando de build: los archivos servidos son el resultado.
 
+## Producción
+
+`.github/workflows/pages.yml` publica en <https://vsu25.github.io/RYO_landing/> una lista explícita de archivos de esta carpeta cada vez que cambia `main`. `menu.html` no se incluye mientras el menú esté congelado.
+
 ## Límites vigentes
 
-- Las imágenes web son derivados conceptuales aprobados para revisión local; no implican permiso de publicación.
+- Las imágenes web actuales están autorizadas por Victor para esta landing pública de revisión; no implican permiso de redistribución o uso independiente.
 - La demostración se limita intencionalmente a sushi rolls y nigiris. Moneda, precios vigentes, horarios y métodos de pago se consolidarán después de la aprobación del cliente.
 - El menú interactivo queda congelado hasta aprobar las nuevas fotografías.
 - Los clips físicos de apertura y cierre todavía no existen.

@@ -1,6 +1,6 @@
 # RYŌ Sushi — Realize Design
 
-**Tipo:** índice operativo · **Estado:** anatomía aprobada; Experiencia y sistema de transición/menú en revisión · **Última actualización:** 28.08.2026
+**Tipo:** índice operativo · **Estado:** landing publicada para revisión; menú congelado · **Última actualización:** 28.08.2026
 
 Los entregables creativo y visual se revisan en HTML:
 
@@ -39,10 +39,10 @@ Este Markdown conserva únicamente navegación, estado y decisiones duraderas. L
 - El stinger propuesto usa dos paneles navy con el patrón real RYŌ, junta y sello dorados, y apertura desde el centro. Su versión reducida elimina el desplazamiento.
 - El menú se prueba con una única fuente para `Explorar / Lista`; actualmente contiene diez platos verificados y mantiene visibles las limitaciones de moneda, vigencia, fotografía y transcripción.
 - El footer cambia a marfil como color secundario y propone WhatsApp como CTA principal, con Instagram como salida secundaria.
-- La Foundation local implementa estas decisiones en dos rutas estáticas; `menu-data.js` es la fuente única de las vistas del menú y los cuatro estados de anatomía, mientras `app.js` resuelve su comportamiento.
-- La Foundation es una demostración visual previa al cliente. El menú de esta etapa se limita a sushi rolls y nigiris; el resto del catálogo y el polishing de producción quedan condicionados a aprobación.
-- El landing V2 añade el acto de cuatro rolls destacados, elimina lenguaje técnico de la superficie pública, concentra Experiencia en datos verificados y enlaza cada tarjeta con su anatomía. El menú queda congelado hasta aprobar fotografías.
+- La implementación conserva dos rutas estáticas en desarrollo; `menu-data.js` es la fuente única de las vistas del menú y los cuatro estados de anatomía, mientras `app.js` resuelve su comportamiento.
+- La landing es la única superficie publicada. El menú de esta etapa se limita a sushi rolls y nigiris, permanece congelado y se excluye del artifact de GitHub Pages.
+- La landing pública organiza caja/apertura, cuatro rolls destacados, anatomía y Experiencia/contacto; elimina lenguaje técnico, concentra Experiencia en datos verificados y enlaza cada tarjeta con su anatomía.
 
 ## Próxima decisión
 
-Aprobar el stinger, el cambio navy → marfil del footer y la interacción `Explorar / Lista`; confirmar WhatsApp como CTA principal. Mantener en paralelo la aprobación de Experiencia K11 y completar la transcripción del menú antes de escalar el prototipo.
+Revisar la landing en producción y registrar ajustes de composición, ritmo y copy. Retomar stinger y `Explorar / Lista` únicamente cuando las fotografías del menú estén aprobadas.

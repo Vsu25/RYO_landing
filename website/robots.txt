@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://vsu25.github.io/RYO_landing/sitemap.xml

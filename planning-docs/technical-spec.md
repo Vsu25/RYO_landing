@@ -1,6 +1,6 @@
 # Sushi Page — Especificación técnica preliminar
 
-**Estado:** stack nativo resuelto para Foundation; vertical slice implementado localmente · **Última actualización:** 28.08.2026
+**Estado:** stack nativo en producción para la landing; menú congelado · **Última actualización:** 28.08.2026
 
 ## Autoridad
 
@@ -31,7 +31,7 @@ Esta fuente define decisiones técnicas. No sustituye contenido, blueprint, iden
 
 El vertical slice adopta HTML semántico, CSS y JavaScript nativo. No usa framework, proceso de build, backend ni dependencia de producción. La decisión permanece limitada a Foundation y puede revisarse únicamente si una necesidad medible no queda cubierta por la plataforma.
 
-La preview futura será estática en GitHub Pages desde un repositorio llamado `RYO_landing`. Vercel no forma parte del plan. Mientras falten permisos, el repositorio de trabajo permanece privado y no se activa Pages. La publicación deberá empaquetar únicamente `website/`, sin originales de `references/`, archivos temporales ni documentación interna.
+La producción es estática en GitHub Pages desde `RYO_landing`. Vercel no forma parte del plan. El workflow `.github/workflows/pages.yml` crea un artifact con una lista explícita de archivos de la landing desde `website/`; excluye `menu.html`, originales de `references/`, temporales y documentación interna.
 
 La landing vive en `website/index.html`, el menú en `website/menu.html` y ambas superficies consumen `website/menu-data.js` como fuente única actual. `website/app.js` comparte el comportamiento de interacción.
 

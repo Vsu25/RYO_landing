@@ -1,6 +1,6 @@
 # Sushi Page — Roadmap de desarrollo
 
-**Estado:** landing demostrativo de cinco actos en revisión; menú interactivo congelado; producción G4 no iniciada · **Aprobación interna:** Victor Silva · **Aprobación externa:** cliente pendiente · **Última actualización:** 28.08.2026
+**Estado:** landing de cuatro actos publicada para revisión; menú interactivo congelado; polishing G4 activo · **Aprobación interna:** Victor Silva · **Aprobación externa:** cliente pendiente · **Última actualización:** 28.08.2026
 
 ## Resultado y límites
 
@@ -108,9 +108,9 @@ Victor aprueba estructura, selección de platos, concepto visual, CTA y comporta
 
 **Propósito:** completar landing y menú reutilizando patrones aprobados.
 
-**Estado:** no iniciado. Requiere aprobación del cliente. La generación paralela de imágenes para rolls y nigiris se considera exploración de diseño, no producción final.
+**Estado:** la landing está implementada y publicada como superficie de revisión. El menú sigue fuera de producción; la generación paralela de imágenes para rolls y nigiris se considera exploración de diseño.
 
-El menú interactivo no recibe polishing durante esta etapa. Se retoma cuando las fotografías de rolls y nigiris estén aprobadas. El landing puede continuar como diseño demostrativo porque ya dispone de masters suficientes para validar su narrativa.
+El menú interactivo no recibe polishing durante esta etapa. Se retoma cuando las fotografías de rolls y nigiris estén aprobadas. La landing continúa en polishing sobre la URL pública.
 
 ### Paquetes
 
@@ -153,7 +153,7 @@ Cero defectos bloqueantes; riesgos residuales y permisos pendientes tienen decis
 
 ### Entregables
 
-- Preview privada o pública según permisos.
+- Landing pública en GitHub Pages y preview del menú solo cuando sea aprobado.
 - QA repetido sobre entorno real.
 - Dominio, HTTPS, metadata, enlaces y rollback verificados.
 - Reporte de lanzamiento.

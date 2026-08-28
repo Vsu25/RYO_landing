@@ -8,9 +8,9 @@ La dirección visual inicial se revisa en el [entregable creativo HTML](../deliv
 
 El wordmark RYŌ está confirmado visualmente en el menú y, por confirmación de Victor, forma parte tanto del exterior como del interior de la caja. La referencia raster archivada no es un master oficial: faltan el vector, variantes de color, medidas, orientación y acabado físico. La [guía fotográfica](../deliverables/design/ryo-photo-capture-guide.html) controla esa captura. G2 continúa abierto para media, branding físico y selección final de platos.
 
-`assets/ryo-wordmark-gold-transparent.png` es el derivado raster dorado aprobado por Victor para el stinger y los prototipos locales. Tiene fondo alfa real y fue reconstruido desde la referencia del menú; no sustituye el futuro archivo vectorial oficial ni autoriza por sí solo publicación externa.
+`assets/ryo-wordmark-gold-transparent.png` es el derivado raster dorado aprobado por Victor para el stinger y la landing. Tiene fondo alfa real y fue reconstruido desde la referencia del menú; no sustituye el futuro archivo vectorial oficial. Victor autorizó su uso en la publicación de revisión del 28.08.2026, sin extender esa autorización a redistribución independiente.
 
-`assets/ryo-overlapping-arcs-pattern-v1.png` conserva el raster aportado como patrón activo para la Foundation local. Su reconstrucción vectorial y el permiso de publicación siguen pendientes.
+`assets/ryo-overlapping-arcs-pattern-v1.png` conserva el raster aportado como patrón activo. Victor autorizó su uso en la landing pública de revisión del 28.08.2026; la reconstrucción vectorial definitiva continúa pendiente.
 
 ## Organización futura
 

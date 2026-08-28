@@ -4,17 +4,17 @@
 
 ## Estado actual
 
-- **Fase:** 3 · Demostración visual y definición de diseño previa al cliente.
-- **Estado:** el landing demostrativo ya recorre cinco actos: hero/caja cerrada, apertura, cuatro rolls destacados, anatomía y Experiencia/contacto. La revisión local confirmó desktop, tablet, móvil y teclado. El menú interactivo queda congelado; sus seis nuevos masters conceptuales no se integran hasta ser aprobados.
-- **Objetivo inmediato:** evaluar y pulir el diseño del landing para presentación al cliente. Después de aprobar las fotografías de rolls y nigiris se retomará el menú.
-- **Bloqueo actual:** aprobación del cliente y permisos de publicación. Después serán necesarios el archivo oficial del wordmark y datos operativos vigentes. GitHub Pages está seleccionado, pero no se habilita públicamente mientras estos puntos sigan abiertos.
+- **Fase:** 4 · Landing en producción y revisión visual pública.
+- **Estado:** la landing recorre cuatro actos completos: caja/apertura, cuatro rolls destacados, anatomía y Experiencia/contacto. La revisión local confirmó desktop, tablet, móvil, teclado y movimiento reducido. El menú interactivo continúa congelado y fuera de la navegación pública.
+- **Objetivo inmediato:** revisar la URL de producción con Victor, registrar ajustes de diseño y aplicar polishing sin incorporar todavía el menú.
+- **Bloqueo actual:** ninguno para la landing publicada. El archivo vectorial oficial, la aprobación final del cliente y las fotografías definitivas siguen siendo necesarios antes de considerar cerrada la identidad o retomar el menú.
 - **Última actualización:** 28.08.2026.
 
 ## Próxima decisión
 
-Revisar con Victor el nuevo recorrido visual del landing y ajustar composición, ritmo y copy antes de presentarlo al cliente. El repositorio de trabajo será privado y se llamará `RYO_landing`; GitHub Pages será la salida estática una vez autorizados los assets.
+Revisar con Victor la landing desplegada en GitHub Pages y convertir sus observaciones en una pasada de polishing. El menú permanece como línea de trabajo separada y congelada.
 
-**Salida esperada:** diseño demostrativo listo para revisión del cliente, con placeholders y limitaciones visibles; producción final condicionada a su aprobación.
+**Salida esperada:** landing pública estable y revisable; el contenido definitivo del menú continúa condicionado a la aprobación de sus fotografías.
 
 ## Fuentes oficiales
 
@@ -25,7 +25,7 @@ Revisar con Victor el nuevo recorrido visual del landing y ajustar composición,
 | Entregable creativo | [`deliverables/design/ryo-unboxed-creative-direction.html`](deliverables/design/ryo-unboxed-creative-direction.html) | Dirección de arte, storyboard y producción audiovisual revisables. |
 | Sistema visual V1 | [`deliverables/design/ryo-unboxed-visual-system-v1.html`](deliverables/design/ryo-unboxed-visual-system-v1.html) | Keyframes, endpoints, continuidad y contrato de clips en revisión. |
 | Transición, menú y footer V1 | [`deliverables/design/ryo-stinger-footer-menu-v1.html`](deliverables/design/ryo-stinger-footer-menu-v1.html) | Stinger, vertical slice con fuente única y cierre de contacto en revisión. |
-| Landing local | [`website/index.html`](website/index.html) | Demostración visual de cinco actos en revisión; el menú conectado permanece congelado hasta aprobar fotografías. |
+| Landing pública | [`website/index.html`](website/index.html) · <https://vsu25.github.io/RYO_landing/> | Producción estática de cuatro actos; el menú permanece congelado hasta aprobar fotografías. |
 | Plan audiovisual vigente | [`reports/2026-08-28-ryo-box-studio-and-audiovisual-plan.md`](reports/2026-08-28-ryo-box-studio-and-audiovisual-plan.md) | Secuencia lateral, masters actuales y contrato simplificado de video/imagen. |
 | Guía fotográfica | [`deliverables/design/ryo-photo-capture-guide.html`](deliverables/design/ryo-photo-capture-guide.html) | Shot list, mediciones, logo lock, rolls, nigiris y video test. |
 | Índice de diseño | [`RealizeDesign.md`](RealizeDesign.md) | Estado y decisiones duraderas del entregable creativo. |
@@ -53,7 +53,7 @@ La experiencia debe utilizar fotografías reales disponibles, explicar ingredien
 
 ### Landing
 
-- Navegación persistente y acceso claro al menú.
+- Navegación persistente hacia caja, rolls, anatomía, experiencia y contacto.
 - Hero de alto impacto.
 - Secciones editoriales para negocio, producto, preparación o ingredientes y platos destacados.
 - Recorrido de scroll con movimiento proporcional, versión móvil específica y alternativa para `prefers-reduced-motion`.
@@ -74,7 +74,7 @@ La experiencia debe utilizar fotografías reales disponibles, explicar ingredien
 - CMS, base de datos, autenticación o panel de administración.
 - Integración con APIs de Instagram o WhatsApp.
 - Contenido, precios o recetas inventados.
-- Publicación de material de terceros sin permiso confirmado.
+- Redistribución de material de marca o terceros fuera de la landing autorizada.
 - Stack definitivo antes de aprobar el blueprint y el vertical slice.
 
 ## Estructura del repositorio
@@ -88,7 +88,7 @@ La experiencia debe utilizar fotografías reales disponibles, explicar ingredien
 | `references/` | Fuentes externas con procedencia; no son assets de producción por defecto. |
 | `reports/` | QA, auditorías y evidencia visual fechada. |
 | `.agents/skills/` | Procedimientos reutilizables propios del proyecto. |
-| `website/` | Demostración visual local del landing y menú; todavía no es implementación de producción. |
+| `website/` | Landing estática de producción y prototipo interno del menú congelado. |
 
 No se crean paquetes, servicios o capas adicionales sin una necesidad aprobada.
 
@@ -96,11 +96,11 @@ No se crean paquetes, servicios o capas adicionales sin una necesidad aprobada.
 
 ### Ahora
 
-1. Evaluar y pulir el nuevo recorrido de cinco actos del landing.
+1. Evaluar y pulir el recorrido público de cuatro actos del landing.
 2. Revisar los seis nuevos masters conceptuales sin integrarlos todavía al menú.
 3. Mantener congelado el menú interactivo hasta aprobar esas fotografías.
-4. Preparar la revisión del cliente sin presentar el prototipo como contenido final o producción terminada.
-5. Preparar el repositorio privado `RYO_landing`; habilitar GitHub Pages solo después de confirmar permisos.
+4. Registrar observaciones obtenidas sobre la URL de producción.
+5. Mantener el despliegue de GitHub Pages limitado a `website/` y sin backend.
 
 ### Después del inventario
 
@@ -127,7 +127,7 @@ No se crean paquetes, servicios o capas adicionales sin una necesidad aprobada.
 | 26.08.2026 | Separar referencias, identidad, planificación, reportes y aplicación. | Evitar que material externo o exploratorio se confunda con assets aprobados o código de producción. | Aplicada |
 | 26.08.2026 | Posponer el scaffold técnico hasta cerrar fuentes, blueprint y vertical slice. | La tecnología debe responder al recorrido y no definirlo prematuramente. | Aprobada para la fase actual |
 | 26.08.2026 | Mantener una sola fuente de datos para las vistas dinámica y estática del menú. | Evitar divergencias en platos, ingredientes, precios y disponibilidad. | Aprobada como invariante |
-| 26.08.2026 | Tratar el material público de Ryo Sushi como referencia hasta confirmar permiso de publicación. | Preservar procedencia, atribución y uso responsable en el portfolio. | Pendiente de confirmación |
+| 26.08.2026 | Tratar el material público de Ryo Sushi como referencia hasta confirmar permiso de publicación. | Preservar procedencia, atribución y uso responsable en el portfolio. | Cumplida para la landing el 28.08.2026 |
 | 26.08.2026 | Cerrar G0 y avanzar a descubrimiento sin crear todavía la aplicación. | La estructura, navegación documental, skills, enlaces y seguridad básica fueron verificados. | Aplicada |
 | 26.08.2026 | Corregir el nombre del negocio a Ryo Sushi y registrar `@ryomcbo`. | Victor confirmó el nombre y aportó el perfil oficial. | Aplicada |
 | 26.08.2026 | Adoptar el menú del 31.07.2026 como contexto visual rector, pendiente de confirmar vigencia editorial. | El PDF define de forma consistente paleta, tipografía, marcos, textura, fotografía y jerarquía. | Aplicada para diseño |
@@ -152,10 +152,12 @@ No se crean paquetes, servicios o capas adicionales sin una necesidad aprobada.
 | 28.08.2026 | Tratar la Foundation como demostración visual previa al cliente, no como producción final. | La prioridad inmediata es comunicar el potencial e impacto del landing; datos definitivos y polishing funcional se consolidan después de la aprobación. | Aplicada |
 | 28.08.2026 | Limitar el menú conceptual a sushi rolls y nigiris. | Permite concentrar diseño, fotografía y consistencia sin transcribir o producir categorías que no forman parte de esta etapa. | Aprobada para la presentación inicial |
 | 28.08.2026 | Completar el set visual del menú reutilizando los cuatro rolls del landing y produciendo masters nuevos solo para Fuji, Kamasutra, Rendi, Nigiri Tuná, Nigiri Salmón y Pesca Blanca. | Evita duplicar assets aprobados, cubre los seis placeholders reales y mantiene cámara, iluminación y atmósfera coherentes con RYŌ Unboxed. | Implementado como concepto; revisión e integración pendientes |
+| 28.08.2026 | Hacer obligatoria la correspondencia entre ID documental, nombre editorial, ID técnico y asset antes de integrar platos al menú. | Evita identificar platos por filenames, perder acentos o conectar una imagen al roll o nigiri equivocado entre `Explorar` y `Lista`. | Aplicada en `sushi-project-manager`; implementación del menú pendiente |
 | 28.08.2026 | Mantener el despliegue fuera de Vercel y resolver más adelante una preview estática tipo Pages. | El entregable actual es diseño navegable y no necesita servicios adicionales ni arquitectura de aplicación. | Dirección acordada; proveedor exacto pendiente de confirmación |
-| 28.08.2026 | Usar GitHub Pages y llamar `RYO_landing` al repositorio. | Conserva una salida estática, simple y sin costo de infraestructura; el repositorio permanece privado y Pages inactivo mientras falten permisos. | Plataforma confirmada; publicación pendiente |
+| 28.08.2026 | Usar GitHub Pages y llamar `RYO_landing` al repositorio. | Conserva una salida estática, simple y sin costo de infraestructura. | Implementada; landing publicada desde `website/` |
 | 28.08.2026 | Congelar el menú interactivo hasta aprobar las nuevas fotografías de rolls y nigiris. | Evita pulir una experiencia cuya composición depende de assets todavía en revisión. | Aplicada |
-| 28.08.2026 | Reordenar el landing en cinco actos: caja cerrada, apertura, rolls, anatomía y Experiencia/contacto. | Convierte el prototipo explicado en una narrativa visual centrada en producto para presentar al cliente. | Implementado localmente; revisión de Victor pendiente |
+| 28.08.2026 | Reordenar el landing en cuatro actos públicos: caja/apertura, rolls, anatomía y Experiencia/contacto. | Evita mostrar un menú incompleto y convierte el prototipo en una landing autosuficiente para revisión. | Implementado y publicado; polishing pendiente |
+| 28.08.2026 | Autorizar la publicación de la landing y sus derivados web actuales para revisión en producción. | Victor confirmó que el diseño puede publicarse y mantenerse accesible mientras se anotan ajustes. | Autorizada para esta landing; no concede redistribución general de marca o media |
 | 28.08.2026 | Incorporar Graphify como skill local e índice derivado del proyecto. | Facilita consultar relaciones entre código, documentos y contenido sin duplicar ni sustituir las fuentes oficiales. | Skill instalada y agentes adaptados; grafo inicial pendiente |
 | 28.08.2026 | Incorporar el conjunto oficial de skills GSAP como referencia local de motion. | Permite diseñar y revisar timelines, ScrollTrigger, plugins, frameworks y rendimiento con criterios consistentes sin adelantar la dependencia técnica. | Ocho skills instaladas y agentes adaptados; paquete `gsap` diferido hasta G3 |
 

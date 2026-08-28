@@ -24,7 +24,7 @@ test-results/
 tmp/
 graphify-out/
 
-# External source media stays local until publication rights are confirmed
+# Original reference media stays local; only optimized derivatives are deployed
 references/ryo-sushi/**/*.jpg
 references/ryo-sushi/**/*.jpeg
 references/ryo-sushi/**/*.png

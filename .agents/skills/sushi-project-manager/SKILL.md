@@ -36,6 +36,16 @@ Lee `PROJECT.md` y `AGENTS.md` desde la raíz. Después revisa únicamente las f
 - Registra decisiones duraderas, no conversaciones ni detalles de ejecución pasajeros.
 - No confundas `referencia`, `autorizado`, `aprobado`, `implementado` y `verificado`.
 
+## Identidad documental de platos y media
+
+Cuando una tarea documente, produzca o integre platos e imágenes del menú:
+
+1. Usa `planning-docs/content-and-source-inventory.md` como autoridad para el ID estable, la categoría y el nombre editorial exacto del plato. No deduzcas el nombre desde el filename ni mantengas otra lista paralela dentro de esta skill.
+2. Contrasta ese registro con `website/menu-data.js` antes de implementar. Conserva una correspondencia inequívoca entre el ID documental, el `id` técnico, el nombre visible y el asset utilizado por ambas vistas del menú.
+3. Registra cada imagen contra un único plato o una función editorial explícita. Anota ruta, fuente, fecha y estado (`referencia`, `concepto`, `aprobado`, `implementado` o `autorizado`) sin elevar automáticamente un derivado generado a fotografía factual.
+4. Mantén ortografía, mayúsculas y acentos de la fuente oficial. Si una fuente y la implementación difieren, marca la contradicción y corrígela en la autoridad correspondiente antes de integrar el asset.
+5. Si una imagen no puede asociarse con certeza a un ID del inventario, déjala pendiente; no la conectes al menú por semejanza visual.
+
 ## Respuesta de dirección
 
 Comunica de forma compacta:
@@ -46,4 +56,3 @@ Comunica de forma compacta:
 - **Siguiente paso:** acción ejecutable o aprobación concreta que falta.
 
 Si existe una opción claramente superior y está autorizada, ejecútala sin detener el trabajo para presentar alternativas ceremoniales.
-
