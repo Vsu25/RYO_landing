@@ -296,7 +296,7 @@ if(!gsap||!ScrollTrigger){
       video.addEventListener("loadedmetadata",()=>ScrollTrigger.refresh(),{once:true});
     });
     document.fonts?.ready.then(()=>ScrollTrigger.refresh());
-    playStinger();
+    addEventListener("load",playStinger,{once:true});
     syncSemantics();
 
     return ()=>timeline.kill();
