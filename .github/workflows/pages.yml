@@ -27,8 +27,9 @@ jobs:
         uses: actions/configure-pages@v5
       - name: Prepare public landing
         run: |
-          mkdir -p public-site/public/media
+          mkdir -p public-site/public/media public-site/vendor
           cp website/index.html website/styles.css website/scroll-story.css website/scroll-story.js website/menu-data.js website/robots.txt website/sitemap.xml public-site/
+          cp website/vendor/gsap.min.js website/vendor/ScrollTrigger.min.js public-site/vendor/
           cp website/public/media/box-front.jpg website/public/media/box-closed.webp website/public/media/box-open.webp public-site/public/media/
           cp website/public/media/roll-pickup.jpg website/public/media/roll-return.jpg public-site/public/media/
           cp website/public/media/roll-sei.webp website/public/media/roll-koga.webp website/public/media/roll-yuzu.webp website/public/media/roll-playboy.webp public-site/public/media/

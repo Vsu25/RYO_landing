@@ -6,6 +6,7 @@
     "generate:video": "node scripts/generate-veo-clips.mjs"
   },
   "devDependencies": {
-    "@google/genai": "^2.19.0"
+    "@google/genai": "^2.19.0",
+    "gsap": "^3.13.0"
   }
 }

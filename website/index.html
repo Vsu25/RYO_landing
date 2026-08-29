@@ -20,8 +20,7 @@
   <link rel="preload" href="public/media/box-front.jpg" as="image" type="image/jpeg">
   <link rel="preload" href="public/media/box-closed.webp" as="image" type="image/webp">
   <link rel="stylesheet" href="styles.css?v=20260828-4">
-  <link rel="stylesheet" href="scroll-story.css?v=20260828-2">
-  <script type="module" src="scroll-story.js?v=20260828-2"></script>
+  <link rel="stylesheet" href="scroll-story.css?v=20260828-3">
 </head>
 <body class="landing-page">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -74,7 +73,7 @@
 
         <header class="story-hero" data-story-hero>
           <p class="eyebrow">RYŌ · Unboxed</p>
-          <h1>La experiencia<br>empieza en la caja.</h1>
+          <h1 aria-label="La experiencia empieza en la caja."><span class="type-line"><span>La experiencia</span></span><span class="type-line"><span>empieza en la caja.</span></span></h1>
           <p>Haz scroll. El empaque entra, gira y revela cuatro rolls protagonistas en una sola toma continua.</p>
           <a class="scroll-cue" href="#objeto" data-story-jump="0.12"><span>Descubrir</span><i aria-hidden="true"></i></a>
         </header>
@@ -94,7 +93,7 @@
 
         <section class="experience-overlay" data-experience-overlay aria-labelledby="experience-title" aria-hidden="true" inert>
           <p class="eyebrow">La experiencia RYŌ</p>
-          <h2 id="experience-title">Alta cocina japonesa.<br><em>Para disfrutar en casa.</em></h2>
+          <h2 id="experience-title" aria-label="Alta cocina japonesa. Para disfrutar en casa."><span class="type-line"><span>Alta cocina japonesa.</span></span><span class="type-line"><span><em>Para disfrutar en casa.</em></span></span></h2>
           <p>Una presentación pensada para que delivery y pick up sigan sintiéndose como una ocasión.</p>
           <div class="experience-overlay__actions">
             <a class="button button--solid magnetic-button" href="https://wa.me/584220382261" target="_blank" rel="noopener"><span>Escribir por WhatsApp</span><i aria-hidden="true">↗</i></a>
@@ -147,5 +146,8 @@
   </footer>
 
   <noscript><div class="noscript-note">Activa JavaScript para recorrer la experiencia audiovisual. El contacto de RYŌ permanece disponible al final de la página.</div></noscript>
+  <script src="vendor/gsap.min.js"></script>
+  <script src="vendor/ScrollTrigger.min.js"></script>
+  <script type="module" src="scroll-story.js?v=20260828-3"></script>
 </body>
 </html>

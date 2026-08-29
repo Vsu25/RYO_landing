@@ -5,8 +5,8 @@
 ## Estado actual
 
 - **Fase:** 4 · Reconstrucción audiovisual de la landing.
-- **Estado:** la landing fue rediseñada y verificada localmente como una escena sticky continua controlada por scroll: entrada y giro editorial de la caja, apertura audiovisual, cuatro anatomías en orden, retorno, cierre y experiencia final. Se generaron dos clips Veo 3.1 y se publican solo sus tramos visualmente fieles.
-- **Objetivo inmediato:** publicar la nueva landing mediante un allowlist de GitHub Pages sin exponer los assets conceptuales del menú y revisar el ritmo final con Victor en la URL pública.
+- **Estado:** la primera versión scroll-reactive publicada no transmitió movimiento suficiente en revisión real. El controlador manual fue sustituido localmente por una timeline GSAP/ScrollTrigger continua, con apertura y cierre editados, cuatro anatomías, tipografía animada y fondo reactivo ya verificados. En paralelo, la exploración del menú concentra la revisión en Índice de carta y su variante 02-B.
+- **Objetivo inmediato:** publicar la corrección GSAP mediante el allowlist de GitHub Pages y confirmar el recorrido completo con Victor antes de rediseñar footer y contacto.
 - **Bloqueo actual:** ninguno para continuar la implementación local. La publicación del menú todavía depende de aprobación externa, vigencia editorial y permiso de uso de sus masters conceptuales.
 - **Última actualización:** 28.08.2026.
 
@@ -160,6 +160,11 @@ No se crean paquetes, servicios o capas adicionales sin una necesidad aprobada.
 | 28.08.2026 | Autorizar la publicación de la landing y sus derivados web actuales para revisión en producción. | Victor confirmó que el diseño puede publicarse y mantenerse accesible mientras se anotan ajustes. | Autorizada para esta landing; no concede redistribución general de marca o media |
 | 28.08.2026 | Incorporar Graphify como skill local e índice derivado del proyecto. | Facilita consultar relaciones entre código, documentos y contenido sin duplicar ni sustituir las fuentes oficiales. | Skill instalada y agentes adaptados; grafo inicial pendiente |
 | 28.08.2026 | Incorporar el conjunto oficial de skills GSAP como referencia local de motion. | Permite diseñar y revisar timelines, ScrollTrigger, plugins, frameworks y rendimiento con criterios consistentes sin adelantar la dependencia técnica. | Ocho skills instaladas y agentes adaptados; paquete `gsap` diferido hasta G3 |
+| 28.08.2026 | Levantar el congelamiento interno del menú e implementar los diez platos aprobados en `Explorar / Lista`. | Victor aprobó la dirección de diseño y los masters conceptuales para continuar la implementación local; la correspondencia documental y visual ya puede validarse de extremo a extremo. | Implementado y en QA local; publicación externa pendiente |
+| 28.08.2026 | Reemplazar las cuatro secciones editoriales del landing por una escena sticky continua controlada por progreso de scroll, con una alternativa lineal para movimiento reducido. | La experiencia aprobada depende de continuidad física entre caja, rolls, anatomía y cierre; los reveals aislados no expresaban esa narrativa. | Implementado y verificado localmente; publicación en curso |
+| 28.08.2026 | Generar dos clips Veo 3.1 de 8 s y publicar solo sus segmentos visualmente fieles, combinándolos con K10–K17 para toma, retorno y crossfades. | Los frames intermedios generativos deformaron roll, logo y patrón; recortar y completar con stills preserva identidad y reduce peso sin ocultar el límite técnico. | Generado, inspeccionado y derivado para web |
+| 28.08.2026 | Convertir el workflow de Pages en allowlist explícita de archivos y media autorizada del landing. | Impide que los seis assets conceptuales del menú se publiquen por accidente mientras continúan en revisión local. | Implementado; verificación de producción pendiente |
+| 28.08.2026 | Sustituir el controlador manual de scroll por una timeline GSAP/ScrollTrigger vendorizada y editar apertura/cierre sobre clips fieles. | Un gesto normal podía saltarse ventanas completas de opacidad y hacer que la página pareciera estática; el scrub amortiguado conserva movimiento perceptible y reversible sin depender de CDN. | Implementado y verificado localmente; publicación pendiente |
 
 ## Criterio de cierre de una acción
 
