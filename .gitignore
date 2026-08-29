@@ -2,6 +2,7 @@
 node_modules/
 .next/
 out/
+*.tsbuildinfo
 dist/
 coverage/
 
@@ -23,6 +24,9 @@ playwright-report/
 test-results/
 tmp/
 graphify-out/
+public/local-menu-media/
+src/app/menu/
+local-media/
 
 # Original reference media stays local; only optimized derivatives are deployed
 references/ryo-sushi/**/*.jpg

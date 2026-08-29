@@ -3,7 +3,7 @@
 **Procedencia:** producidos y aportados por Victor Silva el 29.08.2026.
 
 **Permiso:** autorizados por Victor para la landing pública de revisión.
-**Tratamiento:** estos archivos son los originales archivados; las copias con nombres de versión en `website/public/media/` son los derivados de publicación.
+**Tratamiento:** estos archivos son los originales archivados; las copias con nombres de versión en `public/media/` son los derivados de publicación.
 
 | Archivo | Función | Duración | Resolución | Códecs | SHA-256 |
 |---|---|---:|---:|---|---|

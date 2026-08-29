@@ -1,0 +1,447 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="description" content="Tres direcciones responsive y una variación solapada para el menú interactivo de RYŌ Sushi.">
+  <title>RYŌ · Exploraciones responsive del menú</title>
+  <style>
+    :root {
+      --ink:#070c18;
+      --navy:#0e1830;
+      --navy-2:#15213e;
+      --gold:#dfbe78;
+      --gold-line:rgb(223 190 120 / 32%);
+      --ivory:#f5eddd;
+      --sand:#dfd2b7;
+      --muted:#a9a89f;
+      --frame-width:min(100%,1180px);
+      --frame-ratio:1440/1024;
+      --serif:Georgia,"Times New Roman",serif;
+      --sans:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ivory); background:#03050a; font-family:var(--sans); line-height:1.5; }
+    button { color:inherit; font:inherit; }
+    img { display:block; width:100%; }
+    figure { margin:0; }
+    h1,h2,h3,p { margin-top:0; }
+    h1,h2,h3 { font-family:var(--serif); font-weight:400; letter-spacing:-.04em; }
+    .wrap { width:min(calc(100% - 2rem),1320px); margin-inline:auto; }
+    .eyebrow { color:var(--gold); font-size:.7rem; font-weight:800; letter-spacing:.16em; text-transform:uppercase; }
+    .lab-header { min-height:72svh; display:grid; align-items:end; border-bottom:1px solid var(--gold-line); background:radial-gradient(circle at 82% 28%,rgb(223 190 120 / 10%),transparent 26%),linear-gradient(135deg,#060a14,#0d162b 62%,#080d1b); }
+    .lab-header__inner { display:grid; grid-template-columns:1.25fr .75fr; gap:3rem; padding-block:7rem 4rem; align-items:end; }
+    .lab-header h1 { max-width:10ch; margin-bottom:1.5rem; font-size:clamp(3.7rem,8vw,8rem); line-height:.86; }
+    .lab-header__lede { max-width:52rem; color:#c6c0b4; font-size:clamp(1rem,1.6vw,1.25rem); }
+    .principles { display:grid; gap:1px; border:1px solid var(--gold-line); background:var(--gold-line); }
+    .principles div { padding:1.1rem; background:rgb(7 12 24 / 92%); }
+    .principles strong { display:block; margin-bottom:.25rem; color:var(--gold); font-size:.68rem; letter-spacing:.12em; text-transform:uppercase; }
+    .principles span { color:#c4bcae; font-size:.78rem; }
+
+    .device-bar { position:sticky; z-index:20; top:0; border-bottom:1px solid var(--gold-line); background:rgb(3 5 10 / 88%); backdrop-filter:blur(18px); }
+    .device-bar__inner { min-height:5rem; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+    .device-bar p { margin:0; color:var(--muted); font-size:.75rem; letter-spacing:.08em; text-transform:uppercase; }
+    .device-switch { display:flex; padding:.25rem; border:1px solid var(--gold-line); background:#080e1c; }
+    .device-switch button { min-height:2.75rem; padding:.65rem 1rem; border:0; background:transparent; cursor:pointer; font-size:.68rem; font-weight:800; letter-spacing:.11em; text-transform:uppercase; }
+    .device-switch button[aria-pressed="true"] { color:#11182b; background:var(--gold); }
+    .device-switch button:focus-visible { outline:2px solid var(--ivory); outline-offset:2px; }
+
+    .explorations { padding-block:6rem 10rem; }
+    .concept { padding-block:0 7rem; }
+    .concept + .concept { padding-top:7rem; border-top:1px solid var(--gold-line); }
+    .concept__head { display:grid; grid-template-columns:1fr minmax(280px,.55fr); gap:3rem; margin-bottom:2.5rem; align-items:end; }
+    .concept__number { display:block; margin-bottom:1rem; color:var(--gold); font-size:.72rem; font-weight:800; letter-spacing:.15em; }
+    .concept h2 { max-width:11ch; margin-bottom:0; font-size:clamp(3rem,6vw,6.4rem); line-height:.86; }
+    .concept__head p { margin:0; color:#bdb7aa; }
+    .concept__head strong { color:var(--ivory); }
+    .device-caption { width:var(--frame-width); margin:0 auto .55rem; display:flex; justify-content:space-between; color:var(--muted); font-size:.65rem; letter-spacing:.1em; text-transform:uppercase; }
+    .device-frame { width:var(--frame-width); aspect-ratio:var(--frame-ratio); margin-inline:auto; overflow:hidden; border:1px solid var(--gold-line); background:var(--ink); box-shadow:0 2.5rem 7rem rgb(0 0 0 / 55%); container-type:inline-size; }
+    .preview { height:100%; display:flex; flex-direction:column; overflow:hidden; background:var(--ink); }
+    .mini-nav { flex:0 0 7%; display:flex; padding-inline:3%; align-items:center; justify-content:space-between; border-bottom:1px solid var(--gold-line); background:rgb(7 12 24 / 92%); }
+    .mini-mark { color:var(--gold); font:clamp(1.05rem,2.4cqw,2.3rem)/1 var(--serif); letter-spacing:.08em; }
+    .mini-nav span:last-child { color:#aaa99f; font-size:clamp(.45rem,.72cqw,.68rem); font-weight:800; letter-spacing:.14em; text-transform:uppercase; }
+    .visual { position:relative; flex:none; overflow:hidden; background:#02040a; }
+    .visual img { width:100%; height:100%; object-fit:cover; }
+    .visual::after { position:absolute; inset:0; pointer-events:none; content:""; }
+    .visual-label { position:absolute; z-index:2; right:2.5%; bottom:5%; padding:.42rem .62rem; border:1px solid var(--gold-line); color:var(--gold); background:rgb(7 12 24 / 76%); font-size:clamp(.42rem,.66cqw,.66rem); font-weight:800; letter-spacing:.12em; text-transform:uppercase; backdrop-filter:blur(8px); }
+    .menu-under { flex:1; min-height:0; display:flex; flex-direction:column; }
+    .category-strip { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--gold-line); }
+    .category-strip span { min-height:3.2rem; display:flex; padding:.65rem 1rem; align-items:center; justify-content:space-between; gap:1rem; color:var(--muted); border-right:1px solid var(--gold-line); font-size:clamp(.48rem,.72cqw,.7rem); font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+    .category-strip span:last-child { border-right:0; }
+    .category-strip .active { color:var(--ivory); background:rgb(223 190 120 / 9%); }
+    .category-strip b { color:var(--gold); font-weight:800; }
+    .dish-rail { display:flex; flex:none; min-height:3.4rem; padding:.55rem 1rem; align-items:center; gap:.45rem; overflow:hidden; border-bottom:1px solid var(--gold-line); }
+    .dish-rail span { flex:0 0 auto; padding:.45rem .65rem; border:1px solid var(--gold-line); color:var(--muted); font-size:clamp(.45rem,.65cqw,.64rem); letter-spacing:.08em; text-transform:uppercase; }
+    .dish-rail .active { color:#11182b; border-color:var(--gold); background:var(--gold); }
+    .detail { flex:1; min-height:0; display:grid; grid-template-columns:1.35fr .65fr; gap:4%; padding:2.4% 3%; }
+    .detail h3 { margin-bottom:.5rem; font-size:clamp(2.1rem,5cqw,5rem); line-height:.9; }
+    .detail p { margin-bottom:.75rem; color:#bbb6aa; font-size:clamp(.64rem,1.05cqw,1rem); }
+    .chips { display:flex; flex-wrap:wrap; gap:.35rem; margin:0; padding:0; list-style:none; }
+    .chips li { padding:.27rem .42rem; border:1px solid var(--gold-line); color:var(--muted); font-size:clamp(.38rem,.55cqw,.55rem); letter-spacing:.06em; text-transform:uppercase; }
+    .meta { align-self:stretch; display:grid; grid-template-columns:1fr 1fr; gap:1px; border:1px solid var(--gold-line); background:var(--gold-line); }
+    .meta div { display:flex; padding:10%; flex-direction:column; justify-content:center; background:var(--navy); }
+    .meta span { color:var(--gold); font-size:clamp(.4rem,.55cqw,.56rem); font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+    .meta strong { margin-top:.35rem; font:clamp(1rem,2cqw,2rem)/1 var(--serif); }
+
+    .concept-a .visual { height:auto; aspect-ratio:16/7; }
+    .concept-a .visual img { object-position:center 48%; }
+    .concept-a .visual::after { background:linear-gradient(0deg,rgb(3 5 10 / 42%),transparent 38%),linear-gradient(90deg,transparent 70%,rgb(3 5 10 / 28%)); }
+
+    .concept-b .visual { height:auto; aspect-ratio:3/1; }
+    .concept-b .visual img { object-position:center 52%; }
+    .concept-b .visual::after { background:linear-gradient(0deg,rgb(5 9 18 / 55%),transparent 44%); }
+    .index-layout { flex:1; min-height:0; display:grid; grid-template-columns:28% 72%; }
+    .course-index { display:grid; grid-template-rows:1fr 1fr; border-right:1px solid var(--gold-line); }
+    .course-index article { padding:12%; border-bottom:1px solid var(--gold-line); background:#091022; }
+    .course-index article:last-child { border-bottom:0; }
+    .course-index article.active { background:var(--sand); color:#11182b; }
+    .course-index small { color:var(--gold); font-size:clamp(.42rem,.6cqw,.6rem); font-weight:800; letter-spacing:.1em; }
+    .course-index .active small { color:#745c2f; }
+    .course-index h3 { margin:.6rem 0 .2rem; font-size:clamp(1.15rem,2.6cqw,2.6rem); line-height:.95; }
+    .course-index p { margin:0; color:var(--muted); font-size:clamp(.46rem,.68cqw,.68rem); }
+    .course-index .active p { color:#625d53; }
+    .index-content { min-width:0; display:grid; grid-template-rows:auto 1fr; padding:3%; }
+    .index-content__title { display:flex; align-items:end; justify-content:space-between; gap:1rem; }
+    .index-content h3 { margin:0; font-size:clamp(2rem,4.5cqw,4.6rem); line-height:.9; }
+    .index-content__title span { color:var(--gold); font:clamp(1rem,1.8cqw,1.8rem)/1 var(--serif); white-space:nowrap; }
+    .name-grid { min-height:0; display:grid; grid-template-columns:repeat(2,1fr); gap:1px; margin-top:3%; border:1px solid var(--gold-line); background:var(--gold-line); }
+    .name-grid article { min-width:0; display:flex; padding:4%; align-items:center; justify-content:space-between; gap:.5rem; background:#0a1225; }
+    .name-grid article.active { color:#11182b; background:var(--gold); }
+    .name-grid strong { overflow:hidden; font:clamp(.72rem,1.15cqw,1.15rem)/1.05 var(--serif); white-space:nowrap; text-overflow:ellipsis; }
+    .name-grid span { color:var(--muted); font-size:clamp(.38rem,.55cqw,.55rem); white-space:nowrap; }
+    .name-grid .active span { color:#4d432e; }
+
+    .overlap-desktop { flex:1; min-height:0; display:flex; flex-direction:column; }
+    .overlap-stage { position:relative; flex:0 0 53%; min-height:0; }
+    .overlap-stage .visual { height:100%; }
+    .overlap-stage .visual img { object-position:center 52%; }
+    .overlap-stage .visual::after { background:linear-gradient(0deg,rgb(4 8 16 / 62%),transparent 42%); }
+    .overlap-categories { position:absolute; z-index:4; bottom:-12cqw; left:3%; width:27%; height:min(24cqw,260px); display:grid; grid-template-rows:1.15fr .85fr; border:1px solid var(--gold-line); box-shadow:0 1.4rem 3rem rgb(0 0 0 / 34%); }
+    .overlap-category { display:flex; padding:9%; flex-direction:column; justify-content:center; border:0; background:#0a1225; }
+    .overlap-category + .overlap-category { border-top:1px solid var(--gold-line); }
+    .overlap-category.active { color:#11182b; background:var(--sand); }
+    .overlap-category small { color:var(--gold); font-size:clamp(.4rem,.58cqw,.58rem); font-weight:800; letter-spacing:.1em; }
+    .overlap-category.active small { color:#765d2f; }
+    .overlap-category h3 { margin:.65rem 0 .2rem; font-size:clamp(1.1rem,2.5cqw,2.5rem); line-height:.9; }
+    .overlap-category p { margin:0; color:var(--muted); font-size:clamp(.42rem,.65cqw,.65rem); }
+    .overlap-category.active p { color:#625d53; }
+    .overlap-body { flex:1; min-height:0; display:grid; grid-template-columns:32% 68%; }
+    .overlap-detail { min-width:0; grid-column:2; display:grid; grid-template-rows:auto auto 1fr; padding:4% 5% 3%; }
+    .overlap-title { display:flex; align-items:end; justify-content:space-between; gap:1rem; }
+    .overlap-title h3 { margin:0; font-size:clamp(2rem,4.5cqw,4.5rem); line-height:.86; }
+    .overlap-title strong { color:var(--gold); font:clamp(1rem,1.9cqw,1.9rem)/1 var(--serif); white-space:nowrap; }
+    .ingredient-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-block:3%; background:var(--gold-line); }
+    .ingredient-grid span { padding:5%; color:#c1b9aa; background:#0a1225; font-size:clamp(.4rem,.62cqw,.62rem); letter-spacing:.05em; }
+    .overlap-names { display:flex; align-items:center; gap:.5rem; overflow:hidden; }
+    .overlap-names span { padding:.4rem .55rem; border:1px solid var(--gold-line); color:var(--muted); font-size:clamp(.4rem,.58cqw,.58rem); white-space:nowrap; }
+    .overlap-names .active { color:#11182b; background:var(--gold); }
+
+    .overlap-cards { display:none; flex:1; min-height:0; padding:3%; gap:1rem; overflow:auto; background:#050914; }
+    .dish-card { border:1px solid var(--gold-line); background:#0a1225; }
+    .dish-card__trigger { width:100%; display:grid; grid-template-columns:2fr 1fr; padding:0; border:0; color:inherit; background:transparent; text-align:left; cursor:pointer; transition:grid-template-columns .35s ease; }
+    .dish-card__trigger:focus-visible { outline:2px solid var(--ivory); outline-offset:-3px; }
+    .dish-card__media { min-height:8rem; overflow:hidden; transition:min-height .35s ease; }
+    .dish-card.is-open .dish-card__trigger { grid-template-columns:2.2fr 1fr; }
+    .dish-card.is-open .dish-card__media { min-height:10.5rem; }
+    .dish-card__media img { height:100%; object-fit:cover; transition:transform .35s ease; }
+    .dish-card.is-open .dish-card__media img { transform:scale(1.06); }
+    .dish-card__action { display:flex; padding:12%; flex-direction:column; justify-content:space-between; border-left:1px solid var(--gold-line); background:#0d1730; }
+    .dish-card__action small { color:var(--gold); font-size:.58rem; font-weight:800; letter-spacing:.12em; }
+    .dish-card__action strong { font:clamp(1rem,2.4cqw,1.6rem)/.95 var(--serif); }
+    .dish-card__action em { display:flex; align-items:center; justify-content:space-between; color:var(--muted); font-size:.58rem; font-style:normal; letter-spacing:.1em; text-transform:uppercase; }
+    .dish-card__action em::after { content:"+"; color:var(--gold); font:1.15rem/1 var(--serif); }
+    .dish-card__trigger[aria-expanded="true"] .dish-card__action { color:#11182b; background:var(--gold); }
+    .dish-card__trigger[aria-expanded="true"] .dish-card__action small,.dish-card__trigger[aria-expanded="true"] .dish-card__action em { color:#5f4d2d; }
+    .dish-card__trigger[aria-expanded="true"] .dish-card__action em::after { color:#11182b; content:"−"; }
+    .dish-card__detail { display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease; }
+    .dish-card.is-open .dish-card__detail { grid-template-rows:1fr; }
+    .dish-card__detail-inner { min-height:0; overflow:hidden; }
+    .dish-card__info { display:grid; grid-template-columns:1.45fr .55fr; border-top:1px solid var(--gold-line); }
+    .dish-card__copy { padding:4%; }
+    .dish-card__copy p { margin:0; color:#bbb6aa; font-size:clamp(.62rem,1.35cqw,.85rem); }
+    .dish-card__meta { display:flex; padding:8%; flex-direction:column; justify-content:center; border-left:1px solid var(--gold-line); color:#11182b; background:var(--sand); }
+    .dish-card__meta strong { font:clamp(1rem,2.5cqw,1.5rem)/1 var(--serif); }
+    .dish-card__meta span { margin-top:.35rem; font-size:.58rem; letter-spacing:.08em; text-transform:uppercase; }
+
+    .concept-c .visual-split { height:auto; aspect-ratio:5/2; display:grid; grid-template-columns:2fr 1fr; gap:1px; background:var(--gold-line); }
+    .concept-c .visual { height:100%; }
+    .concept-c .visual--main img { object-position:center 48%; }
+    .concept-c .visual--macro img { object-position:27% 50%; transform:scale(1.9); }
+    .concept-c .visual--macro::after { background:linear-gradient(0deg,rgb(4 8 16 / 55%),transparent 50%); }
+    .macro-copy { position:absolute; z-index:2; right:8%; bottom:7%; left:8%; }
+    .macro-copy span { color:var(--gold); font-size:clamp(.4rem,.6cqw,.6rem); font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+    .macro-copy strong { display:block; margin-top:.2rem; font:clamp(1rem,2.3cqw,2.3rem)/.95 var(--serif); }
+    .sequence-menu { flex:1; min-height:0; display:grid; grid-template-columns:30% 70%; }
+    .sequence-summary { padding:9%; border-right:1px solid var(--gold-line); background:var(--sand); color:#11182b; }
+    .sequence-summary .eyebrow { color:#765d2f; font-size:clamp(.38rem,.58cqw,.58rem); }
+    .sequence-summary h3 { margin:.65rem 0; font-size:clamp(1.7rem,3.8cqw,3.8rem); line-height:.88; }
+    .sequence-summary p { color:#57534a; font-size:clamp(.48rem,.72cqw,.72rem); }
+    .sequence-summary strong { font:clamp(1rem,1.8cqw,1.8rem)/1 var(--serif); }
+    .sequence-browser { min-width:0; display:grid; grid-template-rows:auto 1fr; }
+    .sequence-categories { display:grid; grid-template-columns:1fr 1fr; border-bottom:1px solid var(--gold-line); }
+    .sequence-categories span { padding:4%; color:var(--muted); font-size:clamp(.46rem,.68cqw,.68rem); font-weight:800; letter-spacing:.1em; text-transform:uppercase; }
+    .sequence-categories .active { color:var(--ivory); border-bottom:2px solid var(--gold); }
+    .sequence-list { min-height:0; display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--gold-line); }
+    .sequence-list article { display:flex; padding:9%; flex-direction:column; justify-content:space-between; background:#091022; }
+    .sequence-list small { color:var(--gold); font-size:clamp(.38rem,.52cqw,.52rem); }
+    .sequence-list strong { font:clamp(.75rem,1.3cqw,1.3rem)/1 var(--serif); }
+    .sequence-list article.active { color:#11182b; background:var(--gold); }
+    .sequence-list .active small { color:#5f4d2d; }
+
+    .concept-notes { width:var(--frame-width); display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin:1px auto 0; border:1px solid var(--gold-line); background:var(--gold-line); }
+    .concept-notes article { padding:1.1rem; color:#bdb7aa; background:#080e1d; font-size:.75rem; }
+    .concept-notes strong { display:block; margin-bottom:.35rem; color:var(--gold); font-size:.62rem; letter-spacing:.12em; text-transform:uppercase; }
+    .recommendation { margin-top:1px; padding:1rem 1.1rem; color:#11182b; background:var(--gold); font-size:.78rem; }
+    .recommendation strong { letter-spacing:.1em; text-transform:uppercase; }
+
+    body[data-device="tablet"] { --frame-width:min(100%,760px); --frame-ratio:834/1112; }
+    body[data-device="phone"] { --frame-width:min(100%,390px); --frame-ratio:390/844; }
+
+    body[data-device="tablet"] .mini-nav { flex-basis:6%; }
+    body[data-device="tablet"] .concept-a .visual,body[data-device="tablet"] .concept-b .visual { height:auto; aspect-ratio:4/3; }
+    body[data-device="tablet"] .overlap-desktop,body[data-device="phone"] .overlap-desktop { display:none; }
+    body[data-device="tablet"] .overlap-cards,body[data-device="phone"] .overlap-cards { display:grid; }
+    body[data-device="tablet"] .overlap-cards { grid-template-columns:repeat(2,1fr); }
+    body[data-device="tablet"] .dish-card:first-child { grid-column:1/-1; }
+    body[data-device="tablet"] .concept-c .visual-split { height:auto; aspect-ratio:4/3; }
+    body[data-device="tablet"] .detail { grid-template-columns:1fr; gap:4%; padding:4%; }
+    body[data-device="tablet"] .meta { max-height:5.5rem; }
+    body[data-device="tablet"] .index-layout { grid-template-columns:1fr; grid-template-rows:auto 1fr; }
+    body[data-device="tablet"] .course-index { grid-template-columns:1fr 1fr; grid-template-rows:1fr; border-right:0; border-bottom:1px solid var(--gold-line); }
+    body[data-device="tablet"] .course-index article { padding:5%; border-right:1px solid var(--gold-line); border-bottom:0; }
+    body[data-device="tablet"] .course-index article:last-child { border-right:0; }
+    body[data-device="tablet"] .sequence-menu { grid-template-columns:1fr; grid-template-rows:auto 1fr; }
+    body[data-device="tablet"] .sequence-summary { display:grid; grid-template-columns:1fr 1.5fr auto; gap:4%; padding:4%; align-items:center; border-right:0; border-bottom:1px solid var(--gold-line); }
+    body[data-device="tablet"] .sequence-summary h3,body[data-device="tablet"] .sequence-summary p { margin:0; }
+
+    body[data-device="phone"] .mini-nav { flex-basis:7%; padding-inline:5%; }
+    body[data-device="phone"] .concept-a .visual,body[data-device="phone"] .concept-b .visual { height:auto; aspect-ratio:4/3; }
+    body[data-device="phone"] .overlap-cards { grid-template-columns:1fr; padding:4%; gap:.7rem; }
+    body[data-device="phone"] .dish-card__media { min-height:9.2rem; }
+    body[data-device="phone"] .dish-card__info { grid-template-columns:1fr 34%; }
+    body[data-device="phone"] .concept-c .visual-split { position:relative; height:auto; aspect-ratio:1/1; display:block; }
+    body[data-device="phone"] .concept-c .visual--main { width:100%; }
+    body[data-device="phone"] .concept-c .visual--macro { position:absolute; right:4%; bottom:5%; width:34%; height:38%; border:1px solid var(--gold); box-shadow:0 1rem 2rem rgb(0 0 0 / 48%); }
+    body[data-device="phone"] .concept-c .macro-copy { display:none; }
+    body[data-device="phone"] .category-strip span { min-height:2.8rem; padding:.55rem .65rem; }
+    body[data-device="phone"] .dish-rail { min-height:3rem; padding:.4rem .6rem; }
+    body[data-device="phone"] .detail { grid-template-columns:1fr; gap:.6rem; padding:5%; }
+    body[data-device="phone"] .detail h3 { font-size:2.5rem; }
+    body[data-device="phone"] .detail p { display:-webkit-box; overflow:hidden; -webkit-box-orient:vertical; -webkit-line-clamp:3; font-size:.72rem; }
+    body[data-device="phone"] .chips li:nth-child(n+6) { display:none; }
+    body[data-device="phone"] .meta { min-height:4rem; }
+    body[data-device="phone"] .meta div { padding:8%; }
+    body[data-device="phone"] .index-layout { grid-template-columns:1fr; grid-template-rows:auto 1fr; }
+    body[data-device="phone"] .course-index { grid-template-columns:1fr 1fr; grid-template-rows:1fr; border-right:0; border-bottom:1px solid var(--gold-line); }
+    body[data-device="phone"] .course-index article { padding:8%; border-right:1px solid var(--gold-line); border-bottom:0; }
+    body[data-device="phone"] .course-index h3 { font-size:1.25rem; }
+    body[data-device="phone"] .course-index p { display:none; }
+    body[data-device="phone"] .index-content { padding:5%; }
+    body[data-device="phone"] .index-content h3 { font-size:2.3rem; }
+    body[data-device="phone"] .name-grid { grid-template-columns:1fr; }
+    body[data-device="phone"] .name-grid article { padding:4%; }
+    body[data-device="phone"] .name-grid article:nth-child(n+5) { display:none; }
+    body[data-device="phone"] .sequence-menu { grid-template-columns:1fr; grid-template-rows:auto 1fr; }
+    body[data-device="phone"] .sequence-summary { display:grid; grid-template-columns:1fr auto; padding:5%; border-right:0; border-bottom:1px solid var(--gold-line); }
+    body[data-device="phone"] .sequence-summary .eyebrow,body[data-device="phone"] .sequence-summary p { display:none; }
+    body[data-device="phone"] .sequence-summary h3 { margin:0; font-size:2rem; }
+    body[data-device="phone"] .sequence-categories span { padding:6%; }
+    body[data-device="phone"] .sequence-list { grid-template-columns:1fr 1fr; }
+    body[data-device="phone"] .sequence-list article:nth-child(n+5) { display:none; }
+    body[data-device="phone"] .concept-notes { grid-template-columns:1fr; }
+
+    @media (max-width:760px) {
+      .lab-header__inner,.concept__head { grid-template-columns:1fr; }
+      .lab-header__inner { padding-block:6rem 3rem; }
+      .device-bar__inner { padding-block:.75rem; align-items:flex-start; flex-direction:column; }
+      .device-switch { width:100%; }
+      .device-switch button { flex:1; min-width:0; padding-inline:.45rem; }
+      .concept { padding-bottom:5rem; }
+      .concept + .concept { padding-top:5rem; }
+      .concept-notes { grid-template-columns:1fr; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      html { scroll-behavior:auto; }
+      .dish-card__trigger,.dish-card__media,.dish-card__media img,.dish-card__detail { transition:none; }
+    }
+  </style>
+</head>
+<body data-device="desktop">
+  <header class="lab-header">
+    <div class="wrap lab-header__inner">
+      <div>
+        <p class="eyebrow">Menú RYŌ · Exploración responsive V1</p>
+        <h1>El visual primero. El menú después.</h1>
+        <p class="lab-header__lede">Tres sistemas de navegación y una segunda lectura del índice, todos probados como escritorio, tablet y teléfono. La comparación se concentra en proporción de imagen, lectura detallada y categorías que se entienden sin descifrar la interfaz.</p>
+      </div>
+      <aside class="principles" aria-label="Principios de esta ronda">
+        <div><strong>01 · Aspect ratio</strong><span>La fotografía recibe una proporción propia por dispositivo.</span></div>
+        <div><strong>02 · Orden</strong><span>Primero se contempla el plato; debajo se consulta el menú.</span></div>
+        <div><strong>03 · Categorías</strong><span>Rolls y nigiris se presentan como dos recorridos claros, no como filtros sueltos.</span></div>
+      </aside>
+    </div>
+  </header>
+
+  <nav class="device-bar" aria-label="Cambiar tamaño de comparación">
+    <div class="wrap device-bar__inner">
+      <p>Viewport activo · <strong data-size-label>1440 × 1024</strong></p>
+      <div class="device-switch" role="group" aria-label="Elegir dispositivo">
+        <button type="button" data-device-target="desktop" aria-pressed="true">Escritorio</button>
+        <button type="button" data-device-target="tablet" aria-pressed="false">Tablet</button>
+        <button type="button" data-device-target="phone" aria-pressed="false">Teléfono</button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="explorations">
+    <section class="concept concept-a wrap" id="editorial">
+      <header class="concept__head">
+        <div><span class="concept__number">01 / RECOMENDADA</span><h2>Galería editorial</h2></div>
+        <p><strong>La fotografía funciona como portada.</strong> Debajo aparecen categoría, selector por nombre y ficha completa. Es el camino más claro para conservar deseo y consulta rápida.</p>
+      </header>
+      <div class="device-caption"><span>Propuesta 01 · Galería editorial</span><span data-size-label>1440 × 1024</span></div>
+      <div class="device-frame">
+        <div class="preview">
+          <div class="mini-nav"><span class="mini-mark">RYŌ</span><span>Menú · 01 / 10</span></div>
+          <figure class="visual"><img src="media/ryo-menu-product-masters-v1/menu-fuji-v1.png" alt="Roll Fuji frente a la caja azul RYŌ"><figcaption class="visual-label">Fuji · Visual conceptual</figcaption></figure>
+          <div class="menu-under">
+            <div class="category-strip"><span class="active">Rolls especiales <b>07</b></span><span>Nigiris <b>03</b></span></div>
+            <div class="dish-rail"><span class="active">Fuji</span><span>Yuzu</span><span>Kamasutra</span><span>Rendi</span><span>Sei Exclusive</span><span>Koga Explosion</span><span>Playboy</span></div>
+            <div class="detail">
+              <div><h3>Fuji</h3><p>Uramaki relleno de camarón, cangrejo y queso crema, con topping de aguacate y camarón crujiente.</p><ul class="chips"><li>Camarón</li><li>Cangrejo</li><li>Queso crema</li><li>Aguacate</li><li>Salsa Fuji</li></ul></div>
+              <div class="meta"><div><span>Precio PDF</span><strong>13 REF</strong></div><div><span>Presentación</span><strong>10 piezas</strong></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="concept-notes"><article><strong>Imagen</strong>16:7 en escritorio; 4:3 en tablet y teléfono.</article><article><strong>Categorías</strong>Dos bandas grandes con cantidad visible; debajo, nombres directos.</article><article><strong>Tradeoff</strong>La ficha necesita scroll en teléfonos pequeños, pero nunca compite con la foto.</article></div>
+      <p class="recommendation"><strong>Recomendación:</strong> base más sólida para el menú final; conserva el lenguaje actual y corrige jerarquía y proporción.</p>
+    </section>
+
+    <section class="concept concept-b wrap" id="indice">
+      <header class="concept__head">
+        <div><span class="concept__number">02 / CONSULTA</span><h2>Índice de carta</h2></div>
+        <p><strong>La categoría se vuelve capítulo.</strong> Después de la imagen, Rolls especiales y Nigiris ocupan bloques numerados; los platos se leen como índice editorial.</p>
+      </header>
+      <div class="device-caption"><span>Propuesta 02 · Índice de carta</span><span data-size-label>1440 × 1024</span></div>
+      <div class="device-frame">
+        <div class="preview">
+          <div class="mini-nav"><span class="mini-mark">RYŌ</span><span>Carta de autor</span></div>
+          <figure class="visual"><img src="media/ryo-menu-product-masters-v1/menu-kamasutra-v1.png" alt="Roll Kamasutra frente a la caja azul RYŌ"><figcaption class="visual-label">Kamasutra · Visual conceptual</figcaption></figure>
+          <div class="index-layout">
+            <div class="course-index"><article class="active"><small>01 · 07 platos</small><h3>Rolls especiales</h3><p>Selección de autor</p></article><article><small>02 · 03 platos</small><h3>Nigiris</h3><p>Dos piezas por selección</p></article></div>
+            <div class="index-content">
+              <div class="index-content__title"><div><span class="eyebrow">Selección activa</span><h3>Kamasutra</h3></div><span>14 REF</span></div>
+              <div class="name-grid"><article><strong>Fuji</strong><span>10 pzas.</span></article><article><strong>Yuzu</strong><span>10 pzas.</span></article><article class="active"><strong>Kamasutra</strong><span>6 pzas.</span></article><article><strong>Rendi</strong><span>10 pzas.</span></article><article><strong>Sei Exclusive</strong><span>10 pzas.</span></article><article><strong>Koga Explosion</strong><span>10 pzas.</span></article></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="concept-notes"><article><strong>Imagen</strong>3:1 editorial en escritorio; 4:3 al bajar de formato.</article><article><strong>Categorías</strong>Capítulos numerados y contados, con la lista visible debajo.</article><article><strong>Tradeoff</strong>Es la consulta más rápida, pero dedica menos espacio a ingredientes del plato activo.</article></div>
+    </section>
+
+    <section class="concept concept-b2 wrap" id="indice-solapado">
+      <header class="concept__head">
+        <div><span class="concept__number">02-B / SOLAPADO</span><h2>Índice encajado</h2></div>
+        <p><strong>La categoría nace dentro de la fotografía.</strong> En escritorio la carta activa sube sobre el borde visual y conduce hacia ingredientes. En tablet y teléfono se convierte en una retícula de cartas expandibles.</p>
+      </header>
+      <div class="device-caption"><span>Propuesta 02-B · Índice encajado</span><span data-size-label>1440 × 1024</span></div>
+      <div class="device-frame">
+        <div class="preview">
+          <div class="mini-nav"><span class="mini-mark">RYŌ</span><span>Carta de autor · 02-B</span></div>
+
+          <div class="overlap-desktop">
+            <div class="overlap-stage">
+              <figure class="visual"><img src="media/ryo-menu-product-masters-v1/menu-kamasutra-v1.png" alt="Roll Kamasutra frente a la caja azul RYŌ"><figcaption class="visual-label">Kamasutra · Visual conceptual</figcaption></figure>
+              <div class="overlap-categories" aria-label="Categorías de la propuesta solapada">
+                <article class="overlap-category active"><small>01 · 07 platos</small><h3>Rolls especiales</h3><p>Selección de autor</p></article>
+                <article class="overlap-category"><small>02 · 03 platos</small><h3>Nigiris</h3><p>Dos piezas por selección</p></article>
+              </div>
+            </div>
+            <div class="overlap-body">
+              <div class="overlap-detail">
+                <div class="overlap-title"><div><span class="eyebrow">Selección activa</span><h3>Kamasutra</h3></div><strong>14 REF</strong></div>
+                <div class="ingredient-grid" aria-label="Ingredientes confirmados"><span>Papel de soya</span><span>Tuna</span><span>Salmón</span><span>Pescado blanco</span><span>Camarón</span><span>Kani crujiente</span><span>Queso crema</span><span>Aguacate</span><span>Gratinado de pesca blanca crujiente</span></div>
+                <div class="overlap-names"><span>Fuji</span><span>Yuzu</span><span class="active">Kamasutra</span><span>Rendi</span><span>Sei Exclusive</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="overlap-cards" aria-label="Cartas responsive del menú">
+            <article class="dish-card is-open">
+              <button class="dish-card__trigger" type="button" aria-expanded="true" aria-controls="card-kamasutra-detail" data-card-toggle>
+                <span class="dish-card__media"><img src="media/ryo-menu-product-masters-v1/menu-kamasutra-v1.png" alt="Roll Kamasutra frente a la caja azul RYŌ"></span>
+                <span class="dish-card__action"><small>01 · ROLL</small><strong>Kamasutra</strong><em>Contraer</em></span>
+              </button>
+              <div class="dish-card__detail" id="card-kamasutra-detail" aria-hidden="false"><div class="dish-card__detail-inner"><div class="dish-card__info"><div class="dish-card__copy"><p>Envuelto en papel de soya, relleno de tuna, salmón, pescado blanco, camarón y kani crujiente con queso crema y aguacate, coronado con gratinado de pesca blanca crujiente.</p></div><div class="dish-card__meta"><strong>14 REF</strong><span>6 piezas</span></div></div></div></div>
+            </article>
+            <article class="dish-card">
+              <button class="dish-card__trigger" type="button" aria-expanded="false" aria-controls="card-fuji-detail" data-card-toggle>
+                <span class="dish-card__media"><img src="media/ryo-menu-product-masters-v1/menu-fuji-v1.png" alt="Roll Fuji frente a la caja azul RYŌ"></span>
+                <span class="dish-card__action"><small>02 · ROLL</small><strong>Fuji</strong><em>Desplegar</em></span>
+              </button>
+              <div class="dish-card__detail" id="card-fuji-detail" aria-hidden="true"><div class="dish-card__detail-inner"><div class="dish-card__info"><div class="dish-card__copy"><p>Uramaki relleno de camarón, cangrejo y queso crema, con topping de aguacate y camarón crujiente, bañado en salsa de anguila y salsa fuji.</p></div><div class="dish-card__meta"><strong>13 REF</strong><span>10 piezas</span></div></div></div></div>
+            </article>
+            <article class="dish-card">
+              <button class="dish-card__trigger" type="button" aria-expanded="false" aria-controls="card-tuna-detail" data-card-toggle>
+                <span class="dish-card__media"><img src="media/ryo-menu-product-masters-v1/menu-nigiri-tuna-v1.png" alt="Dos piezas de Nigiri Tuná sobre un plato azul RYŌ"></span>
+                <span class="dish-card__action"><small>03 · NIGIRI</small><strong>Nigiri Tuná</strong><em>Desplegar</em></span>
+              </button>
+              <div class="dish-card__detail" id="card-tuna-detail" aria-hidden="true"><div class="dish-card__detail-inner"><div class="dish-card__info"><div class="dish-card__copy"><p>Atún importado, decorado con cebolla crujiente y nuestra exclusiva salsa Ryo.</p></div><div class="dish-card__meta"><strong>5 REF</strong><span>2 piezas</span></div></div></div></div>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="concept-notes"><article><strong>Escritorio</strong>La carta de categoría sube dentro de la foto; el detalle continúa debajo sin tapar el plato.</article><article><strong>Tablet y teléfono</strong>Cada plato usa imagen, control lateral y ficha inferior en una sola carta expandible.</article><article><strong>Tradeoff</strong>La jerarquía gana carácter, pero el solapamiento sólo se conserva donde hay ancho suficiente.</article></div>
+      <p class="recommendation"><strong>Lectura de tu referencia:</strong> el bloque activo se desplaza hacia arriba; la fotografía no cambia de sitio y sigue siendo el plano dominante.</p>
+    </section>
+
+    <section class="concept concept-c wrap" id="detalle">
+      <header class="concept__head">
+        <div><span class="concept__number">03 / DETALLE</span><h2>Mesa + acercamiento</h2></div>
+        <p><strong>Una imagen amplia y un recorte macro del mismo plato.</strong> El bloque visual revela textura y topping antes de presentar una navegación compacta por categoría.</p>
+      </header>
+      <div class="device-caption"><span>Propuesta 03 · Mesa + acercamiento</span><span data-size-label>1440 × 1024</span></div>
+      <div class="device-frame">
+        <div class="preview">
+          <div class="mini-nav"><span class="mini-mark">RYŌ</span><span>Nigiris · 01 / 03</span></div>
+          <div class="visual-split">
+            <figure class="visual visual--main"><img src="media/ryo-menu-product-masters-v1/menu-nigiri-tuna-v1.png" alt="Nigiri Tuná sobre plato azul RYŌ"><figcaption class="visual-label">Nigiri Tuná</figcaption></figure>
+            <figure class="visual visual--macro"><img src="media/ryo-menu-product-masters-v1/menu-nigiri-tuna-v1.png" alt="Detalle cercano del Nigiri Tuná"><figcaption class="macro-copy"><span>Acercamiento</span><strong>Textura y topping</strong></figcaption></figure>
+          </div>
+          <div class="sequence-menu">
+            <div class="sequence-summary"><p class="eyebrow">Selección</p><h3>Nigiri Tuná</h3><p>Atún importado, cebolla crujiente y salsa Ryo.</p><strong>5 REF · 2 piezas</strong></div>
+            <div class="sequence-browser"><div class="sequence-categories"><span>Rolls especiales · 07</span><span class="active">Nigiris · 03</span></div><div class="sequence-list"><article class="active"><small>01</small><strong>Nigiri Tuná</strong></article><article><small>02</small><strong>Nigiri Salmón</strong></article><article><small>03</small><strong>Pesca Blanca</strong></article><article><small>←</small><strong>Anterior</strong></article><article><small>→</small><strong>Siguiente</strong></article><article><small>≡</small><strong>Ver lista</strong></article></div></div>
+          </div>
+        </div>
+      </div>
+      <div class="concept-notes"><article><strong>Imagen</strong>Bloque 5:2 con macro en escritorio; 4:3 en tablet y macro flotante 1:1 en teléfono.</article><article><strong>Categorías</strong>Pestañas simples y platos numerados; la ficha seleccionada queda separada.</article><article><strong>Tradeoff</strong>Es la opción más memorable, pero exige que cada fotografía aguante un recorte cercano.</article></div>
+    </section>
+  </main>
+
+  <script>
+    const sizes={desktop:"1440 × 1024",tablet:"834 × 1112",phone:"390 × 844"};
+    const controls=[...document.querySelectorAll("[data-device-target]")];
+    console.assert(controls.length===3&&Object.keys(sizes).length===3,"La matriz necesita tres viewports.");
+    controls.forEach(button=>button.addEventListener("click",()=>{
+      document.body.dataset.device=button.dataset.deviceTarget;
+      controls.forEach(control=>control.setAttribute("aria-pressed",String(control===button)));
+      document.querySelectorAll("[data-size-label]").forEach(label=>label.textContent=sizes[button.dataset.deviceTarget]);
+    }));
+    const cardToggles=[...document.querySelectorAll("[data-card-toggle]")];
+    console.assert(cardToggles.length===3,"La propuesta 02-B necesita tres cartas de prueba.");
+    cardToggles.forEach(button=>button.addEventListener("click",()=>{
+      const willOpen=button.getAttribute("aria-expanded")!=="true";
+      cardToggles.forEach(control=>{
+        const open=control===button&&willOpen;
+        control.setAttribute("aria-expanded",String(open));
+        control.querySelector("em").textContent=open?"Contraer":"Desplegar";
+        control.closest(".dish-card").classList.toggle("is-open",open);
+        document.getElementById(control.getAttribute("aria-controls")).setAttribute("aria-hidden",String(!open));
+      });
+    }));
+  </script>
+</body>
+</html>

@@ -1,14 +1,15 @@
 # RYŌ Sushi — Realize Design
 
-**Tipo:** índice operativo · **Estado:** landing publicada para revisión; menú congelado · **Última actualización:** 28.08.2026
+**Tipo:** índice operativo · **Estado:** landing migrada a Next.js/React; menú completo en revisión local · **Última actualización:** 29.08.2026
 
 Los entregables creativo y visual se revisan en HTML:
 
 - [`deliverables/design/ryo-unboxed-creative-direction.html`](deliverables/design/ryo-unboxed-creative-direction.html)
 - [`deliverables/design/ryo-unboxed-visual-system-v1.html`](deliverables/design/ryo-unboxed-visual-system-v1.html)
 - [`deliverables/design/ryo-stinger-footer-menu-v1.html`](deliverables/design/ryo-stinger-footer-menu-v1.html)
+- [`deliverables/design/ryo-menu-responsive-explorations-v1.html`](deliverables/design/ryo-menu-responsive-explorations-v1.html)
 - [`deliverables/design/ryo-photo-capture-guide.html`](deliverables/design/ryo-photo-capture-guide.html)
-- [`website/index.html`](website/index.html) y [`website/menu.html`](website/menu.html)
+- [`src/app/page.tsx`](src/app/page.tsx) y [`src/local-pages/MenuPage.tsx`](src/local-pages/MenuPage.tsx)
 - [`reports/2026-08-28-ryo-box-studio-and-audiovisual-plan.md`](reports/2026-08-28-ryo-box-studio-and-audiovisual-plan.md)
 
 ## Función de este archivo
@@ -37,12 +38,16 @@ Este Markdown conserva únicamente navegación, estado y decisiones duraderas. L
 - Cada roll usa coordenadas anatómicas propias. El nombre aparece arriba a la derecha, los ingredientes y su función se ordenan en una columna lateral, la descripción general queda abajo y el precio se omite en esta escena de landing.
 - Las casillas anatómicas permanecen visibles con transparencia y mayor separación. Hover o foco muestra únicamente la línea y el punto asociados; la calibración final se hará sobre los masters de producción.
 - El stinger propuesto usa dos paneles navy con el patrón real RYŌ, junta y sello dorados, y apertura desde el centro. Su versión reducida elimina el desplazamiento.
-- El menú se prueba con una única fuente para `Explorar / Lista`; actualmente contiene diez platos verificados y mantiene visibles las limitaciones de moneda, vigencia, fotografía y transcripción.
+- El menú usa una única fuente para `Explorar / Lista`; contiene diez platos verificados, selección directa por nombre y visuals conceptuales vinculados por ID documental, ID técnico y nombre editorial.
 - El footer cambia a marfil como color secundario y propone WhatsApp como CTA principal, con Instagram como salida secundaria.
-- La implementación conserva dos rutas estáticas en desarrollo; `menu-data.js` es la fuente única de las vistas del menú y los cuatro estados de anatomía, mientras `app.js` resuelve su comportamiento.
-- La landing es la única superficie publicada. El menú de esta etapa se limita a sushi rolls y nigiris, permanece congelado y se excluye del artifact de GitHub Pages.
+- La implementación usa Next.js 16, React 19 y TypeScript; `src/data/menu.json` es la fuente única de `Explorar / Lista` y de los cuatro estados anatómicos.
+- La landing es la única superficie publicada. El menú de esta etapa se limita a rolls especiales y nigiris, está implementado para revisión local y se excluye del artifact de GitHub Pages hasta resolver permisos y vigencia.
 - La landing pública organiza caja/apertura, cuatro rolls destacados, anatomía y Experiencia/contacto; elimina lenguaje técnico, concentra Experiencia en datos verificados y enlaza cada tarjeta con su anatomía.
+- Índice de carta 02-B es la base aprobada del menú: en escritorio el bloque de categoría se encaja y sobresale desde la fotografía; en tablet y teléfono cada plato funciona como una carta táctil que amplía el visual y despliega información debajo sin modal de pantalla completa.
+- El motion del menú usa GSAP Core solo en selección y apertura perceptual, con transform y opacidad durante 280–340 ms, reemplazo de tweens activos y salida equivalente sin animación para `prefers-reduced-motion`.
+- La historia audiovisual vive en una isla React con `useGSAP` y ScrollTrigger: los tres videos controlan caja y cámara; únicamente los cuatro rolls usan crossfade durante la pausa anatómica.
+- El menú se genera solo en desarrollo local. La exportación estática elimina su ruta, sus imágenes y sus chunks antes de subir `out/` a GitHub Pages.
 
 ## Próxima decisión
 
-Revisar la landing en producción y registrar ajustes de composición, ritmo y copy. Retomar stinger y `Explorar / Lista` únicamente cuando las fotografías del menú estén aprobadas.
+Revisar con Victor el ritmo del build Next.js en GitHub Pages y después afinar recortes, proporción imagen/texto y densidad de ingredientes del menú 02-B antes de autorizar su publicación.

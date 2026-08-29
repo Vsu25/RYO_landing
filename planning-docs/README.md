@@ -6,7 +6,7 @@ Fuentes especializadas de estrategia, contenido, experiencia, técnica y ejecuci
 
 1. Consulta [`../PROJECT.md`](../PROJECT.md) para conocer estado, alcance y próxima decisión.
 2. Aplica [`../AGENTS.md`](../AGENTS.md) antes de modificar estructura, documentación, diseño o código.
-3. Abre [`../website/index.html`](../website/index.html) para revisar la landing implementada.
+3. Ejecuta `npm run dev` y abre `http://127.0.0.1:3000/` para revisar la landing implementada.
 4. Usa [`../deliverables/design/ryo-unboxed-creative-direction.html`](../deliverables/design/ryo-unboxed-creative-direction.html) y [`../RealizeDesign.md`](../RealizeDesign.md) para la dirección visual.
 
 ## Reglas
@@ -41,6 +41,8 @@ Fuentes especializadas de estrategia, contenido, experiencia, técnica y ejecuci
 | `references/` | Material externo con procedencia; no se publica directamente. |
 | `reports/` | QA, auditorías y evidencia fechada. |
 | `.agents/skills/` | Procedimientos reutilizables del workspace. |
-| `website/` | Superficie estática publicada en GitHub Pages. |
+| `src/` | Aplicación Next.js/React y fuente ejecutable. |
+| `public/media/` | Media autorizada para la landing pública. |
+| `tests/` | Verificación de contenido y artifact. |
 
-`main` publica una lista explícita de archivos de la landing desde `website/` mediante `.github/workflows/pages.yml`. `menu.html` queda fuera del artifact mientras el menú interactivo permanezca congelado.
+`main` ejecuta el build estático de Next.js mediante `.github/workflows/pages.yml` y publica `out/`. La ruta React `/menu` y su media local se retiran antes del build mientras su publicación no esté autorizada.

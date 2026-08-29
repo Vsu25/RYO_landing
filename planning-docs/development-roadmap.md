@@ -1,6 +1,6 @@
 # Sushi Page — Roadmap de desarrollo
 
-**Estado:** landing de cuatro actos publicada para revisión; menú interactivo congelado; polishing G4 activo · **Aprobación interna:** Victor Silva · **Aprobación externa:** cliente pendiente · **Última actualización:** 28.08.2026
+**Estado:** landing audiovisual V2 migrada y verificada en Next.js/React; menú React completo en QA local; polishing G4 activo · **Aprobación interna:** Victor Silva · **Aprobación externa:** cliente pendiente · **Última actualización:** 29.08.2026
 
 ## Resultado y límites
 
@@ -83,12 +83,12 @@ Victor aprueba estructura, selección de platos, concepto visual, CTA y comporta
 
 **Propósito:** validar el patrón visual y técnico de mayor riesgo antes de multiplicarlo.
 
-**Progreso:** landing y menú estáticos implementados con HTML/CSS/JS nativo como demostración visual. La anatomía usa cuatro estados, el menú comparte una fuente para `Explorar / Lista`, el stinger usa el logo transparente y existe reduced motion. Victor aceptó la base para continuar diseñando; la aprobación del cliente sigue pendiente.
+**Progreso:** la Foundation nativa validó el concepto y luego fue sustituida por una implementación Next.js/React con TypeScript. La anatomía usa cuatro estados, el menú comparte una fuente JSON para `Explorar / Lista`, el stinger usa el logo transparente y existe reduced motion. Victor aprobó la migración técnica; la aprobación del cliente sigue pendiente.
 
 ### Entregables
 
-- Aplicación mínima en `website/`.
-- Superficie HTML funcional y verificable en navegador.
+- Aplicación en `src/` con exportación estática en `out/`.
+- Superficie HTML prerenderizada y verificable en navegador.
 - Fuente de datos única para el menú.
 - Navegación y hero base.
 - Una escena completa de plato/anatomía.
@@ -108,9 +108,9 @@ Victor aprueba estructura, selección de platos, concepto visual, CTA y comporta
 
 **Propósito:** completar landing y menú reutilizando patrones aprobados.
 
-**Estado:** la landing está implementada y publicada como superficie de revisión. El menú sigue fuera de producción; la generación paralela de imágenes para rolls y nigiris se considera exploración de diseño.
+**Estado:** la landing V2 integra en React tres videos propios ligados al scroll y cuatro anatomías en orden corregido; su build para Pages está verificado y la publicación migrada está pendiente. El menú React integra localmente los diez platos aprobados con su correspondencia documental y visual; continúa fuera del artifact mientras se resuelven permisos y vigencia.
 
-El menú interactivo no recibe polishing durante esta etapa. Se retoma cuando las fotografías de rolls y nigiris estén aprobadas. La landing continúa en polishing sobre la URL pública.
+Victor levantó el congelamiento interno del menú el 28.08.2026. `Explorar / Lista` comparten datos, imágenes, ingredientes, precios REF y presentaciones; la siguiente pasada se concentra en polishing y QA antes de solicitar autorización pública.
 
 ### Paquetes
 
@@ -118,10 +118,10 @@ El menú interactivo no recibe polishing durante esta etapa. Se retoma cuando la
 |---|---|---|
 | 4.1 · Narrativa | Hero y secciones de negocio | Copy y dirección aprobados |
 | 4.2 · Producto | Platos destacados y anatomías | Inventario verificado |
-| 4.3 · Menú | Categorías, modos y navegación | Modelo de datos aprobado |
+| 4.3 · Menú | Categorías, modos, navegación táctil/teclado y catálogo equivalente | Implementado en React; QA local en curso y ruta excluida de producción |
 | 4.4 · Conversión | Instagram, WhatsApp y footer | Canales confirmados |
-| 4.5 · Motion | Escenas y transiciones selectivas | Layout estable |
-| 4.6 · Metadata | Icono, OG, robots y sitemap | Identidad y dominio definidos |
+| 4.5 · Motion | Intro, apertura y cierre en video con scrub; anatomías Playboy → Yuzu → Koga → Sei | Migrado a `useGSAP`/ScrollTrigger y verificado en desktop y móvil; revisión en Pages pendiente |
+| 4.6 · Metadata | Icono, OG, robots y sitemap | Implementado mediante metadata routes y exportación estática |
 
 ### Gate G4 · Experiencia completa
 

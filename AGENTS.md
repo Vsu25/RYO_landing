@@ -58,7 +58,7 @@ El material de Instagram, menú y otras fuentes externas se archiva primero en `
 1. No inventes platos, ingredientes, precios, promociones, handles, teléfonos, ubicación ni horarios.
 2. No alteres un precio o descripción sin registrar su fuente y fecha.
 3. No publiques imágenes, logos, textos o piezas gráficas de terceros hasta confirmar autorización, licencia o una base de uso válida para el portfolio.
-4. Conserva el original como referencia y produce derivados web en `brand/` o `website/public/media/` solo después de su aprobación.
+4. Conserva el original como referencia y produce derivados web en `brand/` o `public/media/` solo después de su aprobación.
 5. La inspiración puede aportar estructura, atmósfera o comportamiento; la interfaz final debe tener una dirección propia y no presentarse como una afiliación no confirmada.
 
 ## Integridad del menú
@@ -109,3 +109,13 @@ Las skills oficiales de GSAP están disponibles como referencia de implementaci�
 ## Criterio general de cierre
 
 Una acción está cerrada cuando el resultado solicitado existe, fue verificado en proporción a su riesgo, respeta las fuentes oficiales y deja actualizado `PROJECT.md` solo si cambió estado, alcance, prioridad o una decisión material.
+
+<!-- BEGIN:nextjs-agent-rules -->
+
+# This is NOT the Next.js you know
+
+This version has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` (resolved from this file's directory; in monorepos the `next` package may not be visible from the repo root) before writing any code. Heed deprecation notices.
+
+This block is written and re-added by `next dev` — verify at `node_modules/next/dist/server/lib/generate-agent-files.js`. Removing it from a diff only re-creates the uncommitted change; committing it with your work keeps the tree clean.
+
+<!-- END:nextjs-agent-rules -->

@@ -26,7 +26,7 @@ Cada etapa termina con un entregable revisable y una decisión de avance.
 - Los archivos Markdown documentan operación, fuentes, decisiones, alcance, especificaciones y QA.
 - Los entregables de diseño se presentan como HTML navegable en `deliverables/design/`.
 - Los entregables de estructura se presentan como HTML navegable en `deliverables/structure/`.
-- La implementación se entrega en `website/` y debe tener una superficie HTML verificable en navegador.
+- La implementación vive en `src/`, se exporta estáticamente a `out/` y debe tener una superficie HTML verificable en navegador.
 - CSS y JavaScript acompañan al HTML únicamente cuando el resultado visual o interactivo los necesita.
 
 ## 1 · Descubrir

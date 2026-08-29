@@ -1,89 +1,106 @@
-# Sushi Page — Especificación técnica preliminar
+# Sushi Page — Especificación técnica
 
-**Estado:** stack nativo en producción para la landing; menú congelado · **Última actualización:** 28.08.2026
+**Estado:** Next.js/React implementado y verificado localmente; despliegue migrado a exportación estática · **Última actualización:** 29.08.2026
 
 ## Autoridad
 
-Esta fuente define decisiones técnicas. No sustituye contenido, blueprint, identidad ni roadmap. Se completará después de G2.
+Esta fuente define el stack, la arquitectura y los guardrails técnicos. El contenido factual pertenece al inventario; la experiencia, al blueprint; el avance, al roadmap.
 
-## Resultado técnico esperado
+## Decisión de arquitectura
 
-- Landing y menú en una sola aplicación web.
-- Renderizado estático o prerenderizado mientras el alcance no requiera servidor.
-- Una fuente de datos tipada para todas las vistas del menú.
-- HTML semántico útil antes de aplicar motion.
-- Responsive, teclado, táctil y `prefers-reduced-motion`.
-- Deploy reproducible y sin secretos en el repositorio.
+La aplicación usa Next.js 16 App Router, React 19 y TypeScript. La salida sigue siendo completamente estática: `next build` produce `out/`, sin servidor de aplicación, backend, funciones ni costo recurrente. GitHub Pages continúa como hosting.
 
-## Invariantes
+Next.js se adopta para ordenar componentes, metadata, tipado y evolución del diseño; no convierte la landing en una aplicación de datos. La interactividad se concentra en dos islas cliente:
 
-1. **Estático primero:** no backend, base de datos o CMS sin requisito aprobado.
-2. **Contenido único:** las vistas del menú no mantienen copias divergentes.
-3. **Server-first cuando aplique:** el código cliente se limita a interacción real.
-4. **CSS y APIs nativas primero:** dependencias solo si reducen riesgo o complejidad neta.
-5. **Motion progresivo:** el contenido y la navegación funcionan sin animaciones.
-6. **Media responsable:** dimensiones explícitas, formatos web, poster para video y carga selectiva.
-7. **Accesibilidad estructural:** landmarks, headings, controles nativos, foco visible y nombres claros.
-8. **Producción híbrida:** un clip corto de apertura más capas HTML/CSS para caja, platos, anotaciones y UI antes de 3D, WebGL o video largo sincronizado frame a frame.
-9. **Patrón fiel:** la fuente muestra arcos concéntricos superpuestos, no un seigaiha. La versión de producción se reconstruye como SVG/CSS de bajo contraste después de validar geometría contra SRC-011; el raster original queda como referencia.
+1. `ScrollExperience`: timeline de videos, navegación por capítulos, anatomía y motion.
+2. `MenuExperience`: switch `Explorar / Lista`, categorías, teclado, swipe y cartas responsive; solo se genera en desarrollo local.
 
-## Stack
+Layout, metadata, contacto y contenido estable se prerenderizan. No se usa estado React por frame; GSAP actualiza tiempo de video, transforms y opacidad directamente, y React cambia únicamente estados semánticos discretos.
 
-El vertical slice adopta HTML semántico, CSS y JavaScript nativo. No usa framework, proceso de build, backend ni dependencia de producción. La decisión permanece limitada a Foundation y puede revisarse únicamente si una necesidad medible no queda cubierta por la plataforma.
+## Stack aprobado
 
-La producción es estática en GitHub Pages desde `RYO_landing`. Vercel no forma parte del plan. El workflow `.github/workflows/pages.yml` crea un artifact con una lista explícita de archivos de la landing desde `website/`; excluye `menu.html`, originales de `references/`, temporales y documentación interna.
+| Capa | Tecnología | Uso |
+|---|---|---|
+| Framework | Next.js 16 App Router | Rutas, metadata y exportación estática. |
+| UI | React 19 | Componentes interactivos y estados discretos. |
+| Lenguaje | TypeScript estricto | Contratos y QA de implementación. |
+| Motion | GSAP + ScrollTrigger + `@gsap/react` | Timeline reversible, pin, scrub y cleanup. |
+| Estilos | CSS propio | Identidad, responsive, foco y reduced motion. |
+| Datos | JSON local tipado | Fuente única del menú y anatomías. |
+| Hosting | GitHub Pages | Artifact estático gratuito. |
+| CI | GitHub Actions | Instalación reproducible, check, export y deploy. |
 
-La landing vive en `website/index.html`, el menú en `website/menu.html` y ambas superficies consumen `website/menu-data.js` como fuente única actual. `website/app.js` comparte el comportamiento de interacción.
+No se incorpora Vercel, backend, CMS, base de datos, autenticación, analytics, WebGL ni librería de componentes.
 
-El vertical slice debe intentar primero `video` nativo muted/inline para la apertura, imágenes transparentes, `position: sticky`, transforms CSS, máscaras e `IntersectionObserver`. Un modelo 3D, control frame a frame o librería de scroll solo se evalúa si el prototipo híbrido no alcanza una perspectiva o continuidad aprobada.
+## Estructura ejecutable
 
-### Evaluación de GSAP
+| Ruta | Contrato |
+|---|---|
+| `src/app/layout.tsx` | Metadata global, viewport y tokens de assets. |
+| `src/app/page.tsx` | Composición prerenderizada de la landing. |
+| `src/components/landing/` | Stinger, scroll audiovisual y anatomía. |
+| `src/components/menu/` | Menú React local. |
+| `src/local-pages/MenuPage.tsx` | Página local que nunca se compila en producción. |
+| `src/data/menu.json` | Diez platos; fuente única para ambas vistas y cuatro anatomías. |
+| `public/media/` | Doce assets autorizados y publicables. |
+| `scripts/local-menu-media.mjs` | Genera `/menu` y sus assets en dev; los borra en prebuild. |
+| `tests/project.test.mjs` | Integridad editorial, allowlist y ausencia de filtraciones. |
+| `out/` | Export generado; nunca es fuente. |
 
-Las skills oficiales de GreenSock están instaladas como documentación de implementación, pero el paquete `gsap` no forma parte todavía del stack. En G3 se puede comparar con la solución nativa si el vertical slice necesita timelines coordinadas, control reversible o scroll ligado al progreso. Si se adopta, debe cubrir cleanup, responsive, `prefers-reduced-motion` y rendimiento antes de escalar a todas las escenas.
+## Contrato audiovisual
 
-**Resultado del primer corte:** el stinger, los fades entre platos y la anatomía se resuelven con transforms CSS y Web Animations API. No existe todavía evidencia que justifique instalar GSAP.
+La escena pinned usa una sola timeline con `scrub: 0.65` y un recorrido de 20 alturas de viewport en escritorio o 18 debajo de 1024 px.
 
-## Modelo de contenido propuesto
+- 0–8 s: `ryo-scroll-intro-v2.mp4`.
+- 8–16 s: `ryo-scroll-open-playboy-v2.mp4`.
+- 15.55–30.75 s: capas de anatomía `Playboy → Yuzu → Koga → Sei`; solo los rolls usan crossfade.
+- 30.7–36.7 s: `ryo-scroll-return-close-v2.mp4`.
+- Desde 36.65 s: escena editorial de Experiencia.
 
-```ts
-type MenuItem = {
-  id: string;
-  categoryId: string;
-  name: string;
-  description: string;
-  ingredients: string[];
-  price: number;
-  currency: string;
-  image?: string;
-  sourceId: string;
-  status: "verified" | "unavailable";
-};
+Los videos permanecen muted, inline y controlados por `currentTime`. La cámara y la caja provienen del video; no se simula su movimiento con fades. El seek se limita a `duration - 0.04` y omite diferencias inferiores a 35 ms para reducir trabajo.
+
+GSAP se inicializa dentro de `useGSAP`, con scope y cleanup. Se priorizan transforms y opacidad. `prefers-reduced-motion` elimina pin, scrub y stinger y muestra una narración estática equivalente.
+
+## Menú local y frontera de publicación
+
+`npm run dev` copia seis WebP conceptuales desde `local-media/menu/` a `public/local-menu-media/` y genera temporalmente `src/app/menu/page.tsx`. Ambas rutas están ignoradas por Git.
+
+`npm run build` ejecuta primero la limpieza y compila solo la landing. El menú no queda “oculto”: no existe ni como HTML ni como chunk de JavaScript público. La landing recibe del Server Component únicamente los cuatro registros anatómicos; los otros seis platos no se serializan.
+
+La publicación del menú requiere una decisión independiente de permisos y vigencia.
+
+## GitHub Pages
+
+`next.config.ts` usa `output: "export"`, `trailingSlash: true`, imágenes sin optimizador de servidor y `basePath` desde `NEXT_PUBLIC_BASE_PATH`.
+
+El workflow:
+
+1. configura Pages y obtiene su `base_path`;
+2. instala Node 20 y dependencias con `npm ci`;
+3. ejecuta `npm run check` con ese `basePath`;
+4. sube `out/`;
+5. despliega mediante el action oficial de Pages.
+
+No se usa `assetPrefix`; todos los assets de aplicación pasan por `sitePath()`.
+
+## Presupuesto y accesibilidad
+
+- Tres videos autorizados, aproximadamente 12.5 MB en conjunto.
+- Dimensiones explícitas y posters para media crítica.
+- Imágenes del menú con lazy loading salvo selección activa.
+- Landmarks, headings, controles nativos, skip link, foco visible y estados `aria-live`.
+- Anatomía operable por hover, foco y toque; línea y punto aparecen solo al activar una casilla.
+- Menú navegable con flechas y gesto horizontal dominante de al menos 48 px.
+- Sin cookies, tracking ni transmisión de datos; WhatsApp e Instagram son enlaces externos.
+
+## Comandos y Definition of Done
+
+```bash
+npm run dev
+npm run typecheck
+npm run build
+npm test
+npm run check
 ```
 
-El esquema es ilustrativo, no código aprobado. La fuente final debe soportar orden editorial, categorías, disponibilidad y texto alternativo sin acoplarse a una vista.
-
-## Presupuesto de experiencia
-
-- Evitar videos o imágenes hero pesadas sin medición.
-- No precargar media fuera del primer viewport.
-- Cargar escenas del menú dinámico según necesidad cuando el catálogo lo justifique.
-- Mantener estable el layout con dimensiones conocidas.
-- Definir metas de rendimiento sobre preview, no sobre desarrollo.
-
-## Seguridad y privacidad
-
-- No almacenar tokens, credenciales, datos personales o números no autorizados en Git.
-- WhatsApp e Instagram usan enlaces normales en v1.
-- No se rastrea comportamiento ni se añaden cookies sin una decisión de medición y consentimiento.
-
-## Definition of Done técnica
-
-- Lint y build exitosos.
-- Sin errores de consola ni enlaces rotos.
-- Rutas principales prerenderizadas cuando el stack lo permita.
-- Navegación por teclado y foco verificados.
-- Resultado equivalente en reduced motion.
-- Contenido del menú comparado con la fuente aprobada.
-- Media optimizada y con texto alternativo.
-- Sin dependencias, componentes o abstracciones sin uso.
-- QA desktop, tablet y móvil documentado en `reports/`.
+Una entrega técnica está cerrada cuando typecheck, export y pruebas pasan; no hay errores nuevos de consola; el flujo funciona hacia adelante y atrás en desktop, móvil y orientación horizontal; la alternativa reducida conserva todo el contenido; y el artifact contiene solo la allowlist pública.
