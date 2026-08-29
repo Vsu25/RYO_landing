@@ -30,3 +30,7 @@ references/ryo-sushi/**/*.jpeg
 references/ryo-sushi/**/*.png
 references/ryo-sushi/**/*.pdf
 references/ryo-sushi/**/*.mov
+
+# Costly Veo masters and resumable operation IDs stay local; web trims are tracked.
+deliverables/design/media/ryo-scroll-video-v1/*.mp4
+deliverables/design/media/ryo-scroll-video-v1/.*-operation.json

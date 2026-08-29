@@ -4,17 +4,17 @@
 
 ## Estado actual
 
-- **Fase:** 4 · Landing en producción y revisión visual pública.
-- **Estado:** la landing recorre cuatro actos completos: caja/apertura, cuatro rolls destacados, anatomía y Experiencia/contacto. La revisión local confirmó desktop, tablet, móvil, teclado y movimiento reducido. El menú interactivo continúa congelado y fuera de la navegación pública.
-- **Objetivo inmediato:** revisar la URL de producción con Victor, registrar ajustes de diseño y aplicar polishing sin incorporar todavía el menú.
-- **Bloqueo actual:** ninguno para la landing publicada. El archivo vectorial oficial, la aprobación final del cliente y las fotografías definitivas siguen siendo necesarios antes de considerar cerrada la identidad o retomar el menú.
+- **Fase:** 4 · Reconstrucción audiovisual de la landing.
+- **Estado:** la landing fue rediseñada y verificada localmente como una escena sticky continua controlada por scroll: entrada y giro editorial de la caja, apertura audiovisual, cuatro anatomías en orden, retorno, cierre y experiencia final. Se generaron dos clips Veo 3.1 y se publican solo sus tramos visualmente fieles.
+- **Objetivo inmediato:** publicar la nueva landing mediante un allowlist de GitHub Pages sin exponer los assets conceptuales del menú y revisar el ritmo final con Victor en la URL pública.
+- **Bloqueo actual:** ninguno para continuar la implementación local. La publicación del menú todavía depende de aprobación externa, vigencia editorial y permiso de uso de sus masters conceptuales.
 - **Última actualización:** 28.08.2026.
 
 ## Próxima decisión
 
-Revisar con Victor la landing desplegada en GitHub Pages y convertir sus observaciones en una pasada de polishing. El menú permanece como línea de trabajo separada y congelada.
+Revisar con Victor el ritmo, la fidelidad y la densidad informativa de la landing scroll-reactive ya publicada; el menú se retoma después de aprobar sus imágenes.
 
-**Salida esperada:** landing pública estable y revisable; el contenido definitivo del menú continúa condicionado a la aprobación de sus fotografías.
+**Salida esperada:** landing audiovisual estable en producción y lista corta de ajustes de polishing; el menú permanece local hasta su revisión específica.
 
 ## Fuentes oficiales
 

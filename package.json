@@ -1,0 +1,11 @@
+{
+  "name": "ryo-landing-production-tools",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate:video": "node scripts/generate-veo-clips.mjs"
+  },
+  "devDependencies": {
+    "@google/genai": "^2.19.0"
+  }
+}
