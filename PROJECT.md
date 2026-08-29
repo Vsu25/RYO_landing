@@ -5,8 +5,8 @@
 ## Estado actual
 
 - **Fase:** 4 · Reconstrucción audiovisual de la landing.
-- **Estado:** la landing audiovisual V2 integra los tres videos propios de Victor con scrub reversible: intro centrado a diagonal, apertura/toma de Playboy, anatomía `Playboy → Yuzu → Koga → Sei` y retorno/cierre. El menú permanece local y fuera del artifact público.
-- **Objetivo inmediato:** publicar la secuencia V2 mediante el allowlist de GitHub Pages y confirmar su ritmo con Victor; footer, contacto y menú continúan como revisiones separadas.
+- **Estado:** la landing audiovisual V2 está publicada y verificada con los tres videos propios de Victor: intro centrado a diagonal, apertura/toma de Playboy, anatomía `Playboy → Yuzu → Koga → Sei` y retorno/cierre. El menú permanece local y fuera del artifact público.
+- **Objetivo inmediato:** revisar con Victor el ritmo de la secuencia V2 ya publicada; footer, contacto y menú continúan como revisiones separadas.
 - **Bloqueo actual:** ninguno para continuar la implementación local. La publicación del menú todavía depende de aprobación externa, vigencia editorial y permiso de uso de sus masters conceptuales.
 - **Última actualización:** 29.08.2026.
 

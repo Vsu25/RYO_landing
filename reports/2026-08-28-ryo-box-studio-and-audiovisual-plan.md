@@ -1,6 +1,6 @@
 # RYŌ Unboxed — caja de estudio y plan audiovisual
 
-**Fecha:** 28.08.2026 · **Revisión:** 29.08.2026 · **Estado:** secuencia V2 implementada localmente · **Fuentes:** SRC-014, SRC-015 y SRC-017
+**Fecha:** 28.08.2026 · **Revisión:** 29.08.2026 · **Estado:** secuencia V2 publicada y verificada · **Fuentes:** SRC-014, SRC-015 y SRC-017
 
 ## Decisión
 

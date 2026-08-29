@@ -1,6 +1,6 @@
 # QA · Integración de los tres videos del scroll
 
-**Fecha:** 29.08.2026 · **Estado:** implementado y verificado localmente · **Superficie:** landing pública
+**Fecha:** 29.08.2026 · **Estado:** publicado y verificado · **Superficie:** <https://vsu25.github.io/RYO_landing/>
 
 ## Alcance
 
@@ -29,6 +29,8 @@ Los originales permanecen en `references/ryo-sushi/video/`; las copias publicabl
 - A progreso `0.8332` el cierre alcanzó `1.89 s`; a `0.9583` llegó a `5.96 s` y activó Experiencia.
 - Los saltos de capítulo, estados `aria-hidden`, transcripción y navegación semántica continuaron operativos.
 - `prefers-reduced-motion` conserva la versión lineal estática y hereda el mismo orden de rolls.
+- Commit publicado: `fdd7c80`.
+- En GitHub Pages se confirmaron los tres URLs MP4, la apertura en `3.02 s` a progreso `0.2826` y Playboy como única capa visible a progreso `0.4444`; la consola permaneció sin errores ni warnings.
 
 ## Riesgo residual visible
 

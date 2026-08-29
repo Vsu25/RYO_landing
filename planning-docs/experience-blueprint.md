@@ -1,6 +1,6 @@
 # Sushi Page — Experience Blueprint
 
-**Estado:** alineado con RYŌ Unboxed; secuencia audiovisual V2 implementada y Experiencia en revisión G2 · **Última actualización:** 29.08.2026
+**Estado:** alineado con RYŌ Unboxed; secuencia audiovisual V2 publicada y Experiencia en revisión G2 · **Última actualización:** 29.08.2026
 
 Este documento define la arquitectura de información. La dirección visual y el storyboard se revisan en el [entregable creativo HTML](../deliverables/design/ryo-unboxed-creative-direction.html); los keyframes y el contrato de movimiento se revisan en el [sistema visual V1](../deliverables/design/ryo-unboxed-visual-system-v1.html). [`../RealizeDesign.md`](../RealizeDesign.md) conserva su índice operativo.
 
