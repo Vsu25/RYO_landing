@@ -39,6 +39,7 @@ Entorno: Next.js dev server en `http://127.0.0.1:3000/`.
 2. El salto de navegación a Experiencia caía todavía dentro del último tramo de cierre; se movió al 96 % del recorrido.
 3. `next/image` con `fill` advertía sobre figuras de tarjetas ocultas en desktop; las fotografías editoriales usan ahora `img` con dimensiones explícitas y lazy loading.
 4. El menú podía compilarse como una ruta aparentemente oculta y filtrar datos en chunks; ahora la ruta y sus assets se generan solo durante `npm run dev` y se eliminan antes del build.
+5. El smoke test del primer deploy detectó que React reemplazaba el overlay anatómico al cambiar de roll y rompía la referencia conservada por la timeline; el overlay ahora mantiene una identidad estable, reinicia sus conectores por plato y fue revalidado sobre Koga con seis ingredientes visibles.
 
 ## Accesibilidad y movimiento reducido
 

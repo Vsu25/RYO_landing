@@ -331,7 +331,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
               <a className="scroll-cue" href="#objeto" onClick={(event) => { event.preventDefault(); jumpTo(0.2); }}><span>Descubrir</span><i aria-hidden="true" /></a>
             </header>
 
-            <AnatomyOverlay key={currentItem.id} item={currentItem} index={activeRoll} active={anatomyActive} />
+            <AnatomyOverlay item={currentItem} index={activeRoll} active={anatomyActive} />
 
             <section className={`experience-overlay${experienceActive ? " is-active" : ""}`} data-experience-overlay aria-labelledby="experience-title" aria-hidden={!experienceActive} inert={!experienceActive}>
               <p className="eyebrow">La experiencia RYŌ</p>

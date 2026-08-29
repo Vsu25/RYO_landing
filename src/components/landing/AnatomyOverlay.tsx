@@ -20,6 +20,11 @@ export function AnatomyOverlay({item, index, active}: AnatomyOverlayProps) {
   const [activeConnector, setActiveConnector] = useState(-1);
   const [paths, setPaths] = useState(() => item.anatomy.points.map(([x, y]) => `M ${x} ${y} L ${x} ${y}`));
 
+  useEffect(() => {
+    setActiveConnector(-1);
+    setPaths(item.anatomy.points.map(([x, y]) => `M ${x} ${y} L ${x} ${y}`));
+  }, [item.id, item.anatomy.points]);
+
   const updatePaths = useCallback(() => {
     const svg = connectors.current;
     if (!svg) return;
