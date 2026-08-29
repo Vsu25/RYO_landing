@@ -47,15 +47,18 @@ if(!gsap||!ScrollTrigger){
     if(!stinger||reducedMotion.matches) return;
     const left=stinger.querySelector(".entry-stinger__door--left");
     const right=stinger.querySelector(".entry-stinger__door--right");
-    const mark=stinger.querySelector("img");
-    gsap.killTweensOf([stinger,left,right,mark]);
+    const seam=stinger.querySelector(".entry-stinger__seam");
+    gsap.killTweensOf([stinger,left,right,seam]);
     gsap.set(stinger,{autoAlpha:1});
     gsap.set([left,right],{xPercent:0});
-    return gsap.timeline({defaults:{ease:"power3.inOut"}})
-      .fromTo(mark,{autoAlpha:0,scale:.84,y:18},{autoAlpha:1,scale:1,y:0,duration:.65,ease:"power3.out"})
-      .to(mark,{autoAlpha:0,scale:.9,duration:.5},.72)
-      .to(left,{xPercent:-101,duration:1.15},.9)
-      .to(right,{xPercent:101,duration:1.15},.9)
+    gsap.set(seam,{scaleY:.08});
+    return gsap.timeline({defaults:{ease:"power4.inOut"}})
+      .to(seam,{scaleY:1,duration:.55,ease:"power3.out"})
+      .to(left,{xPercent:.8,duration:.28,ease:"power2.inOut"},.22)
+      .to(right,{xPercent:-.8,duration:.28,ease:"power2.inOut"},.22)
+      .to(seam,{scaleY:.08,duration:.35,ease:"power3.in"},.62)
+      .to(left,{xPercent:-101,duration:1.45},.72)
+      .to(right,{xPercent:101,duration:1.45},.72)
       .set(stinger,{autoAlpha:0});
   };
 
