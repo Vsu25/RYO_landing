@@ -1,6 +1,6 @@
 # Sushi Page — Especificación técnica
 
-**Estado:** Next.js/React implementado y verificado localmente; despliegue migrado a exportación estática · **Última actualización:** 29.08.2026
+**Estado:** Next.js/React implementado y verificado en GitHub Pages mediante exportación estática · **Última actualización:** 29.08.2026
 
 ## Autoridad
 

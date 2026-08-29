@@ -1,6 +1,6 @@
 # QA · Migración Next.js/React
 
-**Fecha:** 29.08.2026 · **Estado:** aprobado localmente; verificación de Pages pendiente · **Superficie:** landing pública y menú local
+**Fecha:** 29.08.2026 · **Estado:** aprobado y verificado en GitHub Pages · **Superficie:** landing pública y menú local
 
 ## Alcance
 
@@ -45,6 +45,10 @@ Entorno: Next.js dev server en `http://127.0.0.1:3000/`.
 
 Se verificaron landmarks, nombres accesibles, estados live, foco del menú y navegación con flechas. La rama `prefers-reduced-motion` permanece implementada como contenido lineal completo y evita ScrollTrigger/stinger; la prueba final en un dispositivo con la preferencia del sistema activada queda como parte del polishing G5.
 
+## QA de producción
+
+El workflow `Deploy landing to GitHub Pages` completó correctamente para el commit `6bd07a3`. En <https://vsu25.github.io/RYO_landing/> se verificaron una escena fijada al viewport, los tres videos con metadata completa y duraciones `8 s / 8 s / 6 s`, ausencia de overflow horizontal y anatomías activas en rolls posteriores al primero. Koga mostró seis ingredientes y Sei siete antes del cierre.
+
 ## Riesgos residuales
 
 - El ritmo definitivo debe aprobarse sobre la URL desplegada, donde la descarga de video puede variar.
@@ -53,4 +57,4 @@ Se verificaron landmarks, nombres accesibles, estados live, foco del menú y nav
 
 ## Gate
 
-La migración técnica está aprobada localmente. G4 continúa activo hasta verificar el nuevo artifact en GitHub Pages y recibir la revisión visual de Victor.
+La migración técnica y su artifact público están aprobados. G4 continúa activo únicamente para la revisión visual de Victor y la lista de polishing; el menú sigue fuera de publicación.
