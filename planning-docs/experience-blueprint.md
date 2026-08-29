@@ -1,6 +1,6 @@
 # Sushi Page — Experience Blueprint
 
-**Estado:** alineado con RYŌ Unboxed; anatomía aprobada y Experiencia en revisión G2 · **Última actualización:** 28.08.2026
+**Estado:** alineado con RYŌ Unboxed; secuencia audiovisual V2 implementada y Experiencia en revisión G2 · **Última actualización:** 29.08.2026
 
 Este documento define la arquitectura de información. La dirección visual y el storyboard se revisan en el [entregable creativo HTML](../deliverables/design/ryo-unboxed-creative-direction.html); los keyframes y el contrato de movimiento se revisan en el [sistema visual V1](../deliverables/design/ryo-unboxed-visual-system-v1.html). [`../RealizeDesign.md`](../RealizeDesign.md) conserva su índice operativo.
 
@@ -41,7 +41,7 @@ La caja se abre y presenta el interior. El contexto parte de fuentes públicas v
 
 ### 3 · Rolls destacados
 
-Cuatro platos comparten una única pose de anatomía frente a la caja abierta: Sei Exclusive, Koga Explosion, Yuzu y Playboy, seleccionados a partir de fotografías aportadas por Victor. El cambio de roll ocurre como transición entre imágenes controladas, no como cuatro videos separados.
+Cuatro platos comparten una única pose de anatomía frente a la caja abierta: Playboy, Yuzu, Koga Explosion y Sei Exclusive, seleccionados a partir de fotografías aportadas por Victor. El orden parte del endpoint K17 / Playboy del video de apertura y retrocede hasta Sei. El cambio de roll ocurre como transición entre imágenes controladas, no como cuatro videos separados.
 
 ### 4 · Anatomía del roll
 
@@ -49,11 +49,11 @@ Cada roll ocupa la misma pausa frontal, sostenido por palillos naturales, con ca
 
 ### 5 · Experiencia
 
-Después de guardar el último roll, la salida se detiene en K11. La caja abierta funciona como mesa editorial: desaparece la anatomía, entra la propuesta verificada “Alta cocina japonesa para disfrutar en casa” y se presenta la modalidad “Solo delivery y pick up”. WhatsApp e Instagram pueden figurar como canales verificados, todavía sin fijar su jerarquía como CTA.
+Después de la anatomía final de Sei, el clip de salida aportado por Victor ejecuta el retorno de K17 / Playboy y el cierre. La caja cerrada funciona como mesa editorial: desaparece la anatomía, entra la propuesta verificada “Alta cocina japonesa para disfrutar en casa” y se presenta la modalidad “Solo delivery y pick up”. WhatsApp e Instagram pueden figurar como canales verificados, todavía sin fijar su jerarquía como CTA.
 
 El formato separa visualmente hechos verificados de campos pendientes. Horarios, Pagos y Métodos de pago conservan un espacio visible con estado “por verificar” hasta revisar los highlights autenticados; no se inventan tiempos de entrega, condiciones ni medios de pago. En desktop la información forma una banda operativa bajo la caja. En móvil, imagen, propuesta y tarjetas pasan a una secuencia lineal.
 
-La caja permanece inmóvil durante la lectura. El cierre K10 se aplaza hasta el final del recorrido, de modo que K11 puede enlazar Experiencia con “Sobre nosotros” sin introducir otro clip. Esta continuidad está propuesta en el sistema visual V1.4 y requiere aprobación G2.
+La caja permanece inmóvil durante la lectura porque el video se sostiene en su último frame cerrado. El cambio factual de Sei hacia el K17 / Playboy del clip de salida se resuelve con una disolución de producto; una continuidad exacta de roll requerirá reemplazar únicamente el inicio de ese clip. Esta revisión conserva la arquitectura sin introducir otro video.
 
 ### 6 · Sobre nosotros
 
@@ -105,4 +105,4 @@ El footer cambia a marfil, color secundario del menú, para señalar el cierre s
 - Desktop, tablet, móvil y reduced motion tienen comportamiento definido.
 - Se identifica un vertical slice de mayor riesgo antes de implementar la página completa.
 - La caja azul conecta hero, retícula, menú y CTA sin inventar su comportamiento físico.
-- La apertura puede resolverse con un clip corto, mientras platos y contenido se mantienen como capas HTML/CSS controlables.
+- Intro, apertura y cierre pueden resolverse con clips cortos ligados al progreso, mientras platos y contenido se mantienen como capas HTML/CSS controlables.

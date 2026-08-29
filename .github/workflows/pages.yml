@@ -31,10 +31,9 @@ jobs:
           cp website/index.html website/styles.css website/scroll-story.css website/scroll-story.js website/menu-data.js website/robots.txt website/sitemap.xml public-site/
           cp website/vendor/gsap.min.js website/vendor/ScrollTrigger.min.js public-site/vendor/
           cp website/public/media/box-front.jpg website/public/media/box-closed.webp website/public/media/box-open.webp public-site/public/media/
-          cp website/public/media/roll-pickup.jpg website/public/media/roll-return.jpg public-site/public/media/
           cp website/public/media/roll-sei.webp website/public/media/roll-koga.webp website/public/media/roll-yuzu.webp website/public/media/roll-playboy.webp public-site/public/media/
           cp website/public/media/ryo-overlapping-arcs-pattern.png website/public/media/ryo-wordmark-gold.png public-site/public/media/
-          cp website/public/media/ryo-entry-open-v1.mp4 website/public/media/ryo-exit-close-v1.mp4 public-site/public/media/
+          cp website/public/media/ryo-scroll-intro-v2.mp4 website/public/media/ryo-scroll-open-playboy-v2.mp4 website/public/media/ryo-scroll-return-close-v2.mp4 public-site/public/media/
       - name: Upload landing
         uses: actions/upload-pages-artifact@v4
         with:

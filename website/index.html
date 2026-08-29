@@ -20,7 +20,7 @@
   <link rel="preload" href="public/media/box-front.jpg" as="image" type="image/jpeg">
   <link rel="preload" href="public/media/box-closed.webp" as="image" type="image/webp">
   <link rel="stylesheet" href="styles.css?v=20260828-4">
-  <link rel="stylesheet" href="scroll-story.css?v=20260828-5">
+  <link rel="stylesheet" href="scroll-story.css?v=20260829-1">
 </head>
 <body class="landing-page">
   <a class="skip-link" href="#contenido">Saltar al contenido</a>
@@ -35,9 +35,9 @@
   <nav class="site-nav story-nav" aria-label="Navegación principal">
     <a class="site-nav__logo" href="#inicio" data-story-jump="0" aria-label="RYŌ Sushi · Inicio"><img src="public/media/ryo-wordmark-gold.png" alt="RYŌ"></a>
     <div class="site-nav__links">
-      <a href="#objeto" data-story-jump="0.12">La caja</a>
-      <a href="#anatomia" data-story-jump="0.29">Anatomía</a>
-      <a href="#experiencia" data-story-jump="0.82">Experiencia</a>
+      <a href="#objeto" data-story-jump="0.20">La caja</a>
+      <a href="#anatomia" data-story-jump="0.40">Anatomía</a>
+      <a href="#experiencia" data-story-jump="0.93">Experiencia</a>
       <button class="icon-button" type="button" data-replay-stinger aria-label="Repetir animación de entrada"><span aria-hidden="true">↻</span></button>
       <a class="button button--solid magnetic-button" href="https://wa.me/584220382261" target="_blank" rel="noopener"><span>WhatsApp</span><i aria-hidden="true">↗</i></a>
     </div>
@@ -53,20 +53,18 @@
       <div class="story-stage" data-story-stage>
         <div class="story-ambient" aria-hidden="true"><i></i><i></i></div>
         <div class="story-media-frame" data-media-frame aria-hidden="true">
-          <img class="story-media story-media--front" data-layer="front" src="public/media/box-front.jpg" width="1672" height="940" alt="">
-          <img class="story-media story-media--closed" data-layer="closed" src="public/media/box-closed.webp" width="1672" height="940" alt="">
-          <video class="story-media story-media--entry" data-layer="entry" muted playsinline preload="metadata" poster="public/media/box-closed.webp">
-            <source src="public/media/ryo-entry-open-v1.mp4" type="video/mp4">
+          <video class="story-media story-media--intro" data-layer="intro" muted playsinline preload="auto" poster="public/media/box-front.jpg">
+            <source src="public/media/ryo-scroll-intro-v2.mp4" type="video/mp4">
           </video>
-          <img class="story-media story-media--open" data-layer="open" src="public/media/box-open.webp" width="1672" height="940" alt="">
-          <img class="story-media story-media--pickup" data-layer="pickup" src="public/media/roll-pickup.jpg" width="1672" height="940" alt="">
-          <img class="story-media story-media--roll" data-roll-layer="sei" src="public/media/roll-sei.webp" width="1672" height="940" alt="">
-          <img class="story-media story-media--roll" data-roll-layer="koga" src="public/media/roll-koga.webp" width="1672" height="940" alt="">
-          <img class="story-media story-media--roll" data-roll-layer="yuzu" src="public/media/roll-yuzu.webp" width="1672" height="940" alt="">
+          <video class="story-media story-media--opening" data-layer="opening" muted playsinline preload="metadata" poster="public/media/box-closed.webp">
+            <source src="public/media/ryo-scroll-open-playboy-v2.mp4" type="video/mp4">
+          </video>
           <img class="story-media story-media--roll" data-roll-layer="playboy" src="public/media/roll-playboy.webp" width="1672" height="940" alt="">
-          <img class="story-media story-media--return" data-layer="return" src="public/media/roll-return.jpg" width="1672" height="940" alt="">
-          <video class="story-media story-media--exit" data-layer="exit" muted playsinline preload="metadata" poster="public/media/box-closed.webp">
-            <source src="public/media/ryo-exit-close-v1.mp4" type="video/mp4">
+          <img class="story-media story-media--roll" data-roll-layer="yuzu" src="public/media/roll-yuzu.webp" width="1672" height="940" alt="">
+          <img class="story-media story-media--roll" data-roll-layer="koga" src="public/media/roll-koga.webp" width="1672" height="940" alt="">
+          <img class="story-media story-media--roll" data-roll-layer="sei" src="public/media/roll-sei.webp" width="1672" height="940" alt="">
+          <video class="story-media story-media--closing" data-layer="closing" muted playsinline preload="metadata" poster="public/media/box-open.webp">
+            <source src="public/media/ryo-scroll-return-close-v2.mp4" type="video/mp4">
           </video>
           <div class="story-media-shade"></div>
         </div>
@@ -75,13 +73,13 @@
           <p class="eyebrow">RYŌ · Unboxed</p>
           <h1 aria-label="La experiencia empieza en la caja."><span class="type-line"><span>La experiencia</span></span><span class="type-line"><span>empieza en la caja.</span></span></h1>
           <p>Haz scroll. El empaque entra, gira y revela cuatro rolls protagonistas en una sola toma continua.</p>
-          <a class="scroll-cue" href="#objeto" data-story-jump="0.12"><span>Descubrir</span><i aria-hidden="true"></i></a>
+          <a class="scroll-cue" href="#objeto" data-story-jump="0.20"><span>Descubrir</span><i aria-hidden="true"></i></a>
         </header>
 
         <section class="anatomy-overlay" data-anatomy-overlay aria-labelledby="anatomy-name" aria-hidden="true" inert>
           <div class="anatomy-overlay__heading">
             <p class="eyebrow"><span data-roll-number>01</span> · Anatomía del roll</p>
-            <h2 id="anatomy-name" data-anatomy-name>Sei Exclusive</h2>
+            <h2 id="anatomy-name" data-anatomy-name>Playboy</h2>
           </div>
           <svg class="scroll-connectors" data-scroll-connectors viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"></svg>
           <ul class="scroll-ingredients" data-scroll-ingredients aria-label="Ingredientes confirmados"></ul>
@@ -103,10 +101,10 @@
 
         <div class="chapter-rail" aria-label="Progreso del recorrido">
           <button type="button" data-story-jump="0.04" data-chapter="inicio"><span>01</span><b>Entrada</b></button>
-          <button type="button" data-story-jump="0.18" data-chapter="caja"><span>02</span><b>Apertura</b></button>
+          <button type="button" data-story-jump="0.21" data-chapter="caja"><span>02</span><b>Apertura</b></button>
           <button type="button" data-story-jump="0.46" data-chapter="rolls"><span>03</span><b>Rolls</b></button>
-          <button type="button" data-story-jump="0.70" data-chapter="cierre"><span>04</span><b>Cierre</b></button>
-          <button type="button" data-story-jump="0.88" data-chapter="experiencia"><span>05</span><b>RYŌ</b></button>
+          <button type="button" data-story-jump="0.79" data-chapter="cierre"><span>04</span><b>Cierre</b></button>
+          <button type="button" data-story-jump="0.94" data-chapter="experiencia"><span>05</span><b>RYŌ</b></button>
         </div>
 
         <div class="story-counter" aria-hidden="true"><span data-story-index>01</span><i></i><span>05</span></div>
@@ -148,6 +146,6 @@
   <noscript><div class="noscript-note">Activa JavaScript para recorrer la experiencia audiovisual. El contacto de RYŌ permanece disponible al final de la página.</div></noscript>
   <script src="vendor/gsap.min.js"></script>
   <script src="vendor/ScrollTrigger.min.js"></script>
-  <script type="module" src="scroll-story.js?v=20260828-5"></script>
+  <script type="module" src="scroll-story.js?v=20260829-1"></script>
 </body>
 </html>

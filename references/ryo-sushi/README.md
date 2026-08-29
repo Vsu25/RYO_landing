@@ -13,6 +13,7 @@ Carpeta reservada para el material original y verificable de Ryo Sushi.
 - `brand/ryo-wordmark-menu-reference-2026-08-27.png`: recorte raster de la portada del menú para reconocer la forma propia del wordmark; no sustituye un vector oficial. SHA-256: `afe2226ad136289178cf613dad3a15274fa9c622f0e198ddbed9b80f8fa7a242`.
 - `box/20260827_211007.jpg` a `box/20260827_211145.jpg`: siete fotografías originales de la caja física aportadas por Victor el 28.08.2026, capturadas el 27.08.2026 a 8160 × 4592 px. Documentan tapa, frente ilustrado, laterales, pliegues, cierre, apertura, divisores, salsas y wordmark exterior/interior. Son autoridad de referencia física; el permiso de publicación sigue pendiente. El detalle y los SHA-256 constan en `box/README.md`.
 - `rolls/`: cuatro recortes fotográficos aportados por Victor el 28.08.2026 para Sei Exclusive, Koga Explosion, Yuzu y Playboy. Documentan el corte frontal sostenido por palillos y se verificaron visualmente contra las páginas 10-12 del menú. El detalle y los SHA-256 constan en `rolls/README.md`; el permiso de publicación sigue pendiente.
+- `video/`: tres videos propios aportados y autorizados por Victor el 29.08.2026 para intro, apertura/toma de Playboy y retorno/cierre. El inventario técnico, hashes y contrato de uso constan en `video/README.md`.
 - `ryo-anatomy-layout-reference-2026-08-28.png`: mockup anotado aportado por Victor para ordenar la anatomía con producto protagonista a la izquierda, nombre e ingredientes a la derecha y descripción general inferior. Es referencia interna de layout, no un asset de producción. SHA-256: `5c44f67b1891deae4a84301f6ef03bf2c3b7255f0e84e7a76c7172389a91044b`.
 
 ## Antes de incorporar archivos
@@ -30,6 +31,7 @@ Carpeta reservada para el material original y verificable de Ryo Sushi.
 - `menu/`: menú vigente y transcripción de apoyo.
 - `box/`: originales de caja, construcción, branding físico y apertura.
 - `rolls/`: referencias fotográficas de platos concretos y sus cortes frontales.
+- `video/`: originales audiovisuales aportados por Victor y su procedencia técnica.
 - `contact/`: evidencia de canales, ubicación u horarios cuando sea relevante.
 
 Solo se crean subcarpetas cuando existe material real y una responsabilidad definida.

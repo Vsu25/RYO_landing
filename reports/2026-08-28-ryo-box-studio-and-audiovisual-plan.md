@@ -1,6 +1,6 @@
 # RYŌ Unboxed — caja de estudio y plan audiovisual
 
-**Fecha:** 28.08.2026 · **Estado:** en revisión G2 · **Fuente física:** SRC-014
+**Fecha:** 28.08.2026 · **Revisión:** 29.08.2026 · **Estado:** secuencia V2 implementada localmente · **Fuentes:** SRC-014, SRC-015 y SRC-017
 
 ## Decisión
 
@@ -10,7 +10,7 @@ Usar las siete fotografías nuevas como un único set de evidencia física y pro
 2. `K02` caja abierta, revelación.
 3. `K08` caja cerrada horizontal, transición hacia “Sobre nosotros”.
 
-Los videos no se producen todavía. Primero se aprueban fidelidad, encuadre, luz, continuidad y función narrativa; después se diseñan plano por plano únicamente la entrada física y la salida física de la secuencia lateral.
+La revisión del 29.08.2026 incorpora tres videos propios producidos y aportados por Victor: intro centrado a diagonal, apertura/toma de K17 / Playboy y retorno/cierre. Los originales se archivan como SRC-017 y las copias V2 se publican desde `website/public/media/`. Los stills continúan como autoridad para la anatomía controlable.
 
 ## Lectura física de la caja
 
@@ -42,14 +42,15 @@ Los tres archivos son PNG de 1672 × 941 px. Fueron creados con el generador int
 | IMG-05 | Cambio de ritmo | Nigiris verificados | Composición propia, no inventada desde el contenido de K02. | Imagen fija y contenido completo. |
 | IMG-06 | Salida editorial | K08 | Caja centrada; aparece “Sobre nosotros” y luego CTA. | K08 inmóvil. |
 
-## Sistema de eventos de video — diseño pendiente, sin producción
+## Sistema de eventos de video — V2 implementado
 
-1. **V01 Entrada física:** K10 → apertura hasta K11 → palillos toman Sei Exclusive → hold K12. Duración objetivo 5–6 s.
-2. **Estados de imagen:** K12 → K13 → K14 → K15. No son clips; son sustituciones o disolvencias cortas controladas por scroll.
-3. **V02 Salida física:** K15 → Playboy desciende y regresa a la caja → hold K11 para Experiencia → cierre hasta K10 al final del recorrido. Duración objetivo 5–6 s sin contar la pausa controlada por scroll.
-4. **Nigiris:** permanecen fuera de esta prueba hasta contar con masters verificables.
+1. **V00 Intro físico:** caja cerrada centrada → giro hasta diagonal cerrada. 8 s, 1920 × 1080.
+2. **V01 Apertura física:** diagonal cerrada → apertura → palillos toman K17 / Playboy → hold protagonista. 8 s, 1280 × 720.
+3. **Estados de imagen:** Playboy → Yuzu → Koga Explosion → Sei Exclusive. No son clips; son disolvencias cortas controladas por scroll.
+4. **V02 Salida física:** K17 / Playboy desciende y regresa → caja se cierra → hold final. 6 s, 1920 × 1080.
+5. **Nigiris:** permanecen fuera de esta prueba.
 
-Cada clip necesita frame inicial y final idénticos a sus posters, exposición y balance bloqueados, loop no esencial, pausa posible, sin strobing y versión estática equivalente.
+Los tres clips se buscan por `currentTime` desde ScrollTrigger, sin autoplay ni loop. El intro y la apertura empalman en la pose diagonal cerrada; el cierre sostiene su último frame debajo de Experiencia. Los posters y la alternativa de movimiento reducido permanecen disponibles.
 
 ## Sistema de eventos de animación de interfaz
 
@@ -92,11 +93,11 @@ Victor debe aprobar:
 2. si K11 conserva este contenido de caja como contexto suave o espera una caja preparada específicamente para la sesión;
 3. medidas de caja, ángulo máximo de tapa y separadores;
 4. archivo oficial del wordmark y permiso para usar fotografías, caja, logo y derivados;
-5. orden definitivo Sei → Koga → Yuzu → Playboy y fidelidad visible de K12-K15.
+5. orden definitivo Playboy → Yuzu → Koga → Sei y fidelidad visible de las cuatro anatomías.
 
 ## Revisión — secuencia lateral de rolls
 
-**Fuente de producto:** SRC-015 · **Estado:** ocho keyframes producidos; video no iniciado
+**Fuente de producto:** SRC-015 · **Video:** SRC-017 · **Estado:** ocho keyframes y tres clips integrados
 
 Victor aportó cuatro cortes frontales: Sei Exclusive, Koga Explosion, Yuzu y Playboy. La secuencia anterior de clips independientes se simplifica a un único escenario lateral con dos acciones físicas y cuatro estados de imagen.
 
@@ -124,13 +125,13 @@ Ambos stills se produjeron con el generador integrado en modo edición `product-
 
 ### Contrato audiovisual simplificado
 
-1. **Entrada física:** K10 cerrado → apertura → K11 → palillos toman Sei → K16 → K12.
-2. **Exploración por scroll:** K12 → K13 → K14 → K15 mediante sustitución o disolvencia corta; no se mueve caja, cámara ni palillos.
+1. **Entrada física:** caja centrada → diagonal cerrada → apertura → K17 / Playboy protagonista.
+2. **Exploración por scroll:** Playboy → Yuzu → Koga → Sei mediante disolución corta; no se mueve caja, cámara ni palillos.
 3. **Anatomía:** cada estado sostiene la imagen mientras aparecen callouts HTML correspondientes al plato actual.
-4. **Salida física:** K15 → Playboy desciende y regresa a la caja → K17 → K11 → pausa editorial de Experiencia → cierre final → K10.
-5. **Reduced motion:** K10, K11 y K12-K15 como imágenes estáticas con navegación directa; sin scrub ni video esencial.
+4. **Salida física:** la anatomía de Sei se disuelve hacia el K17 / Playboy presente en el clip aportado; el movimiento real regresa el roll y cierra la caja. Esta diferencia se mantiene visible como riesgo residual hasta sustituir el inicio del clip por Sei.
+5. **Reduced motion:** caja y cuatro anatomías como imágenes estáticas en el mismo orden; sin scrub ni video esencial.
 
-La producción puede resolverse como dos clips cortos —entrada y salida— con los cuatro estados intermedios en imágenes. Un único video largo solo sería aceptable si conserva puntos de pausa exactos y no hornea las anotaciones.
+La producción se resuelve con tres clips cortos —intro, apertura y salida— y cuatro estados intermedios en imágenes. No existe video largo monolítico y las anotaciones no se hornean en media.
 
 ### Layout anatómico V1.2
 

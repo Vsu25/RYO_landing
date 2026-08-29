@@ -5,10 +5,10 @@
 ## Estado actual
 
 - **Fase:** 4 · Reconstrucción audiovisual de la landing.
-- **Estado:** la primera versión scroll-reactive publicada no transmitió movimiento suficiente en revisión real. El controlador manual fue sustituido localmente por una timeline GSAP/ScrollTrigger continua, con apertura y cierre editados, cuatro anatomías, tipografía animada y fondo reactivo ya verificados. En paralelo, la exploración del menú concentra la revisión en Índice de carta y su variante 02-B.
-- **Objetivo inmediato:** publicar la corrección GSAP mediante el allowlist de GitHub Pages y confirmar el recorrido completo con Victor antes de rediseñar footer y contacto.
+- **Estado:** la landing audiovisual V2 integra los tres videos propios de Victor con scrub reversible: intro centrado a diagonal, apertura/toma de Playboy, anatomía `Playboy → Yuzu → Koga → Sei` y retorno/cierre. El menú permanece local y fuera del artifact público.
+- **Objetivo inmediato:** publicar la secuencia V2 mediante el allowlist de GitHub Pages y confirmar su ritmo con Victor; footer, contacto y menú continúan como revisiones separadas.
 - **Bloqueo actual:** ninguno para continuar la implementación local. La publicación del menú todavía depende de aprobación externa, vigencia editorial y permiso de uso de sus masters conceptuales.
-- **Última actualización:** 28.08.2026.
+- **Última actualización:** 29.08.2026.
 
 ## Próxima decisión
 
@@ -27,6 +27,7 @@ Revisar con Victor el ritmo, la fidelidad y la densidad informativa de la landin
 | Transición, menú y footer V1 | [`deliverables/design/ryo-stinger-footer-menu-v1.html`](deliverables/design/ryo-stinger-footer-menu-v1.html) | Stinger, vertical slice con fuente única y cierre de contacto en revisión. |
 | Landing pública | [`website/index.html`](website/index.html) · <https://vsu25.github.io/RYO_landing/> | Producción estática de cuatro actos; el menú permanece congelado hasta aprobar fotografías. |
 | Plan audiovisual vigente | [`reports/2026-08-28-ryo-box-studio-and-audiovisual-plan.md`](reports/2026-08-28-ryo-box-studio-and-audiovisual-plan.md) | Secuencia lateral, masters actuales y contrato simplificado de video/imagen. |
+| QA de video-scroll V2 | [`reports/2026-08-29-scroll-video-integration-qa.md`](reports/2026-08-29-scroll-video-integration-qa.md) | Mapeo de clips, orden anatómico, evidencia local y riesgo de continuidad del roll de cierre. |
 | Guía fotográfica | [`deliverables/design/ryo-photo-capture-guide.html`](deliverables/design/ryo-photo-capture-guide.html) | Shot list, mediciones, logo lock, rolls, nigiris y video test. |
 | Índice de diseño | [`RealizeDesign.md`](RealizeDesign.md) | Estado y decisiones duraderas del entregable creativo. |
 | Visión de producto | [`planning-docs/product-brief.md`](planning-docs/product-brief.md) | Resultado, audiencia, recorridos y límites iniciales. |
@@ -165,6 +166,7 @@ No se crean paquetes, servicios o capas adicionales sin una necesidad aprobada.
 | 28.08.2026 | Generar dos clips Veo 3.1 de 8 s y publicar solo sus segmentos visualmente fieles, combinándolos con K10–K17 para toma, retorno y crossfades. | Los frames intermedios generativos deformaron roll, logo y patrón; recortar y completar con stills preserva identidad y reduce peso sin ocultar el límite técnico. | Generado, inspeccionado y derivado para web |
 | 28.08.2026 | Convertir el workflow de Pages en allowlist explícita de archivos y media autorizada del landing. | Impide que los seis assets conceptuales del menú se publiquen por accidente mientras continúan en revisión local. | Implementado; verificación de producción pendiente |
 | 28.08.2026 | Sustituir el controlador manual de scroll por una timeline GSAP/ScrollTrigger vendorizada y editar apertura/cierre sobre clips fieles. | Un gesto normal podía saltarse ventanas completas de opacidad y hacer que la página pareciera estática; el scrub amortiguado conserva movimiento perceptible y reversible sin depender de CDN. | Implementado y verificado localmente; publicación pendiente |
+| 29.08.2026 | Sustituir el movimiento híbrido V1 por tres videos propios de Victor ligados directamente al progreso del scroll y recorrer las anatomías en orden Playboy → Yuzu → Koga → Sei. | Los clips aportados resuelven cámara, giro, apertura y cierre con movimiento real; las imágenes siguen controlando la pausa descriptiva y el fade entre rolls. | Implementado y verificado localmente; publicación V2 pendiente |
 
 ## Criterio de cierre de una acción
 

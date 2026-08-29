@@ -1,6 +1,6 @@
 import {menuItems} from "./menu-data.js?v=20260828-4";
 
-const anatomyIds=["sei","koga","yuzu","playboy"];
+const anatomyIds=["playboy","yuzu","koga","sei"];
 const anatomyItems=anatomyIds.map(id=>menuItems.find(item=>item.id===id)).filter(Boolean);
 const reducedMotion=matchMedia("(prefers-reduced-motion: reduce)");
 const finePointer=matchMedia("(hover: hover) and (pointer: fine)");
@@ -71,7 +71,7 @@ if(!gsap||!ScrollTrigger){
     if(!story||!stage) return;
 
     const layer=name=>story.querySelector(`[data-layer="${name}"]`);
-    const layers={front:layer("front"),closed:layer("closed"),entry:layer("entry"),open:layer("open"),pickup:layer("pickup"),return:layer("return"),exit:layer("exit")};
+    const layers={intro:layer("intro"),opening:layer("opening"),closing:layer("closing")};
     const rollLayers=Object.fromEntries(anatomyIds.map(id=>[id,story.querySelector(`[data-roll-layer="${id}"]`)]));
     const allMedia=[...Object.values(layers),...Object.values(rollLayers)].filter(Boolean);
     const hero=story.querySelector("[data-story-hero]");
@@ -89,16 +89,17 @@ if(!gsap||!ScrollTrigger){
     const chapterButtons=[...story.querySelectorAll("[data-chapter]")];
     const progressBar=document.querySelector("[data-scroll-progress]");
     const nav=document.querySelector(".story-nav");
-    const entryState={progress:0};
-    const exitState={progress:0};
+    const introState={progress:0};
+    const openingState={progress:0};
+    const closingState={progress:0};
     let currentRoll=-1;
     let currentChapter=-1;
     let timeline;
 
     const seek=(video,ratio)=>{
       if(!video||video.readyState<1||!Number.isFinite(video.duration)) return;
-      const next=Math.max(0,Math.min(1,ratio))*(video.duration-.04);
-      if(Math.abs(video.currentTime-next)>.025) video.currentTime=next;
+      const next=Math.max(0,Math.min(1,ratio))*Math.max(0,video.duration-.04);
+      if(Math.abs(video.currentTime-next)>.035) video.currentTime=next;
     };
 
     const activateConnector=(index,button)=>{
@@ -170,18 +171,21 @@ if(!gsap||!ScrollTrigger){
 
     const syncSemantics=()=>{
       const time=timeline.time();
-      const rollIndex=time<9.2?0:time<11.4?1:time<13.6?2:3;
-      const anatomyActive=time>=7.1&&time<16;
-      const experienceActive=time>=20.4;
+      seek(layers.intro,time/8);
+      seek(layers.opening,(time-8)/8);
+      seek(layers.closing,(time-30.7)/6);
+      const rollIndex=time<19.35?0:time<23.15?1:time<26.95?2:3;
+      const anatomyActive=time>=15.55&&time<30.75;
+      const experienceActive=time>=36.65;
       if(anatomyActive) renderAnatomy(rollIndex);
       setInteractive(anatomy,anatomyActive);
       setInteractive(experience,experienceActive);
-      setChapter(time<3?0:time<7.1?1:time<16?2:time<20.4?3:4);
+      setChapter(time<8?0:time<15.55?1:time<30.75?2:time<36.65?3:4);
       stage.style.setProperty("--story-progress",timeline.progress().toFixed(4));
     };
 
-    gsap.set(allMedia,{autoAlpha:0,scale:1.02,transformOrigin:"50% 50%"});
-    gsap.set(layers.front,{autoAlpha:1,scale:1.04});
+    gsap.set(allMedia,{autoAlpha:0,scale:1,transformOrigin:"50% 50%"});
+    gsap.set(layers.intro,{autoAlpha:1});
     gsap.set([anatomy,experience,chapterRail],{autoAlpha:0});
     gsap.set(stage,{"--glow-x":"72%","--glow-y":"52%"});
     setInteractive(anatomy,false);
@@ -190,57 +194,38 @@ if(!gsap||!ScrollTrigger){
     timeline=gsap.timeline({defaults:{ease:"none"},paused:true});
     timeline
       .addLabel("intro",0)
-      .to(hero,{autoAlpha:0,duration:1},.55)
-      .to(layers.front,{scale:1.13,xPercent:-3,duration:1.35},.25)
-      .addLabel("turn",1.45)
-      .to(layers.front,{autoAlpha:0,xPercent:-9,rotation:-1.2,duration:1.25,ease:"power2.inOut"},"turn")
-      .fromTo(layers.closed,{autoAlpha:0,scale:1.16,xPercent:10,rotation:1.5},{autoAlpha:1,scale:1,xPercent:0,rotation:0,duration:1.55,ease:"power3.out",immediateRender:false},"turn")
-      .to(chapterRail,{autoAlpha:.78,duration:.6},"turn+=.35")
-      .to(stage,{"--glow-x":"58%","--glow-y":"58%",duration:1.5},"turn")
-      .addLabel("open",3.2)
-      .to(layers.closed,{autoAlpha:0,scale:.98,duration:.45},"open")
-      .fromTo(layers.entry,{autoAlpha:0,scale:1.025},{autoAlpha:1,scale:1,duration:.45,immediateRender:false},"open")
-      .fromTo(entryState,{progress:0},{progress:1,duration:2.5,onUpdate:()=>seek(layers.entry,entryState.progress),immediateRender:false},"open")
-      .fromTo(layers.open,{autoAlpha:0,scale:1.035},{autoAlpha:1,scale:1,duration:.55,ease:"power2.out",immediateRender:false},"open+=2.1")
-      .to(layers.entry,{autoAlpha:0,duration:.45},"open+=2.25")
-      .addLabel("pickup",5.85)
-      .fromTo(layers.pickup,{autoAlpha:0,scale:1.045,yPercent:2},{autoAlpha:1,scale:1,yPercent:0,duration:.75,ease:"power3.out",immediateRender:false},"pickup")
-      .to(layers.open,{autoAlpha:0,duration:.65},"pickup")
-      .to(layers.pickup,{scale:1.035,duration:1.1},"pickup+=.7")
-      .to(layers.pickup,{autoAlpha:0,scale:1.06,duration:.5},"pickup+=1.35")
-      .to(anatomy,{autoAlpha:1,duration:.65},7.05)
-      .to(stage,{"--glow-x":"40%","--glow-y":"48%",duration:2},6.5);
+      .fromTo(introState,{progress:0},{progress:1,duration:8,immediateRender:false},"intro")
+      .to(hero,{autoAlpha:0,y:-26,duration:1.15,ease:"power2.inOut"},5.25)
+      .to(chapterRail,{autoAlpha:.78,duration:.65,ease:"power2.out"},4.8)
+      .to(stage,{"--glow-x":"59%","--glow-y":"57%",duration:5.8},2.2)
+      .addLabel("open",8)
+      .set(layers.opening,{autoAlpha:1},"open")
+      .set(layers.intro,{autoAlpha:0},"open+=.02")
+      .fromTo(openingState,{progress:0},{progress:1,duration:8,immediateRender:false},"open")
+      .to(stage,{"--glow-x":"48%","--glow-y":"50%",duration:6.5},"open+=1")
+      .to(anatomy,{autoAlpha:1,duration:.6,ease:"power2.out"},15.55);
 
-    const rollStarts=[7.1,9.3,11.5,13.7];
+    const rollStarts=[15.55,19.35,23.15,26.95];
+    const rollEnds=[19.9,23.7,27.5,31.1];
     anatomyIds.forEach((id,index)=>{
       const start=rollStarts[index];
-      const end=rollStarts[index+1]||16;
+      const end=rollEnds[index];
       timeline
-        .fromTo(rollLayers[id],{autoAlpha:0,scale:1.06,xPercent:2,yPercent:1},{autoAlpha:1,scale:1,xPercent:0,yPercent:0,duration:.72,ease:"power3.out",immediateRender:false},start)
-        .to(rollLayers[id],{scale:1.025,duration:Math.max(.4,end-start-1),ease:"none"},start+.7)
-        .to(rollLayers[id],{autoAlpha:0,scale:.99,xPercent:-1.5,duration:.65,ease:"power2.in"},end-.42);
+        .fromTo(rollLayers[id],{autoAlpha:0},{autoAlpha:1,duration:.55,ease:"power2.inOut",immediateRender:false},start)
+        .to(rollLayers[id],{autoAlpha:0,duration:.55,ease:"power2.inOut"},end-.55);
     });
 
     timeline
-      .to(anatomy,{autoAlpha:0,duration:.6},15.65)
-      .addLabel("return",15.8)
-      .fromTo(layers.return,{autoAlpha:0,scale:1.07,yPercent:-1},{autoAlpha:1,scale:1,yPercent:0,duration:.75,ease:"power3.out",immediateRender:false},"return")
-      .to(layers.return,{scale:.985,yPercent:1,duration:1.1},"return+=.65")
-      .to(layers.return,{autoAlpha:0,duration:.5},"return+=1.25")
-      .addLabel("close",17.25)
-      .set(layers.entry,{autoAlpha:1,scale:1},"close")
-      .fromTo(entryState,{progress:1},{progress:0,duration:2.3,onUpdate:()=>seek(layers.entry,entryState.progress),immediateRender:false},"close")
-      .to(stage,{"--glow-x":"62%","--glow-y":"60%",duration:2.1},"close")
-      .fromTo(layers.exit,{autoAlpha:0,scale:1.02},{autoAlpha:1,scale:1,duration:.45,immediateRender:false},"close+=1.9")
-      .fromTo(exitState,{progress:0},{progress:1,duration:1.15,onUpdate:()=>seek(layers.exit,exitState.progress),immediateRender:false},"close+=1.9")
-      .to(layers.entry,{autoAlpha:0,duration:.35},"close+=2")
-      .addLabel("finale",20.4)
-      .fromTo(layers.front,{autoAlpha:0,scale:1.12,xPercent:4},{autoAlpha:1,scale:1,xPercent:0,rotation:0,duration:1.25,ease:"power3.out",immediateRender:false},"finale")
-      .to(layers.exit,{autoAlpha:0,duration:.6},"finale")
+      .to(layers.opening,{autoAlpha:0,duration:.55,ease:"power2.inOut"},15.55)
+      .to(anatomy,{autoAlpha:0,duration:.55,ease:"power2.inOut"},30.55)
+      .addLabel("close",30.7)
+      .fromTo(layers.closing,{autoAlpha:0},{autoAlpha:1,duration:.55,ease:"power2.inOut",immediateRender:false},"close")
+      .fromTo(closingState,{progress:0},{progress:1,duration:6,immediateRender:false},"close")
+      .to(stage,{"--glow-x":"61%","--glow-y":"59%",duration:5.2},"close+=.4")
+      .addLabel("finale",36.65)
       .fromTo(experience,{autoAlpha:0},{autoAlpha:1,duration:.75,ease:"power2.out",immediateRender:false},"finale+=.3")
       .fromTo(experience.querySelectorAll(".eyebrow,.type-line > span,p,.experience-overlay__actions"),{autoAlpha:0,y:38},{autoAlpha:1,y:0,duration:.85,stagger:.11,ease:"power3.out",immediateRender:false},"finale+=.35")
       .to(chapterRail,{autoAlpha:0,duration:.45},"finale")
-      .to(layers.front,{scale:1.035,duration:2.1},"finale+=1")
       .to(stage,{"--glow-x":"48%","--glow-y":"50%",duration:2.1},"finale+=.4");
 
     timeline.eventCallback("onUpdate",syncSemantics);
@@ -250,10 +235,10 @@ if(!gsap||!ScrollTrigger){
       trigger:story,
       animation:timeline,
       start:"top top",
-      end:()=>`+=${Math.round(innerHeight*13)}`,
+      end:()=>`+=${Math.round(innerHeight*(innerWidth<1024?18:20))}`,
       pin:true,
       pinSpacing:true,
-      scrub:1.35,
+      scrub:.65,
       anticipatePin:1,
       invalidateOnRefresh:true,
       onUpdate:self=>{
@@ -294,14 +279,21 @@ if(!gsap||!ScrollTrigger){
       });
     }
 
-    Object.values(layers).filter(element=>element?.tagName==="VIDEO").forEach(video=>{
-      video.load();
-      video.addEventListener("loadedmetadata",()=>ScrollTrigger.refresh(),{once:true});
+    [layers.intro,layers.opening,layers.closing].forEach(video=>{
+      const onReady=()=>{
+        syncSemantics();
+        ScrollTrigger.refresh();
+      };
+      if(video.readyState>=1) onReady();
+      else video.addEventListener("loadedmetadata",onReady,{once:true});
     });
     document.fonts?.ready.then(()=>ScrollTrigger.refresh());
     addEventListener("load",playStinger,{once:true});
     syncSemantics();
 
-    return ()=>timeline.kill();
+    return ()=>{
+      ambientLoop.kill();
+      timeline.kill();
+    };
   });
 }

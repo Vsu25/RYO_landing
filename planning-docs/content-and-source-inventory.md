@@ -1,6 +1,6 @@
 # Sushi Page — Inventario de contenido y fuentes
 
-**Estado:** landing autorizada para publicación de revisión; seis masters conceptuales adicionales del menú permanecen congelados; highlights pendientes · **Última actualización:** 28.08.2026
+**Estado:** landing audiovisual actualizada con tres videos propios autorizados; seis masters conceptuales adicionales del menú permanecen congelados; highlights pendientes · **Última actualización:** 29.08.2026
 
 Este documento es la fuente de control para todo dato, imagen y texto que pueda llegar a la experiencia.
 
@@ -36,6 +36,7 @@ Este documento es la fuente de control para todo dato, imagen y texto que pueda 
 | SRC-014 | Fotografía original | Set de siete vistas de la caja física RYŌ, cerrada y abierta | Aportado por Victor; capturas del 27.08.2026 | 28.08.2026 | `references/ryo-sushi/box/20260827_211007.jpg` … `20260827_211145.jpg` | Autorizado por Victor para derivados de la landing | Archivado y revisado | 8160 × 4592 px cada una. Confirma geometría, arte frontal, cierre, tapa, laterales, interior, divisores, salsas y wordmark. SHA-256: `37d4755c…`, `535bdf13…`, `71b031b3…`, `a840efe9…`, `997e872d…`, `5540abc8…`, `06f6e647…`. Falta medición física y vector oficial. |
 | SRC-015 | Fotografía de producto | Recortes frontales de Sei Exclusive, Koga Explosion, Yuzu y Playboy sostenidos por palillos | Aportado por Victor | 28.08.2026 | `references/ryo-sushi/rolls/` | Autorizado por Victor para derivados de la landing | Archivado y contrastado con menú | 1184 px de ancho; confirma corte y apariencia visible para anatomía. Descripciones, piezas y precios verificados contra SRC-002, páginas 10-12. |
 | SRC-016 | Dirección visual | Mockup anotado del layout anatómico: producto a la izquierda y columna descriptiva a la derecha | Aportado por Victor | 28.08.2026 | `references/ryo-sushi/ryo-anatomy-layout-reference-2026-08-28.png` | Uso interno de diseño | Archivado y aplicado | 2480 × 1406 px. Fija nombre arriba a la derecha, ingredientes conectados y descripción general inferior; no es un asset de producción. SHA-256: `5c44f67b…`. |
+| SRC-017 | Video propio | Intro, apertura/toma de Playboy y retorno/cierre para el scroll audiovisual | Producido y aportado por Victor | 29.08.2026 | `references/ryo-sushi/video/` | Autorizado por Victor para la landing pública de revisión | Archivado, verificado e implementado | H.264 + AAC; 8 s 1920 × 1080, 8 s 1280 × 720 y 6 s 1920 × 1080. Hashes y contrato de uso en `references/ryo-sushi/video/README.md`. |
 
 ## Inventario de platos
 
@@ -114,3 +115,5 @@ Los ocho PNG de `deliverables/design/media/ryo-roll-anatomy-masters-v1/` forman 
 Los seis PNG de `deliverables/design/media/ryo-menu-product-masters-v1/` completan los placeholders del menú conceptual: Fuji, Kamasutra, Rendi, Nigiri Tuná, Nigiri Salmón y Pesca Blanca. Están normalizados a 1672 × 940 px y toman SRC-002 como referencia factual; los rolls continúan la escena lateral de caja y los nigiris continúan el plato azul de K06. Son derivados generados para revisión de diseño, no fotografías documentales ni assets autorizados para publicación. Sei Exclusive, Koga Explosion, Yuzu y Playboy reutilizan sus masters existentes y no se duplicaron.
 
 La landing usa derivados WebP en `website/public/media/` para caja y cuatro anatomías, además del patrón y el wordmark dorado transparente. Victor autorizó este conjunto específico para la publicación de revisión del 28.08.2026. La autorización no se extiende a redistribución independiente, reutilización de marca o publicación de los originales archivados.
+
+El 29.08.2026 Victor aportó y autorizó tres videos propios como SRC-017. Sus copias de publicación `ryo-scroll-intro-v2.mp4`, `ryo-scroll-open-playboy-v2.mp4` y `ryo-scroll-return-close-v2.mp4` sustituyen los clips recortados V1 en la landing. La anatomía queda ordenada `Playboy → Yuzu → Koga → Sei`; nombres, ingredientes y callouts siguen siendo capas HTML.
