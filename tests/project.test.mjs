@@ -85,11 +85,15 @@ test("la sección 06 conecta las dos vistas del menú local", () => {
 test("el encuadre móvil no cambia en teléfonos altos", () => {
   assert.match(scrollStory, /width:min\(220vw,177\.778svh\)/);
   assert.match(scrollStory, /\.story-media-frame \{ left:50%; \}/);
-  assert.match(scrollStory, /\.scroll-connectors,\.anatomy-marker-layer \{ left:66%; \}/);
+  assert.match(scrollStory, /\.scroll-connectors,\.anatomy-marker-layer \{ left:58%; \}/);
   assert.doesNotMatch(scrollStory, /story-media-frame,.scroll-connectors,.anatomy-marker-layer \{ top:31%; left:66%/);
-  assert.match(scrollExperience, /const anatomyShiftX = phoneViewport \? window\.innerWidth \* 0\.16 : 0/);
+  assert.match(scrollExperience, /const anatomyShiftX = phoneViewport \? window\.innerWidth \* 0\.08 : 0/);
   assert.match(scrollExperience, /x: anatomyShiftX/);
   assert.match(scrollExperience, /scale: closingScale, x: 0/);
+  assert.match(scrollExperience, /if \(compactViewport && !closingCheckpointUsed && self\.direction > 0 && self\.progress > closingEndProgress\)/);
+  assert.match(scrollExperience, /window\.setTimeout\(\(\) => \{/);
+  assert.match(scrollExperience, /behavior: "smooth"/);
+  assert.match(scrollExperience, /window\.scrollTo\(\{top: self\.start \+ \(self\.end - self\.start\) \* closingStartProgress, behavior: "smooth"\}\)/);
   assert.doesNotMatch(scrollStory, /min-height:900px|250vw/);
   const phones = [[320, 568], [360, 740], [360, 800], [375, 667], [375, 812], [390, 844], [393, 852], [412, 915], [430, 932]];
   for (const [width, height] of phones) {

@@ -127,12 +127,16 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
       const compactViewport = phoneViewport || tabletViewport;
       const focusScale = phoneViewport ? 2.25 : tabletViewport ? 2.1 : 1;
       const focusShift = phoneViewport ? window.innerHeight * 0.19 : tabletViewport ? window.innerHeight * 0.15 : 0;
-      const anatomyShiftX = phoneViewport ? window.innerWidth * 0.16 : 0;
+      const anatomyShiftX = phoneViewport ? window.innerWidth * 0.08 : 0;
       const closingScale = phoneViewport ? 1.85 : tabletViewport ? 1.55 : 1;
+      const closingStartProgress = storyTiming.closing.start / storyTiming.handoff.end;
+      const closingEndProgress = storyTiming.closing.end / storyTiming.handoff.end;
       let rollIndex = -1;
       let chapterIndex = -1;
       let anatomyIsActive = false;
       let experienceIsActive = false;
+      let closingCheckpointUsed = false;
+      let closingSettleTimer = 0;
       const seekTargets = new WeakMap<HTMLVideoElement, number>();
 
       const flushSeek = (video: HTMLVideoElement) => {
@@ -205,7 +209,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
         .set(media.opening, {autoAlpha: 1}, "open")
         .set(media.intro, {autoAlpha: 0}, "open+=.02")
         .to({}, {duration: storyTiming.opening.end - storyTiming.opening.start}, "open")
-        .to(mediaFrame, compactViewport ? {scale: 1, x: 0, y: 0, duration: storyTiming.opening.end - storyTiming.opening.start, ease: "power2.inOut"} : {duration: storyTiming.opening.end - storyTiming.opening.start}, "open")
+        .to(mediaFrame, compactViewport ? {scale: 1, y: 0, duration: storyTiming.opening.end - storyTiming.opening.start, ease: "power2.inOut"} : {duration: storyTiming.opening.end - storyTiming.opening.start}, "open")
         .to(stageElement, {"--glow-x": "48%", "--glow-y": "50%", duration: 4.5}, "open+=.45")
         .to(mediaFrame, {x: anatomyShiftX, duration: 0.75, ease: "power2.inOut"}, storyTiming.anatomy.start - 0.7)
         .to(anatomy, {autoAlpha: 1, duration: 0.38, ease: "power2.out"}, storyTiming.anatomy.start)
@@ -266,6 +270,16 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
+          if (compactViewport && !closingCheckpointUsed && self.direction > 0 && self.progress > closingEndProgress) {
+            window.clearTimeout(closingSettleTimer);
+            closingSettleTimer = window.setTimeout(() => {
+              if (closingCheckpointUsed || self.progress <= closingEndProgress) return;
+              closingCheckpointUsed = true;
+              window.scrollTo({top: self.start + (self.end - self.start) * closingStartProgress, behavior: "smooth"});
+            }, 180);
+          } else if (self.direction < 0 && self.progress < closingStartProgress - 0.04) {
+            closingCheckpointUsed = false;
+          }
           if (progressBar.current) gsap.set(progressBar.current, {scaleX: self.progress, transformOrigin: "left center"});
           nav?.classList.toggle("is-scrolled", self.progress > 0.015);
         },
@@ -336,6 +350,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
       return () => {
         magneticCleanups.forEach((cleanup) => cleanup());
         videoCleanups.forEach((cleanup) => cleanup());
+        window.clearTimeout(closingSettleTimer);
         ambientLoop.kill();
         timeline.kill();
       };

@@ -246,7 +246,7 @@
 @media (max-width:600px) {
   .story-media-frame,.scroll-connectors,.anatomy-marker-layer { top:31%; width:min(220vw,177.778svh); }
   .story-media-frame { left:50%; }
-  .scroll-connectors,.anatomy-marker-layer { left:66%; }
+  .scroll-connectors,.anatomy-marker-layer { left:58%; }
   .story-hero { top:4.85rem; bottom:auto; }
   .story-hero h1 { font-size:clamp(3rem,14.5vw,4.7rem); }
   .story-hero > p:not(.eyebrow) { max-width:25rem; font-size:.88rem; }
