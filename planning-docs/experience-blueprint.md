@@ -1,6 +1,6 @@
 # Sushi Page — Experience Blueprint
 
-**Estado:** alineado con RYŌ Unboxed; secuencia audiovisual V2 publicada y Experiencia en revisión G2 · **Última actualización:** 29.08.2026
+**Estado:** alineado con `RYŌ · El toque final`; secuencia audiovisual V2 publicada y Experiencia en revisión G2 · **Última actualización:** 30.08.2026
 
 Este documento define la arquitectura de información. La dirección visual y el storyboard se revisan en el [entregable creativo HTML](../deliverables/design/ryo-unboxed-creative-direction.html); los keyframes y el contrato de movimiento se revisan en el [sistema visual V1](../deliverables/design/ryo-unboxed-visual-system-v1.html). [`../RealizeDesign.md`](../RealizeDesign.md) conserva su índice operativo.
 
@@ -32,7 +32,7 @@ Marca o nombre y CTA. Debe permanecer clara sobre composiciones visuales variabl
 
 ### 1 · Hero
 
-La caja azul cerrada funciona como portal editorial y conserva el peso visual dominante del primer viewport. El texto ocupa aproximadamente el 40% del encuadre en escritorio con la promesa `La experiencia empieza antes del primer bocado`, el apoyo verificado `Alta cocina japonesa para disfrutar en casa` y la indicación mínima `Desliza para abrir`. WhatsApp permanece en la navegación; no se repite como CTA dentro del hero. En móvil la caja se acerca, el espacio superior se comprime y el contador aparece después del primer gesto. El primer frame identifica Ryo Sushi incluso antes de que comience la animación.
+La caja azul cerrada funciona como portal editorial y conserva el peso visual dominante del primer viewport. El texto ocupa aproximadamente el 40% del encuadre en escritorio con la promesa aprobada `El corte es nuestro. El toque final es tuyo.`, el apoyo `Alta cocina japonesa, preparada para disfrutarse donde tú elijas.` y la indicación mínima `Desliza para abrir`. WhatsApp permanece en la navegación; no se repite como CTA dentro del hero. En móvil la caja se acerca, el espacio superior se comprime y el contador aparece después del primer gesto. El primer frame identifica Ryo Sushi incluso antes de que comience la animación.
 
 ### 2 · Apertura
 
@@ -50,7 +50,7 @@ Cada roll ocupa la misma pausa frontal, sostenido por palillos naturales, con ca
 
 Después de la presentación final de Sei, el clip de salida aportado por Victor ejecuta el retorno de K17 / Playboy y el cierre. La interfaz desaparece, una línea dorada desciende por el centro, dos puertas con el patrón de arcos RYŌ cierran desde los laterales y el título `RYŌ · En casa` entra de forma enmascarada. El panel cerrado atraviesa el límite de la escena al liberar el scroll hacia la información.
 
-La sección siguiente usa una composición bento: propuesta verificada, caja cerrada, modalidad `Solo delivery y pick up`, CTA `Comunícate por WhatsApp` e Instagram `@ryomcbo`. El número verificado permanece detrás del enlace y no se expone como texto en la interfaz. No muestra horarios, pagos, ubicación ni otros campos pendientes. En desktop la caja ocupa la celda visual protagonista; en tablet se reorganiza en dos columnas y en móvil pasa a una secuencia lineal.
+La sección siguiente usa una composición bento: caja cerrada, modalidad `Solo delivery y pick up`, título `La experiencia continúa cuando la caja se cierra.`, CTA `Pide por WhatsApp` e Instagram `@ryomcbo`. El número verificado permanece detrás del enlace y no se expone como texto en la interfaz. No muestra horarios, pagos, ubicación ni otros campos pendientes. En desktop la caja ocupa la celda visual protagonista; en tablet se reorganiza en dos columnas y en móvil pasa a una secuencia lineal.
 
 La caja permanece inmóvil durante la lectura porque el video se sostiene en su último frame cerrado. El cambio factual de Sei hacia el K17 / Playboy del clip de salida se resuelve con una disolución de producto; una continuidad exacta de roll requerirá reemplazar únicamente el inicio de ese clip. Esta revisión conserva la arquitectura sin introducir otro video.
 

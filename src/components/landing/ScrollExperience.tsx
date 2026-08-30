@@ -359,19 +359,19 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
           <a href="#anatomia" onClick={(event) => { event.preventDefault(); jumpTo(0.32); }}>Presentación</a>
           <a href="#experiencia" onClick={(event) => { event.preventDefault(); jumpTo(0.91); }}>Experiencia</a>
           <button className="icon-button" type="button" onClick={() => setReplayToken((token) => token + 1)} aria-label="Repetir animación de entrada"><span aria-hidden="true">↻</span></button>
-          <a className="button button--solid magnetic-button" href="https://wa.me/584220382261" target="_blank" rel="noopener"><span>WhatsApp</span><i aria-hidden="true">↗</i></a>
+          <a className="button button--solid magnetic-button" href="https://wa.me/584220382261" target="_blank" rel="noopener"><span>Pide por WhatsApp</span><i aria-hidden="true">↗</i></a>
         </div>
         <CurvedNav label="Abrir navegación RYŌ" items={[
           {label: "Inicio", href: "#inicio", description: "Entrada de la caja", onSelect: () => jumpTo(0)},
           {label: "La caja", href: "#objeto", description: "Giro y apertura", onSelect: () => jumpTo(0.16)},
-          {label: "Presentación", href: "#anatomia", description: "Cuatro rolls", onSelect: () => jumpTo(0.32)},
+          {label: "Presentación", href: "#anatomia", description: "Ingredientes y equilibrio", onSelect: () => jumpTo(0.32)},
           {label: "RYŌ en casa", href: "#experiencia", description: "Delivery y contacto", onSelect: () => jumpTo(0.91)},
           {label: "Instagram", href: "https://www.instagram.com/ryomcbo/", description: "@ryomcbo", external: true},
         ]} />
       </nav>
 
       <main id="contenido">
-        <section ref={story} className="scroll-story" id="inicio" aria-label="RYŌ Unboxed: recorrido audiovisual">
+        <section ref={story} className="scroll-story" id="inicio" aria-label="RYŌ: El toque final, recorrido audiovisual">
           <span className="story-anchor" id="objeto" style={{top: "12%"}} aria-hidden="true" />
           <span className="story-anchor" id="rolls" style={{top: "27%"}} aria-hidden="true" />
           <span className="story-anchor" id="anatomia" style={{top: "29%"}} aria-hidden="true" />
@@ -397,15 +397,15 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
             </div>
 
             <header className="story-hero" data-story-hero>
-              <p className="eyebrow">RYŌ · Unboxed</p>
-              <h1 aria-label="La experiencia empieza antes del primer bocado."><span className="type-line"><span>La experiencia</span></span><span className="type-line"><span>empieza antes del</span></span><span className="type-line"><span>primer bocado.</span></span></h1>
-              <p>Alta cocina japonesa para disfrutar en casa.</p>
+              <p className="eyebrow">Sushi de autor · Delivery &amp; pick up</p>
+              <h1 aria-label="El corte es nuestro. El toque final es tuyo."><span className="type-line"><span>El corte es nuestro.</span></span><span className="type-line"><span>El toque final</span></span><span className="type-line"><span>es tuyo.</span></span></h1>
+              <p>Alta cocina japonesa, preparada para disfrutarse donde tú elijas.</p>
               <a className="scroll-cue" href="#objeto" onClick={(event) => { event.preventDefault(); jumpTo(0.16); }}><span>Desliza para abrir</span><i aria-hidden="true" /></a>
             </header>
 
             <AnatomyOverlay item={currentItem} index={activeRoll} active={anatomyActive} />
 
-            <nav className={`roll-preview-nav${anatomyActive ? " is-active" : ""}`} aria-label="Previsualizar los cuatro rolls" aria-hidden={!anatomyActive} inert={!anatomyActive}>
+            <nav className={`roll-preview-nav${anatomyActive ? " is-active" : ""}`} aria-label="Previsualizar los rolls destacados" aria-hidden={!anatomyActive} inert={!anatomyActive}>
               <span>Rolls</span>
               <div>{items.map((item, index) => (
                 <button
@@ -420,12 +420,12 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
             </nav>
 
             <section className={`experience-overlay${experienceActive ? " is-active" : ""}`} data-experience-overlay aria-labelledby="experience-title" aria-hidden={!experienceActive} inert={!experienceActive}>
-              <p className="eyebrow">La experiencia RYŌ</p>
-              <h2 id="experience-title" aria-label="Alta cocina japonesa. Para disfrutar en casa."><span className="type-line"><span>Alta cocina japonesa.</span></span><span className="type-line"><span><em>Para disfrutar en casa.</em></span></span></h2>
-              <p>Una presentación pensada para que delivery y pick up sigan sintiéndose como una ocasión.</p>
+              <p className="eyebrow">RYŌ en casa</p>
+              <h2 id="experience-title" aria-label="Alta cocina japonesa, directo a tu mesa."><span className="type-line"><span>Alta cocina japonesa,</span></span><span className="type-line"><span><em>directo a tu mesa.</em></span></span></h2>
+              <p>Preparada en nuestra cocina para disfrutarse donde tú elijas.</p>
               <div className="experience-overlay__actions">
-                <a className="button button--solid magnetic-button" href="https://wa.me/584220382261" target="_blank" rel="noopener"><span>Escribir por WhatsApp</span><i aria-hidden="true">↗</i></a>
-                <a className="text-link" href="https://www.instagram.com/ryomcbo/" target="_blank" rel="noopener">Instagram · @ryomcbo</a>
+                <a className="button button--solid magnetic-button" href="https://wa.me/584220382261" target="_blank" rel="noopener"><span>Pide por WhatsApp</span><i aria-hidden="true">↗</i></a>
+                <a className="text-link" href="https://www.instagram.com/ryomcbo/" target="_blank" rel="noopener">Descubre más en Instagram</a>
               </div>
             </section>
 
@@ -456,7 +456,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
         <section className="reduced-story" aria-label="Recorrido RYŌ sin movimiento">
           <header className="reduced-story__intro" id="reduced-inicio">
             <img src={sitePath("/media/box-front.jpg")} width="1672" height="940" alt="Caja azul RYŌ cerrada y centrada en una escena de estudio oscura" />
-            <div className="reduced-roll__copy"><p className="eyebrow">RYŌ · Unboxed</p><h1>La experiencia empieza antes del primer bocado.</h1><p>Alta cocina japonesa para disfrutar en casa.</p></div>
+            <div className="reduced-roll__copy"><p className="eyebrow">Sushi de autor · Delivery &amp; pick up</p><h1>El corte es nuestro. El toque final es tuyo.</h1><p>Alta cocina japonesa, preparada para disfrutarse donde tú elijas.</p></div>
           </header>
           <div id="reduced-anatomia">{items.map((item, index) => <RollCopy key={item.id} item={item} index={index} />)}</div>
         </section>

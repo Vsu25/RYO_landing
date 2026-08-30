@@ -7,7 +7,7 @@ import "./scroll-story.css";
 export const metadata: Metadata = {
   metadataBase: new URL(productionUrl),
   title: {
-    default: "RYŌ Sushi — Unboxed",
+    default: "RYŌ Sushi — El toque final",
     template: "%s — RYŌ Sushi",
   },
   description: "RYŌ Sushi: una experiencia audiovisual de alta cocina japonesa para disfrutar en casa.",
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "es_VE",
-    title: "RYŌ Sushi — Unboxed",
-    description: "La caja se abre. El producto toma el escenario. Descubre cuatro rolls de RYŌ a través del scroll.",
+    title: "RYŌ Sushi — El toque final",
+    description: "El corte es nuestro. El toque final es tuyo. Descubre RYŌ a través de una experiencia audiovisual ligada al scroll.",
     url: `${productionUrl}/`,
     images: [{url: `${productionUrl}/media/box-open.webp`, width: 1672, height: 940, alt: "Caja azul RYŌ abierta en una escena de estudio oscura"}],
   },

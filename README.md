@@ -1,16 +1,21 @@
-# RYŌ Unboxed
+# RYŌ · El toque final
 
-Landing editorial y audiovisual para RYŌ Sushi. La experiencia convierte la caja azul en un recorrido ligado al scroll: entrada, giro, apertura, anatomía de cuatro rolls, retorno, cierre y contacto.
+Landing editorial y audiovisual para RYŌ Sushi. La caja azul guía un recorrido continuo ligado al scroll: entrada, giro, apertura, presentación de producto, retorno, cierre cinematográfico y contacto.
 
-[Ver la landing](https://vsu25.github.io/RYO_landing/) · [WhatsApp](https://wa.me/584220382261) · [Instagram](https://www.instagram.com/ryomcbo/)
+## Experiencia publicada
+
+**[Abrir la landing de RYŌ →](https://vsu25.github.io/RYO_landing/)**
+
+[WhatsApp](https://wa.me/584220382261) · [Instagram](https://www.instagram.com/ryomcbo/) · [Desarrollo por VSU](https://meetvsu.dev)
 
 ![Caja RYŌ abierta en estudio](public/media/box-open.webp)
 
 ## Experiencia pública
 
 - Tres videos propios sincronizados con el progreso, sin reproducción automática lineal.
-- Anatomía en orden `Playboy → Yuzu → Koga → Sei`, con coordenadas e ingredientes propios por roll.
+- Presentaciones en orden `Playboy → Yuzu → Koga → Sei`, con coordenadas e ingredientes propios por roll.
 - Stinger de dos puertas con patrón y wordmark RYŌ.
+- Cierre cinematográfico con línea dorada, puertas laterales y transición `RYŌ · En casa`.
 - Layout responsive y alternativa completa para `prefers-reduced-motion`.
 - Cierre editorial con WhatsApp e Instagram verificados.
 
@@ -50,9 +55,9 @@ npm run preview    # sirve out/ en el puerto 4173
 | Ruta | Responsabilidad |
 |---|---|
 | `src/app/` | Layout, metadata y landing prerenderizada. |
-| `src/components/landing/` | Stinger, historia scroll-reactive y anatomía. |
+| `src/components/landing/` | Stinger, historia scroll-reactive y presentaciones de producto. |
 | `src/components/menu/` | Menú React disponible únicamente en desarrollo local. |
-| `src/data/menu.json` | Fuente única de los diez platos y cuatro anatomías. |
+| `src/data/menu.json` | Fuente única de platos, ingredientes y mapas de presentación. |
 | `public/media/` | Allowlist de los doce assets autorizados para la landing. |
 | `scripts/local-menu-media.mjs` | Prepara y retira la ruta/media local del menú. |
 | `deliverables/design/` | Dirección visual y prototipos HTML revisables. |
@@ -63,7 +68,9 @@ El estado operativo vive en [PROJECT.md](PROJECT.md); las decisiones técnicas, 
 
 ## Publicación
 
-Cada push a `main` ejecuta `npm ci`, `npm run check` y publica `out/` en GitHub Pages. El build elimina antes la ruta local `/menu` y sus seis imágenes pendientes; las pruebas fallan si alguna llega al artifact.
+Cada push a `main` ejecuta `npm ci`, `npm run check` y publica `out/` en GitHub Pages. El build elimina antes la ruta local `/menu` y sus imágenes pendientes; las pruebas fallan si alguna llega al artifact.
+
+URL pública: <https://vsu25.github.io/RYO_landing/>
 
 ## Marca y contenido
 

@@ -5,10 +5,10 @@
 ## Estado actual
 
 - **Fase:** 4 · Producción y migración técnica de la landing.
-- **Estado:** la landing audiovisual V2 fue migrada completamente a Next.js 16, React 19 y TypeScript, publicada y verificada en GitHub Pages. Un pase de polishing local recupera la dirección del hero `caja como portal editorial`, compacta y sincroniza el video-scroll con el frame presentado, rediseña la presentación de rolls y su composición móvil de borde a borde, añade un cierre cinemático de puertas, navegación curva y una sección `RYŌ en casa` tipo bento con footer navy/dorado; su publicación queda pendiente de revisión. La mejora final de scrubbing depende de reexportar los masters con keyframes más frecuentes.
+- **Estado:** la landing audiovisual V2 usa Next.js 16, React 19 y TypeScript y está publicada en GitHub Pages. El pase de polishing recupera la caja como portal editorial, compacta el video-scroll, rediseña la presentación responsive de rolls, añade cierre cinemático y bento `RYŌ en casa`; el sistema verbal aprobado `RYŌ · El toque final` ya está implementado localmente y queda pendiente de publicar esta revisión. La mejora final de scrubbing depende de reexportar los masters con keyframes más frecuentes.
 - **Objetivo inmediato:** revisar con Victor el pase de polishing local en escritorio, tablet y teléfono antes de actualizar la versión pública. La publicación del menú permanece como revisión separada.
 - **Bloqueo actual:** ninguno para continuar la implementación local. La publicación del menú todavía depende de aprobación externa, vigencia editorial y permiso de uso de sus masters conceptuales.
-- **Última actualización:** 29.08.2026.
+- **Última actualización:** 30.08.2026.
 
 ## Próxima decisión
 
@@ -184,6 +184,7 @@ No se crean paquetes, servicios o capas adicionales sin una necesidad aprobada.
 | 29.08.2026 | Compactar el recorrido a `12 / 10 / 8.5` viewports, reducir el scrub y agrupar los seeks hasta que el navegador presente cada frame; representar cada punto anatómico como sello circular independiente del SVG. | El ajuste elimina el arrastre artificial, evita acumular seeks y conserva puntos circulares nítidos sobre el encuadre 16:9; el límite restante corresponde a los keyframes de los MP4 actuales. | Implementado y verificado localmente; reexportación de media propuesta |
 | 29.08.2026 | Tratar teléfono y tablet como composiciones editoriales de borde a borde: hero junto al navbar, zoom de caja controlado por página y anatomía superior con cuatro ingredientes prioritarios y selector de rolls. | Aprovecha el alto real de cada dispositivo, evita vacíos sin función y mantiene imagen, título, puntos y conectores en una geometría común. | Implementado y verificado localmente; publicación pendiente de revisión |
 | 29.08.2026 | Nombrar públicamente la escena como `Presentación del roll` y cerrar el recorrido con línea vertical, puertas laterales y reveal `RYŌ · En casa`; enlazar la atribución de VSU a `meetvsu.dev`. | El lenguaje resulta menos técnico para el cliente y el final convierte la entrega al bento en un acto visual coherente con el stinger de apertura. | Implementado y verificado localmente; publicación pendiente de revisión |
+| 30.08.2026 | Aplicar `RYŌ · El toque final` como sistema verbal y convertir el README en acceso público al proyecto. | Alinea metadata, hero, cierre, bento, menú y contacto con la dirección aprobada, evita cantidades narrativas frágiles y permite abrir la experiencia desde GitHub. | Implementado y verificado localmente; publicación pendiente |
 
 ## Criterio de cierre de una acción
 

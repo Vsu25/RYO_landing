@@ -1,6 +1,6 @@
 # RYŌ — Dirección editorial de copy para la próxima implementación
 
-**Estado:** aprobado por Victor para la próxima implementación · **Implementación:** pendiente · **Fecha:** 29.08.2026
+**Estado:** aprobado e implementado · **Implementación:** verificada localmente el 30.08.2026 · **Fecha:** 29.08.2026
 
 ## Propósito
 
@@ -87,16 +87,15 @@ La primera dirección sigue siendo `El corte es nuestro. El toque final es tuyo.
 - Los nombres, ingredientes, precios, moneda y piezas de cada plato permanecen bajo el protocolo del menú.
 - La voz puede ser evocadora; los datos gastronómicos siguen siendo literales o aprobados.
 
-## Handoff para la próxima implementación
+## Handoff aplicado
 
-Antes de aplicar el sistema:
+La implementación del 30.08.2026:
 
-1. consultar este reporte y el inventario de contenido;
-2. localizar menciones actuales de cantidades fuera del protocolo del menú, incluidas etiquetas visibles, navegación, textos alternativos, mensajes para lectores de pantalla y metadata;
-3. sustituirlas por formulaciones abiertas que no dependan del número ni de la retícula;
-4. aplicar el sistema de copy sin cambiar datos del menú;
-5. comprobar el límite visual de dos líneas en escritorio, tablet y teléfono;
-6. verificar que la versión con movimiento reducido comunica el mismo contenido.
+1. aplica el concepto `RYŌ · El toque final` a metadata, hero, experiencia, bento, contacto y menú local;
+2. retira cantidades fijas del copy narrativo, navegación, accesibilidad y metadata;
+3. conserva conteos únicamente en el protocolo funcional del menú;
+4. mantiene intactos nombres, ingredientes, piezas y precios documentados;
+5. replica el hero aprobado en la alternativa con movimiento reducido.
 
 ## Criterios de aceptación
 
@@ -115,6 +114,6 @@ Antes de aplicar el sistema:
 - [`../references/ryo-sushi/README.md`](../references/ryo-sushi/README.md)
 - [Instagram `@ryomcbo`](https://www.instagram.com/ryomcbo/)
 
-## Alcance de esta publicación
+## Alcance de la implementación
 
-Este reporte publica la decisión editorial para que esté disponible en el siguiente pase. No modifica la landing, el menú, los componentes, los datos ni la versión desplegada.
+Este reporte sigue siendo la fuente de dirección verbal. La landing y el prototipo local del menú ya consumen el sistema aprobado; la verificación pública se registra después del despliegue correspondiente.

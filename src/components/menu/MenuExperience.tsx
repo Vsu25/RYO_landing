@@ -72,18 +72,18 @@ export function MenuExperience() {
       <BrandStinger replayToken={replayToken} />
       <nav className="site-nav" aria-label="Navegación del menú">
         <Link className="site-nav__logo" href="/" aria-label="Volver a RYŌ Sushi"><Image src={sitePath("/media/ryo-wordmark-gold.png")} width={480} height={178} alt="RYŌ" /></Link>
-        <div className="site-nav__links"><Link href="/">Experiencia</Link><a href="#menu-content">Platos</a><a className="button button--solid" href="https://wa.me/584220382261" target="_blank" rel="noopener">WhatsApp</a></div>
+        <div className="site-nav__links"><Link href="/">Experiencia</Link><a href="#menu-content">Platos</a><a className="button button--solid" href="https://wa.me/584220382261" target="_blank" rel="noopener">Pide por WhatsApp</a></div>
         <CurvedNav label="Abrir navegación del menú" items={[
           {label: "Experiencia", href: sitePath("/"), description: "Volver a la landing"},
           {label: "Platos", href: "#menu-content", description: "Explorar o consultar"},
-          {label: "WhatsApp", href: "https://wa.me/584220382261", description: "+58 422 0382261", external: true},
+          {label: "WhatsApp", href: "https://wa.me/584220382261", description: "Contacto directo", external: true},
           {label: "Instagram", href: "https://www.instagram.com/ryomcbo/", description: "@ryomcbo", external: true},
         ]} />
       </nav>
 
       <header className="menu-hero">
         <div className="wrap menu-hero__content">
-          <div><p className="eyebrow">Menú RYŌ</p><h1>Elegir también es parte de la experiencia.</h1></div>
+          <div><p className="eyebrow">Menú RYŌ</p><h1>Una decisión. Tu próxima experiencia.</h1></div>
           <button className="button" type="button" onClick={() => setReplayToken((token) => token + 1)}>Repetir stinger</button>
         </div>
       </header>
@@ -91,7 +91,7 @@ export function MenuExperience() {
       <main className="menu-main" id="menu-content">
         <div className="wrap">
           <div className="menu-heading">
-            <div><p className="eyebrow">Una fuente · Dos lecturas</p><h2>Explorar o consultar.</h2></div>
+            <div><p className="eyebrow">Dos formas de elegir</p><h2>Explora el detalle. Consulta lo esencial.</h2></div>
             <div className="view-switch" role="group" aria-label="Cambiar presentación del menú">
               <button type="button" onClick={() => setView("explore")} aria-pressed={view === "explore"} aria-controls="menu-explorer">Explorar</button>
               <button type="button" onClick={() => setView("list")} aria-pressed={view === "list"} aria-controls="menu-catalogue">Lista</button>

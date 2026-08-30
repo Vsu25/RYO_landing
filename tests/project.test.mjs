@@ -7,6 +7,7 @@ import test from "node:test";
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const menuItems = JSON.parse(readFileSync(resolve(projectRoot, "src/data/menu.json"), "utf8"));
 const publicMedia = resolve(projectRoot, "public/media");
+const readme = readFileSync(resolve(projectRoot, "README.md"), "utf8");
 
 const walk = (directory) => readdirSync(directory).flatMap((name) => {
   const path = resolve(directory, name);
@@ -56,6 +57,15 @@ test("el export estático excluye la ruta y los visuales locales del menú", () 
   assert.match(emittedText, /Playboy/);
   assert.match(emittedText, /Sei Exclusive/);
   assert.match(emittedText, /Presentación del roll/);
+  assert.match(emittedText, /El corte es nuestro/);
+  assert.doesNotMatch(emittedText, /La experiencia empieza antes del primer bocado/);
+  assert.doesNotMatch(emittedText, /Descubre cuatro rolls/);
   assert.match(emittedText, /https:\/\/meetvsu\.dev/);
   assert.doesNotMatch(emittedText, /https:\/\/github\.com\/Vsu25/);
+});
+
+test("el README funciona como acceso público al proyecto", () => {
+  assert.match(readme, /https:\/\/vsu25\.github\.io\/RYO_landing\//);
+  assert.match(readme, /RYŌ · El toque final/);
+  assert.match(readme, /https:\/\/meetvsu\.dev/);
 });

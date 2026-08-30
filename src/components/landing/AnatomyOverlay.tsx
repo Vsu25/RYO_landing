@@ -98,7 +98,7 @@ export function AnatomyOverlay({item, index, active}: AnatomyOverlayProps) {
   return (
     <section ref={root} className={`anatomy-overlay${active ? " is-active" : ""}`} aria-labelledby="anatomy-name" aria-hidden={!active} inert={!active}>
       <div className="anatomy-overlay__heading">
-        <p className="eyebrow"><span>{String(index + 1).padStart(2, "0")}</span> · Presentación del roll</p>
+        <p className="eyebrow"><span>{String(index + 1).padStart(2, "0")}</span> · El detalle · Presentación del roll</p>
         <h2 id="anatomy-name" className={item.name.length > 12 ? "is-long" : undefined}>{item.name}</h2>
       </div>
       <svg ref={connectors} className="scroll-connectors" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
