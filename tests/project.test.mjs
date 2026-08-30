@@ -7,6 +7,7 @@ import test from "node:test";
 const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const menuItems = JSON.parse(readFileSync(resolve(projectRoot, "src/data/menu.json"), "utf8"));
 const publicMedia = resolve(projectRoot, "public/media");
+const publicMenuMedia = resolve(projectRoot, "public/menu-media");
 const readme = readFileSync(resolve(projectRoot, "README.md"), "utf8");
 const scrollStory = readFileSync(resolve(projectRoot, "src/app/scroll-story.css"), "utf8");
 const homePage = readFileSync(resolve(projectRoot, "src/app/page.tsx"), "utf8");
@@ -47,23 +48,44 @@ test("la landing pública contiene solo los doce masters aprobados", () => {
   assert.deepEqual(readdirSync(publicMedia).sort(), expected);
 });
 
-test("el export estático excluye la ruta y los visuales locales del menú", () => {
+test("el menú público contiene los seis visuales conceptuales seleccionados", () => {
+  const expected = [
+    "menu-fuji.webp", "menu-kamasutra.webp", "menu-nigiri-salmon.webp",
+    "menu-nigiri-tuna.webp", "menu-pesca-blanca.webp", "menu-rendi.webp",
+  ];
+  assert.deepEqual(readdirSync(publicMenuMedia).sort(), expected);
+  for (const item of menuItems) {
+    assert.ok(existsSync(resolve(projectRoot, "public", item.image.replace(/^\//, ""))), `${item.id}: falta ${item.image}`);
+  }
+});
+
+test("el export estático incluye la ruta y los visuales del menú", () => {
   const out = resolve(projectRoot, "out");
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
   assert.ok(existsSync(resolve(out, "index.html")), "falta out/index.html; ejecuta npm run build primero");
-  assert.equal(existsSync(resolve(out, "menu")), false, "la ruta local /menu no debe publicarse");
-  assert.equal(existsSync(resolve(out, "local-menu-media")), false, "los visuales locales del menú no deben publicarse");
+  assert.ok(existsSync(resolve(out, "menu/index.html")), "falta la ruta pública /menu/");
+  assert.ok(existsSync(resolve(out, "menu-media/menu-fuji.webp")), "faltan los visuales públicos del menú");
+  const indexHtml = readFileSync(resolve(out, "index.html"), "utf8");
+  const menuHtml = readFileSync(resolve(out, "menu/index.html"), "utf8");
+  assert.ok(indexHtml.includes(`href="${basePath}/menu/?view=explore#menu-content"`), "falta el enlace prefijado a Explorar");
+  assert.ok(indexHtml.includes(`href="${basePath}/menu/?view=list#menu-content"`), "falta el enlace prefijado a Lista");
+  assert.ok(menuHtml.includes(`src="${basePath}/menu-media/menu-fuji.webp"`), "falta el prefijo de media del menú");
+  assert.match(menuHtml, /content="noindex, follow"/, "la preview conceptual debe permanecer fuera de indexación");
   const emittedText = walk(out)
     .filter((path) => /\.(?:html|js|json|txt|xml)$/.test(path))
     .map((path) => readFileSync(path, "utf8"))
     .join("\n");
-  assert.doesNotMatch(emittedText, /Kamasutra|Nigiri Tuná|menu-fuji\.webp/, "el bundle público filtró contenido del menú local");
+  assert.match(emittedText, /Kamasutra/);
+  assert.match(emittedText, /Nigiri Tuná/);
+  assert.match(emittedText, /menu-fuji\.webp/);
   assert.match(emittedText, /Playboy/);
   assert.match(emittedText, /Sei Exclusive/);
   assert.match(emittedText, /Presentación del roll/);
   assert.match(emittedText, /El corte es nuestro/);
   assert.match(emittedText, /Ya viste el detalle\. Ahora descubre el resto\./);
-  assert.match(emittedText, /Vista en preparación/);
-  assert.doesNotMatch(emittedText, /\/menu\/\?view=(?:explore|list)/, "la invitación pública no debe enlazar una ruta excluida");
+  assert.doesNotMatch(emittedText, /Vista en preparación/);
+  assert.match(emittedText, /\/menu\/\?view=explore#menu-content/);
+  assert.match(emittedText, /\/menu\/\?view=list#menu-content/);
   assert.doesNotMatch(emittedText, /La experiencia empieza antes del primer bocado/);
   assert.doesNotMatch(emittedText, /Descubre cuatro rolls/);
   assert.match(emittedText, /https:\/\/meetvsu\.dev/);
@@ -76,7 +98,7 @@ test("el README funciona como acceso público al proyecto", () => {
   assert.doesNotMatch(readme, /wa\.me|instagram\.com|meetvsu\.dev|github\.com/);
 });
 
-test("la sección 06 conecta las dos vistas del menú local", () => {
+test("la sección 06 conecta las dos vistas del menú público", () => {
   assert.match(homePage, /06 · Explora el menú/);
   assert.match(homePage, /\/menu\/\?view=explore#menu-content/);
   assert.match(homePage, /\/menu\/\?view=list#menu-content/);

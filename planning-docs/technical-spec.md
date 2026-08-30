@@ -1,6 +1,6 @@
 # Sushi Page — Especificación técnica
 
-**Estado:** Next.js/React implementado y verificado en GitHub Pages mediante exportación estática · **Última actualización:** 29.08.2026
+**Estado:** landing y preview del menú integradas en Next.js/React mediante una sola exportación estática · **Última actualización:** 30.08.2026
 
 ## Autoridad
 
@@ -13,7 +13,7 @@ La aplicación usa Next.js 16 App Router, React 19 y TypeScript. La salida sigue
 Next.js se adopta para ordenar componentes, metadata, tipado y evolución del diseño; no convierte la landing en una aplicación de datos. La interactividad se concentra en dos islas cliente:
 
 1. `ScrollExperience`: timeline de videos, navegación por capítulos, anatomía y motion.
-2. `MenuExperience`: switch `Explorar / Lista`, categorías, teclado, swipe y cartas responsive; solo se genera en desarrollo local.
+2. `MenuExperience`: switch `Explorar / Lista`, categorías, teclado, swipe y cartas responsive en la ruta pública `/menu/`.
 
 Layout, metadata, contacto y contenido estable se prerenderizan. No se usa estado React por frame; GSAP actualiza tiempo de video, transforms y opacidad directamente, y React cambia únicamente estados semánticos discretos.
 
@@ -39,12 +39,12 @@ No se incorpora Vercel, backend, CMS, base de datos, autenticación, analytics, 
 | `src/app/layout.tsx` | Metadata global, viewport y tokens de assets. |
 | `src/app/page.tsx` | Composición prerenderizada de la landing. |
 | `src/components/landing/` | Stinger, scroll audiovisual y anatomía. |
-| `src/components/menu/` | Menú React local. |
-| `src/local-pages/MenuPage.tsx` | Página local que nunca se compila en producción. |
+| `src/app/menu/page.tsx` | Ruta prerenderizada, metadata propia y límite de indexación del menú. |
+| `src/components/menu/` | Menú React compartido por las vistas `Explorar / Lista`. |
 | `src/data/menu.json` | Diez platos; fuente única para ambas vistas y cuatro anatomías. |
 | `public/media/` | Doce assets autorizados y publicables. |
-| `scripts/local-menu-media.mjs` | Genera `/menu` y sus assets en dev; los borra en prebuild. |
-| `tests/project.test.mjs` | Integridad editorial, allowlist y ausencia de filtraciones. |
+| `public/menu-media/` | Seis derivados conceptuales seleccionados para la preview del menú. |
+| `tests/project.test.mjs` | Integridad editorial, correspondencia de media y presencia de ambas rutas en el artifact. |
 | `out/` | Export generado; nunca es fuente. |
 
 ## Contrato audiovisual
@@ -67,13 +67,13 @@ El cierre usa elementos HTML existentes dentro de una sola timeline: la línea e
 
 En tablet y teléfono, `.story-media-frame`, `.scroll-connectors` y `.anatomy-marker-layer` conservan el mismo rectángulo responsivo para que las coordenadas normalizadas sigan apuntando al producto. El marco inicia ampliado y desplazado al centro del viewport, anima a escala `1` junto al navbar durante anatomía y recupera el acercamiento al cerrar. En teléfono, cada anatomía declara entre cuatro y cinco líneas destacadas; actualmente se muestran cuatro, se recorren automáticamente cada `2200 ms`, el resto se resume en la ficha inferior y el selector `01–04` salta al interior de cada pausa para evitar caer sobre un crossfade.
 
-## Menú local y frontera de publicación
+## Menú integrado y frontera editorial
 
-`npm run dev` copia seis WebP conceptuales desde `local-media/menu/` a `public/local-menu-media/` y genera temporalmente `src/app/menu/page.tsx`. Ambas rutas están ignoradas por Git.
+`src/app/menu/page.tsx` y los seis WebP seleccionados forman parte permanente del mismo proyecto y del mismo export estático que la landing. No existe un segundo build ni una copia de datos: landing, `Explorar` y `Lista` consumen `src/data/menu.json`.
 
-`npm run build` ejecuta primero la limpieza y compila solo la landing. El menú no queda “oculto”: no existe ni como HTML ni como chunk de JavaScript público. La landing recibe del Server Component únicamente los cuatro registros anatómicos; los otros seis platos no se serializan.
+La ruta se publica como preview conceptual, conserva etiquetas visibles sobre las imágenes y declara los valores como REF. Su metadata usa `robots: noindex` hasta confirmar vigencia editorial y aprobación externa; esto no impide acceder mediante la sección 06 o una URL directa.
 
-La publicación del menú requiere una decisión independiente de permisos y vigencia.
+El selector sincroniza `?view=explore|list` con el estado visible para que los dos enlaces de la landing sean reproducibles y compartibles.
 
 ## GitHub Pages
 
@@ -110,4 +110,4 @@ npm test
 npm run check
 ```
 
-Una entrega técnica está cerrada cuando typecheck, export y pruebas pasan; no hay errores nuevos de consola; el flujo funciona hacia adelante y atrás en desktop, móvil y orientación horizontal; la alternativa reducida conserva todo el contenido; y el artifact contiene solo la allowlist pública.
+Una entrega técnica está cerrada cuando typecheck, export y pruebas pasan; no hay errores nuevos de consola; el flujo funciona hacia adelante y atrás en desktop, móvil y orientación horizontal; la alternativa reducida conserva todo el contenido; y el artifact contiene las dos rutas y únicamente la media registrada.

@@ -1,6 +1,6 @@
 # Sushi Page — Experience Blueprint
 
-**Estado:** alineado con `RYŌ · El toque final`; secuencia audiovisual V2 publicada y sección 06 del menú implementada localmente · **Última actualización:** 30.08.2026
+**Estado:** alineado con `RYŌ · El toque final`; secuencia audiovisual V2 y preview conceptual del menú conectadas · **Última actualización:** 30.08.2026
 
 Este documento define la arquitectura de información. La dirección visual y el storyboard se revisan en el [entregable creativo HTML](../deliverables/design/ryo-unboxed-creative-direction.html); los keyframes y el contrato de movimiento se revisan en el [sistema visual V1](../deliverables/design/ryo-unboxed-visual-system-v1.html). [`../RealizeDesign.md`](../RealizeDesign.md) conserva su índice operativo.
 
@@ -63,7 +63,7 @@ Un stinger breve introduce la ruta `/menu`: dos paneles navy con el patrón real
 
 La ruta ofrece `Explorar / Lista` sobre una sola fuente de platos. En esta etapa la selección se limita a sushi rolls y nigiris. `Explorar` presenta un plato grande, navegación anterior/siguiente, selección directa y datos disponibles. `Lista` muestra el mismo contenido como catálogo escaneable. Ningún plato sin fotografía recibe una imagen inventada: el patrón ocupa temporalmente ese espacio. Otras categorías se evalúan únicamente después de la aprobación del cliente.
 
-Mientras los masters conceptuales del menú no tengan aprobación de publicación, ambos enlaces funcionan únicamente en desarrollo local y el export público muestra `Vista en preparación`. La sección puede publicarse como anuncio sin filtrar la ruta, los platos ni sus imágenes.
+Los dos enlaces abren `/menu/` con el modo solicitado en la URL. La ruta se publica como preview conceptual no indexada: identifica sus imágenes conceptuales, mantiene los valores en REF y no se presenta como carta oficial hasta confirmar vigencia y aprobación externa.
 
 ### 7 · Contacto
 

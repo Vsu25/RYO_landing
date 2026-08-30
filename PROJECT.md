@@ -5,16 +5,16 @@
 ## Estado actual
 
 - **Fase:** 4 · Producción y migración técnica de la landing.
-- **Estado:** la landing audiovisual V2 usa Next.js 16, React 19 y TypeScript y está publicada en GitHub Pages. El pase de polishing recupera la caja como portal editorial, compacta el video-scroll, rediseña la presentación responsive de rolls, añade cierre cinemático y bento `RYŌ en casa`; el sistema verbal `RYŌ · El toque final`, el tratamiento anatómico translúcido y el encuadre móvil por fase ya forman parte de la revisión pública. La sección 06 `Explora el menú` presenta `Interactivo / Tradicional` en la landing pública, pero conserva ambos accesos en preparación hasta autorizar la ruta y sus masters. La mejora final de scrubbing depende de reexportar los videos con keyframes más frecuentes.
-- **Objetivo inmediato:** revisar con Victor en hardware real el centro de entrada/cierre, el encuadre anatómico y la sección 06 de la versión pública. La publicación de la ruta del menú permanece como revisión separada.
-- **Bloqueo actual:** ninguno para continuar la implementación local. La publicación del menú todavía depende de aprobación externa, vigencia editorial y permiso de uso de sus masters conceptuales.
+- **Estado:** la landing audiovisual V2 y la preview conceptual del menú usan Next.js 16, React 19 y TypeScript dentro de una sola exportación estática para GitHub Pages. La sección 06 enlaza `/menu/`, donde `Explorar / Lista` comparten diez platos, navegación táctil/teclado y la dirección responsive 02-B. Las imágenes conceptuales y los valores REF se identifican en la interfaz; la ruta permanece fuera de indexación hasta la aprobación del cliente. La mejora final de scrubbing de la landing depende de reexportar los videos con keyframes más frecuentes.
+- **Objetivo inmediato:** publicar y revisar con Victor la integración real de `/menu/` en GitHub Pages, con énfasis en hardware táctil, claridad editorial y fidelidad de imágenes conceptuales.
+- **Bloqueo actual:** ninguno para publicar la preview conceptual. La vigencia editorial definitiva, aprobación del cliente y sustitución por fotografía documental siguen pendientes antes de tratarla como menú oficial.
 - **Última actualización:** 30.08.2026.
 
 ## Próxima decisión
 
-Revisar con Victor el encuadre móvil por fase y la composición de la sección 06; el menú completo se publica solo después de aprobar sus imágenes.
+Revisar con Victor la ruta `/menu/` ya vinculada y convertir observaciones de contenido, imagen y ritmo en un pase de polishing acotado.
 
-**Salida esperada:** aprobación del polishing para publicar la siguiente versión de la landing; el menú permanece local hasta su revisión específica.
+**Salida esperada:** preview pública integrada y verificada; cualquier promoción a menú oficial queda condicionada a vigencia y aprobación externa.
 
 ## Fuentes oficiales
 
@@ -25,10 +25,11 @@ Revisar con Victor el encuadre móvil por fase y la composición de la sección 
 | Entregable creativo | [`deliverables/design/ryo-unboxed-creative-direction.html`](deliverables/design/ryo-unboxed-creative-direction.html) | Dirección de arte, storyboard y producción audiovisual revisables. |
 | Sistema visual V1 | [`deliverables/design/ryo-unboxed-visual-system-v1.html`](deliverables/design/ryo-unboxed-visual-system-v1.html) | Keyframes, endpoints, continuidad y contrato de clips en revisión. |
 | Transición, menú y footer V1 | [`deliverables/design/ryo-stinger-footer-menu-v1.html`](deliverables/design/ryo-stinger-footer-menu-v1.html) | Stinger, vertical slice con fuente única y cierre de contacto en revisión. |
-| Exploración responsive del menú | [`deliverables/design/ryo-menu-responsive-explorations-v1.html`](deliverables/design/ryo-menu-responsive-explorations-v1.html) | Tres sistemas comparables; Índice de carta 02-B es la dirección aprobada e implementada localmente. |
-| Landing pública y menú local | [`src/app/page.tsx`](src/app/page.tsx) · [`src/local-pages/MenuPage.tsx`](src/local-pages/MenuPage.tsx) · <https://vsu25.github.io/RYO_landing/> | La landing Next.js está verificada en Pages; el menú React se genera solo en desarrollo local y sigue pendiente de autorización pública. |
+| Exploración responsive del menú | [`deliverables/design/ryo-menu-responsive-explorations-v1.html`](deliverables/design/ryo-menu-responsive-explorations-v1.html) | Tres sistemas comparables; Índice de carta 02-B es la dirección aprobada e implementada. |
+| Landing y menú públicos | [`src/app/page.tsx`](src/app/page.tsx) · [`src/app/menu/page.tsx`](src/app/menu/page.tsx) · <https://vsu25.github.io/RYO_landing/> | Una sola aplicación Next.js y un solo artifact; `/menu/` se publica como preview conceptual no indexada. |
 | Plan audiovisual vigente | [`reports/2026-08-28-ryo-box-studio-and-audiovisual-plan.md`](reports/2026-08-28-ryo-box-studio-and-audiovisual-plan.md) | Secuencia lateral, masters actuales y contrato simplificado de video/imagen. |
 | QA del menú | [`reports/2026-08-28-menu-interactive-qa.md`](reports/2026-08-28-menu-interactive-qa.md) | Evidencia técnica, visual y riesgos residuales de la implementación local. |
+| QA de integración pública del menú | [`reports/2026-08-30-menu-public-integration-qa.md`](reports/2026-08-30-menu-public-integration-qa.md) | Ruta permanente, correspondencia de assets, responsive, accesibilidad y export de Pages. |
 | QA de video-scroll V2 | [`reports/2026-08-29-scroll-video-integration-qa.md`](reports/2026-08-29-scroll-video-integration-qa.md) | Mapeo de clips, orden anatómico, evidencia local y riesgo de continuidad del roll de cierre. |
 | QA de migración Next.js/React | [`reports/2026-08-29-nextjs-react-migration-qa.md`](reports/2026-08-29-nextjs-react-migration-qa.md) | Build, artifact, responsive, scroll, menú local y riesgos residuales de la nueva arquitectura. |
 | QA del polishing responsive | [`reports/2026-08-29-landing-polishing-qa.md`](reports/2026-08-29-landing-polishing-qa.md) | Anatomía táctil, navegación curva, cierre, bento y verificación local por breakpoint. |
@@ -93,9 +94,10 @@ La experiencia debe utilizar fotografías reales disponibles, explicar ingredien
 | `references/` | Fuentes externas con procedencia; no son assets de producción por defecto. |
 | `reports/` | QA, auditorías y evidencia visual fechada. |
 | `.agents/skills/` | Procedimientos reutilizables propios del proyecto. |
-| `src/` | Aplicación Next.js/React, componentes, datos y página local del menú. |
+| `src/` | Aplicación Next.js/React, componentes, datos, landing y página del menú. |
 | `public/media/` | Allowlist de media autorizada para la landing pública. |
-| `local-media/` | Masters WebP del menú local; ignorados por Git y excluidos del build. |
+| `public/menu-media/` | Derivados WebP conceptuales autorizados para la preview pública del menú. |
+| `local-media/` | Copias maestras locales del menú; ignoradas por Git y no consumidas por el build. |
 | `tests/` | Contratos de contenido, allowlist y artifact. |
 | `legacy/website-static/` | Snapshot histórico anterior a Next.js; no es fuente activa ni se publica. |
 
@@ -105,10 +107,10 @@ No se crean paquetes, servicios o capas adicionales sin una necesidad aprobada.
 
 ### Ahora
 
-1. Revisar con Victor el build Next.js publicado y convertir sus observaciones en una lista corta de polishing.
+1. Revisar con Victor la landing y `/menu/` publicados y convertir sus observaciones en una lista corta de polishing.
 2. Afinar proporciones, recortes y densidad de las tarjetas 02-B sobre la implementación funcional.
 3. Completar la prueba final en hardware táctil y con movimiento reducido.
-4. Mantener el menú fuera del artifact público hasta confirmar permisos y vigencia.
+4. Mantener la preview del menú identificada como conceptual y fuera de indexación hasta confirmar vigencia y aprobación externa.
 5. Mantener el despliegue estático y sin backend.
 
 ### Después del inventario
@@ -177,7 +179,7 @@ No se crean paquetes, servicios o capas adicionales sin una necesidad aprobada.
 | 28.08.2026 | Adoptar Índice de carta 02-B como sistema del menú funcional: categoría solapada sobre la imagen en escritorio y tarjetas desplegables en tablet/teléfono. | Aprovecha el espacio, mantiene nombre, ingredientes, presentación y precio legibles, y permite ir directamente al plato sin convertir la imagen en un modal dominante. | Aprobada, implementada y verificada localmente; publicación pendiente |
 | 29.08.2026 | Sustituir el movimiento híbrido V1 por tres videos propios de Victor ligados directamente al progreso del scroll y recorrer las anatomías en orden Playboy → Yuzu → Koga → Sei. | Los clips aportados resuelven cámara, giro, apertura y cierre con movimiento real; las imágenes siguen controlando la pausa descriptiva y el fade entre rolls. | Implementado y verificado en GitHub Pages |
 | 29.08.2026 | Migrar la aplicación completa a Next.js 16, React 19 y TypeScript manteniendo una salida estática en GitHub Pages. | El framework ordena componentes, metadata, tipado y evolución visual sin introducir backend ni costo recurrente; GSAP conserva el control preciso del scroll. | Implementado y verificado en GitHub Pages |
-| 29.08.2026 | Generar la ruta `/menu` y sus seis imágenes pendientes únicamente durante `npm run dev`, y retirarlas antes de cada build. | Evita que contenido no autorizado quede filtrado en HTML o chunks públicos y conserva el prototipo completo para revisión local. | Implementado y cubierto por pruebas |
+| 29.08.2026 | Generar la ruta `/menu` y sus seis imágenes pendientes únicamente durante `npm run dev`, y retirarlas antes de cada build. | Evita que contenido no autorizado quede filtrado en HTML o chunks públicos y conserva el prototipo completo para revisión local. | Superada el 30.08.2026 por autorización de la preview pública |
 | 29.08.2026 | Retirar la aplicación estática anterior después de validar paridad funcional en React. | Mantener una sola arquitectura y una sola fuente ejecutable reduce deriva; la versión anterior permanece recuperable desde Git. | Aplicada |
 | 29.08.2026 | Resolver el polishing responsive con una navegación curva propia, anatomía táctil reforzada, cierre de patrón RYŌ y bloque `RYŌ en casa` tipo bento, sin incorporar las dependencias del componente de referencia. | Conserva la dirección visual solicitada, reduce el recorrido móvil y evita sumar Tailwind, shadcn, Framer Motion o iconos para una interacción que GSAP, React y CSS existentes ya cubren. | Implementado y verificado localmente; publicación pendiente de revisión |
 | 29.08.2026 | Recuperar la exploración `la caja como portal editorial` para el hero y mapear el video-scroll a tramos continuos diferenciados por breakpoint, sin snap entre capítulos. | Devuelve protagonismo a la caja, mantiene libertad de desplazamiento y evita que un gesto rápido convierta el recorrido en una sucesión de fades o saltos. | Implementado y verificado localmente; publicación pendiente de revisión |
@@ -185,7 +187,8 @@ No se crean paquetes, servicios o capas adicionales sin una necesidad aprobada.
 | 29.08.2026 | Tratar teléfono y tablet como composiciones editoriales de borde a borde: hero junto al navbar, zoom de caja controlado por página y anatomía superior con cuatro ingredientes prioritarios y selector de rolls. | Aprovecha el alto real de cada dispositivo, evita vacíos sin función y mantiene imagen, título, puntos y conectores en una geometría común. | Implementado y verificado en GitHub Pages; recorte estable corregido para teléfonos altos el 30.08.2026 |
 | 29.08.2026 | Nombrar públicamente la escena como `Presentación del roll` y cerrar el recorrido con línea vertical, puertas laterales y reveal `RYŌ · En casa`; enlazar la atribución de VSU a `meetvsu.dev`. | El lenguaje resulta menos técnico para el cliente y el final convierte la entrega al bento en un acto visual coherente con el stinger de apertura. | Implementado y verificado localmente; publicación pendiente de revisión |
 | 30.08.2026 | Aplicar `RYŌ · El toque final` como sistema verbal y convertir el README en acceso público al proyecto. | Alinea metadata, hero, cierre, bento, menú y contacto con la dirección aprobada, evita cantidades narrativas frágiles y permite abrir la experiencia desde GitHub. | Implementado y verificado en GitHub Pages |
-| 30.08.2026 | Convertir la sexta sección en invitación al menú con dos accesos equivalentes: `Interactivo / Tradicional`. | Extiende la narrativa desde el roll protagonista hacia la carta y permite comparar presentaciones sin duplicar datos; los enlaces quedan en preparación hasta aprobar los masters del menú. | Implementado en la landing pública; ruta del menú todavía local |
+| 30.08.2026 | Convertir la sexta sección en invitación al menú con dos accesos equivalentes: `Interactivo / Tradicional`. | Extiende la narrativa desde el roll protagonista hacia la carta y permite comparar presentaciones sin duplicar datos; los enlaces quedan en preparación hasta aprobar los masters del menú. | Implementado; ambos accesos enlazan la preview pública |
+| 30.08.2026 | Publicar `/menu/` dentro del mismo proyecto Next.js y artifact de GitHub Pages como preview conceptual no indexada. | Victor pidió vincular y hostear la página paralela; consolidarla elimina la divergencia local/producción sin añadir otro repositorio, servicio o fuente de datos. | Implementado; QA pública pendiente |
 | 30.08.2026 | Centrar el frame móvil durante entrada, apertura y cierre, y reservar el desplazamiento lateral para la anatomía. | El desplazamiento fijo anterior movía caja, cámara y cierre hacia la derecha en todo el recorrido; separar la composición por fase conserva el roll visible sin descentrar el audiovisual. | Implementado y publicado; magnitud refinada por la decisión siguiente |
 | 30.08.2026 | Unificar imagen, puntos y conectores de la anatomía móvil en `58vw`, reducir el desplazamiento de la escena a `8vw` y añadir un checkpoint compacto antes del cierre. | Dos tweens competían por el eje horizontal y un flick largo podía cruzar todo el clip de salida; una geometría única corrige la puntería y el checkpoint conserva el cierre sin imponer snap al recorrido completo. | Implementado y verificado en la matriz móvil, Safari y GitHub Pages |
 

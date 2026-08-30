@@ -16,8 +16,9 @@ Landing editorial y audiovisual para RYŌ Sushi. La caja azul guía un recorrido
 - Cierre cinematográfico con línea dorada, puertas laterales y transición `RYŌ · En casa`.
 - Layout responsive y alternativa completa para `prefers-reduced-motion`.
 - Cierre editorial integrado con la identidad visual de RYŌ.
+- Menú público con una vista interactiva y otra tradicional sobre la misma fuente de diez platos.
 
-El menú `Explorar / Lista` existe como prototipo local. No forma parte del artifact público hasta aprobar sus imágenes, vigencia y permiso de publicación.
+La ruta `/menu/` funciona como preview conceptual: las imágenes están identificadas como tales y los valores se presentan en REF según la carta de referencia.
 
 ## Tecnología
 
@@ -36,14 +37,14 @@ npm ci
 npm run dev
 ```
 
-Abre `http://127.0.0.1:3000/`. El comando prepara también `http://127.0.0.1:3000/menu/` usando masters que permanecen fuera de Git.
+Abre `http://127.0.0.1:3000/`. El menú está disponible en `http://127.0.0.1:3000/menu/`.
 
 Comandos útiles:
 
 ```bash
 npm run typecheck  # TypeScript
 npm run build      # exporta la landing pública en out/
-npm test           # contenido, allowlist y exclusión del menú
+npm test           # contenido, media y rutas del artifact
 npm run check      # validación completa
 npm run preview    # sirve out/ en el puerto 4173
 ```
@@ -52,12 +53,12 @@ npm run preview    # sirve out/ en el puerto 4173
 
 | Ruta | Responsabilidad |
 |---|---|
-| `src/app/` | Layout, metadata y landing prerenderizada. |
+| `src/app/` | Layout, metadata, landing y ruta `/menu/` prerenderizadas. |
 | `src/components/landing/` | Stinger, historia scroll-reactive y presentaciones de producto. |
-| `src/components/menu/` | Menú React disponible únicamente en desarrollo local. |
+| `src/components/menu/` | Menú React con vistas `Explorar / Lista`. |
 | `src/data/menu.json` | Fuente única de platos, ingredientes y mapas de presentación. |
 | `public/media/` | Allowlist de los doce assets autorizados para la landing. |
-| `scripts/local-menu-media.mjs` | Prepara y retira la ruta/media local del menú. |
+| `public/menu-media/` | Seis derivados WebP conceptuales usados por el menú. |
 | `deliverables/design/` | Dirección visual y prototipos HTML revisables. |
 | `planning-docs/` | Producto, contenido, técnica y roadmap. |
 | `reports/` | Evidencia de QA fechada. |
@@ -66,7 +67,7 @@ El estado operativo vive en `PROJECT.md`; las decisiones técnicas, en `planning
 
 ## Publicación
 
-Cada push a `main` ejecuta `npm ci`, `npm run check` y publica `out/` en GitHub Pages. El build elimina antes la ruta local `/menu` y sus imágenes pendientes; las pruebas fallan si alguna llega al artifact.
+Cada push a `main` ejecuta `npm ci`, `npm run check` y publica `out/` en GitHub Pages. El build incluye la landing, `/menu/` y únicamente la media registrada en el inventario; las pruebas fallan si falta una ruta, un plato o un asset esperado.
 
 ## Marca y contenido
 

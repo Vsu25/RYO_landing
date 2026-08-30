@@ -1,6 +1,6 @@
 # Sushi Page — Roadmap de desarrollo
 
-**Estado:** landing audiovisual V2 migrada y verificada en Next.js/React; menú React completo en QA local; polishing G4 activo · **Aprobación interna:** Victor Silva · **Aprobación externa:** cliente pendiente · **Última actualización:** 29.08.2026
+**Estado:** landing audiovisual V2 y preview del menú integradas en Next.js/React; QA de publicación activo · **Aprobación interna:** Victor Silva · **Aprobación externa:** cliente pendiente · **Última actualización:** 30.08.2026
 
 ## Resultado y límites
 
@@ -108,9 +108,9 @@ Victor aprueba estructura, selección de platos, concepto visual, CTA y comporta
 
 **Propósito:** completar landing y menú reutilizando patrones aprobados.
 
-**Estado:** la landing V2 integra en React tres videos propios ligados al scroll y cuatro anatomías en orden corregido; su build para Pages está verificado y la publicación migrada está pendiente. El menú React integra localmente los diez platos aprobados con su correspondencia documental y visual; continúa fuera del artifact mientras se resuelven permisos y vigencia.
+**Estado:** la landing V2 integra en React tres videos propios ligados al scroll y cuatro anatomías en orden corregido. El menú React integra los diez platos seleccionados, conserva su correspondencia documental/visual y forma parte del mismo artifact como preview conceptual no indexada.
 
-Victor levantó el congelamiento interno del menú el 28.08.2026. `Explorar / Lista` comparten datos, imágenes, ingredientes, precios REF y presentaciones; la siguiente pasada se concentra en polishing y QA antes de solicitar autorización pública.
+Victor autorizó el 30.08.2026 vincular y hostear la preview. `Explorar / Lista` comparten datos, imágenes, ingredientes, precios REF y presentaciones; el siguiente gate es revisar el entorno publicado antes de promoverla como carta oficial.
 
 ### Paquetes
 
@@ -118,7 +118,7 @@ Victor levantó el congelamiento interno del menú el 28.08.2026. `Explorar / Li
 |---|---|---|
 | 4.1 · Narrativa | Hero y secciones de negocio | Copy y dirección aprobados |
 | 4.2 · Producto | Platos destacados y anatomías | Inventario verificado |
-| 4.3 · Menú | Categorías, modos, navegación táctil/teclado y catálogo equivalente | Implementado en React; QA local en curso y ruta excluida de producción |
+| 4.3 · Menú | Categorías, modos, navegación táctil/teclado y catálogo equivalente | Implementado en React, integrado al export y en QA pública |
 | 4.4 · Conversión | Instagram, WhatsApp y footer | Canales confirmados |
 | 4.5 · Motion | Intro, apertura y cierre en video con scrub; anatomías Playboy → Yuzu → Koga → Sei | Migrado a `useGSAP`/ScrollTrigger y verificado en desktop y móvil; revisión en Pages pendiente |
 | 4.6 · Metadata | Icono, OG, robots y sitemap | Implementado mediante metadata routes y exportación estática |
@@ -153,7 +153,7 @@ Cero defectos bloqueantes; riesgos residuales y permisos pendientes tienen decis
 
 ### Entregables
 
-- Landing pública en GitHub Pages y preview del menú solo cuando sea aprobado.
+- Landing y preview conceptual del menú en una sola publicación de GitHub Pages.
 - QA repetido sobre entorno real.
 - Dominio, HTTPS, metadata, enlaces y rollback verificados.
 - Reporte de lanzamiento.

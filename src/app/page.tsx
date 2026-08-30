@@ -5,8 +5,6 @@ import {anatomyItems} from "@/data/menu";
 import {sitePath} from "@/lib/site-path";
 
 export default function HomePage() {
-  const menuAvailable = process.env.NODE_ENV === "development";
-
   return (
     <>
       <ScrollExperience items={anatomyItems} />
@@ -37,16 +35,12 @@ export default function HomePage() {
             <article className="menu-invitation__mode menu-invitation__mode--interactive">
               <span>01 · Una experiencia</span>
               <div><small>Modo</small><h3>Menú interactivo</h3><p>Recorre cada plato a gran escala, cambia de categoría y descubre sus ingredientes, presentación y detalle.</p></div>
-              {menuAvailable
-                ? <Link href={sitePath("/menu/?view=explore#menu-content")}>Abrir menú interactivo <i aria-hidden="true">↗</i></Link>
-                : <span className="menu-invitation__pending">Vista en preparación</span>}
+              <Link href="/menu/?view=explore#menu-content">Abrir menú interactivo <i aria-hidden="true">↗</i></Link>
             </article>
             <article className="menu-invitation__mode menu-invitation__mode--traditional">
               <span>02 · Una consulta</span>
               <div><small>Modo</small><h3>Menú tradicional</h3><p>Consulta toda la selección en una lista clara y rápida, pensada para comparar y elegir sin detenerte.</p></div>
-              {menuAvailable
-                ? <Link href={sitePath("/menu/?view=list#menu-content")}>Ver menú tradicional <i aria-hidden="true">↗</i></Link>
-                : <span className="menu-invitation__pending">Vista en preparación</span>}
+              <Link href="/menu/?view=list#menu-content">Ver menú tradicional <i aria-hidden="true">↗</i></Link>
             </article>
           </div>
           <p className="menu-invitation__note">Dos maneras de explorar RYŌ. Una misma carta.</p>

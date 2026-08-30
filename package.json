@@ -3,11 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "node scripts/local-menu-media.mjs prepare && next dev",
-    "prebuild": "node scripts/local-menu-media.mjs clean",
+    "dev": "next dev",
     "build": "next build",
     "preview": "python3 -m http.server 4173 --directory out",
-    "pretypecheck": "node scripts/local-menu-media.mjs clean",
     "typecheck": "tsc --noEmit",
     "test": "node --test tests/*.test.mjs",
     "check": "npm run typecheck && npm run build && npm test",

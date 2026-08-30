@@ -43,6 +43,7 @@ Fuentes especializadas de estrategia, contenido, experiencia, técnica y ejecuci
 | `.agents/skills/` | Procedimientos reutilizables del workspace. |
 | `src/` | Aplicación Next.js/React y fuente ejecutable. |
 | `public/media/` | Media autorizada para la landing pública. |
+| `public/menu-media/` | Derivados conceptuales autorizados para la preview pública del menú. |
 | `tests/` | Verificación de contenido y artifact. |
 
-`main` ejecuta el build estático de Next.js mediante `.github/workflows/pages.yml` y publica `out/`. La ruta React `/menu` y su media local se retiran antes del build mientras su publicación no esté autorizada.
+`main` ejecuta el build estático de Next.js mediante `.github/workflows/pages.yml` y publica `out/`. La landing y `/menu/` se generan dentro del mismo artifact; el menú permanece marcado como preview conceptual no indexada hasta aprobación externa.

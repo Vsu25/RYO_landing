@@ -41,7 +41,8 @@ export function MenuExperience() {
   const item = filtered[current] ?? filtered[0];
 
   useEffect(() => {
-    if (new URLSearchParams(window.location.search).get("view") === "list") setView("list");
+    const requestedView = new URLSearchParams(window.location.search).get("view");
+    if (requestedView === "explore" || requestedView === "list") setView(requestedView);
   }, []);
 
   useGSAP(() => {
@@ -66,6 +67,13 @@ export function MenuExperience() {
   const selectCategory = (next: typeof category) => {
     setCategory(next);
     setCurrent(0);
+  };
+
+  const selectView = (next: typeof view) => {
+    setView(next);
+    const url = new URL(window.location.href);
+    url.searchParams.set("view", next);
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
   };
 
   if (!item) return null;
@@ -97,11 +105,11 @@ export function MenuExperience() {
           <div className="menu-heading">
             <div><p className="eyebrow">Dos formas de elegir</p><h2>Explora el detalle. Consulta lo esencial.</h2></div>
             <div className="view-switch" role="group" aria-label="Cambiar presentación del menú">
-              <button type="button" onClick={() => setView("explore")} aria-pressed={view === "explore"} aria-controls="menu-explorer">Explorar</button>
-              <button type="button" onClick={() => setView("list")} aria-pressed={view === "list"} aria-controls="menu-catalogue">Lista</button>
+              <button type="button" onClick={() => selectView("explore")} aria-pressed={view === "explore"} aria-controls="menu-explorer">Explorar</button>
+              <button type="button" onClick={() => selectView("list")} aria-pressed={view === "list"} aria-controls="menu-catalogue">Lista</button>
             </div>
           </div>
-          <p className="prototype-note"><strong>Selección aprobada para el prototipo:</strong> esta etapa trabaja únicamente con rolls especiales y nigiris. Los valores son referencias del PDF; moneda y vigencia se consolidarán después de la aprobación del cliente.</p>
+          <p className="prototype-note"><strong>Selección de rolls especiales y nigiris.</strong> Los valores se muestran en REF según la carta de referencia. Las imágenes identificadas como conceptuales representan la dirección visual del proyecto.</p>
           <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">{view === "explore" ? `${item.name}, ${current + 1} de ${filtered.length}, ${item.category}.` : "Vista Lista activa."}</p>
 
           <section

@@ -24,8 +24,6 @@ playwright-report/
 test-results/
 tmp/
 graphify-out/
-public/local-menu-media/
-src/app/menu/
 local-media/
 
 # Original reference media stays local; only optimized derivatives are deployed
