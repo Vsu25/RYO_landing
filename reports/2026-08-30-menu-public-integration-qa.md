@@ -1,6 +1,6 @@
 # QA · Integración pública del menú
 
-**Fecha:** 30.08.2026 · **Estado:** implementado y verificado localmente; publicación pendiente · **Superficie:** landing y `/menu/`
+**Fecha:** 30.08.2026 · **Estado:** publicado y verificado en GitHub Pages · **Superficie:** <https://vsu25.github.io/RYO_landing/> y `/menu/`
 
 ## Resultado
 
@@ -55,4 +55,15 @@ En navegador se verificaron diez filas en `Lista`, siete cartas para Rolls espec
 1. El menú es una preview de portfolio, no una carta oficial: la vigencia editorial del PDF del 31.07.2026 sigue pendiente.
 2. Los diez visuales son conceptuales; deben sustituirse o aprobarse expresamente antes de presentarlos como fotografía documental.
 3. La aprobación pública de Victor habilita esta preview, no la redistribución independiente de marca, imágenes o contenido.
-4. La revisión final debe repetirse en la URL de GitHub Pages después del despliegue y en hardware táctil real.
+4. La revisión en hardware táctil real sigue siendo necesaria para el polishing perceptual final.
+
+## Verificación en GitHub Pages
+
+El commit `bd49c9f` quedó disponible en la URL pública. La comprobación directa confirmó:
+
+- landing sin el estado `Vista en preparación`;
+- enlaces `/RYO_landing/menu/?view=explore|list`;
+- `/menu/` con título, selector, contenido y metadata propios;
+- cambio entre modos reflejado en la URL;
+- asset `menu-pesca-blanca.webp` servido como `image/webp` a `1672 × 940`;
+- ausencia de overflow horizontal en el viewport de comprobación.
