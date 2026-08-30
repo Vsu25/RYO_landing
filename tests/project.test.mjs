@@ -73,7 +73,7 @@ test("el export estático excluye la ruta y los visuales locales del menú", () 
 test("el README funciona como acceso público al proyecto", () => {
   assert.match(readme, /https:\/\/vsu25\.github\.io\/RYO_landing\//);
   assert.match(readme, /RYŌ · El toque final/);
-  assert.match(readme, /https:\/\/meetvsu\.dev/);
+  assert.doesNotMatch(readme, /wa\.me|instagram\.com|meetvsu\.dev|github\.com/);
 });
 
 test("la sección 06 conecta las dos vistas del menú local", () => {

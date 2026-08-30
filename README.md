@@ -6,8 +6,6 @@ Landing editorial y audiovisual para RYŌ Sushi. La caja azul guía un recorrido
 
 **[Abrir la landing de RYŌ →](https://vsu25.github.io/RYO_landing/)**
 
-[WhatsApp](https://wa.me/584220382261) · [Instagram](https://www.instagram.com/ryomcbo/) · [Desarrollo por VSU](https://meetvsu.dev)
-
 ![Caja RYŌ abierta en estudio](public/media/box-open.webp)
 
 ## Experiencia pública
@@ -17,7 +15,7 @@ Landing editorial y audiovisual para RYŌ Sushi. La caja azul guía un recorrido
 - Stinger de dos puertas con patrón y wordmark RYŌ.
 - Cierre cinematográfico con línea dorada, puertas laterales y transición `RYŌ · En casa`.
 - Layout responsive y alternativa completa para `prefers-reduced-motion`.
-- Cierre editorial con WhatsApp e Instagram verificados.
+- Cierre editorial integrado con la identidad visual de RYŌ.
 
 El menú `Explorar / Lista` existe como prototipo local. No forma parte del artifact público hasta aprobar sus imágenes, vigencia y permiso de publicación.
 
@@ -64,14 +62,12 @@ npm run preview    # sirve out/ en el puerto 4173
 | `planning-docs/` | Producto, contenido, técnica y roadmap. |
 | `reports/` | Evidencia de QA fechada. |
 
-El estado operativo vive en [PROJECT.md](PROJECT.md); las decisiones técnicas, en [planning-docs/technical-spec.md](planning-docs/technical-spec.md).
+El estado operativo vive en `PROJECT.md`; las decisiones técnicas, en `planning-docs/technical-spec.md`.
 
 ## Publicación
 
 Cada push a `main` ejecuta `npm ci`, `npm run check` y publica `out/` en GitHub Pages. El build elimina antes la ruta local `/menu` y sus imágenes pendientes; las pruebas fallan si alguna llega al artifact.
 
-URL pública: <https://vsu25.github.io/RYO_landing/>
-
 ## Marca y contenido
 
-El código y la documentación no conceden derechos de reutilización sobre el nombre RYŌ, el logotipo, las fotografías, el menú ni los assets de marca. Las fuentes, permisos y límites se registran en [planning-docs/content-and-source-inventory.md](planning-docs/content-and-source-inventory.md).
+El código y la documentación no conceden derechos de reutilización sobre el nombre RYŌ, el logotipo, las fotografías, el menú ni los assets de marca. Las fuentes, permisos y límites se registran en `planning-docs/content-and-source-inventory.md`.
