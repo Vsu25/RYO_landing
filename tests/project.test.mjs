@@ -25,6 +25,10 @@ test("la fuente del menú conserva diez platos documentados", () => {
     if (!item.anatomy) continue;
     assert.equal(item.anatomy.order.length, item.anatomy.points.length, `${item.id}: puntos incompletos`);
     assert.ok(item.anatomy.main >= 0 && item.anatomy.main < item.anatomy.order.length, `${item.id}: principal fuera de rango`);
+    assert.ok(item.anatomy.featured.length >= 4 && item.anatomy.featured.length <= 5, `${item.id}: selección móvil fuera de rango`);
+    assert.equal(new Set(item.anatomy.featured).size, item.anatomy.featured.length, `${item.id}: selección móvil duplicada`);
+    assert.ok(item.anatomy.featured.includes(item.anatomy.main), `${item.id}: falta el ingrediente principal en móvil`);
+    assert.ok(item.anatomy.featured.every((line) => line >= 0 && line < item.anatomy.order.length), `${item.id}: línea móvil fuera de rango`);
   }
 });
 
@@ -51,4 +55,7 @@ test("el export estático excluye la ruta y los visuales locales del menú", () 
   assert.doesNotMatch(emittedText, /Kamasutra|Nigiri Tuná|menu-fuji\.webp/, "el bundle público filtró contenido del menú local");
   assert.match(emittedText, /Playboy/);
   assert.match(emittedText, /Sei Exclusive/);
+  assert.match(emittedText, /Presentación del roll/);
+  assert.match(emittedText, /https:\/\/meetvsu\.dev/);
+  assert.doesNotMatch(emittedText, /https:\/\/github\.com\/Vsu25/);
 });

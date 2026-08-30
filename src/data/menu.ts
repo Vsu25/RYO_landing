@@ -3,6 +3,7 @@ import menuSource from "./menu.json";
 export type Anatomy = {
   order: number[];
   main: number;
+  featured: number[];
   points: [number, number][];
 };
 

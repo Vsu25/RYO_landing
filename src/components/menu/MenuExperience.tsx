@@ -6,6 +6,7 @@ import {useRef, useState} from "react";
 import {useGSAP} from "@gsap/react";
 import {gsap} from "gsap";
 import {BrandStinger} from "@/components/landing/BrandStinger";
+import {CurvedNav} from "@/components/shared/CurvedNav";
 import {menuItems, type MenuItem} from "@/data/menu";
 import {sitePath} from "@/lib/site-path";
 
@@ -72,6 +73,12 @@ export function MenuExperience() {
       <nav className="site-nav" aria-label="Navegación del menú">
         <Link className="site-nav__logo" href="/" aria-label="Volver a RYŌ Sushi"><Image src={sitePath("/media/ryo-wordmark-gold.png")} width={480} height={178} alt="RYŌ" /></Link>
         <div className="site-nav__links"><Link href="/">Experiencia</Link><a href="#menu-content">Platos</a><a className="button button--solid" href="https://wa.me/584220382261" target="_blank" rel="noopener">WhatsApp</a></div>
+        <CurvedNav label="Abrir navegación del menú" items={[
+          {label: "Experiencia", href: sitePath("/"), description: "Volver a la landing"},
+          {label: "Platos", href: "#menu-content", description: "Explorar o consultar"},
+          {label: "WhatsApp", href: "https://wa.me/584220382261", description: "+58 422 0382261", external: true},
+          {label: "Instagram", href: "https://www.instagram.com/ryomcbo/", description: "@ryomcbo", external: true},
+        ]} />
       </nav>
 
       <header className="menu-hero">
