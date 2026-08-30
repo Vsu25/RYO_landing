@@ -207,7 +207,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
         .to(mediaFrame, compactViewport ? {scale: 1, y: 0, duration: storyTiming.opening.end - storyTiming.opening.start, ease: "power2.inOut"} : {duration: storyTiming.opening.end - storyTiming.opening.start}, "open")
         .to(stageElement, {"--glow-x": "48%", "--glow-y": "50%", duration: 4.5}, "open+=.45")
         .to(anatomy, {autoAlpha: 1, duration: 0.38, ease: "power2.out"}, storyTiming.anatomy.start)
-        .to(mediaShade, {autoAlpha: 0.48, duration: 0.42, ease: "power2.out"}, storyTiming.anatomy.start - 0.1)
+        .to(mediaShade, {autoAlpha: 0.24, duration: 0.42, ease: "power2.out"}, storyTiming.anatomy.start - 0.1)
         .to(rollGlow, {autoAlpha: 1, duration: 0.48, ease: "power2.out"}, storyTiming.anatomy.start - 0.1);
 
       items.forEach((_, index) => {

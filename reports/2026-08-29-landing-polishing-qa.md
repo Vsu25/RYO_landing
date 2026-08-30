@@ -1,7 +1,7 @@
 # QA · Landing polishing responsive
 
 **Fecha:** 29.08.2026
-**Estado:** implementado y verificado localmente; publicación pendiente de revisión.
+**Estado:** implementado y verificado en GitHub Pages; corrección móvil final validada el 30.08.2026.
 
 ## Alcance verificado
 
@@ -21,7 +21,7 @@
 
 ## Evidencia técnica y visual
 
-- `npm run check`: correcto; incluye TypeScript, export estático de Next.js y tres pruebas de contenido/artifact.
+- `npm run check`: correcto; incluye TypeScript, export estático de Next.js y cinco pruebas de contenido, artifact y encuadre responsive.
 - Next.js dev server: compilación correcta y respuesta `200` para `/`.
 - Navegador local: comprobado a `1280 × 800`, `768 × 1024` y `390 × 844`.
 - ScrollTrigger: `12` alturas de viewport en escritorio, `10` en tablet y `8.5` en teléfono.
@@ -32,8 +32,8 @@
 - Anatomía: el toque deja un callout y un grupo SVG activos; el estado inicial no muestra líneas ni puntos.
 - En `390 × 844`, el control siguiente desplazó la banda de ingredientes de `0` a `253.5 px`; botones, resumen y navegación permanecen visibles.
 - Navbar: el control curvo aparece solo por debajo de `1024 px`; la navegación lineal se conserva en escritorio.
-- Alineación anatómica: marco de imagen, SVG de conectores y capa de sellos registran una diferencia de `0 px` en `360 × 800`, `390 × 844`, `430 × 932`, `768 × 1024` y `844 × 390`.
-- Teléfonos estándar: sin overflow horizontal, cuatro callouts visibles y resumen a `16 px` del borde inferior. La fotografía comienza junto o detrás del navbar y deja aproximadamente `53–65 px` hasta el selector en 360/390 px; en 430 × 932 se aplica un recorte más amplio para conservar la misma densidad vertical.
+- Alineación anatómica: marco de imagen, SVG de conectores y capa de sellos registran una diferencia de `0 px` en `360 × 800`, `390 × 844`, `412 × 915`, `430 × 932`, `768 × 1024` y `844 × 390`.
+- Teléfonos estándar: sin overflow horizontal, cuatro callouts visibles y resumen a `16 px` del borde inferior. El recorte conserva `220vw` desde `320 × 568` hasta `430 × 932`, incluido el Samsung S24 Ultra de referencia a `412 × 915`; la altura del teléfono ya no activa un segundo zoom ni desplaza roll, caja, puntos o conectores.
 - Selector móvil: el salto al roll 03 se estabiliza dentro de la pausa de `Koga Explosion`, no sobre el límite del crossfade.
 - Handoff final: la línea aparece antes del movimiento de puertas; el título permanece oculto durante el cierre y se revela después de que ambos paneles alcanzan el centro. La misma timeline revierte la secuencia al subir.
 
@@ -41,4 +41,4 @@
 
 La programación ya no acumula seeks y la respuesta del gesto mejoró de forma medible. El techo restante depende de la codificación de los masters: para una sensación de scrub casi cuadro a cuadro conviene reexportar los tres clips con GOP corto o formato intra-frame y sustituirlos sin cambiar la arquitectura.
 
-Revisar visualmente este pase local con Victor antes de publicar el nuevo artifact en GitHub Pages. El menú interactivo sigue fuera del artifact público.
+Continuar la revisión sobre hardware real con Victor. El menú interactivo sigue fuera del artifact público.

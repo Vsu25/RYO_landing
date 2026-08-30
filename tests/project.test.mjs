@@ -8,6 +8,7 @@ const projectRoot = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const menuItems = JSON.parse(readFileSync(resolve(projectRoot, "src/data/menu.json"), "utf8"));
 const publicMedia = resolve(projectRoot, "public/media");
 const readme = readFileSync(resolve(projectRoot, "README.md"), "utf8");
+const scrollStory = readFileSync(resolve(projectRoot, "src/app/scroll-story.css"), "utf8");
 
 const walk = (directory) => readdirSync(directory).flatMap((name) => {
   const path = resolve(directory, name);
@@ -68,4 +69,14 @@ test("el README funciona como acceso público al proyecto", () => {
   assert.match(readme, /https:\/\/vsu25\.github\.io\/RYO_landing\//);
   assert.match(readme, /RYŌ · El toque final/);
   assert.match(readme, /https:\/\/meetvsu\.dev/);
+});
+
+test("el encuadre móvil no cambia en teléfonos altos", () => {
+  assert.match(scrollStory, /width:min\(220vw,177\.778svh\)/);
+  assert.doesNotMatch(scrollStory, /min-height:900px|250vw/);
+  const phones = [[320, 568], [360, 740], [360, 800], [375, 667], [375, 812], [390, 844], [393, 852], [412, 915], [430, 932]];
+  for (const [width, height] of phones) {
+    const frameWidth = Math.min(width * 2.2, height * 1.77778);
+    assert.equal(frameWidth, width * 2.2, `${width}×${height}: el alto alteró el recorte`);
+  }
 });

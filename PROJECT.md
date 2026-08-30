@@ -5,14 +5,14 @@
 ## Estado actual
 
 - **Fase:** 4 · Producción y migración técnica de la landing.
-- **Estado:** la landing audiovisual V2 usa Next.js 16, React 19 y TypeScript y está publicada en GitHub Pages. El pase de polishing recupera la caja como portal editorial, compacta el video-scroll, rediseña la presentación responsive de rolls, añade cierre cinemático y bento `RYŌ en casa`; el sistema verbal aprobado `RYŌ · El toque final` ya está implementado localmente y queda pendiente de publicar esta revisión. La mejora final de scrubbing depende de reexportar los masters con keyframes más frecuentes.
-- **Objetivo inmediato:** revisar con Victor el pase de polishing local en escritorio, tablet y teléfono antes de actualizar la versión pública. La publicación del menú permanece como revisión separada.
+- **Estado:** la landing audiovisual V2 usa Next.js 16, React 19 y TypeScript y está publicada en GitHub Pages. El pase de polishing recupera la caja como portal editorial, compacta el video-scroll, rediseña la presentación responsive de rolls, añade cierre cinemático y bento `RYŌ en casa`; el sistema verbal `RYŌ · El toque final`, el tratamiento anatómico translúcido y el encuadre móvil estable ya forman parte de la revisión pública. La mejora final de scrubbing depende de reexportar los masters con keyframes más frecuentes.
+- **Objetivo inmediato:** revisar con Victor la versión pública en hardware real de escritorio, tablet y teléfono. La publicación del menú permanece como revisión separada.
 - **Bloqueo actual:** ninguno para continuar la implementación local. La publicación del menú todavía depende de aprobación externa, vigencia editorial y permiso de uso de sus masters conceptuales.
 - **Última actualización:** 30.08.2026.
 
 ## Próxima decisión
 
-Revisar con Victor el ritmo, la fidelidad y la densidad informativa del pase responsive local; el menú se retoma después de aprobar sus imágenes.
+Revisar con Victor el ritmo, la fidelidad y la densidad informativa del pase responsive publicado; el menú se retoma después de aprobar sus imágenes.
 
 **Salida esperada:** aprobación del polishing para publicar la siguiente versión de la landing; el menú permanece local hasta su revisión específica.
 
@@ -182,9 +182,9 @@ No se crean paquetes, servicios o capas adicionales sin una necesidad aprobada.
 | 29.08.2026 | Resolver el polishing responsive con una navegación curva propia, anatomía táctil reforzada, cierre de patrón RYŌ y bloque `RYŌ en casa` tipo bento, sin incorporar las dependencias del componente de referencia. | Conserva la dirección visual solicitada, reduce el recorrido móvil y evita sumar Tailwind, shadcn, Framer Motion o iconos para una interacción que GSAP, React y CSS existentes ya cubren. | Implementado y verificado localmente; publicación pendiente de revisión |
 | 29.08.2026 | Recuperar la exploración `la caja como portal editorial` para el hero y mapear el video-scroll a tramos continuos diferenciados por breakpoint, sin snap entre capítulos. | Devuelve protagonismo a la caja, mantiene libertad de desplazamiento y evita que un gesto rápido convierta el recorrido en una sucesión de fades o saltos. | Implementado y verificado localmente; publicación pendiente de revisión |
 | 29.08.2026 | Compactar el recorrido a `12 / 10 / 8.5` viewports, reducir el scrub y agrupar los seeks hasta que el navegador presente cada frame; representar cada punto anatómico como sello circular independiente del SVG. | El ajuste elimina el arrastre artificial, evita acumular seeks y conserva puntos circulares nítidos sobre el encuadre 16:9; el límite restante corresponde a los keyframes de los MP4 actuales. | Implementado y verificado localmente; reexportación de media propuesta |
-| 29.08.2026 | Tratar teléfono y tablet como composiciones editoriales de borde a borde: hero junto al navbar, zoom de caja controlado por página y anatomía superior con cuatro ingredientes prioritarios y selector de rolls. | Aprovecha el alto real de cada dispositivo, evita vacíos sin función y mantiene imagen, título, puntos y conectores en una geometría común. | Implementado y verificado localmente; publicación pendiente de revisión |
+| 29.08.2026 | Tratar teléfono y tablet como composiciones editoriales de borde a borde: hero junto al navbar, zoom de caja controlado por página y anatomía superior con cuatro ingredientes prioritarios y selector de rolls. | Aprovecha el alto real de cada dispositivo, evita vacíos sin función y mantiene imagen, título, puntos y conectores en una geometría común. | Implementado y verificado en GitHub Pages; recorte estable corregido para teléfonos altos el 30.08.2026 |
 | 29.08.2026 | Nombrar públicamente la escena como `Presentación del roll` y cerrar el recorrido con línea vertical, puertas laterales y reveal `RYŌ · En casa`; enlazar la atribución de VSU a `meetvsu.dev`. | El lenguaje resulta menos técnico para el cliente y el final convierte la entrega al bento en un acto visual coherente con el stinger de apertura. | Implementado y verificado localmente; publicación pendiente de revisión |
-| 30.08.2026 | Aplicar `RYŌ · El toque final` como sistema verbal y convertir el README en acceso público al proyecto. | Alinea metadata, hero, cierre, bento, menú y contacto con la dirección aprobada, evita cantidades narrativas frágiles y permite abrir la experiencia desde GitHub. | Implementado y verificado localmente; publicación pendiente |
+| 30.08.2026 | Aplicar `RYŌ · El toque final` como sistema verbal y convertir el README en acceso público al proyecto. | Alinea metadata, hero, cierre, bento, menú y contacto con la dirección aprobada, evita cantidades narrativas frágiles y permite abrir la experiencia desde GitHub. | Implementado y verificado en GitHub Pages |
 
 ## Criterio de cierre de una acción
 
