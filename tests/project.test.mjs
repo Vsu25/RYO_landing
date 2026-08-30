@@ -9,6 +9,8 @@ const menuItems = JSON.parse(readFileSync(resolve(projectRoot, "src/data/menu.js
 const publicMedia = resolve(projectRoot, "public/media");
 const readme = readFileSync(resolve(projectRoot, "README.md"), "utf8");
 const scrollStory = readFileSync(resolve(projectRoot, "src/app/scroll-story.css"), "utf8");
+const homePage = readFileSync(resolve(projectRoot, "src/app/page.tsx"), "utf8");
+const scrollExperience = readFileSync(resolve(projectRoot, "src/components/landing/ScrollExperience.tsx"), "utf8");
 
 const walk = (directory) => readdirSync(directory).flatMap((name) => {
   const path = resolve(directory, name);
@@ -59,6 +61,9 @@ test("el export estático excluye la ruta y los visuales locales del menú", () 
   assert.match(emittedText, /Sei Exclusive/);
   assert.match(emittedText, /Presentación del roll/);
   assert.match(emittedText, /El corte es nuestro/);
+  assert.match(emittedText, /Ya viste el detalle\. Ahora descubre el resto\./);
+  assert.match(emittedText, /Vista en preparación/);
+  assert.doesNotMatch(emittedText, /\/menu\/\?view=(?:explore|list)/, "la invitación pública no debe enlazar una ruta excluida");
   assert.doesNotMatch(emittedText, /La experiencia empieza antes del primer bocado/);
   assert.doesNotMatch(emittedText, /Descubre cuatro rolls/);
   assert.match(emittedText, /https:\/\/meetvsu\.dev/);
@@ -71,8 +76,20 @@ test("el README funciona como acceso público al proyecto", () => {
   assert.match(readme, /https:\/\/meetvsu\.dev/);
 });
 
+test("la sección 06 conecta las dos vistas del menú local", () => {
+  assert.match(homePage, /06 · Explora el menú/);
+  assert.match(homePage, /\/menu\/\?view=explore#menu-content/);
+  assert.match(homePage, /\/menu\/\?view=list#menu-content/);
+});
+
 test("el encuadre móvil no cambia en teléfonos altos", () => {
   assert.match(scrollStory, /width:min\(220vw,177\.778svh\)/);
+  assert.match(scrollStory, /\.story-media-frame \{ left:50%; \}/);
+  assert.match(scrollStory, /\.scroll-connectors,\.anatomy-marker-layer \{ left:66%; \}/);
+  assert.doesNotMatch(scrollStory, /story-media-frame,.scroll-connectors,.anatomy-marker-layer \{ top:31%; left:66%/);
+  assert.match(scrollExperience, /const anatomyShiftX = phoneViewport \? window\.innerWidth \* 0\.16 : 0/);
+  assert.match(scrollExperience, /x: anatomyShiftX/);
+  assert.match(scrollExperience, /scale: closingScale, x: 0/);
   assert.doesNotMatch(scrollStory, /min-height:900px|250vw/);
   const phones = [[320, 568], [360, 740], [360, 800], [375, 667], [375, 812], [390, 844], [393, 852], [412, 915], [430, 932]];
   for (const [width, height] of phones) {

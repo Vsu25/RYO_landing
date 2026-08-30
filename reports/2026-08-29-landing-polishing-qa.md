@@ -1,7 +1,7 @@
 # QA · Landing polishing responsive
 
 **Fecha:** 29.08.2026
-**Estado:** implementado y verificado en GitHub Pages; corrección móvil final validada el 30.08.2026.
+**Estado:** polishing publicado y verificado en GitHub Pages; sección 06 del menú implementada y verificada localmente el 30.08.2026.
 
 ## Alcance verificado
 
@@ -21,7 +21,7 @@
 
 ## Evidencia técnica y visual
 
-- `npm run check`: correcto; incluye TypeScript, export estático de Next.js y cinco pruebas de contenido, artifact y encuadre responsive.
+- `npm run check`: correcto; incluye TypeScript, export estático de Next.js y seis pruebas de contenido, artifact, sección 06 y encuadre responsive.
 - Next.js dev server: compilación correcta y respuesta `200` para `/`.
 - Navegador local: comprobado a `1280 × 800`, `768 × 1024` y `390 × 844`.
 - ScrollTrigger: `12` alturas de viewport en escritorio, `10` en tablet y `8.5` en teléfono.
@@ -34,8 +34,10 @@
 - Navbar: el control curvo aparece solo por debajo de `1024 px`; la navegación lineal se conserva en escritorio.
 - Alineación anatómica: marco de imagen, SVG de conectores y capa de sellos registran una diferencia de `0 px` en `360 × 800`, `390 × 844`, `412 × 915`, `430 × 932`, `768 × 1024` y `844 × 390`.
 - Teléfonos estándar: sin overflow horizontal, cuatro callouts visibles y resumen a `16 px` del borde inferior. El recorte conserva `220vw` desde `320 × 568` hasta `430 × 932`, incluido el Samsung S24 Ultra de referencia a `412 × 915`; la altura del teléfono ya no activa un segundo zoom ni desplaza roll, caja, puntos o conectores.
+- Centro por fase: entrada, giro y final usan el centro real del viewport; el frame se desplaza `16vw` solo al revelar la anatomía y regresa progresivamente durante el cierre. Verificado a `320 × 568`, `360 × 740`, `375 × 812`, `390 × 844`, `412 × 915` y `430 × 932`, siempre sin overflow horizontal.
 - Selector móvil: el salto al roll 03 se estabiliza dentro de la pausa de `Koga Explosion`, no sobre el límite del crossfade.
 - Handoff final: la línea aparece antes del movimiento de puertas; el título permanece oculto durante el cierre y se revela después de que ambos paneles alcanzan el centro. La misma timeline revierte la secuencia al subir.
+- Sección 06: `Interactivo` activa `Explorar` y `Tradicional` activa `Lista`; comprobada sin overflow a `320 × 568`, `390 × 844`, `768 × 1024` y `1280 × 720`. El export muestra `Vista en preparación` y no contiene enlaces a la ruta local excluida.
 
 ## Riesgo residual y decisión pendiente
 

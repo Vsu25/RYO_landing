@@ -1,9 +1,12 @@
+import Link from "next/link";
 import {ScrollExperience} from "@/components/landing/ScrollExperience";
 import {ContactFooter} from "@/components/shared/ContactFooter";
 import {anatomyItems} from "@/data/menu";
 import {sitePath} from "@/lib/site-path";
 
 export default function HomePage() {
+  const menuAvailable = process.env.NODE_ENV === "development";
+
   return (
     <>
       <ScrollExperience items={anatomyItems} />
@@ -21,6 +24,32 @@ export default function HomePage() {
           <article className="home-bento__service"><span>Modalidad</span><h3>Solo delivery<br />y pick up.</h3></article>
           <a className="home-bento__contact home-bento__contact--whatsapp" href="https://wa.me/584220382261" target="_blank" rel="noopener noreferrer"><span>El toque final</span><strong>Pide por WhatsApp</strong><i aria-hidden="true">↗</i></a>
           <a className="home-bento__contact home-bento__contact--instagram" href="https://www.instagram.com/ryomcbo/" target="_blank" rel="noopener noreferrer"><span>Descubre más</span><strong>Instagram · @ryomcbo</strong><i aria-hidden="true">↗</i></a>
+        </div>
+      </section>
+      <section className="menu-invitation" id="menu" aria-labelledby="menu-invitation-title">
+        <div className="wrap menu-invitation__grid">
+          <header className="menu-invitation__intro">
+            <p className="eyebrow">06 · Explora el menú</p>
+            <h2 id="menu-invitation-title">Ya viste el detalle. Ahora descubre el resto.</h2>
+            <p>Explora la carta como una experiencia visual o consúltala de forma directa. Son los mismos platos; cambia la manera de encontrarlos. Elige tu versión favorita y cuéntanos cuál prefieres.</p>
+          </header>
+          <div className="menu-invitation__modes">
+            <article className="menu-invitation__mode menu-invitation__mode--interactive">
+              <span>01 · Una experiencia</span>
+              <div><small>Modo</small><h3>Menú interactivo</h3><p>Recorre cada plato a gran escala, cambia de categoría y descubre sus ingredientes, presentación y detalle.</p></div>
+              {menuAvailable
+                ? <Link href={sitePath("/menu/?view=explore#menu-content")}>Abrir menú interactivo <i aria-hidden="true">↗</i></Link>
+                : <span className="menu-invitation__pending">Vista en preparación</span>}
+            </article>
+            <article className="menu-invitation__mode menu-invitation__mode--traditional">
+              <span>02 · Una consulta</span>
+              <div><small>Modo</small><h3>Menú tradicional</h3><p>Consulta toda la selección en una lista clara y rápida, pensada para comparar y elegir sin detenerte.</p></div>
+              {menuAvailable
+                ? <Link href={sitePath("/menu/?view=list#menu-content")}>Ver menú tradicional <i aria-hidden="true">↗</i></Link>
+                : <span className="menu-invitation__pending">Vista en preparación</span>}
+            </article>
+          </div>
+          <p className="menu-invitation__note">Dos maneras de explorar RYŌ. Una misma carta.</p>
         </div>
       </section>
       <ContactFooter />

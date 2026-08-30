@@ -1,6 +1,6 @@
 # Sushi Page — Experience Blueprint
 
-**Estado:** alineado con `RYŌ · El toque final`; secuencia audiovisual V2 publicada y Experiencia en revisión G2 · **Última actualización:** 30.08.2026
+**Estado:** alineado con `RYŌ · El toque final`; secuencia audiovisual V2 publicada y sección 06 del menú implementada localmente · **Última actualización:** 30.08.2026
 
 Este documento define la arquitectura de información. La dirección visual y el storyboard se revisan en el [entregable creativo HTML](../deliverables/design/ryo-unboxed-creative-direction.html); los keyframes y el contrato de movimiento se revisan en el [sistema visual V1](../deliverables/design/ryo-unboxed-visual-system-v1.html). [`../RealizeDesign.md`](../RealizeDesign.md) conserva su índice operativo.
 
@@ -15,6 +15,7 @@ Este documento define la arquitectura de información. La dirección visual y el
 ├── anatomía
 ├── cierre editorial
 ├── RYŌ en casa · bento de servicio y contacto
+├── 06 · exploración del menú · Interactivo / Tradicional
 └── contacto + footer
 
 /menu
@@ -54,17 +55,17 @@ La sección siguiente usa una composición bento: caja cerrada, modalidad `Solo 
 
 La caja permanece inmóvil durante la lectura porque el video se sostiene en su último frame cerrado. El cambio factual de Sei hacia el K17 / Playboy del clip de salida se resuelve con una disolución de producto; una continuidad exacta de roll requerirá reemplazar únicamente el inicio de ese clip. Esta revisión conserva la arquitectura sin introducir otro video.
 
-### 6 · Sobre nosotros
+### 6 · Exploración del menú
 
-Pausa ligera después de demostrar producto y servicio: propósito, forma de trabajo y experiencia en casa. El copy tendrá 45–65 palabras y dependerá de información aportada o verificada; no se inventan origen, equipo, antigüedad o procesos.
-
-### 7 · Menú
+Después de `RYŌ en casa`, una sección marfil presenta dos accesos equivalentes a la misma carta: `Menú interactivo` para recorrer cada plato como una escena visual y `Menú tradicional` para consultarlos como catálogo. El encabezado parte de la idea `Ya viste el detalle. Ahora descubre el resto.` y pide elegir la presentación favorita sin introducir testimonios ni afirmaciones no verificadas.
 
 Un stinger breve introduce la ruta `/menu`: dos paneles navy con el patrón real de arcos RYŌ se separan desde una junta dorada central. El wordmark funciona como sello antes de retirarse. No se repite durante la exploración ni bloquea el acceso; en reduced motion se muestra directamente el contenido.
 
 La ruta ofrece `Explorar / Lista` sobre una sola fuente de platos. En esta etapa la selección se limita a sushi rolls y nigiris. `Explorar` presenta un plato grande, navegación anterior/siguiente, selección directa y datos disponibles. `Lista` muestra el mismo contenido como catálogo escaneable. Ningún plato sin fotografía recibe una imagen inventada: el patrón ocupa temporalmente ese espacio. Otras categorías se evalúan únicamente después de la aprobación del cliente.
 
-### 8 · Contacto
+Mientras los masters conceptuales del menú no tengan aprobación de publicación, ambos enlaces funcionan únicamente en desarrollo local y el export público muestra `Vista en preparación`. La sección puede publicarse como anuncio sin filtrar la ruta, los platos ni sus imágenes.
+
+### 7 · Contacto
 
 El footer cierra sobre navy con el patrón de arcos RYŌ en baja opacidad y una banda dorada inferior. Contiene la propuesta pública, modalidad, CTA de WhatsApp sin número visible, Instagram `@ryomcbo` y la atribución `Desarrollo por VSU` enlazada a `https://meetvsu.dev`. Horarios, ubicación y métodos de pago no aparecen hasta ser confirmados. WhatsApp funciona como salida principal propuesta y todavía requiere aprobación de jerarquía G2.
 

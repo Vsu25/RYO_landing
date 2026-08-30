@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import {useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {useGSAP} from "@gsap/react";
 import {gsap} from "gsap";
 import {BrandStinger} from "@/components/landing/BrandStinger";
@@ -39,6 +39,10 @@ export function MenuExperience() {
   const [replayToken, setReplayToken] = useState(0);
   const filtered = menuItems.filter((item) => item.category === category);
   const item = filtered[current] ?? filtered[0];
+
+  useEffect(() => {
+    if (new URLSearchParams(window.location.search).get("view") === "list") setView("list");
+  }, []);
 
   useGSAP(() => {
     if (!root.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;

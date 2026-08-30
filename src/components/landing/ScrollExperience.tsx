@@ -127,6 +127,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
       const compactViewport = phoneViewport || tabletViewport;
       const focusScale = phoneViewport ? 2.25 : tabletViewport ? 2.1 : 1;
       const focusShift = phoneViewport ? window.innerHeight * 0.19 : tabletViewport ? window.innerHeight * 0.15 : 0;
+      const anatomyShiftX = phoneViewport ? window.innerWidth * 0.16 : 0;
       const closingScale = phoneViewport ? 1.85 : tabletViewport ? 1.55 : 1;
       let rollIndex = -1;
       let chapterIndex = -1;
@@ -190,7 +191,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
       gsap.set(handoffDoors[1], {xPercent: 100});
       gsap.set(handoffLine, {scaleY: 0, transformOrigin: "top center"});
       gsap.set(handoffLabel, {autoAlpha: 0, yPercent: 30});
-      gsap.set(mediaFrame, {xPercent: -50, yPercent: -50, scale: focusScale, y: focusShift, transformOrigin: "50% 50%"});
+      gsap.set(mediaFrame, {xPercent: -50, yPercent: -50, x: 0, scale: focusScale, y: focusShift, transformOrigin: "50% 50%"});
       gsap.set(stageElement, {"--glow-x": "72%", "--glow-y": "52%"});
 
       timeline
@@ -204,8 +205,9 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
         .set(media.opening, {autoAlpha: 1}, "open")
         .set(media.intro, {autoAlpha: 0}, "open+=.02")
         .to({}, {duration: storyTiming.opening.end - storyTiming.opening.start}, "open")
-        .to(mediaFrame, compactViewport ? {scale: 1, y: 0, duration: storyTiming.opening.end - storyTiming.opening.start, ease: "power2.inOut"} : {duration: storyTiming.opening.end - storyTiming.opening.start}, "open")
+        .to(mediaFrame, compactViewport ? {scale: 1, x: 0, y: 0, duration: storyTiming.opening.end - storyTiming.opening.start, ease: "power2.inOut"} : {duration: storyTiming.opening.end - storyTiming.opening.start}, "open")
         .to(stageElement, {"--glow-x": "48%", "--glow-y": "50%", duration: 4.5}, "open+=.45")
+        .to(mediaFrame, {x: anatomyShiftX, duration: 0.75, ease: "power2.inOut"}, storyTiming.anatomy.start - 0.7)
         .to(anatomy, {autoAlpha: 1, duration: 0.38, ease: "power2.out"}, storyTiming.anatomy.start)
         .to(mediaShade, {autoAlpha: 0.24, duration: 0.42, ease: "power2.out"}, storyTiming.anatomy.start - 0.1)
         .to(rollGlow, {autoAlpha: 1, duration: 0.48, ease: "power2.out"}, storyTiming.anatomy.start - 0.1);
@@ -226,7 +228,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
         .addLabel("close", storyTiming.closing.start)
         .fromTo(media.closing, {autoAlpha: 0}, {autoAlpha: 1, duration: 0.32, ease: "power2.inOut", immediateRender: false}, "close")
         .to({}, {duration: storyTiming.closing.end - storyTiming.closing.start}, "close")
-        .to(mediaFrame, compactViewport ? {scale: closingScale, y: focusShift, duration: storyTiming.closing.end - storyTiming.closing.start, ease: "power2.inOut"} : {duration: storyTiming.closing.end - storyTiming.closing.start}, "close")
+        .to(mediaFrame, compactViewport ? {scale: closingScale, x: 0, y: focusShift, duration: storyTiming.closing.end - storyTiming.closing.start, ease: "power2.inOut"} : {duration: storyTiming.closing.end - storyTiming.closing.start}, "close")
         .to(stageElement, {"--glow-x": "61%", "--glow-y": "59%", duration: 4.2}, "close+=.3")
         .addLabel("finale", storyTiming.experience.start)
         .fromTo(experience, {autoAlpha: 0}, {autoAlpha: 1, duration: 0.48, ease: "power2.out", immediateRender: false}, "finale+=.18")
@@ -358,6 +360,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
           <a href="#objeto" onClick={(event) => { event.preventDefault(); jumpTo(0.16); }}>La caja</a>
           <a href="#anatomia" onClick={(event) => { event.preventDefault(); jumpTo(0.32); }}>Presentación</a>
           <a href="#experiencia" onClick={(event) => { event.preventDefault(); jumpTo(0.91); }}>Experiencia</a>
+          <a href="#menu">Menú</a>
           <button className="icon-button" type="button" onClick={() => setReplayToken((token) => token + 1)} aria-label="Repetir animación de entrada"><span aria-hidden="true">↻</span></button>
           <a className="button button--solid magnetic-button" href="https://wa.me/584220382261" target="_blank" rel="noopener"><span>Pide por WhatsApp</span><i aria-hidden="true">↗</i></a>
         </div>
@@ -366,6 +369,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
           {label: "La caja", href: "#objeto", description: "Giro y apertura", onSelect: () => jumpTo(0.16)},
           {label: "Presentación", href: "#anatomia", description: "Ingredientes y equilibrio", onSelect: () => jumpTo(0.32)},
           {label: "RYŌ en casa", href: "#experiencia", description: "Delivery y contacto", onSelect: () => jumpTo(0.91)},
+          {label: "Menú", href: "#menu", description: "Interactivo o tradicional"},
           {label: "Instagram", href: "https://www.instagram.com/ryomcbo/", description: "@ryomcbo", external: true},
         ]} />
       </nav>
