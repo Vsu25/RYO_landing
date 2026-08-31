@@ -1,7 +1,6 @@
 "use client";
 
 import {useRef} from "react";
-import Image from "next/image";
 import {useGSAP} from "@gsap/react";
 import {gsap} from "gsap";
 import {sitePath} from "@/lib/site-path";
@@ -36,10 +35,10 @@ export function BrandStinger({replayToken = 0}: {replayToken?: number}) {
   return (
     <div className="entry-stinger" ref={root} aria-hidden="true">
       <div className="entry-stinger__door entry-stinger__door--left">
-        <span className="entry-stinger__mark"><Image src={sitePath("/media/ryo-wordmark-gold.png")} width={1774} height={887} alt="" priority /></span>
+        <span className="entry-stinger__mark"><img src={sitePath("/media/ryo-wordmark-gold-web.webp")} width="720" height="360" alt="" fetchPriority="high" /></span>
       </div>
       <div className="entry-stinger__door entry-stinger__door--right">
-        <span className="entry-stinger__mark"><Image src={sitePath("/media/ryo-wordmark-gold.png")} width={1774} height={887} alt="" priority /></span>
+        <span className="entry-stinger__mark"><img src={sitePath("/media/ryo-wordmark-gold-web.webp")} width="720" height="360" alt="" fetchPriority="high" /></span>
       </div>
       <span className="entry-stinger__seam" />
     </div>

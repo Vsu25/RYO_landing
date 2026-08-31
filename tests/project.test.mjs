@@ -41,10 +41,10 @@ test("la landing pública contiene solo los masters aprobados", () => {
   const expected = [
     "box-closed.webp", "box-front.jpg", "box-open.webp",
     "roll-koga.webp", "roll-playboy.webp", "roll-sei.webp", "roll-yuzu.webp",
-    "ryo-overlapping-arcs-pattern.png", "ryo-scroll-intro-mobile-v3.mp4", "ryo-scroll-intro-v2.mp4",
+    "ryo-overlapping-arcs-pattern-web.webp", "ryo-overlapping-arcs-pattern.png", "ryo-scroll-intro-mobile-v3.mp4", "ryo-scroll-intro-v2.mp4",
     "ryo-scroll-open-playboy-mobile-v3.mp4", "ryo-scroll-open-playboy-v2.mp4",
     "ryo-scroll-return-close-mobile-v3.mp4", "ryo-scroll-return-close-v2.mp4",
-    "ryo-wordmark-gold.png",
+    "ryo-site-icon.png", "ryo-wordmark-gold-web.webp", "ryo-wordmark-gold.png",
   ];
   assert.deepEqual(readdirSync(publicMedia).sort(), expected);
 });
@@ -106,6 +106,17 @@ test("la sección 06 conecta las dos vistas del menú público", () => {
   assert.match(homePage, /06 · Explora el menú/);
   assert.match(homePage, /\/menu\/\?view=explore#menu-content/);
   assert.match(homePage, /\/menu\/\?view=list#menu-content/);
+  assert.equal((homePage.match(/prefetch=\{false\}/g) ?? []).length, 2);
+});
+
+test("la carga inicial reserva la red para el primer clip", () => {
+  assert.match(scrollExperience, /story-media--intro[^\n]+preload="auto"/);
+  assert.match(scrollExperience, /story-media--opening[^\n]+preload="none"/);
+  assert.match(scrollExperience, /story-media--closing[^\n]+preload="none"/);
+  assert.match(scrollExperience, /data-src=\{sitePath\(item\.image\)\}/);
+  assert.match(scrollExperience, /primeOpeningMedia/);
+  assert.match(scrollExperience, /primeClosingMedia/);
+  assert.doesNotMatch(scrollExperience, /ScrollTrigger\.refresh\(\)/);
 });
 
 test("el encuadre móvil permanece estable y el cierre no rebobina el scroll", () => {

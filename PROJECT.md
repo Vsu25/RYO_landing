@@ -5,8 +5,8 @@
 ## Estado actual
 
 - **Fase:** 4 · Producción y migración técnica de la landing.
-- **Estado:** la landing audiovisual V2 y la preview conceptual del menú usan Next.js 16, React 19 y TypeScript dentro de una sola exportación estática para GitHub Pages. La sección 06 enlaza `/menu/`, donde `Explorar / Lista` comparten diez platos, navegación táctil/teclado y la dirección responsive 02-B. El recorrido móvil usa derivados H.264 de 960 × 540 px con GOP 6 y scrub directo 1:1; la ruta del menú permanece fuera de indexación hasta la aprobación del cliente.
-- **Objetivo inmediato:** verificar en hardware táctil la precisión del scrubbing móvil y revisar con Victor la integración real de `/menu/` en GitHub Pages.
+- **Estado:** la landing audiovisual V2 y la preview conceptual del menú usan Next.js 16, React 19 y TypeScript dentro de una sola exportación estática para GitHub Pages. La sección 06 enlaza `/menu/`, donde `Explorar / Lista` comparten diez platos, navegación táctil/teclado y la dirección responsive 02-B. El recorrido móvil usa derivados H.264 de 960 × 540 px con GOP 6 y scrub directo 1:1. La carga inicial reserva únicamente la introducción; apertura, rolls y cierre se preparan progresivamente sin recomprimir la imagen.
+- **Objetivo inmediato:** publicar el pase de rendimiento, repetir PageSpeed sobre el artifact público y verificar en hardware táctil que el nuevo orden de carga conserva la precisión del scrubbing móvil.
 - **Bloqueo actual:** ninguno para publicar la preview conceptual. La vigencia editorial definitiva, aprobación del cliente y sustitución por fotografía documental siguen pendientes antes de tratarla como menú oficial.
 - **Última actualización:** 30.08.2026.
 
@@ -33,6 +33,7 @@ Revisar con Victor la ruta `/menu/` ya vinculada y convertir observaciones de co
 | QA de video-scroll V2 | [`reports/2026-08-29-scroll-video-integration-qa.md`](reports/2026-08-29-scroll-video-integration-qa.md) | Mapeo de clips, orden anatómico, evidencia local y riesgo de continuidad del roll de cierre. |
 | QA de migración Next.js/React | [`reports/2026-08-29-nextjs-react-migration-qa.md`](reports/2026-08-29-nextjs-react-migration-qa.md) | Build, artifact, responsive, scroll, menú local y riesgos residuales de la nueva arquitectura. |
 | QA del polishing responsive | [`reports/2026-08-29-landing-polishing-qa.md`](reports/2026-08-29-landing-polishing-qa.md) | Anatomía táctil, navegación curva, cierre, bento y verificación local por breakpoint. |
+| QA de rendimiento de la landing | [`reports/2026-08-30-landing-performance-qa.md`](reports/2026-08-30-landing-performance-qa.md) | Carga progresiva, entrega de imágenes, reflows, payload inicial, validación y límites de GitHub Pages. |
 | Guía fotográfica | [`deliverables/design/ryo-photo-capture-guide.html`](deliverables/design/ryo-photo-capture-guide.html) | Shot list, mediciones, logo lock, rolls, nigiris y video test. |
 | Índice de diseño | [`RealizeDesign.md`](RealizeDesign.md) | Estado y decisiones duraderas del entregable creativo. |
 | Visión de producto | [`planning-docs/product-brief.md`](planning-docs/product-brief.md) | Resultado, audiencia, recorridos y límites iniciales. |
@@ -192,6 +193,7 @@ No se crean paquetes, servicios o capas adicionales sin una necesidad aprobada.
 | 30.08.2026 | Centrar el frame móvil durante entrada, apertura y cierre, y reservar el desplazamiento lateral para la anatomía. | El desplazamiento fijo anterior movía caja, cámara y cierre hacia la derecha en todo el recorrido; separar la composición por fase conserva el roll visible sin descentrar el audiovisual. | Implementado y publicado; magnitud refinada por la decisión siguiente |
 | 30.08.2026 | Unificar imagen, puntos y conectores de la anatomía móvil en `58vw` y reducir el desplazamiento de la escena a `8vw`. | Dos tweens competían por el eje horizontal; una geometría única corrige la puntería sin alterar la posición vertical del documento. | Implementado y verificado en la matriz móvil, Safari y GitHub Pages |
 | 30.08.2026 | Sustituir en teléfono los MP4 de keyframe único por derivados H.264 de 960 × 540 px con GOP 6 y usar `scrub: true`. | Los tiempos de GSAP eran correctos, pero cada seek obligaba al decodificador móvil a reconstruir el clip desde el segundo cero; los derivados reducen el salto máximo a 0,25 s y alinean barra, timeline y gesto 1:1 sin modificar tablet o escritorio. | Implementado y verificado en GitHub Pages; teléfono físico pendiente |
+| 30.08.2026 | Escalonar la media según el progreso, priorizar el LCP, servir identidad en WebP lossless y evitar el prefetch del menú desde la landing. | PageSpeed detectó payload y dependencias prematuras; cargar únicamente lo visible reduce competencia de red y memoria sin rebajar resolución, cambiar frames ni simplificar el motion. | Implementado y verificado localmente; medición pública pendiente |
 
 ## Criterio de cierre de una acción
 

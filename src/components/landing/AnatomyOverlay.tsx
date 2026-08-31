@@ -46,15 +46,16 @@ export function AnatomyOverlay({item, index, active}: AnatomyOverlayProps) {
   }, [item]);
 
   useEffect(() => {
-    const frame = requestAnimationFrame(updatePaths);
-    const observer = new ResizeObserver(updatePaths);
+    let frame = requestAnimationFrame(updatePaths);
+    const scheduleUpdate = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(updatePaths);
+    };
+    const observer = new ResizeObserver(scheduleUpdate);
     if (connectors.current) observer.observe(connectors.current);
-    window.addEventListener("resize", updatePaths);
-    document.fonts?.ready.then(updatePaths);
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
-      window.removeEventListener("resize", updatePaths);
     };
   }, [updatePaths]);
 

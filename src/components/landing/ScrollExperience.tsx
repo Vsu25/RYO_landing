@@ -1,6 +1,7 @@
 "use client";
 
 import {useCallback, useRef, useState} from "react";
+import ReactDOM from "react-dom";
 import {useGSAP} from "@gsap/react";
 import {gsap} from "gsap";
 import {ScrollTrigger} from "gsap/ScrollTrigger";
@@ -49,7 +50,7 @@ function RollCopy({item, index, transcript = false}: {item: AnatomyItem; index: 
           src={sitePath(item.image)}
           width="1672"
           height="940"
-          loading={index ? "lazy" : "eager"}
+          loading="lazy"
           decoding="async"
           alt={item.imageAlt || `${item.name} frente a la caja RYŌ`}
         />
@@ -65,6 +66,7 @@ function RollCopy({item, index, transcript = false}: {item: AnatomyItem; index: 
 }
 
 export function ScrollExperience({items}: {items: AnatomyItem[]}) {
+  ReactDOM.preload(sitePath("/media/box-front.jpg"), {as: "image", fetchPriority: "high"});
   const root = useRef<HTMLDivElement>(null);
   const story = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
@@ -116,7 +118,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
     const nav = container.querySelector<HTMLElement>(".story-nav");
     const storyStatus = container.querySelector<HTMLElement>("[data-story-status]");
     const rollStatus = container.querySelector<HTMLElement>("[data-roll-status]");
-    const rollLayers = items.map((item) => container.querySelector<HTMLElement>(`[data-roll-layer="${item.id}"]`));
+    const rollLayers = items.map((item) => container.querySelector<HTMLImageElement>(`[data-roll-layer="${item.id}"]`));
     const allMedia = [...Object.values(media), ...rollLayers].filter(Boolean);
     const mm = gsap.matchMedia();
 
@@ -133,7 +135,31 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
       let chapterIndex = -1;
       let anatomyIsActive = false;
       let experienceIsActive = false;
+      let openingMediaPrimed = false;
+      let closingMediaPrimed = false;
+      let navIsScrolled = false;
       const seekTargets = new WeakMap<HTMLVideoElement, number>();
+
+      const primeOpeningMedia = () => {
+        if (openingMediaPrimed) return;
+        openingMediaPrimed = true;
+        rollLayers.forEach((layer) => {
+          if (layer && !layer.hasAttribute("src") && layer.dataset.src) layer.src = layer.dataset.src;
+        });
+        if (media.opening) {
+          media.opening.preload = "auto";
+          media.opening.load();
+        }
+      };
+
+      const primeClosingMedia = () => {
+        if (closingMediaPrimed) return;
+        closingMediaPrimed = true;
+        if (media.closing) {
+          media.closing.preload = "auto";
+          media.closing.load();
+        }
+      };
 
       const flushSeek = (video: HTMLVideoElement) => {
         const next = seekTargets.get(video);
@@ -266,8 +292,14 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
+          if (self.progress > 0.02) primeOpeningMedia();
+          if (self.progress > 0.38) primeClosingMedia();
           if (progressBar.current) gsap.set(progressBar.current, {scaleX: self.progress, transformOrigin: "left center"});
-          nav?.classList.toggle("is-scrolled", self.progress > 0.015);
+          const nextNavState = self.progress > 0.015;
+          if (nextNavState !== navIsScrolled) {
+            navIsScrolled = nextNavState;
+            nav?.classList.toggle("is-scrolled", nextNavState);
+          }
         },
         onEnter: () => ambientLoop.resume(),
         onEnterBack: () => ambientLoop.resume(),
@@ -290,20 +322,29 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
         document.querySelectorAll<HTMLElement>(".magnetic-button").forEach((button) => {
           const xTo = gsap.quickTo(button, "x", {duration: 0.35, ease: "power3.out"});
           const yTo = gsap.quickTo(button, "y", {duration: 0.35, ease: "power3.out"});
+          let rect = button.getBoundingClientRect();
+          const enter = () => { rect = button.getBoundingClientRect(); };
           const move = (event: PointerEvent) => {
-            const rect = button.getBoundingClientRect();
             xTo((event.clientX - rect.left - rect.width / 2) / rect.width * 7);
             yTo((event.clientY - rect.top - rect.height / 2) / rect.height * 5);
           };
           const leave = () => { xTo(0); yTo(0); };
+          button.addEventListener("pointerenter", enter);
           button.addEventListener("pointermove", move);
           button.addEventListener("pointerleave", leave);
           magneticCleanups.push(() => {
+            button.removeEventListener("pointerenter", enter);
             button.removeEventListener("pointermove", move);
             button.removeEventListener("pointerleave", leave);
           });
         });
       }
+
+      const primeOnIntent = () => primeOpeningMedia();
+      window.addEventListener("wheel", primeOnIntent, {once: true, passive: true});
+      window.addEventListener("touchstart", primeOnIntent, {once: true, passive: true});
+      window.addEventListener("pointerdown", primeOnIntent, {once: true, passive: true});
+      window.addEventListener("keydown", primeOnIntent, {once: true});
 
       const videoCleanups: Array<() => void> = [];
       Object.values(media).forEach((video) => {
@@ -316,26 +357,28 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
         };
         const ready = () => {
           syncSemantics();
-          ScrollTrigger.refresh();
         };
         video.addEventListener("seeked", followTarget);
+        video.addEventListener("loadedmetadata", ready);
+        video.addEventListener("loadeddata", ready);
         videoCleanups.push(() => {
           video.removeEventListener("seeked", followTarget);
+          video.removeEventListener("loadedmetadata", ready);
+          video.removeEventListener("loadeddata", ready);
           if (videoFrame && typeof video.cancelVideoFrameCallback === "function") video.cancelVideoFrameCallback(videoFrame);
           if (animationFrame) cancelAnimationFrame(animationFrame);
         });
         if (video.readyState >= 1) ready();
-        else {
-          video.addEventListener("loadedmetadata", ready, {once: true});
-          videoCleanups.push(() => video.removeEventListener("loadedmetadata", ready));
-        }
       });
-      void document.fonts?.ready.then(() => ScrollTrigger.refresh());
       syncSemantics();
 
       return () => {
         magneticCleanups.forEach((cleanup) => cleanup());
         videoCleanups.forEach((cleanup) => cleanup());
+        window.removeEventListener("wheel", primeOnIntent);
+        window.removeEventListener("touchstart", primeOnIntent);
+        window.removeEventListener("pointerdown", primeOnIntent);
+        window.removeEventListener("keydown", primeOnIntent);
         ambientLoop.kill();
         timeline.kill();
       };
@@ -354,7 +397,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
 
       <nav className="site-nav story-nav" aria-label="Navegación principal">
         <a className="site-nav__logo" href="#inicio" onClick={(event) => { event.preventDefault(); jumpTo(0); }} aria-label="RYŌ Sushi · Inicio">
-          <img src={sitePath("/media/ryo-wordmark-gold.png")} width="480" height="178" alt="RYŌ" />
+          <img src={sitePath("/media/ryo-wordmark-gold-web.webp")} width="480" height="240" alt="RYŌ" fetchPriority="high" />
         </a>
         <div className="site-nav__links">
           <a href="#objeto" onClick={(event) => { event.preventDefault(); jumpTo(0.16); }}>La caja</a>
@@ -388,14 +431,14 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
                 <source media="(max-width: 599px)" src={sitePath("/media/ryo-scroll-intro-mobile-v3.mp4")} type="video/mp4" />
                 <source src={sitePath("/media/ryo-scroll-intro-v2.mp4")} type="video/mp4" />
               </video>
-              <video ref={openingVideo} className="story-media story-media--opening" muted playsInline preload="auto" poster={sitePath("/media/box-closed.webp")}>
+              <video ref={openingVideo} className="story-media story-media--opening" muted playsInline preload="none" poster={sitePath("/media/box-closed.webp")}>
                 <source media="(max-width: 599px)" src={sitePath("/media/ryo-scroll-open-playboy-mobile-v3.mp4")} type="video/mp4" />
                 <source src={sitePath("/media/ryo-scroll-open-playboy-v2.mp4")} type="video/mp4" />
               </video>
               {items.map((item) => (
-                <img key={item.id} className="story-media story-media--roll" data-roll-layer={item.id} src={sitePath(item.image)} width="1672" height="940" alt="" loading="eager" decoding="async" />
+                <img key={item.id} className="story-media story-media--roll" data-roll-layer={item.id} data-src={sitePath(item.image)} width="1672" height="940" alt="" decoding="async" />
               ))}
-              <video ref={closingVideo} className="story-media story-media--closing" muted playsInline preload="auto" poster={sitePath("/media/box-open.webp")}>
+              <video ref={closingVideo} className="story-media story-media--closing" muted playsInline preload="none" poster={sitePath("/media/box-open.webp")}>
                 <source media="(max-width: 599px)" src={sitePath("/media/ryo-scroll-return-close-mobile-v3.mp4")} type="video/mp4" />
                 <source src={sitePath("/media/ryo-scroll-return-close-v2.mp4")} type="video/mp4" />
               </video>
@@ -462,7 +505,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
 
         <section className="reduced-story" aria-label="Recorrido RYŌ sin movimiento">
           <header className="reduced-story__intro" id="reduced-inicio">
-            <img src={sitePath("/media/box-front.jpg")} width="1672" height="940" alt="Caja azul RYŌ cerrada y centrada en una escena de estudio oscura" />
+            <img src={sitePath("/media/box-front.jpg")} width="1672" height="940" loading="lazy" alt="Caja azul RYŌ cerrada y centrada en una escena de estudio oscura" />
             <div className="reduced-roll__copy"><p className="eyebrow">Sushi de autor · Delivery &amp; pick up</p><h1>El corte es nuestro. El toque final es tuyo.</h1><p>Alta cocina japonesa, preparada para disfrutarse donde tú elijas.</p></div>
           </header>
           <div id="reduced-anatomia">{items.map((item, index) => <RollCopy key={item.id} item={item} index={index} />)}</div>

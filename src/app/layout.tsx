@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   },
   description: "RYŌ Sushi: una experiencia audiovisual de alta cocina japonesa para disfrutar en casa.",
   alternates: {canonical: `${productionUrl}/`},
-  icons: {icon: sitePath("/media/ryo-overlapping-arcs-pattern.png")},
+  icons: {icon: sitePath("/media/ryo-site-icon.png")},
   openGraph: {
     type: "website",
     locale: "es_VE",
@@ -32,7 +32,7 @@ export const viewport: Viewport = {
 };
 
 const visualTokens = {
-  "--pattern-image": `url("${sitePath("/media/ryo-overlapping-arcs-pattern.png")}")`,
+  "--pattern-image": `url("${sitePath("/media/ryo-overlapping-arcs-pattern-web.webp")}")`,
 } as CSSProperties;
 
 export default function RootLayout({children}: Readonly<{children: React.ReactNode}>) {
