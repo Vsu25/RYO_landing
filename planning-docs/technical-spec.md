@@ -42,14 +42,14 @@ No se incorpora Vercel, backend, CMS, base de datos, autenticación, analytics, 
 | `src/app/menu/page.tsx` | Ruta prerenderizada, metadata propia y límite de indexación del menú. |
 | `src/components/menu/` | Menú React compartido por las vistas `Explorar / Lista`. |
 | `src/data/menu.json` | Diez platos; fuente única para ambas vistas y cuatro anatomías. |
-| `public/media/` | Doce assets autorizados y publicables. |
+| `public/media/` | Quince assets autorizados y publicables, incluidos tres derivados móviles. |
 | `public/menu-media/` | Seis derivados conceptuales seleccionados para la preview del menú. |
 | `tests/project.test.mjs` | Integridad editorial, correspondencia de media y presencia de ambas rutas en el artifact. |
 | `out/` | Export generado; nunca es fuente. |
 
 ## Contrato audiovisual
 
-La escena pinned usa una sola timeline virtual compacta, con `scrub` de `0.18`, `0.14` o `0.10` y recorridos de `12`, `10` u `8.5` alturas de viewport en escritorio, tablet o teléfono.
+La escena pinned usa una sola timeline virtual compacta. Escritorio y tablet conservan `scrub` amortiguado de `0.18` y `0.14`; teléfono usa `scrub: true` para correspondencia lineal 1:1. Los recorridos son de `12`, `10` u `8.5` alturas de viewport respectivamente.
 
 - 0–4.8 unidades: `ryo-scroll-intro-v2.mp4`.
 - 4.8–10.2 unidades: `ryo-scroll-open-playboy-v2.mp4`.
@@ -59,7 +59,7 @@ La escena pinned usa una sola timeline virtual compacta, con `scrub` de `0.18`, 
 - 32.35–34.8 unidades: línea vertical, cierre de paneles laterales, reveal `RYŌ · En casa` y entrega por scroll a la sección informativa.
 - Desde 36.65 s: escena editorial de Experiencia.
 
-Los videos permanecen muted, inline y controlados por `currentTime`. La cámara y la caja provienen del video; no se simula su movimiento con fades. El seek se limita a `duration - 0.04`, omite diferencias inferiores a 33 ms y conserva solo el objetivo más reciente. Cuando termina un seek, el siguiente se despacha después de `requestVideoFrameCallback` —o `requestAnimationFrame` como fallback— para no acumular solicitudes más rápido de lo que el decodificador puede presentar cuadros. Para un scrubbing todavía más preciso, los masters deberán exportarse con keyframes frecuentes o GOP corto.
+Los videos permanecen muted, inline y controlados por `currentTime`. La cámara y la caja provienen del video; no se simula su movimiento con fades. El seek se limita a `duration - 0.04`, omite diferencias inferiores a 33 ms y conserva solo el objetivo más reciente. Cuando termina un seek, el siguiente se despacha después de `requestVideoFrameCallback` —o `requestAnimationFrame` como fallback— para no acumular solicitudes más rápido de lo que el decodificador puede presentar cuadros. En teléfonos, cada `<video>` selecciona primero un derivado H.264 de 960 × 540 px con GOP 6 y `faststart`; los V2 originales quedan como fuente de escritorio/tablet y fallback.
 
 GSAP se inicializa dentro de `useGSAP`, con scope y cleanup. Se priorizan transforms y opacidad. `prefers-reduced-motion` elimina pin, scrub y stinger y muestra una narración estática equivalente.
 
@@ -91,7 +91,7 @@ No se usa `assetPrefix`; todos los assets de aplicación pasan por `sitePath()`.
 
 ## Presupuesto y accesibilidad
 
-- Tres videos autorizados, aproximadamente 12.5 MB en conjunto.
+- Tres videos V2 autorizados para escritorio/tablet y tres derivados móviles de scrubbing; cada viewport descarga únicamente una variante por clip.
 - Dimensiones explícitas y posters para media crítica.
 - Imágenes del menú con lazy loading salvo selección activa.
 - Landmarks, headings, controles nativos, skip link, foco visible y estados `aria-live`.

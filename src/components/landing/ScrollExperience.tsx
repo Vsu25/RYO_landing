@@ -262,7 +262,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
         end: () => `+=${Math.round(window.innerHeight * (phoneViewport ? 8.5 : tabletViewport ? 10 : 12))}`,
         pin: true,
         pinSpacing: true,
-        scrub: phoneViewport ? 0.1 : tabletViewport ? 0.14 : 0.18,
+        scrub: phoneViewport ? true : tabletViewport ? 0.14 : 0.18,
         anticipatePin: 1,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
@@ -385,15 +385,18 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
             <div className="story-ambient" aria-hidden="true"><i /><i /></div>
             <div className="story-media-frame" aria-hidden="true">
               <video ref={introVideo} className="story-media story-media--intro" muted playsInline preload="auto" poster={sitePath("/media/box-front.jpg")}>
+                <source media="(max-width: 599px)" src={sitePath("/media/ryo-scroll-intro-mobile-v3.mp4")} type="video/mp4" />
                 <source src={sitePath("/media/ryo-scroll-intro-v2.mp4")} type="video/mp4" />
               </video>
               <video ref={openingVideo} className="story-media story-media--opening" muted playsInline preload="auto" poster={sitePath("/media/box-closed.webp")}>
+                <source media="(max-width: 599px)" src={sitePath("/media/ryo-scroll-open-playboy-mobile-v3.mp4")} type="video/mp4" />
                 <source src={sitePath("/media/ryo-scroll-open-playboy-v2.mp4")} type="video/mp4" />
               </video>
               {items.map((item) => (
                 <img key={item.id} className="story-media story-media--roll" data-roll-layer={item.id} src={sitePath(item.image)} width="1672" height="940" alt="" loading="eager" decoding="async" />
               ))}
               <video ref={closingVideo} className="story-media story-media--closing" muted playsInline preload="auto" poster={sitePath("/media/box-open.webp")}>
+                <source media="(max-width: 599px)" src={sitePath("/media/ryo-scroll-return-close-mobile-v3.mp4")} type="video/mp4" />
                 <source src={sitePath("/media/ryo-scroll-return-close-v2.mp4")} type="video/mp4" />
               </video>
               <div className="story-media-shade" />

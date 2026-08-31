@@ -71,7 +71,7 @@ El footer cierra sobre navy con el patrón de arcos RYŌ en baja opacidad y una 
 
 ## Ritmo del recorrido audiovisual
 
-La timeline conserva hitos temporales para entrada, apertura, cada anatomía, cierre y salida, pero no hace snap entre ellos. Cada tramo traduce su progreso a `currentTime` dentro de una timeline virtual compacta; el seek se agrupa y espera al frame presentado antes de enviar el siguiente objetivo al video. El scrub queda en `0.18` para escritorio, `0.14` para tablet y `0.10` para teléfono. El recorrido asigna aproximadamente `12`, `10` y `8.5` alturas de viewport respectivamente: el gesto produce movimiento perceptible con menos arrastre, sin quitar control sobre las pausas anatómicas. En viewport compacto, el primer gesto que intente atravesar completamente el tramo final vuelve suavemente al inicio del cierre; el siguiente gesto continúa con normalidad. Este checkpoint garantiza que el clip de salida aparezca incluso ante un flick largo, sin convertir el resto del recorrido en secciones con snap. Los tres clips se precargan para reducir pausas al entrar en cada tramo. La fluidez definitiva también depende de que los masters tengan keyframes frecuentes; una exportación con GOP corto o intra-frame es la siguiente optimización de media si se busca scrubbing de precisión editorial.
+La timeline conserva hitos temporales para entrada, apertura, cada anatomía, cierre y salida, pero no hace snap entre ellos. Cada tramo traduce su progreso a `currentTime` dentro de una timeline virtual compacta; el seek se agrupa y espera al frame presentado antes de enviar el siguiente objetivo al video. El scrub queda en `0.18` para escritorio y `0.14` para tablet; teléfono usa relación directa 1:1 mediante `scrub: true`. El recorrido asigna aproximadamente `12`, `10` y `8.5` alturas de viewport respectivamente: el gesto produce movimiento perceptible sin quitar control sobre las pausas anatómicas. No existe corrección automática de posición ni rebobinado del documento. Los tres clips se precargan para reducir pausas al entrar en cada tramo y, en teléfono, se seleccionan derivados de 960 × 540 px con GOP 6 para evitar decodificar desde el inicio ante cada seek.
 
 ## Menú dinámico
 
@@ -97,7 +97,7 @@ La timeline conserva hitos temporales para entrada, apertura, cada anatomía, ci
 |---|---|
 | Desktop | Composiciones amplias, escenas sticky selectivas y anotaciones laterales. |
 | Tablet | Recorrido sticky de `10` alturas de viewport, scrub de `0.14`, panel curvo de navegación, encuadre de caja que hace zoom-out hacia la anatomía superior, banda táctil con controles y bento de dos columnas. |
-| Móvil | Recorrido sticky de `8.5` alturas de viewport, scrub de `0.10`, composición activa de borde a borde, roll protagonista junto al navbar, cuatro ingredientes automáticos, selector directo `01–04`, navegación curva y bento lineal. |
+| Móvil | Recorrido sticky de `8.5` alturas de viewport, scrub directo 1:1 y videos GOP 6 de 960 × 540 px, composición activa de borde a borde, roll protagonista junto al navbar, cuatro ingredientes automáticos, selector directo `01–04`, navegación curva y bento lineal. |
 | Reduced motion | Frame final y contenido completo sin parallax, scrub o loops esenciales. |
 
 ## Criterios de aceptación del blueprint

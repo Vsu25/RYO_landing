@@ -37,12 +37,13 @@ test("la fuente del menú conserva diez platos documentados", () => {
   }
 });
 
-test("la landing pública contiene solo los doce masters aprobados", () => {
+test("la landing pública contiene solo los masters aprobados", () => {
   const expected = [
     "box-closed.webp", "box-front.jpg", "box-open.webp",
     "roll-koga.webp", "roll-playboy.webp", "roll-sei.webp", "roll-yuzu.webp",
-    "ryo-overlapping-arcs-pattern.png", "ryo-scroll-intro-v2.mp4",
-    "ryo-scroll-open-playboy-v2.mp4", "ryo-scroll-return-close-v2.mp4",
+    "ryo-overlapping-arcs-pattern.png", "ryo-scroll-intro-mobile-v3.mp4", "ryo-scroll-intro-v2.mp4",
+    "ryo-scroll-open-playboy-mobile-v3.mp4", "ryo-scroll-open-playboy-v2.mp4",
+    "ryo-scroll-return-close-mobile-v3.mp4", "ryo-scroll-return-close-v2.mp4",
     "ryo-wordmark-gold.png",
   ];
   assert.deepEqual(readdirSync(publicMedia).sort(), expected);
@@ -67,6 +68,9 @@ test("el export estático incluye la ruta y los visuales del menú", () => {
   assert.ok(existsSync(resolve(out, "menu-media/menu-fuji.webp")), "faltan los visuales públicos del menú");
   const indexHtml = readFileSync(resolve(out, "index.html"), "utf8");
   const menuHtml = readFileSync(resolve(out, "menu/index.html"), "utf8");
+  for (const clip of ["ryo-scroll-intro-mobile-v3.mp4", "ryo-scroll-open-playboy-mobile-v3.mp4", "ryo-scroll-return-close-mobile-v3.mp4"]) {
+    assert.ok(indexHtml.includes(`src="${basePath}/media/${clip}"`), `falta el derivado móvil ${clip}`);
+  }
   assert.ok(indexHtml.includes(`href="${basePath}/menu/?view=explore#menu-content"`), "falta el enlace prefijado a Explorar");
   assert.ok(indexHtml.includes(`href="${basePath}/menu/?view=list#menu-content"`), "falta el enlace prefijado a Lista");
   assert.ok(menuHtml.includes(`src="${basePath}/menu-media/menu-fuji.webp"`), "falta el prefijo de media del menú");
@@ -112,6 +116,8 @@ test("el encuadre móvil permanece estable y el cierre no rebobina el scroll", (
   assert.match(scrollExperience, /const anatomyShiftX = phoneViewport \? window\.innerWidth \* 0\.08 : 0/);
   assert.match(scrollExperience, /x: anatomyShiftX/);
   assert.match(scrollExperience, /scale: closingScale, x: 0/);
+  assert.match(scrollExperience, /scrub: phoneViewport \? true : tabletViewport \? 0\.14 : 0\.18/);
+  assert.match(scrollExperience, /media="\(max-width: 599px\)" src=\{sitePath\("\/media\/ryo-scroll-intro-mobile-v3\.mp4"\)\}/);
   assert.doesNotMatch(scrollExperience, /closingCheckpointUsed|closingSettleTimer|closingStartProgress|closingEndProgress/);
   assert.doesNotMatch(scrollExperience, /self\.start \+ \(self\.end - self\.start\) \* closingStartProgress/);
   assert.doesNotMatch(scrollStory, /min-height:900px|250vw/);
