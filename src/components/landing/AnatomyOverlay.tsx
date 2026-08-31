@@ -18,6 +18,7 @@ export function AnatomyOverlay({item, index, active}: AnatomyOverlayProps) {
   const connectors = useRef<SVGSVGElement>(null);
   const ingredientStrip = useRef<HTMLUListElement>(null);
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
+  const pathFrame = useRef(0);
   const [activeConnector, setActiveConnector] = useState(-1);
   const [paths, setPaths] = useState(() => item.anatomy.points.map(([x, y]) => `M ${x} ${y} L ${x} ${y}`));
   const remainingIngredients = item.anatomy.order
@@ -45,26 +46,26 @@ export function AnatomyOverlay({item, index, active}: AnatomyOverlayProps) {
     }));
   }, [item]);
 
+  const schedulePathUpdate = useCallback(() => {
+    cancelAnimationFrame(pathFrame.current);
+    pathFrame.current = requestAnimationFrame(updatePaths);
+  }, [updatePaths]);
+
   useEffect(() => {
-    let frame = requestAnimationFrame(updatePaths);
-    const scheduleUpdate = () => {
-      cancelAnimationFrame(frame);
-      frame = requestAnimationFrame(updatePaths);
-    };
-    const observer = new ResizeObserver(scheduleUpdate);
+    schedulePathUpdate();
+    const observer = new ResizeObserver(schedulePathUpdate);
     if (connectors.current) observer.observe(connectors.current);
     return () => {
-      cancelAnimationFrame(frame);
+      cancelAnimationFrame(pathFrame.current);
       observer.disconnect();
     };
-  }, [updatePaths]);
+  }, [schedulePathUpdate]);
 
   useEffect(() => {
     if (!active || !window.matchMedia("(max-width: 600px)").matches) return;
     let cursor = 0;
     const activate = () => {
       setActiveConnector(item.anatomy.featured[cursor] ?? item.anatomy.main);
-      requestAnimationFrame(updatePaths);
     };
     activate();
     const interval = window.setInterval(() => {
@@ -72,7 +73,7 @@ export function AnatomyOverlay({item, index, active}: AnatomyOverlayProps) {
       activate();
     }, 2200);
     return () => window.clearInterval(interval);
-  }, [active, item.id, item.anatomy, updatePaths]);
+  }, [active, item.id, item.anatomy]);
 
   useGSAP(() => {
     if (!active || !root.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -86,14 +87,13 @@ export function AnatomyOverlay({item, index, active}: AnatomyOverlayProps) {
 
   const select = (lineIndex: number) => {
     setActiveConnector(lineIndex);
-    requestAnimationFrame(updatePaths);
+    schedulePathUpdate();
   };
 
   const moveIngredients = (direction: -1 | 1) => {
     const strip = ingredientStrip.current;
     if (!strip) return;
     strip.scrollBy({left: direction * Math.max(220, strip.clientWidth * 0.72), behavior: "smooth"});
-    requestAnimationFrame(updatePaths);
   };
 
   return (
@@ -120,7 +120,7 @@ export function AnatomyOverlay({item, index, active}: AnatomyOverlayProps) {
         ))}
       </div>
       <button className="anatomy-scroll-control anatomy-scroll-control--previous" type="button" aria-label="Ver ingredientes anteriores" onClick={() => moveIngredients(-1)}><span aria-hidden="true">←</span></button>
-      <ul ref={ingredientStrip} className="scroll-ingredients" aria-label="Ingredientes confirmados" tabIndex={0} onScroll={updatePaths}>
+      <ul ref={ingredientStrip} className="scroll-ingredients" aria-label="Ingredientes confirmados" tabIndex={0} onScroll={schedulePathUpdate}>
         {item.anatomy.order.map((ingredientIndex, lineIndex) => {
           const mobileOrder = item.anatomy.featured.indexOf(lineIndex);
           return (

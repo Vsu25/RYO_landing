@@ -2,6 +2,7 @@ import type {Metadata} from "next";
 import {MenuExperience} from "@/components/menu/MenuExperience";
 import {ContactFooter} from "@/components/shared/ContactFooter";
 import {productionUrl} from "@/lib/site-path";
+import "./menu.css";
 
 export const metadata: Metadata = {
   title: "Menú",

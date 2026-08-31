@@ -66,14 +66,14 @@ function RollCopy({item, index, transcript = false}: {item: AnatomyItem; index: 
 }
 
 export function ScrollExperience({items}: {items: AnatomyItem[]}) {
-  ReactDOM.preload(sitePath("/media/box-front.jpg"), {as: "image", fetchPriority: "high"});
+  ReactDOM.preload(sitePath("/media/box-front-web.webp"), {as: "image", fetchPriority: "high"});
   const root = useRef<HTMLDivElement>(null);
   const story = useRef<HTMLElement>(null);
-  const stage = useRef<HTMLDivElement>(null);
   const introVideo = useRef<HTMLVideoElement>(null);
   const openingVideo = useRef<HTMLVideoElement>(null);
   const closingVideo = useRef<HTMLVideoElement>(null);
   const progressBar = useRef<HTMLDivElement>(null);
+  const storyCounterProgress = useRef<HTMLSpanElement>(null);
   const [replayToken, setReplayToken] = useState(0);
   const [activeRoll, setActiveRoll] = useState(0);
   const [anatomyActive, setAnatomyActive] = useState(false);
@@ -95,8 +95,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
   useGSAP(() => {
     const container = root.current;
     const storyElement = story.current;
-    const stageElement = stage.current;
-    if (!container || !storyElement || !stageElement) return;
+    if (!container || !storyElement) return;
 
     const media = {
       intro: introVideo.current,
@@ -147,6 +146,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
           if (layer && !layer.hasAttribute("src") && layer.dataset.src) layer.src = layer.dataset.src;
         });
         if (media.opening) {
+          media.opening.poster = media.opening.dataset.poster ?? "";
           media.opening.preload = "auto";
           media.opening.load();
         }
@@ -156,6 +156,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
         if (closingMediaPrimed) return;
         closingMediaPrimed = true;
         if (media.closing) {
+          media.closing.poster = media.closing.dataset.poster ?? "";
           media.closing.preload = "auto";
           media.closing.load();
         }
@@ -205,7 +206,6 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
           setCurrentChapter(nextChapter);
           if (storyStatus) storyStatus.textContent = chapterStatus[nextChapter] ?? "";
         }
-        stageElement.style.setProperty("--story-progress", timeline.progress().toFixed(4));
       };
 
       gsap.set(allMedia, {autoAlpha: 0, scale: 1, transformOrigin: "50% 50%"});
@@ -218,21 +218,18 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
       gsap.set(handoffLine, {scaleY: 0, transformOrigin: "top center"});
       gsap.set(handoffLabel, {autoAlpha: 0, yPercent: 30});
       gsap.set(mediaFrame, {xPercent: -50, yPercent: -50, x: 0, scale: focusScale, y: focusShift, transformOrigin: "50% 50%"});
-      gsap.set(stageElement, {"--glow-x": "72%", "--glow-y": "52%"});
 
       timeline
         .addLabel("intro", 0)
         .to({}, {duration: storyTiming.intro.end - storyTiming.intro.start}, "intro")
         .to(hero, {autoAlpha: 0, y: -26, duration: 0.7, ease: "power2.inOut"}, 3.65)
         .to(chapterRail, {autoAlpha: 0.78, duration: 0.45, ease: "power2.out"}, 3.4)
-        .to(stageElement, {"--glow-x": "59%", "--glow-y": "57%", duration: 3.6}, 1)
         .to(mediaFrame, compactViewport ? {scale: focusScale * 0.97, duration: 3.5, ease: "sine.inOut"} : {duration: 3.5}, 0.6)
         .addLabel("open", storyTiming.opening.start)
         .set(media.opening, {autoAlpha: 1}, "open")
         .set(media.intro, {autoAlpha: 0}, "open+=.02")
         .to({}, {duration: storyTiming.opening.end - storyTiming.opening.start}, "open")
         .to(mediaFrame, compactViewport ? {scale: 1, y: 0, duration: storyTiming.opening.end - storyTiming.opening.start, ease: "power2.inOut"} : {duration: storyTiming.opening.end - storyTiming.opening.start}, "open")
-        .to(stageElement, {"--glow-x": "48%", "--glow-y": "50%", duration: 4.5}, "open+=.45")
         .to(mediaFrame, {x: anatomyShiftX, duration: 0.75, ease: "power2.inOut"}, storyTiming.anatomy.start - 0.7)
         .to(anatomy, {autoAlpha: 1, duration: 0.38, ease: "power2.out"}, storyTiming.anatomy.start)
         .to(mediaShade, {autoAlpha: 0.24, duration: 0.42, ease: "power2.out"}, storyTiming.anatomy.start - 0.1)
@@ -255,12 +252,10 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
         .fromTo(media.closing, {autoAlpha: 0}, {autoAlpha: 1, duration: 0.32, ease: "power2.inOut", immediateRender: false}, "close")
         .to({}, {duration: storyTiming.closing.end - storyTiming.closing.start}, "close")
         .to(mediaFrame, compactViewport ? {scale: closingScale, x: 0, y: focusShift, duration: storyTiming.closing.end - storyTiming.closing.start, ease: "power2.inOut"} : {duration: storyTiming.closing.end - storyTiming.closing.start}, "close")
-        .to(stageElement, {"--glow-x": "61%", "--glow-y": "59%", duration: 4.2}, "close+=.3")
         .addLabel("finale", storyTiming.experience.start)
         .fromTo(experience, {autoAlpha: 0}, {autoAlpha: 1, duration: 0.48, ease: "power2.out", immediateRender: false}, "finale+=.18")
         .fromTo(experience.querySelectorAll(".eyebrow,.type-line > span,p,.experience-overlay__actions"), {autoAlpha: 0, y: 32}, {autoAlpha: 1, y: 0, duration: 0.58, stagger: 0.07, ease: "power3.out", immediateRender: false}, "finale+=.22")
         .to(chapterRail, {autoAlpha: 0, duration: 0.3}, "finale")
-        .to(stageElement, {"--glow-x": "48%", "--glow-y": "50%", duration: 1.7}, "finale+=.25")
         .to(experience, {autoAlpha: 0, y: -16, duration: 0.32, ease: "power2.in"}, storyTiming.experience.end - 0.2)
         .set(handoff, {autoAlpha: 1}, storyTiming.handoff.start)
         .to(handoffLine, {scaleY: 1, duration: 0.55, ease: "power2.inOut"}, storyTiming.handoff.start)
@@ -295,6 +290,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
           if (self.progress > 0.02) primeOpeningMedia();
           if (self.progress > 0.38) primeClosingMedia();
           if (progressBar.current) gsap.set(progressBar.current, {scaleX: self.progress, transformOrigin: "left center"});
+          if (storyCounterProgress.current) gsap.set(storyCounterProgress.current, {scaleX: self.progress, transformOrigin: "left center"});
           const nextNavState = self.progress > 0.015;
           if (nextNavState !== navIsScrolled) {
             navIsScrolled = nextNavState;
@@ -424,21 +420,21 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
           <span className="story-anchor" id="anatomia" style={{top: "29%"}} aria-hidden="true" />
           <span className="story-anchor" id="experiencia" style={{top: "82%"}} aria-hidden="true" />
 
-          <div ref={stage} className="story-stage">
+          <div className="story-stage">
             <div className="story-ambient" aria-hidden="true"><i /><i /></div>
             <div className="story-media-frame" aria-hidden="true">
-              <video ref={introVideo} className="story-media story-media--intro" muted playsInline preload="auto" poster={sitePath("/media/box-front.jpg")}>
+              <video ref={introVideo} className="story-media story-media--intro" muted playsInline preload="auto" poster={sitePath("/media/box-front-web.webp")}>
                 <source media="(max-width: 599px)" src={sitePath("/media/ryo-scroll-intro-mobile-v3.mp4")} type="video/mp4" />
                 <source src={sitePath("/media/ryo-scroll-intro-v2.mp4")} type="video/mp4" />
               </video>
-              <video ref={openingVideo} className="story-media story-media--opening" muted playsInline preload="none" poster={sitePath("/media/box-closed.webp")}>
+              <video ref={openingVideo} className="story-media story-media--opening" muted playsInline preload="none" data-poster={sitePath("/media/box-closed.webp")}>
                 <source media="(max-width: 599px)" src={sitePath("/media/ryo-scroll-open-playboy-mobile-v3.mp4")} type="video/mp4" />
                 <source src={sitePath("/media/ryo-scroll-open-playboy-v2.mp4")} type="video/mp4" />
               </video>
               {items.map((item) => (
                 <img key={item.id} className="story-media story-media--roll" data-roll-layer={item.id} data-src={sitePath(item.image)} width="1672" height="940" alt="" decoding="async" />
               ))}
-              <video ref={closingVideo} className="story-media story-media--closing" muted playsInline preload="none" poster={sitePath("/media/box-open.webp")}>
+              <video ref={closingVideo} className="story-media story-media--closing" muted playsInline preload="none" data-poster={sitePath("/media/box-open.webp")}>
                 <source media="(max-width: 599px)" src={sitePath("/media/ryo-scroll-return-close-mobile-v3.mp4")} type="video/mp4" />
                 <source src={sitePath("/media/ryo-scroll-return-close-v2.mp4")} type="video/mp4" />
               </video>
@@ -487,7 +483,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
               ))}
             </div>
 
-            <div className="story-counter" aria-hidden="true"><span>{String(currentChapter + 1).padStart(2, "0")}</span><i /><span>05</span></div>
+            <div className="story-counter" aria-hidden="true"><span>{String(currentChapter + 1).padStart(2, "0")}</span><i><span ref={storyCounterProgress} /></i><span>05</span></div>
             <div className="story-handoff" aria-hidden="true">
               <div className="story-handoff__door story-handoff__door--left" />
               <div className="story-handoff__door story-handoff__door--right" />
@@ -505,7 +501,7 @@ export function ScrollExperience({items}: {items: AnatomyItem[]}) {
 
         <section className="reduced-story" aria-label="Recorrido RYŌ sin movimiento">
           <header className="reduced-story__intro" id="reduced-inicio">
-            <img src={sitePath("/media/box-front.jpg")} width="1672" height="940" loading="lazy" alt="Caja azul RYŌ cerrada y centrada en una escena de estudio oscura" />
+            <img src={sitePath("/media/box-front-web.webp")} width="1672" height="941" loading="lazy" alt="Caja azul RYŌ cerrada y centrada en una escena de estudio oscura" />
             <div className="reduced-roll__copy"><p className="eyebrow">Sushi de autor · Delivery &amp; pick up</p><h1>El corte es nuestro. El toque final es tuyo.</h1><p>Alta cocina japonesa, preparada para disfrutarse donde tú elijas.</p></div>
           </header>
           <div id="reduced-anatomia">{items.map((item, index) => <RollCopy key={item.id} item={item} index={index} />)}</div>

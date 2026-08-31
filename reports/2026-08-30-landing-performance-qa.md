@@ -2,7 +2,7 @@
 
 **Fecha:** 30.08.2026
 
-**Estado:** implementado y verificado localmente; medición pública posterior al despliegue pendiente.
+**Estado:** implementado y verificado en build de producción; comprobación pública incluida en el despliegue de Pages.
 
 ## Alcance
 
@@ -25,6 +25,14 @@ Este pase responde a los hallazgos aportados desde PageSpeed Insights: vida de c
 6. La geometría del botón magnético se mide al entrar, no en cada movimiento. El `ResizeObserver` anatómico agrupa la actualización de conectores en un solo `requestAnimationFrame`.
 7. Se eliminaron refreshes repetidos de ScrollTrigger durante la carga de media y fuentes. Los eventos `loadedmetadata` y `loadeddata` sincronizan el tiempo solicitado sin alterar el documento.
 
+## Segundo pase sobre la landing principal
+
+La integración del menú permitió detectar que su CSS seguía dentro de la hoja global. Se separaron los estilos por ruta: `globals.css` conserva únicamente base, navegación y footer; `scroll-story.css` se carga desde `/`; `menu.css`, solo desde `/menu/`. El export resultante entrega a la landing 9 616 B de CSS comprimido en vez del bloque único previo de aproximadamente 10,8 KB, y la ruta de menú recibe 5 935 B entre base y estilos propios.
+
+El póster inicial de 1672 × 941 px pasó de JPEG de 292 KB a WebP de 176 KB, una reducción aproximada del 40 % con PSNR 45,66 dB y validación visual a resolución original. Los posters de apertura y cierre ahora se asignan únicamente al preparar cada clip.
+
+También se retiraron cuatro animaciones de variables CSS que repintaban el gradiente ambiental y una variable de progreso aplicada al escenario completo. Las barras actualizan su `scaleX` directamente; la posición anatómica agrupa resize y scroll táctil en un solo `requestAnimationFrame`, y la rotación automática móvil ya no vuelve a medir una geometría que no cambió.
+
 ## Impacto medido en archivos y carga inicial
 
 | Recurso | Antes | Después | Resultado |
@@ -40,15 +48,15 @@ En una entrada limpia del artifact local posterior al cambio se observaron 14 as
 ## Diagnósticos residuales y criterio
 
 - **Cache lifetime:** GitHub Pages fija 10 minutos. Resolverlo completamente exige un CDN u hosting con headers configurables; no se introduce un service worker ni un cambio de proveedor sin una decisión de arquitectura.
-- **Render blocking:** permanece un único CSS necesario, de aproximadamente 10,8 KB comprimido. No se activó `experimental.inlineCss` porque duplicaría CSS en HTML/RSC y perjudicaría visitas repetidas para una ganancia pequeña.
+- **Render blocking:** la landing conserva dos chunks necesarios —base y recorrido— por un total de 9 616 B comprimidos. No se activó `experimental.inlineCss` porque duplicaría CSS en HTML/RSC y perjudicaría visitas repetidas para una ganancia pequeña.
 - **Unused / legacy JavaScript:** React, Next y GSAP forman el runtime aprobado de esta experiencia. Se retiró la descarga anticipada de la ruta del menú; los bundles restantes sostienen navegación, accesibilidad, timeline y scrubbing. Una reducción mayor requiere medir cobertura pública por chunk antes de retirar funcionalidad.
 - **Payload total:** el sitio conserva seis fuentes de video porque desktop y móvil necesitan codificaciones distintas, pero ya no compiten todas en la entrada. La siguiente mejora material sería un encode moderno adicional negociado por navegador, que debe validarse visualmente antes de reemplazar H.264.
 
 ## Verificación
 
-- `npm run check`: TypeScript, export estático y ocho contratos automatizados aprobados.
+- `NEXT_PUBLIC_BASE_PATH=/RYO_landing npm run check`: TypeScript, export estático y diez contratos automatizados aprobados.
 - Artifact inicial: un video, sin media del menú y sin imágenes anatómicas antes de interacción.
 - Scrub: recorrido incremental completo hacia adelante y atrás verificado en el navegador integrado.
-- Calidad: MP4 visual sin reencode; WebP de identidad en modo lossless; masters originales preservados.
+- Calidad: entrada, anatomía, cierre y `RYŌ en casa` comprobados visualmente; MP4 sin reencode y masters originales preservados.
 
 PageSpeed debe repetirse sobre la URL pública después del despliegue y con la caché de la medición limpia. El API automatizado respondió 429 durante esta revisión, por lo que este informe no inventa una puntuación posterior.

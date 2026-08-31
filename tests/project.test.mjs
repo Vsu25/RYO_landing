@@ -10,7 +10,11 @@ const publicMedia = resolve(projectRoot, "public/media");
 const publicMenuMedia = resolve(projectRoot, "public/menu-media");
 const readme = readFileSync(resolve(projectRoot, "README.md"), "utf8");
 const scrollStory = readFileSync(resolve(projectRoot, "src/app/scroll-story.css"), "utf8");
+const globalStyles = readFileSync(resolve(projectRoot, "src/app/globals.css"), "utf8");
+const rootLayout = readFileSync(resolve(projectRoot, "src/app/layout.tsx"), "utf8");
 const homePage = readFileSync(resolve(projectRoot, "src/app/page.tsx"), "utf8");
+const menuPage = readFileSync(resolve(projectRoot, "src/app/menu/page.tsx"), "utf8");
+const menuStyles = readFileSync(resolve(projectRoot, "src/app/menu/menu.css"), "utf8");
 const scrollExperience = readFileSync(resolve(projectRoot, "src/components/landing/ScrollExperience.tsx"), "utf8");
 const menuExperience = readFileSync(resolve(projectRoot, "src/components/menu/MenuExperience.tsx"), "utf8");
 
@@ -40,7 +44,7 @@ test("la fuente del menú conserva diez platos documentados", () => {
 
 test("la landing pública contiene solo los masters aprobados", () => {
   const expected = [
-    "box-closed.webp", "box-front.jpg", "box-open.webp",
+    "box-closed.webp", "box-front-web.webp", "box-front.jpg", "box-open.webp",
     "roll-koga.webp", "roll-playboy.webp", "roll-sei.webp", "roll-yuzu.webp",
     "ryo-overlapping-arcs-pattern-web.webp", "ryo-overlapping-arcs-pattern.png", "ryo-scroll-intro-mobile-v3.mp4", "ryo-scroll-intro-v2.mp4",
     "ryo-scroll-open-playboy-mobile-v3.mp4", "ryo-scroll-open-playboy-v2.mp4",
@@ -123,10 +127,24 @@ test("la carga inicial reserva la red para el primer clip", () => {
   assert.match(scrollExperience, /story-media--intro[^\n]+preload="auto"/);
   assert.match(scrollExperience, /story-media--opening[^\n]+preload="none"/);
   assert.match(scrollExperience, /story-media--closing[^\n]+preload="none"/);
+  assert.match(scrollExperience, /box-front-web\.webp/);
+  assert.match(scrollExperience, /data-poster=\{sitePath\("\/media\/box-closed\.webp"\)\}/);
+  assert.match(scrollExperience, /data-poster=\{sitePath\("\/media\/box-open\.webp"\)\}/);
   assert.match(scrollExperience, /data-src=\{sitePath\(item\.image\)\}/);
   assert.match(scrollExperience, /primeOpeningMedia/);
   assert.match(scrollExperience, /primeClosingMedia/);
   assert.doesNotMatch(scrollExperience, /ScrollTrigger\.refresh\(\)/);
+});
+
+test("la landing no descarga estilos exclusivos del menú ni repinta el escenario por progreso", () => {
+  assert.match(homePage, /import "\.\/scroll-story\.css"/);
+  assert.doesNotMatch(rootLayout, /scroll-story\.css/);
+  assert.match(menuPage, /import "\.\/menu\.css"/);
+  assert.match(menuStyles, /\.menu-explorer/);
+  assert.doesNotMatch(globalStyles, /\.menu-explorer|\.dish-picker|\.menu-catalogue/);
+  assert.doesNotMatch(scrollExperience, /--story-progress|--glow-x|--glow-y/);
+  assert.match(scrollExperience, /storyCounterProgress/);
+  assert.match(scrollStory, /\.story-counter i span/);
 });
 
 test("el encuadre móvil permanece estable y el cierre no rebobina el scroll", () => {

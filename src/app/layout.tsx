@@ -2,7 +2,6 @@ import type {CSSProperties} from "react";
 import type {Metadata, Viewport} from "next";
 import {productionUrl, sitePath} from "@/lib/site-path";
 import "./globals.css";
-import "./scroll-story.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(productionUrl),

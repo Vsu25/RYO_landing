@@ -42,7 +42,7 @@ No se incorpora Vercel, backend, CMS, base de datos, autenticación, analytics, 
 | `src/app/menu/page.tsx` | Ruta prerenderizada, metadata propia y límite de indexación del menú. |
 | `src/components/menu/` | Menú React compartido por las vistas `Explorar / Lista`. |
 | `src/data/menu.json` | Diez platos; fuente única para ambas vistas y cuatro anatomías. |
-| `public/media/` | Dieciocho assets autorizados y publicables, incluidos tres derivados móviles y tres derivados ligeros de marca. |
+| `public/media/` | Diecinueve assets autorizados y publicables, incluidos tres derivados móviles, tres derivados ligeros de marca y el póster WebP crítico de la caja. |
 | `public/menu-media/` | Seis derivados conceptuales seleccionados para la preview del menú. |
 | `tests/project.test.mjs` | Integridad editorial, correspondencia de media y presencia de ambas rutas en el artifact. |
 | `out/` | Export generado; nunca es fuente. |
@@ -61,7 +61,7 @@ La escena pinned usa una sola timeline virtual compacta. Escritorio y tablet con
 
 Los videos permanecen muted, inline y controlados por `currentTime`. La cámara y la caja provienen del video; no se simula su movimiento con fades. El seek se limita a `duration - 0.04`, omite diferencias inferiores a 33 ms y conserva solo el objetivo más reciente. Cuando termina un seek, el siguiente se despacha después de `requestVideoFrameCallback` —o `requestAnimationFrame` como fallback— para no acumular solicitudes más rápido de lo que el decodificador puede presentar cuadros. En teléfonos, cada `<video>` selecciona primero un derivado H.264 de 960 × 540 px con GOP 6 y `faststart`; los V2 originales quedan como fuente de escritorio/tablet y fallback.
 
-La estrategia de descubrimiento reserva `preload="auto"` para la introducción. Apertura y capas de rolls se preparan al primer gesto o al entrar en el primer 2 % de la historia; el cierre, antes de su ventana al 38 %. Los eventos de media sincronizan el `currentTime` pendiente cuando termina la carga, sin refrescar ScrollTrigger por cada archivo. Los tres MP4 de escritorio conservan exactamente su bitstream visual: se retiró únicamente el audio que la experiencia siempre reproduce silenciado. Wordmark y patrón usan derivados WebP lossless dimensionados para su uso real; los masters PNG permanecen en la allowlist como fuente aprobada.
+La estrategia de descubrimiento reserva `preload="auto"` para la introducción. Apertura y capas de rolls se preparan al primer gesto o al entrar en el primer 2 % de la historia; el cierre, antes de su ventana al 38 %. Sus posters permanecen como `data-poster` hasta ese momento para que tampoco compitan durante la entrada. Los eventos de media sincronizan el `currentTime` pendiente cuando termina la carga, sin refrescar ScrollTrigger por cada archivo. Los tres MP4 de escritorio conservan exactamente su bitstream visual: se retiró únicamente el audio que la experiencia siempre reproduce silenciado. Wordmark, patrón y póster LCP usan derivados WebP dimensionados para su uso real; los masters aprobados permanecen disponibles como fuente.
 
 GSAP se inicializa dentro de `useGSAP`, con scope y cleanup. Se priorizan transforms y opacidad. `prefers-reduced-motion` elimina pin, scrub y stinger y muestra una narración estática equivalente.
 
@@ -97,13 +97,15 @@ GitHub Pages entrega los assets estáticos con `Cache-Control: max-age=600` y no
 
 - Tres videos V2 autorizados para escritorio/tablet y tres derivados móviles de scrubbing; cada viewport descarga únicamente una variante por clip y solo al acercarse a su tramo.
 - El LCP de la caja declara prioridad explícita; los enlaces al menú desactivan el prefetch automático para no descargar la ruta y sus imágenes durante la lectura de la landing.
-- Dimensiones explícitas y posters para media crítica.
+- Dimensiones explícitas, póster inicial WebP y posters diferidos para media todavía invisible.
 - Imágenes del menú con lazy loading salvo selección activa.
 - Landmarks, headings, controles nativos, skip link, foco visible y estados `aria-live`.
 - Anatomía operable por hover, foco y toque; línea y punto aparecen solo al activar una casilla.
 - Teléfono sin desplazamiento horizontal a `360 × 800`, `390 × 844` y `430 × 932`; cuatro ingredientes prioritarios y resumen completo permanecen dentro del viewport.
 - Menú navegable con flechas y gesto horizontal dominante de al menos 48 px.
 - Sin cookies, tracking ni transmisión de datos; WhatsApp e Instagram son enlaces externos.
+
+El CSS común permanece en `globals.css`; la coreografía de la landing se importa desde `app/page.tsx` y el sistema del menú desde `app/menu/page.tsx`. El export genera un chunk compartido y uno específico por ruta, evitando enviar a la principal los selectores de catálogo. Durante el scrub, las dos barras de progreso actualizan únicamente su propia transformación; el escenario completo ya no recibe variables CSS por frame. Las lecturas geométricas de la anatomía se agrupan en un solo `requestAnimationFrame` durante resize y desplazamiento táctil.
 
 ## Comandos y Definition of Done
 

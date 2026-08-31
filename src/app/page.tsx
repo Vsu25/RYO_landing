@@ -3,6 +3,7 @@ import {ScrollExperience} from "@/components/landing/ScrollExperience";
 import {ContactFooter} from "@/components/shared/ContactFooter";
 import {anatomyItems} from "@/data/menu";
 import {sitePath} from "@/lib/site-path";
+import "./scroll-story.css";
 
 export default function HomePage() {
   return (
