@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import {useEffect, useRef, useState} from "react";
 import {useGSAP} from "@gsap/react";
@@ -30,7 +29,7 @@ function DishVisual({item, priority = false}: {item: MenuItem; priority?: boolea
 
 export function MenuExperience() {
   const root = useRef<HTMLDivElement>(null);
-  const explorer = useRef<HTMLElement>(null);
+  const picker = useRef<HTMLDivElement>(null);
   const pickerButtons = useRef<(HTMLButtonElement | null)[]>([]);
   const pointerStart = useRef<{x: number; y: number} | null>(null);
   const [view, setView] = useState<"explore" | "list">("explore");
@@ -45,15 +44,27 @@ export function MenuExperience() {
     if (requestedView === "explore" || requestedView === "list") setView(requestedView);
   }, []);
 
+  useEffect(() => {
+    const track = picker.current;
+    const button = pickerButtons.current[current];
+    if (!track || !button) return;
+    track.scrollTo({
+      left: button.offsetLeft - (track.clientWidth - button.offsetWidth) / 2,
+      behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
+    });
+  }, [category, current]);
+
   useGSAP(() => {
     if (!root.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     const visual = root.current.querySelector(".dish-visual img");
-    const copy = root.current.querySelectorAll(".dish-copy > :not(.explorer-controls)");
+    const copy = root.current.querySelectorAll(".dish-copy > *");
     const activeCategory = root.current.querySelector('.category-nav [aria-pressed="true"]');
+    const activePicker = root.current.querySelector('.dish-picker [aria-current="true"]');
     const activeCard = root.current.querySelector(".menu-card.is-open");
     if (visual) gsap.fromTo(visual, {autoAlpha: 0.58, x: 18, scale: 1.025}, {autoAlpha: 1, x: 0, scale: 1, duration: 0.34, ease: "power2.out", clearProps: "transform,opacity,visibility"});
     gsap.fromTo(copy, {autoAlpha: 0, y: 10}, {autoAlpha: 1, y: 0, duration: 0.28, ease: "power2.out", stagger: 0.025, clearProps: "transform,opacity,visibility"});
     if (activeCategory) gsap.fromTo(activeCategory, {y: 9}, {y: 0, duration: 0.28, ease: "power2.out", clearProps: "transform"});
+    if (activePicker) gsap.fromTo(activePicker, {scale: 0.96}, {scale: 1, duration: 0.32, ease: "power2.out", clearProps: "transform"});
     if (activeCard) gsap.fromTo(activeCard, {autoAlpha: 0.72, y: 8}, {autoAlpha: 1, y: 0, duration: 0.28, ease: "power2.out", clearProps: "transform,opacity,visibility"});
   }, {scope: root, dependencies: [item?.id, category, view], revertOnUpdate: true});
 
@@ -83,11 +94,11 @@ export function MenuExperience() {
       <a className="skip-link" href="#menu-content">Saltar al menú</a>
       <BrandStinger replayToken={replayToken} />
       <nav className="site-nav" aria-label="Navegación del menú">
-        <Link className="site-nav__logo" href="/" aria-label="Volver a RYŌ Sushi"><Image src={sitePath("/media/ryo-wordmark-gold.png")} width={480} height={178} alt="RYŌ" /></Link>
-        <div className="site-nav__links"><Link href="/">Experiencia</Link><a href="#menu-content">Platos</a><a className="button button--solid" href="https://wa.me/584220382261" target="_blank" rel="noopener">Pide por WhatsApp</a></div>
+        <Link className="site-nav__logo" href="/" aria-label="Volver a RYŌ Sushi"><img src={sitePath("/media/ryo-wordmark-gold-web.webp")} width="480" height="240" alt="RYŌ" /></Link>
+        <div className="site-nav__links"><Link href="/">Experiencia</Link><a href="#menu-explorer">Platos</a><a className="button button--solid" href="https://wa.me/584220382261" target="_blank" rel="noopener">Pide por WhatsApp</a></div>
         <CurvedNav label="Abrir navegación del menú" items={[
           {label: "Experiencia", href: sitePath("/"), description: "Volver a la landing"},
-          {label: "Platos", href: "#menu-content", description: "Explorar o consultar"},
+          {label: "Platos", href: "#menu-explorer", description: "Explorar o consultar"},
           {label: "WhatsApp", href: "https://wa.me/584220382261", description: "Contacto directo", external: true},
           {label: "Instagram", href: "https://www.instagram.com/ryomcbo/", description: "@ryomcbo", external: true},
         ]} />
@@ -113,7 +124,6 @@ export function MenuExperience() {
           <p className="sr-only" role="status" aria-live="polite" aria-atomic="true">{view === "explore" ? `${item.name}, ${current + 1} de ${filtered.length}, ${item.category}.` : "Vista Lista activa."}</p>
 
           <section
-            ref={explorer}
             className="menu-explorer"
             id="menu-explorer"
             tabIndex={0}
@@ -137,7 +147,11 @@ export function MenuExperience() {
                   if (Math.abs(deltaX) > 48 && Math.abs(deltaX) > Math.abs(deltaY)) move(deltaX < 0 ? 1 : -1);
                 }}
                 onPointerCancel={() => { pointerStart.current = null; }}
-              ><DishVisual key={item.id} item={item} priority /></figure>
+              >
+                <DishVisual key={item.id} item={item} priority />
+                <button className="dish-visual__arrow dish-visual__arrow--previous" onClick={() => move(-1)} type="button" disabled={filtered.length < 2} aria-label="Plato anterior">←</button>
+                <button className="dish-visual__arrow dish-visual__arrow--next" onClick={() => move(1)} type="button" disabled={filtered.length < 2} aria-label="Plato siguiente">→</button>
+              </figure>
               <div className="category-nav" role="group" aria-label="Filtrar por categoría">
                 {categories.map((categoryName, index) => {
                   const count = menuItems.filter((dish) => dish.category === categoryName).length;
@@ -158,16 +172,17 @@ export function MenuExperience() {
               <p className="dish-description">{item.description}</p>
               <ul className="ingredient-chips" aria-label="Ingredientes confirmados">{item.ingredients.map((ingredient) => <li key={ingredient}>{ingredient}</li>)}</ul>
               <div className="dish-meta"><div><span>Presentación</span><strong>{item.pieces}</strong></div></div>
-              <div className="explorer-controls">
-                <button className="button" onClick={() => move(-1)} type="button" disabled={filtered.length < 2}>← Anterior</button>
-                <div className="dish-picker" aria-label="Seleccionar plato">
-                  {filtered.map((dish, index) => (
-                    <button key={dish.id} ref={(node) => { pickerButtons.current[index] = node; }} type="button" onClick={() => setCurrent(index)} aria-current={index === current} tabIndex={index === current ? 0 : -1}>{dish.name}</button>
-                  ))}
-                </div>
-                <button className="button" onClick={() => move(1)} type="button" disabled={filtered.length < 2}>Siguiente →</button>
-              </div>
             </article>
+
+            <nav className="explorer-controls" aria-label={`Seleccionar plato de ${category}`}>
+              <div ref={picker} className="dish-picker">
+                {filtered.map((dish, index) => (
+                  <button key={dish.id} ref={(node) => { pickerButtons.current[index] = node; }} type="button" onClick={() => setCurrent(index)} aria-current={index === current} tabIndex={index === current ? 0 : -1}>
+                    <small>{String(index + 1).padStart(2, "0")}</small><span>{dish.name}</span>
+                  </button>
+                ))}
+              </div>
+            </nav>
 
             <div className="menu-card-list" aria-label="Cartas de platos">
               {filtered.map((dish, index) => {

@@ -12,6 +12,7 @@ const readme = readFileSync(resolve(projectRoot, "README.md"), "utf8");
 const scrollStory = readFileSync(resolve(projectRoot, "src/app/scroll-story.css"), "utf8");
 const homePage = readFileSync(resolve(projectRoot, "src/app/page.tsx"), "utf8");
 const scrollExperience = readFileSync(resolve(projectRoot, "src/components/landing/ScrollExperience.tsx"), "utf8");
+const menuExperience = readFileSync(resolve(projectRoot, "src/components/menu/MenuExperience.tsx"), "utf8");
 
 const walk = (directory) => readdirSync(directory).flatMap((name) => {
   const path = resolve(directory, name);
@@ -107,6 +108,15 @@ test("la sección 06 conecta las dos vistas del menú público", () => {
   assert.match(homePage, /\/menu\/\?view=explore#menu-content/);
   assert.match(homePage, /\/menu\/\?view=list#menu-content/);
   assert.equal((homePage.match(/prefetch=\{false\}/g) ?? []).length, 2);
+});
+
+test("el explorador del menú conserva sus controles directos y el asset ligero de marca", () => {
+  assert.match(menuExperience, /dish-visual__arrow--previous/);
+  assert.match(menuExperience, /dish-visual__arrow--next/);
+  assert.match(menuExperience, /className="dish-picker"/);
+  assert.match(menuExperience, /track\.scrollTo/);
+  assert.match(menuExperience, /ryo-wordmark-gold-web\.webp/);
+  assert.doesNotMatch(menuExperience, /from "next\/image"/);
 });
 
 test("la carga inicial reserva la red para el primer clip", () => {

@@ -6,7 +6,7 @@
 
 La página paralela del menú ya pertenecía al mismo stack Next.js 16, React 19 y TypeScript. La integración no requirió migración ni un segundo proyecto: se convirtió la ruta temporal `/menu/` en una página permanente del App Router, se incluyeron sus seis derivados WebP en el artifact estático y se activaron los dos enlaces de la sección 06.
 
-La preview conserva la dirección aprobada `02-B · Índice encajado`: azul noche, marfil, dorado, patrón RYŌ, imagen protagonista en escritorio y tarjetas desplegables en tablet/teléfono.
+La preview conserva la dirección aprobada `02-B · Índice encajado`: azul noche, marfil, dorado, patrón RYŌ, una escena compacta con imagen protagonista y ficha editorial en escritorio, y tarjetas desplegables en tablet/teléfono.
 
 ## Contratos verificados
 
@@ -23,6 +23,8 @@ La preview conserva la dirección aprobada `02-B · Índice encajado`: azul noch
 - Los enlaces de la landing abren directamente `?view=explore` o `?view=list`.
 - El selector actualiza el modo y sincroniza la URL sin recargar ni alterar el ancla.
 - Categorías, anterior/siguiente, selector directo y cartas desplegables responden con controles nativos.
+- En escritorio, las flechas permanecen dentro de la imagen y las bandas de categorías y platos completan la escena sin superponer contenido.
+- El selector horizontal recentra la elección activa; utiliza `scrollTo` nativo y desactiva el movimiento suave con `prefers-reduced-motion`.
 - Flechas izquierda/derecha cambian el plato y conservan el foco del explorador.
 - El gesto horizontal exige 48 px y predominio sobre el eje vertical para no bloquear el scroll móvil.
 - Existen skip link, foco visible, textos alternativos, estado `aria-live` y alternativa de movimiento reducido.
@@ -36,13 +38,17 @@ La preview conserva la dirección aprobada `02-B · Índice encajado`: azul noch
 | 390 × 844 | Sin overflow; una carta expandida y controles táctiles completos. |
 | 768 × 1024 | Sin overflow; jerarquía y selector conservados. |
 | 844 × 390 | Sin overflow horizontal en orientación apaisada. |
-| 1280 × 720 | Imagen protagonista, categoría solapada y detalle editorial legibles. |
+| 1280 × 720 | Imagen protagonista completa, detalle editorial, flechas y bandas de categorías/platos legibles. |
 
 En navegador se verificaron diez filas en `Lista`, siete cartas para Rolls especiales, tres para Nigiris, cambio por teclado, ausencia de imágenes rotas y sincronización `Lista → Explorar` en la URL.
 
+## Revisión de la optimización paralela
+
+El pase del 30.08.2026 fue revisado sobre el export de producción local. `Explorar` conservó selección directa, cambio de categoría, flechas visuales, flechas de teclado, foco y sincronización de estado; `Lista` mantuvo los diez platos y actualizó `?view=list` sin recarga. La composición de 1280 × 720 no mostró overflow ni imágenes rotas. El logo del menú pasó al derivado WebP lossless ya aprobado y dejó de cargar el componente cliente de `next/image` para una imagen estática.
+
 ## Build
 
-`NEXT_PUBLIC_BASE_PATH=/RYO_landing npm run check` pasó TypeScript, build y siete pruebas. El export contiene:
+`npm run check` pasó TypeScript, build y nueve pruebas; el workflow repite la verificación con `NEXT_PUBLIC_BASE_PATH=/RYO_landing`. El export contiene:
 
 - `out/index.html`
 - `out/menu/index.html`
