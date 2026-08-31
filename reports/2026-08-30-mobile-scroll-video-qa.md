@@ -1,6 +1,6 @@
 # QA · Scrubbing móvil RYŌ
 
-**Fecha:** 30.08.2026 · **Estado:** implementación local verificada; hardware y GitHub Pages pendientes
+**Fecha:** 30.08.2026 · **Estado:** implementación local y GitHub Pages verificadas; teléfono físico pendiente
 
 ## Hallazgo
 
@@ -32,5 +32,6 @@ Los tres MP4 V2 contenían un único keyframe en `0 s`. Durante un barrido móvi
 | Intro y cierre · 390 × 844 | `readyState 4` en 18/18 muestras; cierre monotónico hacia adelante y atrás. |
 | Barra vs. timeline · 390 × 844 | Diferencia máxima normalizada `0,00005`. |
 | Escritorio · 1280 × 720 | Continúa seleccionando exclusivamente los tres V2 originales. |
+| GitHub Pages · 390 × 844 | Selecciona los tres V3; apertura y cierre reversibles, `readyState 4` en 26/26 muestras y diferencia barra/timeline `0,00003`. |
 
-La validación final pendiente es repetir el gesto manual sobre GitHub Pages en un teléfono físico después del despliegue.
+La validación final pendiente es repetir el gesto manual sobre GitHub Pages en un teléfono físico.
