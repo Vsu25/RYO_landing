@@ -19,6 +19,7 @@ export function AnatomyOverlay({item, index, active}: AnatomyOverlayProps) {
   const ingredientStrip = useRef<HTMLUListElement>(null);
   const buttons = useRef<(HTMLButtonElement | null)[]>([]);
   const pathFrame = useRef(0);
+  const autoRotation = useRef<number | null>(null);
   const [activeConnector, setActiveConnector] = useState(-1);
   const [paths, setPaths] = useState(() => item.anatomy.points.map(([x, y]) => `M ${x} ${y} L ${x} ${y}`));
   const remainingIngredients = item.anatomy.order
@@ -51,6 +52,12 @@ export function AnatomyOverlay({item, index, active}: AnatomyOverlayProps) {
     pathFrame.current = requestAnimationFrame(updatePaths);
   }, [updatePaths]);
 
+  const stopAutoRotation = useCallback(() => {
+    if (autoRotation.current === null) return;
+    window.clearInterval(autoRotation.current);
+    autoRotation.current = null;
+  }, []);
+
   useEffect(() => {
     schedulePathUpdate();
     const observer = new ResizeObserver(schedulePathUpdate);
@@ -62,18 +69,19 @@ export function AnatomyOverlay({item, index, active}: AnatomyOverlayProps) {
   }, [schedulePathUpdate]);
 
   useEffect(() => {
-    if (!active || !window.matchMedia("(max-width: 600px)").matches) return;
+    stopAutoRotation();
+    if (!active || !window.matchMedia("(max-width: 600px)").matches || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
     let cursor = 0;
     const activate = () => {
       setActiveConnector(item.anatomy.featured[cursor] ?? item.anatomy.main);
     };
     activate();
-    const interval = window.setInterval(() => {
+    autoRotation.current = window.setInterval(() => {
       cursor = (cursor + 1) % item.anatomy.featured.length;
       activate();
     }, 2200);
-    return () => window.clearInterval(interval);
-  }, [active, item.id, item.anatomy]);
+    return stopAutoRotation;
+  }, [active, item.id, item.anatomy, stopAutoRotation]);
 
   useGSAP(() => {
     if (!active || !root.current || window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -86,6 +94,7 @@ export function AnatomyOverlay({item, index, active}: AnatomyOverlayProps) {
   }, {scope: root, dependencies: [item.id, active], revertOnUpdate: true});
 
   const select = (lineIndex: number) => {
+    stopAutoRotation();
     setActiveConnector(lineIndex);
     schedulePathUpdate();
   };
@@ -131,7 +140,7 @@ export function AnatomyOverlay({item, index, active}: AnatomyOverlayProps) {
                 type="button"
                 aria-pressed={activeConnector === lineIndex}
                 onPointerEnter={() => select(lineIndex)}
-                onPointerLeave={() => setActiveConnector(-1)}
+                onPointerLeave={(event) => { if (event.pointerType !== "touch") setActiveConnector(-1); }}
                 onFocus={() => select(lineIndex)}
                 onBlur={() => setActiveConnector(-1)}
                 onClick={() => select(lineIndex)}

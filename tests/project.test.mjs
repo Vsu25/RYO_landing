@@ -16,6 +16,7 @@ const homePage = readFileSync(resolve(projectRoot, "src/app/page.tsx"), "utf8");
 const menuPage = readFileSync(resolve(projectRoot, "src/app/menu/page.tsx"), "utf8");
 const menuStyles = readFileSync(resolve(projectRoot, "src/app/menu/menu.css"), "utf8");
 const scrollExperience = readFileSync(resolve(projectRoot, "src/components/landing/ScrollExperience.tsx"), "utf8");
+const anatomyOverlay = readFileSync(resolve(projectRoot, "src/components/landing/AnatomyOverlay.tsx"), "utf8");
 const menuExperience = readFileSync(resolve(projectRoot, "src/components/menu/MenuExperience.tsx"), "utf8");
 
 const walk = (directory) => readdirSync(directory).flatMap((name) => {
@@ -165,4 +166,11 @@ test("el encuadre móvil permanece estable y el cierre no rebobina el scroll", (
     const frameWidth = Math.min(width * 2.2, height * 1.77778);
     assert.equal(frameWidth, width * 2.2, `${width}×${height}: el alto alteró el recorte`);
   }
+});
+
+test("la selección táctil conserva el detalle y detiene la rotación automática", () => {
+  assert.match(anatomyOverlay, /const autoRotation = useRef<number \| null>\(null\)/);
+  assert.match(anatomyOverlay, /const select = \(lineIndex: number\) => \{\s+stopAutoRotation\(\)/);
+  assert.match(anatomyOverlay, /event\.pointerType !== "touch"/);
+  assert.match(anatomyOverlay, /prefers-reduced-motion: reduce/);
 });
